@@ -1,0 +1,419 @@
+trip_id,agency_name,route_name,train_type,service_type,origin_stop_name,origin_country,destination_stop_name,destination_country,departure_time,arrival_time,distance_km,duration_h,emission_gco2e_pkm,total_emission_kgco2e,source_dataset
+ATC IR 11502,Astra Trans Carpatic SRL,IR 11502 = IR 11504,Train régional,National,București Nord,RO,Arad,RO,20:30,09:39,604.0,13:09:00,23.18,14.0,Back-on-Track
+ATC IR 11504,Astra Trans Carpatic SRL,IR 11502 = IR 11504,Train régional,National,Arad,RO,București Nord,RO,19:48,08:16,604.0,12:28:00,23.18,14.0,Back-on-Track
+BDŽ 2626,БДЖ - Пътнически превози ЕООД,2626 = 2627,Train régional,National,Варна,BG,София,BG,21:55,05:46,533.0,7:51:00,21.39,11.4,Back-on-Track
+BDŽ 2627,БДЖ - Пътнически превози ЕООД,2626 = 2627,Train régional,National,София,BG,Варна,BG,23:00,06:52,533.0,7:52:00,21.39,11.4,Back-on-Track
+BDŽ 2636,БДЖ - Пътнически превози ЕООД,2636 = 2637,Train régional,National,Добрич,BG,София,BG,20:35,05:46,572.0,9:11:00,17.092615894039735,9.78,Back-on-Track
+BDŽ 2637,БДЖ - Пътнически превози ЕООД,2636 = 2637,Train régional,National,София,BG,Добрич,BG,23:00,08:26,572.0,9:26:00,17.092615894039735,9.78,Back-on-Track
+BDŽ 3636,БДЖ - Пътнически превози ЕООД,3636 = 3637,Train régional,National,Варна,BG,София,BG,21:40,07:00,513.0,9:20:00,21.44,11.0,Back-on-Track
+BDŽ 3637,БДЖ - Пътнически превози ЕООД,3636 = 3637,Train régional,National,София,BG,Варна,BG,23:05,07:16,513.0,8:11:00,21.44,11.0,Back-on-Track
+BDŽ 3686,БДЖ - Пътнически превози ЕООД,3686 = 3687,Train régional,National,Бургас,BG,София,BG,22:50,05:13,425.0,6:23:00,21.18,9.0,Back-on-Track
+BDŽ 3687,БДЖ - Пътнически превози ЕООД,3686 = 3687,Train régional,National,София,BG,Бургас,BG,23:40,05:55,425.0,6:15:00,21.18,9.0,Back-on-Track
+BDŽ 8626,БДЖ - Пътнически превози ЕООД,8626 = 8627,Train régional,National,Бургас,BG,София,BG,21:45,05:20,444.0,7:35:00,20.5,9.1,Back-on-Track
+BDŽ 8627,БДЖ - Пътнически превози ЕООД,8626 = 8627,Train régional,National,София,BG,Бургас,BG,22:25,05:50,444.0,7:25:00,20.5,9.1,Back-on-Track
+BDŽ 8656,БДЖ - Пътнически превози ЕООД,8656 = 8657,Train régional,National,Варна,BG,София,BG,23:30,09:00,539.0,9:30:00,20.41,11.0,Back-on-Track
+BDŽ 8657,БДЖ - Пътнически превози ЕООД,8656 = 8657,Train régional,National,София,BG,Варна,BG,20:55,06:00,539.0,9:05:00,20.41,11.0,Back-on-Track
+BDŽ 9646,БДЖ - Пътнически превози ЕООД,9646 = 9647,Train régional,National,Силистра,BG,Русе Товарна,BG,18:20,23:02,605.0,11:26:00,20.5,12.4,Back-on-Track
+BDŽ 9647,БДЖ - Пътнически превози ЕООД,9646 = 9647,Train régional,National,София,BG,Межден,BG,20:10,06:09,605.0,11:10:00,20.5,12.4,Back-on-Track
+CFM/CFR 401,Opérateur non renseigné,Prietenia,Train régional,International,Chişinău,RO,București Nord,MD,17:05,06:47,584.0,13:42:00,23.12,13.5,Back-on-Track
+CFM/CFR 402,Opérateur non renseigné,Prietenia,Train régional,International,București Nord,RO,Chişinău,MD,19:10,08:44,584.0,13:34:00,23.12,13.5,Back-on-Track
+CFR 1641 (CN),C.F.R. Călători S.A.,1641 (CN) = 1642 (CN),Train régional,National,București Nord,RO,Cluj-Napoca,RO,21:03,07:02,493.0,9:59:00,20.89,10.3,Back-on-Track
+CFR 1641 (SM),C.F.R. Călători S.A.,1641 (SM) = 1642 (SM),Train régional,National,București Nord,RO,Satu Mare,RO,21:01,10:39,758.0,13:38:00,19.53,14.8,Back-on-Track
+CFR 1641/R 4112,C.F.R. Călători S.A.,R 4116 = 1641/R 4112,Train régional,National,București Nord,RO,Sighetu Marmației,RO,21:01,10:00,606.0,12:59:00,25.58,15.5,Back-on-Track
+CFR 1641/R-E 4008,C.F.R. Călători S.A.,R-E 4007/1642 = 1641/R-E 4008,Train régional,National,București Nord,RO,Bistrița Nord,RO,21:03,05:57,451.0,8:54:00,21.95,9.9,Back-on-Track
+CFR 1642 (CN),C.F.R. Călători S.A.,1641 (CN) = 1642 (CN),Train régional,National,Cluj-Napoca,RO,București Nord,RO,20:03,06:20,493.0,10:17:00,20.89,10.3,Back-on-Track
+CFR 1642 (SM),C.F.R. Călători S.A.,1641 (SM) = 1642 (SM),Train régional,National,Satu Mare,RO,București Nord,RO,16:20,06:20,758.0,14:00:00,19.53,14.8,Back-on-Track
+CFR 1653,C.F.R. Călători S.A.,1653 = 1654,Train régional,National,București Nord,RO,Vatra Dornei Băi,RO,22:35,07:34,606.0,8:59:00,21.45,13.0,Back-on-Track
+CFR 1654,C.F.R. Călători S.A.,1653 = 1654,Train régional,National,Vatra Dornei Băi,RO,București Nord,RO,20:28,05:56,606.0,9:28:00,21.45,13.0,Back-on-Track
+CFR 1667,C.F.R. Călători S.A.,1667 = 1668,Train régional,National,București Nord,RO,Iași,RO,22:50,05:26,405.0,6:36:00,24.2,9.8,Back-on-Track
+CFR 1668,C.F.R. Călători S.A.,1667 = 1668,Train régional,National,Iași,RO,București Nord,RO,22:45,05:28,405.0,6:43:00,24.2,9.8,Back-on-Track
+CFR 1744/79,C.F.R. Călători S.A.,78/1743 = 1744/79,Train régional,National,Oradea,RO,București Nord,RO,18:04,08:42,711.0,14:38:00,24.05,17.1,Back-on-Track
+CFR 1763,C.F.R. Călători S.A.,1763 = 1765,Train régional,National,Iași,RO,Timişoara Nord,RO,15:35,08:56,849.0,17:21:00,21.2,18.0,Back-on-Track
+CFR 1765,C.F.R. Călători S.A.,1763 = 1765,Train régional,National,Timişoara Nord,RO,Iași,RO,14:51,08:13,849.0,17:22:00,21.2,18.0,Back-on-Track
+CFR 1821,C.F.R. Călători S.A.,1821 = 1822,Train régional,National,București Nord,RO,Arad,RO,23:28,11:24,604.0,11:56:00,23.18,14.0,Back-on-Track
+CFR 1822,C.F.R. Călători S.A.,1821 = 1822,Train régional,National,Arad,RO,București Nord,RO,17:48,05:25,604.0,11:37:00,23.18,14.0,Back-on-Track
+CFR 1837,C.F.R. Călători S.A.,1837 = 1838,Train régional,National,Iași,RO,Cluj-Napoca,RO,20:40,05:20,459.0,8:40:00,20.7,9.5,Back-on-Track
+CFR 1838,C.F.R. Călători S.A.,1837 = 1838,Train régional,National,Cluj-Napoca,RO,Iași,RO,20:30,05:10,459.0,8:40:00,20.7,9.5,Back-on-Track
+CFR 1920,C.F.R. Călători S.A.,1920 = 1922,Train régional,National,Constanța,RO,Oradea,RO,16:43,10:50,991.0,18:07:00,17.092615894039735,16.94,Back-on-Track
+CFR 1922,C.F.R. Călători S.A.,1920 = 1922,Train régional,National,Oradea,RO,Constanța,RO,13:54,07:43,991.0,17:49:00,17.092615894039735,16.94,Back-on-Track
+CFR 1941,C.F.R. Călători S.A.,1941 = 1942/R 8810,Train régional,National,Satu Mare,RO,Mangalia,RO,12:20,07:30,974.0,19:10:00,17.092615894039735,16.65,Back-on-Track
+CFR 1942/R 8810,C.F.R. Călători S.A.,1941 = 1942/R 8810,Train régional,National,Mangalia,RO,Satu Mare,RO,14:26,09:39,974.0,19:13:00,17.092615894039735,16.65,Back-on-Track
+CFR 1952,C.F.R. Călători S.A.,1952 = 1954,Train régional,National,Suceava Nord,RO,Constanța,RO,20:25,03:59,526.0,7:34:00,24.14,12.7,Back-on-Track
+CFR 1954,C.F.R. Călători S.A.,1952 = 1954,Train régional,National,Constanța,RO,Suceava Nord,RO,23:30,07:16,526.0,7:46:00,24.14,12.7,Back-on-Track
+CFR 78/1743,C.F.R. Călători S.A.,78/1743 = 1744/79,Train régional,National,București Nord,RO,Oradea,RO,21:00,11:50,711.0,14:50:00,24.05,17.1,Back-on-Track
+CFR IC 472,C.F.R. Călători S.A.,Ister,Train régional,International,București Nord,HU,Budapest Keleti,RO,18:25,08:50,870.0,14:25:00,24.71,21.5,Back-on-Track
+CFR IC 473,C.F.R. Călători S.A.,Ister,Train régional,International,Budapest-Keleti,HU,București Nord,RO,19:10,11:35,870.0,16:25:00,24.71,21.5,Back-on-Track
+CFR R 4116,C.F.R. Călători S.A.,R 4116 = 1641/R 4112,Train régional,National,Sighetu Marmației,RO,București Nord,RO,15:52,07:04,606.0,15:12:00,25.58,15.5,Back-on-Track
+CFR R-E 4007/1642,C.F.R. Călători S.A.,R-E 4007/1642 = 1641/R-E 4008,Train régional,National,Bistrița Nord,RO,București Nord,RO,21:25,06:20,451.0,8:55:00,21.95,9.9,Back-on-Track
+CFR/MÁV / IC 78,Opérateur non renseigné,Non renseigné,Train de nuit,National,București Nord,XX,București Nord,XX,21:00,,,,14.0,,Back-on-Track
+CFR/MÁV IC 406,Opérateur non renseigné,Corona,Train régional,International,Brașov,HU,Budapest Keleti,RO,18:51,09:55,803.0,15:04:00,16.31,13.1,Back-on-Track
+CFR/MÁV IC 407,Opérateur non renseigné,Corona,Train régional,International,Budapest Keleti,HU,Brașov,RO,17:40,09:43,803.0,16:03:00,16.31,13.1,Back-on-Track
+CFR/MÁV IRN / IC 78,Opérateur non renseigné,Muntenia,Train régional,International,București Nord,HU,Budapest Keleti,RO,21:00,12:50,858.0,15:50:00,21.21,18.2,Back-on-Track
+CFR/MÁV IRN / IC 79,Opérateur non renseigné,Muntenia,Train régional,International,Budapest Keleti,HU,București Nord,RO,15:10,08:42,858.0,17:32:00,21.21,18.2,Back-on-Track
+CFR/MÁV/ÖBB D 346,Opérateur non renseigné,Dacia,Train régional,International,București Nord,AT,Cluj-Napoca,RO,14:07,08:21,1157.0,18:14:00,21.35,24.7,Back-on-Track
+CFR/MÁV/ÖBB D 347,Opérateur non renseigné,Dacia,Train régional,International,Wien Hbf,AT,București Nord,RO,19:42,15:06,1157.0,19:24:00,21.35,24.7,Back-on-Track
+CS 1001 (A),Caledonian Sleeper Ltd.,Highlander,Train régional,National,London Euston,GB,Aberdeen,GB,21:15,07:40,877.0,10:25:00,20.64,18.1,Back-on-Track
+CS 1001 (FW),Caledonian Sleeper Ltd.,Highlander,Train régional,National,London Euston,GB,Fort William,GB,21:15,10:00,839.0,12:45:00,22.41,18.8,Back-on-Track
+CS 1001 (I),Caledonian Sleeper Ltd.,Highlander,Train régional,National,London Euston,GB,Inverness,GB,21:15,08:45,914.0,11:30:00,20.68,18.9,Back-on-Track
+CS 1002 (A),Caledonian Sleeper Ltd.,Highlander,Train régional,National,Aberdeen,GB,London Euston,GB,21:43,08:00,877.0,10:17:00,20.64,18.1,Back-on-Track
+CS 1002 (FW),Caledonian Sleeper Ltd.,Highlander,Train régional,National,Fort William,GB,London Euston,GB,19:50,08:00,839.0,12:10:00,22.41,18.8,Back-on-Track
+CS 1002 (I),Caledonian Sleeper Ltd.,Highlander,Train régional,National,Inverness,GB,London Euston,GB,20:45,08:00,914.0,11:15:00,20.68,18.9,Back-on-Track
+CS 1003 (E),Caledonian Sleeper Ltd.,Lowlander,Train régional,National,London Euston,GB,Edinburgh Waverley,GB,23:45,07:30,644.0,7:45:00,22.83,14.7,Back-on-Track
+CS 1003 (G),Caledonian Sleeper Ltd.,Lowlander,Train régional,National,London Euston,GB,Glasgow Central,GB,23:45,07:30,645.0,7:45:00,22.64,14.6,Back-on-Track
+CS 1004 (E),Caledonian Sleeper Ltd.,Lowlander,Train régional,National,Edinburgh Waverley,GB,London Euston,GB,23:40,07:15,644.0,7:35:00,22.83,14.7,Back-on-Track
+CS 1004 (G),Caledonian Sleeper Ltd.,Lowlander,Train régional,National,Glasgow Central,GB,London Euston,GB,23:40,07:15,645.0,7:35:00,22.64,14.6,Back-on-Track
+ES 452,European Sleeper Cooperatïe,452 = 453,Train régional,International,Praha hl.n.,CZ,Rotterdam Centraal,BE,18:04,09:27,852.0,15:23:00,19.01,16.2,Back-on-Track
+ES 453,European Sleeper Cooperatïe,452 = 453,Train régional,International,Rotterdam Centraal,CZ,Praha hl.n.,BE,19:22,10:45,852.0,15:23:00,19.01,16.2,Back-on-Track
+FS IC Notte 1515,Trenitalia S.p.A,IC Notte 796 = IC Notte 1515,Train régional,National,Torino Lingotto,IT,Salerno,IT,20:23,09:11,962.0,12:48:00,18.61,17.9,Back-on-Track
+FS IC Notte 1954,Trenitalia S.p.A,IC Notte 1954 = IC Notte 1955 (P),Train régional,National,Palermo Centrale,IT,Roma Termini,IT,18:48,07:18,867.0,12:30:00,20.42,17.7,Back-on-Track
+FS IC Notte 1955 (P),Trenitalia S.p.A,IC Notte 1954 = IC Notte 1955 (P),Train régional,National,Roma Termini,IT,Palermo Centrale,IT,20:31,09:24,867.0,12:53:00,20.42,17.7,Back-on-Track
+FS IC Notte 1955 (S),Trenitalia S.p.A,IC Notte 1955 (S) = IC Notte 1956,Train régional,National,Roma Termini,IT,Siracusa,IT,20:31,09:01,820.0,12:30:00,20.12,16.5,Back-on-Track
+FS IC Notte 1956,Trenitalia S.p.A,IC Notte 1955 (S) = IC Notte 1956,Train régional,National,Siracusa,IT,Roma Termini,IT,19:10,07:18,820.0,12:08:00,20.12,16.5,Back-on-Track
+FS IC Notte 1958,Trenitalia S.p.A,IC Notte 1958 = IC Notte 1959 (P),Train régional,National,Palermo Centrale,IT,Roma Termini,IT,21:10,09:51,867.0,12:41:00,20.42,17.7,Back-on-Track
+FS IC Notte 1959 (P),Trenitalia S.p.A,IC Notte 1958 = IC Notte 1959 (P),Train régional,National,Roma Termini,IT,Palermo Centrale,IT,23:00,11:57,867.0,12:57:00,20.42,17.7,Back-on-Track
+FS IC Notte 1959 (S),Trenitalia S.p.A,IC Notte 1959 (S) = IC Notte 1960,Train régional,National,Roma Termini,IT,Siracusa,IT,23:00,11:29,820.0,12:29:00,20.12,16.5,Back-on-Track
+FS IC Notte 1960,Trenitalia S.p.A,IC Notte 1959 (S) = IC Notte 1960,Train régional,National,Siracusa,IT,Roma Termini,IT,21:45,09:51,820.0,12:06:00,20.12,16.5,Back-on-Track
+FS IC Notte 1962,Trenitalia S.p.A,IC Notte 1962 = IC Notte 1963,Train régional,National,Siracusa,IT,Milano Centrale,IT,13:35,10:10,1380.0,20:35:00,21.23,29.3,Back-on-Track
+FS IC Notte 1963,Trenitalia S.p.A,IC Notte 1962 = IC Notte 1963,Train régional,National,Milano Centrale,IT,Siracusa,IT,20:10,15:48,1380.0,19:38:00,21.23,29.3,Back-on-Track
+FS IC Notte 1964,Trenitalia S.p.A,IC Notte 1964 = IC Notte 1967,Train régional,National,Palermo Centrale,IT,Milano Centrale,IT,12:58,10:10,1427.0,21:12:00,21.37,30.49,Back-on-Track
+FS IC Notte 1967,Trenitalia S.p.A,IC Notte 1964 = IC Notte 1967,Train régional,National,Milano Centrale,IT,Palermo Centrale,IT,20:10,16:55,1427.0,20:45:00,21.37,30.49,Back-on-Track
+FS IC Notte 752,Trenitalia S.p.A,IC Notte 752 = IC Notte 755,Train régional,National,Lecce,IT,Milano Centrale,IT,19:50,07:12,1032.0,11:22:00,20.16,20.81,Back-on-Track
+FS IC Notte 754,Trenitalia S.p.A,IC Notte 754 = IC Notte 757,Train régional,National,Lecce,IT,Torino Lingotto,IT,20:25,09:15,1147.0,12:50:00,20.05,23.0,Back-on-Track
+FS IC Notte 755,Trenitalia S.p.A,IC Notte 752 = IC Notte 755,Train régional,National,Milano Centrale,IT,Lecce,IT,21:50,09:30,1032.0,11:40:00,20.16,20.81,Back-on-Track
+FS IC Notte 757,Trenitalia S.p.A,IC Notte 754 = IC Notte 757,Train régional,National,Torino Lingotto,IT,Lecce,IT,20:58,10:10,1147.0,13:12:00,20.05,23.0,Back-on-Track
+FS IC Notte 758,Trenitalia S.p.A,IC Notte 758 = IC Notte 765,Train régional,National,Lecce,IT,Milano Centrale,IT,18:31,07:05,1092.0,12:34:00,20.24,22.1,Back-on-Track
+FS IC Notte 763,Trenitalia S.p.A,IC Notte 763 = IC Notte 764,Train régional,National,Bolzano / Bozen,IT,Roma Termini,IT,21:30,06:06,631.0,8:36:00,19.81,12.5,Back-on-Track
+FS IC Notte 764,Trenitalia S.p.A,IC Notte 763 = IC Notte 764,Train régional,National,Roma Termini,IT,Bolzano / Bozen,IT,22:05,06:28,631.0,8:23:00,19.81,12.5,Back-on-Track
+FS IC Notte 765,Trenitalia S.p.A,IC Notte 758 = IC Notte 765,Train régional,National,Milano Centrale,IT,Bari Centrale,IT,21:15,07:00,1092.0,9:45:00,20.24,22.1,Back-on-Track
+FS IC Notte 770,Trenitalia S.p.A,IC Notte 770 = IC Notte 774,Train régional,National,Trieste Centrale,IT,Roma Termini,IT,19:11,06:35,711.0,11:24:00,21.52,15.3,Back-on-Track
+FS IC Notte 774,Trenitalia S.p.A,IC Notte 770 = IC Notte 774,Train régional,National,Roma Termini,IT,Trieste Centrale,IT,22:35,09:55,711.0,11:20:00,21.52,15.3,Back-on-Track
+FS IC Notte 788,Trenitalia S.p.A,IC Notte 788 = IC Notte 789,Train régional,National,Lecce,IT,Roma Termini,IT,22:15,06:10,647.0,7:55:00,19.63,12.7,Back-on-Track
+FS IC Notte 789,Trenitalia S.p.A,IC Notte 788 = IC Notte 789,Train régional,National,Roma Termini,IT,Lecce,IT,23:58,08:10,647.0,8:12:00,19.63,12.7,Back-on-Track
+FS IC Notte 794,Trenitalia S.p.A,IC Notte 794 = IC Notte 795,Train régional,National,Reggio Calabria Centrale,IT,Torino Lingotto,IT,21:43,14:32,1358.0,16:49:00,18.92,25.69,Back-on-Track
+FS IC Notte 795,Trenitalia S.p.A,IC Notte 794 = IC Notte 795,Train régional,National,Torino Lingotto,IT,Reggio Calabria Centrale,IT,15:29,08:45,1358.0,17:16:00,18.92,25.69,Back-on-Track
+FS IC Notte 796,Trenitalia S.p.A,IC Notte 796 = IC Notte 1515,Train régional,National,Salerno,IT,Torino Lingotto,IT,20:52,10:32,962.0,13:40:00,18.61,17.9,Back-on-Track
+FS IC Notte 797,Trenitalia S.p.A,IC Notte 797 = IC Notte 798,Train régional,National,Torino Porta Susa,IT,Salerno,IT,20:40,09:46,1009.0,13:06:00,20.12,20.3,Back-on-Track
+FS IC Notte 798,Trenitalia S.p.A,IC Notte 797 = IC Notte 798,Train régional,National,Salerno,IT,Torino Porta Susa,IT,20:38,09:05,1009.0,12:27:00,20.12,20.3,Back-on-Track
+FS TT 96100,Opérateur non renseigné,Non renseigné,Train de nuit,National,Roma Termini,XX,Calalzo-Pieve Di Cadore (Cortina),XX,21:40,08:50,,11.17,14.0,,Back-on-Track
+FS TT 96101,Opérateur non renseigné,Non renseigné,Train de nuit,National,Calalzo-Pieve Di Cadore (Cortina),XX,Roma Termini,XX,21:00,06:40,,9.67,14.0,,Back-on-Track
+GA F5 725,Go-Ahead Norge AS,F5,Train régional,National,Oslo S,NO,Stavanger,NO,22:25,07:20,588.0,8:55:00,0.31,0.18,Back-on-Track
+GA F5 726,Go-Ahead Norge AS,F5,Train régional,National,Stavanger,NO,Oslo S,NO,22:15,07:26,588.0,9:11:00,0.31,0.18,Back-on-Track
+GWR Sleeper (London),First Greater Western Ltd.,Night Riviera,Train régional,National,Penzance,GB,London Paddington,GB,21:45,05:08,489.0,7:23:00,20.45,10.0,Back-on-Track
+GWR Sleeper (Penzance),First Greater Western Ltd.,Night Riviera,Train régional,National,London Paddington,GB,Penzance,GB,23:45,07:54,489.0,8:09:00,20.45,10.0,Back-on-Track
+HŽPP 1820,HŽ Putnički prijevoz d.o.o.,1820 = 1821,Train régional,National,Split,HR,Zagreb Gl. K.,HR,21:11,05:49,424.0,8:38:00,27.36,11.6,Back-on-Track
+HŽPP 1821,HŽ Putnički prijevoz d.o.o.,1820 = 1821,Train régional,National,Zagreb Gl. K.,HR,Split,HR,22:30,07:01,424.0,8:31:00,27.36,11.6,Back-on-Track
+HŽPP 1840,HŽ Putnički prijevoz d.o.o.,1840 = 1841,Train régional,National,Vukovar,HR,Split,HR,16:57,06:51,700.0,13:54:00,9.29,6.5,Back-on-Track
+HŽPP 1841,HŽ Putnički prijevoz d.o.o.,1840 = 1841,Train régional,National,Split,HR,Vukovar,HR,21:11,11:11,700.0,14:00:00,9.29,6.5,Back-on-Track
+HŽPP 1880,HŽ Putnički prijevoz d.o.o.,Dalmacija,Train régional,National,Osijek,HR,Split,HR,19:48,09:21,677.0,13:33:00,9.6,6.5,Back-on-Track
+HŽPP 1881,HŽ Putnički prijevoz d.o.o.,Dalmacija,Train régional,National,Split,HR,Osijek,HR,22:23,12:04,677.0,13:41:00,9.6,6.5,Back-on-Track
+HŽPP/ÖBB EN 40237,Opérateur non renseigné,EN 414 = EN 40237,Train régional,International,Stuttgart Hbf,DE,Zagreb Gl. K.,HR,20:29,10:39,807.0,14:10:00,13.75,11.1,Back-on-Track
+HŽPP/ÖBB EN 40414,Opérateur non renseigné,EN 40414 = EN 40465,Train régional,International,Zagreb Gl. K.,AT,Zürich HB,HR,19:38,09:20,903.0,13:42:00,5.87,5.3,Back-on-Track
+HŽPP/ÖBB EN 40465,Opérateur non renseigné,EN 40414 = EN 40465,Train régional,International,Zürich HB,AT,Zagreb Gl. K.,HR,19:40,10:39,903.0,14:59:00,5.87,5.3,Back-on-Track
+HŽPP/ÖBB EN 414,Opérateur non renseigné,EN 414 = EN 40237,Train régional,International,Zagreb Gl. K.,DE,Stuttgart Hbf,HR,19:38,08:38,807.0,13:00:00,13.75,11.1,Back-on-Track
+HŽPP/ÖBB EN 480,Opérateur non renseigné,Non renseigné,Train de nuit,National,Rijeka,XX,Stuttgart Hbf,XX,18:57,08:38,,13.68,14.0,,Back-on-Track
+HŽPP/ÖBB EN 60237,Opérateur non renseigné,Non renseigné,Train de nuit,National,Stuttgart Hbf,XX,Rijeka,XX,20:29,11:12,,14.72,14.0,,Back-on-Track
+MÁV 1246 / 1605,MÁV-START Vasúti Személyszállító Zrt.,Istria,Train régional,International,Budapest Déli,HU,Koper,HR,20:30,08:34,703.0,12:04:00,17.092615894039735,12.02,Back-on-Track
+MÁV 1246 / 1605 / 481,MÁV-START Vasúti Személyszállító Zrt.,Istria,Train régional,International,Budapest Déli,HU,Rijeka,HR,20:30,09:25,703.0,12:55:00,17.092615894039735,12.02,Back-on-Track
+MÁV 1604 / 1247,MÁV-START Vasúti Személyszállító Zrt.,Istria,Train régional,International,Koper,HU,Budapest Déli,HR,20:15,08:29,703.0,12:14:00,17.092615894039735,12.02,Back-on-Track
+MÁV 480 / 1604 / 1247,MÁV-START Vasúti Személyszállító Zrt.,Istria,Train régional,International,Rijeka,HU,Budapest Déli,HR,20:50,08:29,703.0,11:39:00,17.092615894039735,12.02,Back-on-Track
+MÁV EN 40457,MÁV-START Vasúti Személyszállító Zrt.,EN 40457 = EN 40476,Train régional,International,Berlin Hbf,DE,Budapest Nyugati,HU,19:21,08:29,995.0,13:08:00,17.09,17.0,Back-on-Track
+MÁV EN 40476,MÁV-START Vasúti Személyszállító Zrt.,EN 40457 = EN 40476,Train régional,International,Budapest Nyugati,DE,Berlin Hbf,HU,19:30,08:15,995.0,12:45:00,17.09,17.0,Back-on-Track
+MÁV IC 1204,MÁV-START Vasúti Személyszállító Zrt.,Adria,Train régional,International,Budapest Keleti,HU,Split,HR,18:53,08:56,784.0,14:03:00,17.092615894039735,13.4,Back-on-Track
+MÁV IC 1205,MÁV-START Vasúti Személyszállító Zrt.,Adria,Train régional,International,Split,HU,Budapest Keleti,HR,18:28,09:12,784.0,14:44:00,17.092615894039735,13.4,Back-on-Track
+MÁV/PKP EN 476,Opérateur non renseigné,IC 407 / EN 477 = EN 476,Train régional,International,Budapest Nyugati,PL,Warszawa Centralna,HU,19:29,08:51,902.0,13:22:00,17.092615894039735,15.42,Back-on-Track
+MÁV/PKP IC 407 / EN 477,Opérateur non renseigné,IC 407 / EN 477 = EN 476,Train régional,International,Warszawa Wschodnia,PL,Budapest Nyugati,HU,19:37,08:29,902.0,12:52:00,17.092615894039735,15.42,Back-on-Track
+MÁV/ÖBB EN 40462,Opérateur non renseigné,EN 40462 = EN 40467,Train régional,International,Budapest Keleti,AT,Zürich HB,HU,20:40,08:20,1083.0,11:40:00,17.092615894039735,18.51,Back-on-Track
+MÁV/ÖBB EN 40467,Opérateur non renseigné,EN 40462 = EN 40467,Train régional,International,Zürich HB,AT,Budapest Keleti,HU,20:40,09:19,1083.0,12:39:00,17.092615894039735,18.51,Back-on-Track
+MÁV/ÖBB EN 50237,Opérateur non renseigné,Kálman Imre,Train régional,International,Budapest Keleti,DE,Stuttgart Hbf,HU,20:40,08:38,966.0,11:58:00,17.092615894039735,16.51,Back-on-Track
+MÁV/ÖBB EN 50462,Opérateur non renseigné,Kálman Imre,Train régional,International,Stuttgart Hbf,DE,Budapest Keleti,HU,20:29,09:19,966.0,12:50:00,17.092615894039735,16.51,Back-on-Track
+OTE 141,Optima Tours,141 = 154,Train régional,International,Villach Hbf,AT,Edirne,TR,21:32,06:03,,32:31:00,17.092615894039735,,Back-on-Track
+OTE 154,Optima Tours,141 = 154,Train régional,International,Edirne,AT,Villach Hbf,TR,18:30,08:11,,37:41:00,17.092615894039735,,Back-on-Track
+PKP EN 443 / IC 406,PKP Intercity S.A.,Chopin,Train régional,International,Praha hl.n.,CZ,Warszawa Centralna,PL,22:13,08:51,,10:38:00,17.092615894039735,,Back-on-Track
+PKP IC 38172,PKP Intercity S.A.,Przemyślanin,Train régional,National,Przemyśl Gł.,PL,Świnoujście,PL,18:40,10:40,,16:00:00,17.092615894039735,,Back-on-Track
+PKP IC 38192,PKP Intercity S.A.,Podhalanin ,Train régional,National,Zakopane,PL,Szczecin Gł.,PL,19:47,07:23,760.0,11:36:00,34.34,26.1,Back-on-Track
+PKP IC 407 / EN 442,PKP Intercity S.A.,Chopin,Train régional,International,Warszawa Wschodnia,CZ,Praha hl.n.,PL,19:37,07:38,,12:01:00,17.092615894039735,,Back-on-Track
+PKP IC 83172,PKP Intercity S.A.,Przemyślanin,Train régional,National,Świnoujście,PL,Przemyśl Gł.,PL,16:59,09:18,,16:19:00,17.092615894039735,,Back-on-Track
+PKP IC 83192,PKP Intercity S.A.,Podhalanin ,Train régional,National,Szczecin Gł.,PL,Zakopane,PL,21:30,09:27,760.0,11:57:00,34.34,26.1,Back-on-Track
+PKP TLK 16190,PKP Intercity S.A.,Karkonosze,Train régional,National,Warszawa Wschodnia,PL,Jelenia Góra,PL,22:01,07:22,638.0,9:21:00,35.27,22.5,Back-on-Track
+PKP TLK 18170,PKP Intercity S.A.,Uznam,Train régional,National,Warszawa Centralna,PL,Świnoujście,PL,22:07,07:11,,9:04:00,17.092615894039735,,Back-on-Track
+PKP TLK 35170,PKP Intercity S.A.,Karpaty,Train régional,National,Zakopane,PL,Gdynia Gł.,PL,20:31,08:45,,12:14:00,17.092615894039735,,Back-on-Track
+PKP TLK 35172,PKP Intercity S.A.,Rozewie,Train régional,National,Kraków Gł.,PL,Gdynia Gł.,PL,19:56,06:01,,10:05:00,17.092615894039735,,Back-on-Track
+PKP TLK 35190,PKP Intercity S.A.,Korsarz,Train régional,National,Kraków Gł.,PL,Łeba,PL,18:35,06:39,703.0,12:04:00,34.57,24.3,Back-on-Track
+PKP TLK 38170,PKP Intercity S.A.,Ustronie,Train régional,National,Kraków Gł.,PL,Kołobrzeg,PL,20:49,10:11,,13:22:00,17.092615894039735,,Back-on-Track
+PKP TLK 404,PKP Intercity S.A.,Pirat,Train régional,National,Kołobrzeg,PL,Zebrzydowice,PL,19:15,06:04,,10:49:00,17.092615894039735,,Back-on-Track
+PKP TLK 405,PKP Intercity S.A.,Pirat,Train régional,National,Zebrzydowice,PL,Kołobrzeg,PL,21:00,07:18,,10:18:00,17.092615894039735,,Back-on-Track
+PKP TLK 46174/38174,PKP Intercity S.A.,Wolin,Train régional,National,Bielsko-Biała Gł.,PL,Świnoujście,PL,21:56,07:42,680.0,9:46:00,38.82,26.4,Back-on-Track
+PKP TLK 53170,PKP Intercity S.A.,Karpaty,Train régional,National,Gdynia Gł.,PL,Zakopane,PL,19:13,06:21,,11:08:00,17.092615894039735,,Back-on-Track
+PKP TLK 53172,PKP Intercity S.A.,Rozewie,Train régional,National,Gdynia Gł.,PL,Kraków Gł.,PL,22:13,08:36,,10:23:00,17.092615894039735,,Back-on-Track
+PKP TLK 53190,PKP Intercity S.A.,Korsarz,Train régional,National,Łeba,PL,Kraków Gł.,PL,21:20,09:00,703.0,11:40:00,34.57,24.3,Back-on-Track
+PKP TLK 61190,PKP Intercity S.A.,Karkonosze,Train régional,National,Jelenia Góra,PL,Warszawa Centralna,PL,21:16,05:50,638.0,8:34:00,35.27,22.5,Back-on-Track
+PKP TLK 81170,PKP Intercity S.A.,Uznam,Train régional,National,Świnoujście,PL,Rzepin,PL,21:01,06:41,,9:40:00,17.092615894039735,,Back-on-Track
+PKP TLK 83170,PKP Intercity S.A.,Ustronie,Train régional,National,Kołobrzeg,PL,Kraków Gł.,PL,20:17,08:44,,12:27:00,17.092615894039735,,Back-on-Track
+PKP TLK 83174/64174,PKP Intercity S.A.,Wolin,Train régional,National,Świnoujście,PL,Bielsko-Biała Gł.,PL,20:17,05:49,680.0,9:32:00,38.82,26.4,Back-on-Track
+PKP/ÖBB EN 406,Opérateur non renseigné,EN 406 = EN 407,Train régional,International,München Hbf,AT,Warszawa Wschodnia,CZ,18:35,09:01,1139.0,14:26:00,21.07,24.0,Back-on-Track
+PKP/ÖBB EN 407,Opérateur non renseigné,EN 406 = EN 407,Train régional,International,Warszawa Wschodnia,AT,München Hbf,CZ,19:38,10:01,1139.0,14:23:00,21.07,24.0,Back-on-Track
+PKP/ČD EC 460,Opérateur non renseigné,Baltic Express,Train régional,International,Praha hl.n.,PL,Gdynia Gł.,CZ,18:51,05:20,856.0,10:29:00,31.66,27.1,Back-on-Track
+PKP/ČD EC 461,Opérateur non renseigné,Baltic Express,Train régional,International,Gdynia Gł.,PL,Praha hl.n.,CZ,23:13,09:06,856.0,9:53:00,31.66,27.1,Back-on-Track
+RJ 1020,RegioJet a.s.,1020 = 1021,Train régional,International,Chop,SK,Praha hl.n.,CZ,17:35,05:46,672.0,12:11:00,17.56,11.8,Back-on-Track
+RJ 1021,RegioJet a.s.,1020 = 1021,Train régional,International,Praha hl.n.,SK,Chop,CZ,21:52,10:34,672.0,12:42:00,17.56,11.8,Back-on-Track
+RJ 1038,RegioJet a.s.,1038 = 1039,Train régional,International,Przemyśl Gł.,PL,Praha hl.n.,CZ,22:12,08:56,740.0,10:44:00,27.84,20.6,Back-on-Track
+RJ 1039,RegioJet a.s.,1038 = 1039,Train régional,International,Praha hl.n.,PL,Przemyśl Gł.,CZ,20:56,07:33,740.0,10:37:00,27.84,20.6,Back-on-Track
+SJ 1,SJ AB,1 = 2,Train régional,National,Stockholm C,SE,Malmö C,SE,23:10,06:59,614.0,7:49:00,1.09,0.67,Back-on-Track
+SJ 2,SJ AB,1 = 2,Train régional,National,Malmö C,SE,Stockholm C,SE,22:30,05:50,614.0,7:20:00,1.09,0.67,Back-on-Track
+SJ 70 (D),SJ AB,70 (D) = 71 (S),Train régional,National,Stockholm C,SE,Duved,SE,22:39,09:17,652.0,10:38:00,1.15,0.75,Back-on-Track
+SJ 70 (U),SJ AB,70 (U) = 77 (S),Train régional,National,Stockholm C,SE,Umeå C,SE,22:39,08:16,704.0,9:37:00,1.01,0.71,Back-on-Track
+SJ 71 (G),Opérateur non renseigné,Non renseigné,Train de nuit,National,Duved,XX,Göteborg C,XX,19:01,08:15,,13.23,14.0,,Back-on-Track
+SJ 71 (S),SJ AB,70 (D) = 71 (S),Train régional,National,Duved,SE,Stockholm C,SE,19:01,05:04,652.0,10:03:00,1.15,0.75,Back-on-Track
+SJ 74 (D),Opérateur non renseigné,Non renseigné,Train de nuit,National,Göteborg C,XX,Duved,XX,19:29,09:17,,13.8,14.0,,Back-on-Track
+SJ 74 (U),Opérateur non renseigné,Non renseigné,Train de nuit,National,Göteborg C,XX,Umeå C,XX,19:29,08:16,,12.78,14.0,,Back-on-Track
+SJ 77 (G),Opérateur non renseigné,Non renseigné,Train de nuit,National,Umeå C,XX,Göteborg C,XX,19:41,08:15,,12.57,14.0,,Back-on-Track
+SJ 77 (S),SJ AB,70 (U) = 77 (S),Train régional,National,Umeå C,SE,Stockholm C,SE,19:41,05:04,704.0,9:23:00,1.01,0.71,Back-on-Track
+SJ 91,Opérateur non renseigné,Non renseigné,Train de nuit,National,Luleå C,XX,Stockholm C,XX,21:10,10:09,,12.98,14.0,,Back-on-Track
+SJ 92,Opérateur non renseigné,Non renseigné,Train de nuit,National,Stockholm C,XX,Luleå C,XX,21:55,11:53,,13.97,14.0,,Back-on-Track
+SJ EN 345,SJ AB,EN 345 = EN 346,Train régional,International,Stockholm C,DE,Berlin Hbf,SE,17:34,09:24,1439.0,15:50:00,11.19,16.1,Back-on-Track
+SJ EN 346,SJ AB,EN 345 = EN 346,Train régional,International,Berlin Hbf,DE,Stockholm C,SE,18:34,9:55,1439.0,15:21:00,11.19,16.1,Back-on-Track
+SJ Nattåg 91,SJ AB,Nattåg 91 = Nattåg 92,Train régional,National,Luleå C,SE,Stockholm C,SE,17:00,06:35,1052.0,13:35:00,1.05,1.1,Back-on-Track
+SJ Nattåg 92,SJ AB,Nattåg 91 = Nattåg 92,Train régional,National,Stockholm C,SE,Luleå C,SE,21:55,11:53,1052.0,13:58:00,1.05,1.1,Back-on-Track
+SJ Nattåg 93 (L),SJ AB,Nattåg 93 (L) = Nattåg 94 (L),Train régional,National,Luleå C,SE,Stockholm C,SE,21:10,10:09,1052.0,12:59:00,1.05,1.1,Back-on-Track
+SJ Nattåg 93 (N),SJ AB,Arctic Circle,Train régional,International,Narvik,SE,Stockholm C,NO,15:11,10:09,1456.0,18:58:00,0.96,1.4,Back-on-Track
+SJ Nattåg 94 (L),SJ AB,Nattåg 93 (L) = Nattåg 94 (L),Train régional,National,Stockholm C,SE,Luleå C,SE,18:08,06:44,1052.0,12:36:00,1.05,1.1,Back-on-Track
+SJ Nattåg 94 (N),SJ AB,Arctic Circle,Train régional,International,Stockholm C,SE,Narvik,NO,18:08,12:40,1456.0,18:32:00,0.96,1.4,Back-on-Track
+SJN 405,SJ Norge AS,F6,Train régional,National,Oslo S,NO,Trondheim,NO,22:50,06:24,556.0,7:34:00,0.32,0.18,Back-on-Track
+SJN 406,SJ Norge AS,F6,Train régional,National,Trondheim,NO,Oslo S,NO,23:17,06:50,556.0,7:33:00,0.32,0.18,Back-on-Track
+SJN 475,SJ Norge AS,F7,Train régional,National,Trondheim,NO,Bodø,NO,23:05,09:05,725.0,10:00:00,0.32,0.23,Back-on-Track
+SJN 476,SJ Norge AS,F7,Train régional,National,Bodø,NO,Trondheim,NO,21:09,07:15,725.0,10:06:00,0.32,0.23,Back-on-Track
+SNCF IC Nuit 3731,SNCF Voyageurs SA,Le Pyrénéen,Train régional,National,Tarbes,FR,Paris Austerlitz,FR,19:00,07:23,841.0,12:32:00,3.45,2.9,Back-on-Track
+SNCF IC Nuit 3740,SNCF Voyageurs SA,Le Pyrénéen,Train régional,National,Paris Austerlitz,FR,Tarbes,FR,22:11,09:34,841.0,11:56:00,3.45,2.9,Back-on-Track
+SNCF IC Nuit 3750,SNCF Voyageurs SA,IC Nuit 3750 = IC Nuit 3751,Train régional,National,Toulouse Matabiau,FR,Paris Austerlitz,FR,19:44,07:03,714.0,11:19:00,3.08,2.2,Back-on-Track
+SNCF IC Nuit 3751,SNCF Voyageurs SA,IC Nuit 3750 = IC Nuit 3751,Train régional,National,Paris Austerlitz,FR,Toulouse Matabiau,FR,22:13,07:44,714.0,9:31:00,3.08,2.2,Back-on-Track
+SNCF IC Nuit 3754,SNCF Voyageurs SA,L'Occitan,Train régional,National,Rodez,FR,Paris Austerlitz,FR,22:37,08:31,712.0,10:13:00,2.81,2.0,Back-on-Track
+SNCF IC Nuit 3754 (Sun),SNCF Voyageurs SA,L'Occitan,Train régional,National,Albi Ville,FR,Paris Austerlitz,FR,20:50,08:31,792.0,11:42:00,2.78,2.2,Back-on-Track
+SNCF IC Nuit 3755,SNCF Voyageurs SA,L'Occitan,Train régional,National,Paris Austerlitz,FR,Rodez,FR,18:51,07:06,712.0,11:41:00,2.81,2.0,Back-on-Track
+SNCF IC Nuit 3755 (Sun),SNCF Voyageurs SA,L'Occitan,Train régional,National,Paris Austerlitz,FR,Albi Ville,FR,18:51,09:02,792.0,13:35:00,2.78,2.2,Back-on-Track
+SNCF IC Nuit 3789,SNCF Voyageurs SA,IC Nuit 3789 = IC Nuit 3790,Train régional,National,Paris Austerlitz,FR,Aurillac,FR,19:27,07:30,602.0,12:08:00,6.48,3.9,Back-on-Track
+SNCF IC Nuit 3790,SNCF Voyageurs SA,IC Nuit 3789 = IC Nuit 3790,Train régional,National,Aurillac,FR,Paris Austerlitz,FR,22:41,08:31,602.0,10:51:00,6.48,3.9,Back-on-Track
+SNCF IC Nuit 3970,SNCF Voyageurs SA,Le Pyrénéen,Train régional,National,Latour-de-Carol,FR,Paris Austerlitz,FR,18:48,07:03,875.0,12:15:00,2.97,2.6,Back-on-Track
+SNCF IC Nuit 3971,SNCF Voyageurs SA,Le Pyrénéen,Train régional,National,Paris Austerlitz,FR,Latour-de-Carol,FR,21:40,10:07,875.0,12:27:00,2.97,2.6,Back-on-Track
+SNCF IC Nuit 5737,SNCF Voyageurs SA,IC Nuit 5737 = IC Nuit 5738,Train régional,National,Paris Austerlitz,FR,Cerbère,FR,20:10,09:16,952.0,13:06:00,2.84,2.7,Back-on-Track
+SNCF IC Nuit 5738,SNCF Voyageurs SA,IC Nuit 5737 = IC Nuit 5738,Train régional,National,Cerbère,FR,Paris Austerlitz,FR,18:53,08:50,952.0,13:57:00,2.84,2.7,Back-on-Track
+SNCF IC Nuit 5772,SNCF Voyageurs SA,Le Train Bleu,Train régional,National,Nice Ville,FR,Paris Austerlitz,FR,17:55,8:08,989.0,14:13:00,3.13,3.1,Back-on-Track
+SNCF IC Nuit 5781,SNCF Voyageurs SA,Le Train Bleu,Train régional,National,Paris Austerlitz,FR,Nice Ville,FR,20:51,09:25,989.0,12:34:00,3.13,3.1,Back-on-Track
+SNCF IC Nuit 5787,SNCF Voyageurs SA,IC Nuit 5787 = IC Nuit 5792,Train régional,National,Paris Austerlitz,FR,Briançon,FR,20:51,08:21,796.0,11:30:00,3.02,2.4,Back-on-Track
+SNCF IC Nuit 5792,SNCF Voyageurs SA,IC Nuit 5787 = IC Nuit 5792,Train régional,National,Briançon,FR,Paris Austerlitz,FR,19:58,08:08,796.0,12:10:00,3.02,2.4,Back-on-Track
+ST 300,Merresor AB,Berlinaren,Train régional,International,Stockholm C,DE,Berlin Hbf,SE,16:20,07:46,1481.0,15:26:00,10.87,16.1,Back-on-Track
+ST 301,Merresor AB,Berlinaren,Train régional,International,Berlin Hbf,DE,Stockholm C,SE,21:10,13:20,1481.0,16:10:00,10.87,16.1,Back-on-Track
+ST 304,Merresor AB,304 = 305,Train régional,International,Innsbruck Hbf,SE,Malmö C,AT,18:00,16:21,1847.0,22:21:00,16.46,30.4,Back-on-Track
+ST 305,Merresor AB,304 = 305,Train régional,International,Malmö C,SE,Innsbruck Hbf,AT,14:40,13:00,1847.0,22:20:00,16.46,30.4,Back-on-Track
+ST 3904,Merresor AB,3904 = 3905,Train régional,National,Malmö C,SE,Duved,SE,17:15,08:20,1265.0,15:05:00,1.11,1.4,Back-on-Track
+ST 3905,Merresor AB,3904 = 3905,Train régional,National,Duved,SE,Malmö C,SE,18:30,08:55,1265.0,14:25:00,1.11,1.4,Back-on-Track
+ST 3920,Merresor AB,3920 = 3921,Train régional,National,Malmö C,SE,Storlien,SE,16:35,08:55,1314.0,16:20:00,1.14,1.5,Back-on-Track
+ST 3921,Merresor AB,3920 = 3921,Train régional,National,Storlien,SE,Malmö C,SE,15:25,07:15,1314.0,15:50:00,1.14,1.5,Back-on-Track
+TCDD 12002,TCDD Taşımacılık A.Ş.,Ankara Ekspresi,Train régional,National,İstanbul Halkalı,TR,Ankara,TR,22:00,06:58,567.0,8:58:00,21.16,12.0,Back-on-Track
+TCDD 22001,TCDD Taşımacılık A.Ş.,Ankara Ekspresi,Train régional,National,Ankara,TR,İstanbul Halkalı,TR,22:00,06:19,567.0,8:19:00,21.16,12.0,Back-on-Track
+TCDD 22006,TCDD Taşımacılık A.Ş.,Izmir Mavi,Train régional,National,Ankara,TR,İzmir Basmane,TR,20:00,09:35,811.0,13:35:00,22.19,18.0,Back-on-Track
+TCDD 22010,TCDD Taşımacılık A.Ş.,Dogu Ekspresi,Train régional,National,Ankara,TR,Kars,TR,17:55,20:20,1339.0,26:25:00,22.78,30.5,Back-on-Track
+TCDD 22012,TCDD Taşımacılık A.Ş.,Vangölü Ekspresi,Train régional,National,Ankara,TR,Tatvan,TR,11:20,13:31,1261.0,26:11:00,22.76,28.7,Back-on-Track
+TCDD 22014,TCDD Taşımacılık A.Ş.,Güney Ekspresi,Train régional,National,Ankara,TR,Kurtalan,TR,11:20,14:31,1263.0,27:11:00,22.8,28.8,Back-on-Track
+TCDD 22018,TCDD Taşımacılık A.Ş.,4 Eylül Mavi,Train régional,National,Ankara,TR,Malatya,TR,19:10,10:56,851.0,15:46:00,22.8,19.4,Back-on-Track
+TCDD 32005,TCDD Taşımacılık A.Ş.,Izmir Mavi,Train régional,National,İzmir Basmane,TR,Ankara,TR,19:05,08:33,811.0,13:28:00,22.19,18.0,Back-on-Track
+TCDD 32007,TCDD Taşımacılık A.Ş.,Konya Mavi,Train régional,National,İzmir Basmane,TR,Konya,TR,20:05,09:01,669.0,12:56:00,24.22,16.2,Back-on-Track
+TCDD 42009,TCDD Taşımacılık A.Ş.,Dogu Ekspresi,Train régional,National,Kars,TR,Ankara,TR,08:00,09:39,1339.0,25:39:00,22.78,30.5,Back-on-Track
+TCDD 52011,TCDD Taşımacılık A.Ş.,Vangölü Ekspresi,Train régional,National,Tatvan,TR,Ankara,TR,10:30,11:56,1261.0,25:26:00,22.76,28.7,Back-on-Track
+TCDD 52013,TCDD Taşımacılık A.Ş.,Güney Ekspresi,Train régional,National,Kurtalan,TR,Ankara,TR,09:30,11:56,1263.0,26:26:00,22.8,28.8,Back-on-Track
+TCDD 52019,TCDD Taşımacılık A.Ş.,4 Eylül Mavi,Train régional,National,Malatya,TR,Ankara,TR,15:30,07:23,851.0,15:53:00,22.8,19.4,Back-on-Track
+TCDD 72008,TCDD Taşımacılık A.Ş.,Konya Mavi,Train régional,National,Konya,TR,İzmir Basmane,TR,19:00,07:37,669.0,12:37:00,24.22,16.2,Back-on-Track
+TCDD/BDŽ 12503/492,Opérateur non renseigné,Balkan Express,Train régional,International,İstanbul Halkalı,BG,София,TR,20:00,09:40,591.0,13:40:00,23.52,13.9,Back-on-Track
+TCDD/BDŽ 493/12504,Opérateur non renseigné,Balkan Express,Train régional,International,София,BG,İstanbul Halkalı,TR,18:45,06:34,591.0,11:49:00,23.52,13.9,Back-on-Track
+TCDD/BDŽ/CFR 12503/460,Opérateur non renseigné,Bosphor Express,Train régional,International,İstanbul Halkalı,RO,București Nord,TR,20:00,17:08,799.0,21:08:00,22.15,17.7,Back-on-Track
+TCDD/BDŽ/CFR 461/12504,Opérateur non renseigné,Bosphor Express,Train régional,International,București Nord,RO,İstanbul Halkalı,TR,10:50,06:34,799.0,19:44:00,22.15,17.7,Back-on-Track
+UEX 1856,Train4you Vertriebs GmbH,1856 = 1857,Train régional,National,München Ost,DE,Hamburg Altona,DE,21:49,07:36,,9:47:00,17.092615894039735,,Back-on-Track
+UEX 1857,Train4you Vertriebs GmbH,1856 = 1857,Train régional,National,Hamburg Altona,DE,München Ost,DE,21:32,07:20,,9:48:00,17.092615894039735,,Back-on-Track
+UEX 1858,Train4you Vertriebs GmbH,1858 = 1859,Train régional,National,Freiburg (Breisgau) Hbf,DE,Hamburg Altona,DE,20:36,07:35,847.0,10:59:00,17.092615894039735,14.48,Back-on-Track
+UEX 1859,Train4you Vertriebs GmbH,1858 = 1859,Train régional,National,Hamburg Altona,DE,Freiburg (Breisgau) Hbf,DE,21:32,08:05,847.0,10:33:00,17.092615894039735,14.48,Back-on-Track
+UEX 302/322,Train4you Vertriebs GmbH,302/322 = 303/323,Train régional,National,Innsbruck Hbf,DE,Hamburg Altona,DE,21:00,08:26,,11:26:00,17.092615894039735,,Back-on-Track
+UEX 303/323,Train4you Vertriebs GmbH,302/322 = 303/323,Train régional,National,Hamburg Altona,DE,Innsbruck Hbf,DE,20:14,08:23,,12:09:00,17.092615894039735,,Back-on-Track
+UEX 320/324,Train4you Vertriebs GmbH,320/324 = 321/325,Train régional,National,Villach Hbf,DE,Hamburg Altona,DE,19:06,09:37,,14:31:00,17.092615894039735,,Back-on-Track
+UEX 321/325,Train4you Vertriebs GmbH,320/324 = 321/325,Train régional,National,Hamburg Altona,DE,Villach Hbf,DE,19:00,08:38,,13:38:00,17.092615894039735,,Back-on-Track
+UEX 332/1372,Train4you Vertriebs GmbH,332/1372 = 333/1373,Train régional,National,Innsbruck Hbf,DE,Düsseldorf Hbf,DE,21:00,07:45,,10:45:00,17.092615894039735,,Back-on-Track
+UEX 333/1373,Train4you Vertriebs GmbH,332/1372 = 333/1373,Train régional,National,Düsseldorf Hbf,DE,Innsbruck Hbf,DE,20:43,08:23,,11:40:00,17.092615894039735,,Back-on-Track
+UEX 334/1374,Train4you Vertriebs GmbH,334/1374 = 335/1375,Train régional,National,Villach Hbf,DE,Düsseldorf Hbf,DE,19:06,08:39,,13:33:00,17.092615894039735,,Back-on-Track
+UEX 335/1375,Train4you Vertriebs GmbH,334/1374 = 335/1375,Train régional,National,Düsseldorf Hbf,DE,Villach Hbf,DE,19:53,08:38,,12:45:00,17.092615894039735,,Back-on-Track
+UZ 001 D,Укрзалізниця,001 D = 001 L,Train régional,National,Харків,UA,Івано-Франківськ,UA,18:55,11:28,1197.0,16:33:00,19.13,22.9,Back-on-Track
+UZ 001 L,Укрзалізниця,001 D = 001 L,Train régional,National,Івано-Франківськ,UA,Харків,UA,19:53,12:33,1197.0,16:40:00,19.13,22.9,Back-on-Track
+UZ 003,Укрзалізниця,003 = 004,Train régional,National,Ужгород,UA,Запоріжжя 1,UA,16:35,13:08,1484.0,20:33:00,17.12,25.41,Back-on-Track
+UZ 004,Укрзалізниця,003 = 004,Train régional,National,Запоріжжя 1,UA,Ужгород,UA,17:53,14:27,1484.0,20:34:00,17.12,25.41,Back-on-Track
+UZ 006 L,Укрзалізниця,006 L = 006 P,Train régional,National,Ясіня,UA,Запоріжжя 1,UA,12:23,11:05,1465.0,22:42:00,17.27,25.3,Back-on-Track
+UZ 006 P,Укрзалізниця,006 L = 006 P,Train régional,National,Запоріжжя 1,UA,Ясіня,UA,13:00,10:43,1465.0,21:43:00,17.27,25.3,Back-on-Track
+UZ 007 K,Укрзалізниця,007 K = 008 L,Train régional,National,Київ Пасажирський,UA,Чернівці,UA,20:21,08:05,919.0,11:44:00,16.97,15.6,Back-on-Track
+UZ 007 O/059 O,Укрзалізниця,007 O/059 O = 008 Š/060 Š,Train régional,National,Харків,UA,Одеса Головна,UA,17:55,08:10,758.0,14:15:00,15.04,11.4,Back-on-Track
+UZ 008 L,Укрзалізниця,007 K = 008 L,Train régional,National,Чернівці,UA,Київ Пасажирський,UA,19:12,07:02,919.0,11:50:00,16.97,15.6,Back-on-Track
+UZ 008 Š/060 Š,Укрзалізниця,007 O/059 O = 008 Š/060 Š,Train régional,National,Одеса Головна,UA,Харків,UA,19:56,09:58,758.0,14:02:00,15.04,11.4,Back-on-Track
+UZ 009,Укрзалізниця,009 / 010,Train régional,International,Київ Пасажирський,HU,Budapest Keleti,UA,10:16,06:00,1171.0,19:44:00,19.21,22.49,Back-on-Track
+UZ 010,Укрзалізниця,009 / 010,Train régional,International,Budapest Keleti,HU,Київ Пасажирський,UA,22:40,19:11,1171.0,20:31:00,19.21,22.49,Back-on-Track
+UZ 012 L,Укрзалізниця,012 L = 012 Š,Train régional,National,Львів,UA,Одеса Головна,UA,19:46,06:23,737.0,10:37:00,19.13,14.1,Back-on-Track
+UZ 012 Š,Укрзалізниця,012 L = 012 Š,Train régional,National,Одеса Головна,UA,Львів,UA,19:46,06:18,737.0,10:32:00,19.13,14.1,Back-on-Track
+UZ 013 K,Укрзалізниця,013 K = 013 L,Train régional,National,Київ Пасажирський,UA,Солотвино 1,UA,15:58,10:58,1503.0,19:00:00,17.03,25.6,Back-on-Track
+UZ 013 L,Укрзалізниця,013 K = 013 L,Train régional,National,Солотвино 1,UA,Київ Пасажирський,UA,14:00,08:54,1503.0,18:54:00,17.03,25.6,Back-on-Track
+UZ 015,Укрзалізниця,015 = 016,Train régional,National,Харків,UA,Ясіня,UA,14:07,10:06,1337.0,19:59:00,16.9,22.6,Back-on-Track
+UZ 016,Укрзалізниця,015 = 016,Train régional,National,Ясіня,UA,Харків,UA,13:28,09:10,1337.0,19:42:00,16.9,22.6,Back-on-Track
+UZ 017 L/045 L,Укрзалізниця,017 O/045 D = 017 L/045 L,Train régional,National,Ужгород,UA,Харків,UA,13:38,08:50,1400.0,19:12:00,17.86,25.0,Back-on-Track
+UZ 017 O/045 D,Укрзалізниця,017 O/045 D = 017 L/045 L,Train régional,National,Харків,UA,Ужгород,UA,14:36,08:34,1400.0,17:58:00,17.86,25.0,Back-on-Track
+UZ 019,Укрзалізниця,019 = 020,Train régional,International,Київ Пасажирський,UA,Chelm,PL,18:19,04:55,540.0,10:36:00,21.48,11.6,Back-on-Track
+UZ 020,Укрзалізниця,019 = 020,Train régional,International,Chelm,UA,Київ Пасажирський,PL,23:40,12:17,540.0,12:37:00,21.48,11.6,Back-on-Track
+UZ 021,Укрзалізниця,021 = 022,Train régional,National,Харків,UA,Львів,UA,19:38,11:30,1115.0,15:52:00,17.22,19.2,Back-on-Track
+UZ 022,Укрзалізниця,021 = 022,Train régional,National,Львів,UA,Харків,UA,18:42,10:17,1115.0,15:35:00,17.22,19.2,Back-on-Track
+UZ 023,Укрзалізниця,023 = 024,Train régional,International,Київ Пасажирський,UA,Chelm,PL,22:40,11:05,540.0,12:25:00,21.48,11.6,Back-on-Track
+UZ 024,Укрзалізниця,023 = 024,Train régional,International,Chelm,UA,Київ Пасажирський,PL,16:42,05:39,540.0,12:57:00,21.48,11.6,Back-on-Track
+UZ 029 K,Укрзалізниця,029 K = 029 L,Train régional,National,Київ Пасажирський,UA,Ужгород,UA,19:19,07:33,876.0,12:14:00,17.58,15.4,Back-on-Track
+UZ 029 L,Укрзалізниця,029 K = 029 L,Train régional,National,Ужгород,UA,Київ Пасажирський,UA,18:55,07:09,876.0,12:14:00,17.58,15.4,Back-on-Track
+UZ 032 D,Укрзалізниця,032 D = 032 P,Train régional,National,Przemyśl Gł.,UA,Запоріжжя 1,UA,18:07,14:37,1305.0,20:30:00,16.02,20.91,Back-on-Track
+UZ 032 P,Укрзалізниця,032 D = 032 P,Train régional,National,Запоріжжя 1,UA,Przemyśl Gł.,UA,20:47,15:21,1305.0,18:34:00,16.02,20.91,Back-on-Track
+UZ 036 L,Укрзалізниця,036 Š = 036 L,Train régional,International,Przemyśl Gł.,PL,Одеса Головна,UA,20:28,12:55,840.0,16:27:00,19.76,16.6,Back-on-Track
+UZ 036 Š,Укрзалізниця,036 Š = 036 L,Train régional,International,Одеса Головна,PL,Przemyśl Gł.,UA,14:45,05:53,840.0,15:08:00,19.76,16.6,Back-on-Track
+UZ 037,Укрзалізниця,037 = 038 O/Š,Train régional,National,Ужгород,UA,Одеса Головна,UA,19:27,12:55,1029.0,17:28:00,17.98,18.5,Back-on-Track
+UZ 038 K,Укрзалізниця,038 K = 038 P,Train régional,National,Київ Пасажирський,UA,Запоріжжя 1,UA,22:17,07:34,658.0,9:17:00,16.41,10.8,Back-on-Track
+UZ 038 O/Š,Укрзалізниця,037 = 038 O/Š,Train régional,National,Одеса Головна,UA,Ужгород,UA,14:45,08:55,1029.0,18:10:00,17.98,18.5,Back-on-Track
+UZ 038 P,Укрзалізниця,038 K = 038 P,Train régional,National,Запоріжжя 1,UA,Київ Пасажирський,UA,20:35,05:58,658.0,9:23:00,16.41,10.8,Back-on-Track
+UZ 041,Укрзалізниця,041 = 042,Train régional,National,Дніпро Головний,UA,Трускавець,UA,14:35,11:13,1238.0,20:38:00,13.65,16.9,Back-on-Track
+UZ 042,Укрзалізниця,041 = 042,Train régional,National,Трускавець,UA,Дніпро Головний,UA,12:55,09:25,1238.0,20:30:00,13.65,16.9,Back-on-Track
+UZ 043 L,Укрзалізниця,043 L = 043 Š,Train régional,National,Івано-Франківськ,UA,Черкаси,UA,20:04,13:11,956.0,17:07:00,18.41,17.6,Back-on-Track
+UZ 043 Š,Укрзалізниця,043 L = 043 Š,Train régional,National,Черкаси,UA,Івано-Франківськ,UA,16:50,09:56,956.0,17:06:00,18.41,17.6,Back-on-Track
+UZ 049,Укрзалізниця,049 = 050,Train régional,National,Київ Пасажирський,UA,Трускавець,UA,21:48,07:23,702.0,9:35:00,17.95,12.6,Back-on-Track
+UZ 050,Укрзалізниця,049 = 050,Train régional,National,Трускавець,UA,Київ Пасажирський,UA,20:54,06:36,702.0,9:42:00,17.95,12.6,Back-on-Track
+UZ 051,Укрзалізниця,051 = 052 K,Train régional,International,Київ Пасажирський,PL,Przemyśl Gł.,UA,19:27,05:53,700.0,10:26:00,18.43,12.9,Back-on-Track
+UZ 052 K,Укрзалізниця,051 = 052 K,Train régional,International,Przemyśl Gł.,PL,Київ Пасажирський,UA,20:28,07:34,700.0,11:06:00,18.43,12.9,Back-on-Track
+UZ 052 P/053,Укрзалізниця,052 P/053 = 052 Š/054,Train régional,National,Дніпро Головний,UA,Одеса Головна,UA,18:30,08:00,754.0,13:30:00,12.47,9.4,Back-on-Track
+UZ 052 Š/054,Укрзалізниця,052 P/053 = 052 Š/054,Train régional,National,Одеса Головна,UA,Дніпро Головний,UA,21:10,11:03,754.0,13:53:00,12.47,9.4,Back-on-Track
+UZ 055,Укрзалізниця,055 = 056,Train régional,National,Київ Пасажирський,UA,Рахів,UA,15:58,07:50,892.0,15:52:00,17.092615894039735,15.25,Back-on-Track
+UZ 056,Укрзалізниця,055 = 056,Train régional,National,Рахів,UA,Київ Пасажирський,UA,16:30,08:54,892.0,16:24:00,17.092615894039735,15.25,Back-on-Track
+UZ 059 K,Укрзалізниця,059 K = 060 L,Train régional,National,Київ Пасажирський,UA,Chop,UA,20:37,12:59,917.0,16:22:00,16.58,15.2,Back-on-Track
+UZ 060 L,Укрзалізниця,059 K = 060 L,Train régional,National,Chop,UA,Київ Пасажирський,UA,14:30,07:47,917.0,17:17:00,16.58,15.2,Back-on-Track
+UZ 063,Укрзалізниця,063 = 064,Train régional,National,Харків,UA,Львів,UA,22:38,13:39,1115.0,15:01:00,17.22,19.2,Back-on-Track
+UZ 064,Укрзалізниця,063 = 064,Train régional,National,Львів,UA,Харків,UA,15:30,05:56,1115.0,14:26:00,17.22,19.2,Back-on-Track
+UZ 065 K,Укрзалізниця,065 K = 065 Š,Train régional,National,Харків,UA,Умань,UA,18:13,09:03,817.0,14:50:00,16.89,13.8,Back-on-Track
+UZ 065 Š,Укрзалізниця,065 K = 065 Š,Train régional,National,Умань,UA,Харків,UA,17:39,09:20,817.0,15:41:00,16.89,13.8,Back-on-Track
+UZ 067,Укрзалізниця,067 = 068,Train régional,International,Київ Пасажирський,PL,Warszawa Wschodnia,UA,20:21,10:11,867.0,13:50:00,19.21,16.66,Back-on-Track
+UZ 068,Укрзалізниця,067 = 068,Train régional,International,Warszawa Wschodnia,PL,Київ Пасажирський,UA,17:49,10:45,867.0,16:56:00,19.21,16.66,Back-on-Track
+UZ 073,Укрзалізниця,073 = 074,Train régional,International,Харків,PL,Przemyśl Gł.,UA,13:32,11:16,1212.0,21:44:00,17.9,21.69,Back-on-Track
+UZ 074,Укрзалізниця,073 = 074,Train régional,International,Przemyśl Gł.,PL,Харків,UA,13:45,13:53,1212.0,24:08:00,17.9,21.69,Back-on-Track
+UZ 075,Укрзалізниця,075 = 076,Train régional,National,Київ Пасажирський,UA,Кривий Ріг,UA,20:13,05:57,488.0,9:44:00,15.78,7.7,Back-on-Track
+UZ 076,Укрзалізниця,075 = 076,Train régional,National,Кривий Ріг,UA,Київ Пасажирський,UA,20:57,06:26,488.0,9:29:00,15.78,7.7,Back-on-Track
+UZ 078 L,Укрзалізниця,078 L = 078 Š,Train régional,National,Ковель,UA,Одеса Головна,UA,17:35,09:08,865.0,15:33:00,24.05,20.8,Back-on-Track
+UZ 078 Š,Укрзалізниця,078 L = 078 Š,Train régional,National,Одеса Головна,UA,Ковель,UA,17:03,09:31,865.0,16:28:00,24.05,20.8,Back-on-Track
+UZ 079,Укрзалізниця,079 = 080,Train régional,National,Дніпро Головний,UA,Львів,UA,22:09,12:59,1077.0,14:50:00,17.83,19.2,Back-on-Track
+UZ 080,Укрзалізниця,079 = 080,Train régional,National,Львів,UA,Дніпро Головний,UA,15:03,06:06,1077.0,15:03:00,17.83,19.2,Back-on-Track
+UZ 081 K,Укрзалізниця,081 K = 081 L,Train régional,National,Київ Пасажирський,UA,Ужгород,UA,18:35,10:59,922.0,16:24:00,16.7,15.4,Back-on-Track
+UZ 081 L,Укрзалізниця,081 K = 081 L,Train régional,National,Ужгород,UA,Київ Пасажирський,UA,16:17,08:32,922.0,16:15:00,16.7,15.4,Back-on-Track
+UZ 086 L,Укрзалізниця,086 L = 086 P,Train régional,National,Львів,UA,Запоріжжя 1,UA,10:48,06:30,1209.0,19:42:00,15.96,19.3,Back-on-Track
+UZ 086 P,Укрзалізниця,086 L = 086 P,Train régional,National,Запоріжжя 1,UA,Львів,UA,18:48,14:15,1209.0,19:27:00,15.96,19.3,Back-on-Track
+UZ 088 L,Укрзалізниця,088 L = 088 P,Train régional,National,Ковель,UA,Запоріжжя 1,UA,17:35,13:43,1110.0,20:08:00,16.13,17.9,Back-on-Track
+UZ 088 P,Укрзалізниця,088 L = 088 P,Train régional,National,Запоріжжя 1,UA,Ковель,UA,16:30,13:40,1110.0,21:10:00,16.13,17.9,Back-on-Track
+UZ 091,Укрзалізниця,091 = 092,Train régional,National,Київ Пасажирський,UA,Львів,UA,22:57,06:33,564.0,7:36:00,19.86,11.2,Back-on-Track
+UZ 092,Укрзалізниця,091 = 092,Train régional,National,Львів,UA,Київ Пасажирський,UA,23:05,06:19,564.0,7:14:00,19.86,11.2,Back-on-Track
+UZ 093,Укрзалізниця,093 = 094,Train régional,National,Харків,UA,Chelm,UA,13:32,11:05,1160.0,21:33:00,17.07,19.8,Back-on-Track
+UZ 094,Укрзалізниця,093 = 094,Train régional,National,Chelm,UA,Харків,UA,16:42,13:53,1160.0,21:11:00,17.07,19.8,Back-on-Track
+UZ 095,Укрзалізниця,095 = 096,Train régional,National,Київ Пасажирський,UA,Рахів,UA,20:29,09:50,892.0,13:21:00,17.092615894039735,15.25,Back-on-Track
+UZ 096,Укрзалізниця,095 = 096,Train régional,National,Рахів,UA,Київ Пасажирський,UA,18:16,09:01,892.0,14:45:00,17.092615894039735,15.25,Back-on-Track
+UZ 097,Укрзалізниця,097 = 098,Train régional,National,Київ Пасажирський,UA,Ковель,UA,21:56,08:28,529.0,10:32:00,30.25,16.0,Back-on-Track
+UZ 098,Укрзалізниця,097 = 098,Train régional,National,Ковель,UA,Київ Пасажирський,UA,19:05,06:04,529.0,10:59:00,30.25,16.0,Back-on-Track
+UZ 099,Укрзалізниця,099 = 100,Train régional,International,Київ Пасажирський,UA,București Nord,RO,06:30,06:47,1036.0,23:17:00,16.02,16.6,Back-on-Track
+UZ 100,Укрзалізниця,099 = 100,Train régional,International,București Nord,UA,Київ Пасажирський,RO,19:10,19:37,1036.0,23:27:00,16.02,16.6,Back-on-Track
+UZ 105,Укрзалізниця,105 = 106,Train régional,National,Київ Пасажирський,UA,Одеса Головна,UA,21:02,06:13,653.0,9:11:00,15.47,10.1,Back-on-Track
+UZ 106,Укрзалізниця,105 = 106,Train régional,National,Одеса Головна,UA,Київ Пасажирський,UA,21:30,06:45,653.0,9:15:00,15.47,10.1,Back-on-Track
+UZ 109,Укрзалізниця,109 = 110,Train régional,National,Херсо́н,UA,Львів,UA,13:35,10:23,1199.0,20:48:00,17.092615894039735,20.49,Back-on-Track
+UZ 110,Укрзалізниця,109 = 110,Train régional,National,Львів,UA,Херсо́н,UA,16:03,12:50,1199.0,20:47:00,17.092615894039735,20.49,Back-on-Track
+UZ 112 L,Укрзалізниця,112 L = 112 P,Train régional,National,Львів,UA,Ізюм,UA,15:30,11:15,1242.0,19:45:00,17.092615894039735,21.23,Back-on-Track
+UZ 112 P,Укрзалізниця,112 L = 112 P,Train régional,National,Ізюм,UA,Львів,UA,18:29,13:39,1242.0,19:10:00,17.092615894039735,21.23,Back-on-Track
+UZ 113,Укрзалізниця,113 = 114,Train régional,National,Харків,UA,Львів,UA,07:50,09:11,1108.0,25:21:00,17.092615894039735,18.94,Back-on-Track
+UZ 114,Укрзалізниця,113 = 114,Train régional,National,Львів,UA,Харків,UA,17:11,19:26,1108.0,26:15:00,17.092615894039735,18.94,Back-on-Track
+UZ 121,Укрзалізниця,121 = 122,Train régional,National,Херсо́н,UA,Київ Пасажирський,UA,16:40,09:20,677.0,16:40:00,17.092615894039735,11.57,Back-on-Track
+UZ 122,Укрзалізниця,121 = 122,Train régional,National,Київ Пасажирський,UA,Херсо́н,UA,21:08,08:33,677.0,11:25:00,17.092615894039735,11.57,Back-on-Track
+UZ 128 L,Укрзалізниця,128 L = 128 P,Train régional,National,Львів,UA,Запоріжжя 1,UA,13:58,15:36,1209.0,25:38:00,17.092615894039735,20.66,Back-on-Track
+UZ 128 P,Укрзалізниця,128 L = 128 P,Train régional,National,Запоріжжя 1,UA,Львів Підзамче,UA,09:50,12:24,1209.0,26:34:00,17.092615894039735,20.66,Back-on-Track
+UZ 136 L,Укрзалізниця,136 L = 136 Š,Train régional,National,Чернівці,UA,Одеса Головна,UA,14:57,08:26,1011.0,17:29:00,17.092615894039735,17.28,Back-on-Track
+UZ 136 Š,Укрзалізниця,136 L = 136 Š,Train régional,National,Одеса Головна,UA,Чернівці,UA,18:19,11:23,1011.0,17:04:00,17.092615894039735,17.28,Back-on-Track
+UZ 139,Укрзалізниця,139 = 140,Train régional,National,Київ Пасажирський,UA,Кам'янець-Подільський,UA,23:32,08:36,458.0,9:04:00,17.092615894039735,7.83,Back-on-Track
+UZ 140,Укрзалізниця,139 = 140,Train régional,National,Кам'янець-Подільський,UA,Київ Пасажирський,UA,20:12,05:20,458.0,9:08:00,17.092615894039735,7.83,Back-on-Track
+UZ 141,Укрзалізниця,141 = 142,Train régional,National,Івано-Франківськ,UA,Чернігів,UA,14:44,07:54,961.0,17:10:00,17.092615894039735,16.43,Back-on-Track
+UZ 142,Укрзалізниця,141 = 142,Train régional,National,Чернігів,UA,Івано-Франківськ,UA,21:18,13:20,961.0,16:02:00,17.092615894039735,16.43,Back-on-Track
+UZ 143,Укрзалізниця,143 = 144,Train régional,National,Суми,UA,Рахів,UA,19:01,19:10,961.0,24:09:00,17.092615894039735,16.43,Back-on-Track
+UZ 144,Укрзалізниця,143 = 144,Train régional,National,Рахів,UA,Суми,UA,09:54,09:56,1243.0,24:02:00,17.092615894039735,21.25,Back-on-Track
+UZ 149,Укрзалізниця,149 = 150,Train régional,National,Полтава,UA,Чернівці,UA,17:24,12:25,1073.0,19:01:00,19.2,20.6,Back-on-Track
+UZ 150,Укрзалізниця,149 = 150,Train régional,National,Чернівці,UA,Полтава,UA,14:32,09:37,1073.0,19:05:00,19.2,20.6,Back-on-Track
+UZ 181 L,Укрзалізниця,181 L = 181 P,Train régional,National,Івано-Франківськ,UA,Дніпро Головний,UA,12:43,09:25,1221.0,20:42:00,17.94,21.9,Back-on-Track
+UZ 181 P,Укрзалізниця,181 L = 181 P,Train régional,National,Дніпро Головний,UA,Івано-Франківськ,UA,14:35,11:22,1221.0,20:47:00,17.94,21.9,Back-on-Track
+UZ 192 P,Укрзалізниця,192 P = 192 Š,Train régional,National,Краматорськ,UA,Одеса Головна,UA,17:32,13:04,1278.0,19:32:00,15.57,19.9,Back-on-Track
+UZ 192 Š,Укрзалізниця,192 P = 192 Š,Train régional,National,Одеса Головна,UA,Краматорськ,UA,20:58,16:45,1278.0,19:47:00,15.57,19.9,Back-on-Track
+UZ 194 L,Укрзалізниця,194 L = 194 P,Train régional,National,Ясіня,UA,Кривий Ріг,UA,13:28,10:34,1288.0,21:06:00,17.092615894039735,22.02,Back-on-Track
+UZ 194 P,Укрзалізниця,194 L = 194 P,Train régional,National,Кривий Ріг,UA,Ясіня,UA,11:02,10:06,1288.0,23:04:00,17.092615894039735,22.02,Back-on-Track
+UZ 357,Укрзалізниця,357 = 358,Train régional,National,Київ Пасажирський,UA,Ясіня,UA,20:37,13:25,872.0,16:48:00,17.092615894039735,14.9,Back-on-Track
+UZ 358,Укрзалізниця,357 = 358,Train régional,National,Ясіня,UA,Київ Пасажирський,UA,14:04,07:47,872.0,17:43:00,17.092615894039735,14.9,Back-on-Track
+UZ/CFM 351 K,Opérateur non renseigné,351 K = 351 L,Train régional,International,Київ Пасажирський,UA,Chişinău,MD,17:05,11:30,720.0,18:25:00,17.092615894039735,12.31,Back-on-Track
+UZ/CFM 351 L,Opérateur non renseigné,351 K = 351 L,Train régional,International,Chişinău,UA,Київ Пасажирський,MD,17:34,12:05,720.0,18:31:00,17.092615894039735,12.31,Back-on-Track
+UZ/ÖBB 40149,Opérateur non renseigné,40149 = 40749,Train régional,International,Wien Hbf,AT,Київ Пасажирський,UA,16:42,18:36,1477.0,25:54:00,17.47,25.8,Back-on-Track
+UZ/ÖBB 40749,Opérateur non renseigné,40149 = 40749,Train régional,International,Київ Пасажирський,AT,Wien Hbf,UA,13:20,11:20,1477.0,22:00:00,17.47,25.8,Back-on-Track
+VR IC 265,VR-Yhtymä Oy,IC 265 = IC 274,Train régional,National,Helsinki,FI,Kemijärvi,FI,19:29,08:50,983.0,13:21:00,14.04,13.8,Back-on-Track
+VR IC 266 (H),VR-Yhtymä Oy,IC 266 (H) = IC 273,Train régional,National,Rovaniemi,FI,Helsinki,FI,17:52,06:27,899.0,12:35:00,13.46,12.1,Back-on-Track
+VR IC 266 (T),VR-Yhtymä Oy,IC 266 (T) = IC 933,Train régional,National,Rovaniemi,FI,Turku,FI,17:52,07:33,899.0,13:41:00,12.57,11.3,Back-on-Track
+VR IC 273,VR-Yhtymä Oy,IC 266 (H) = IC 273,Train régional,National,Helsinki,FI,Rovaniemi,FI,23:13,11:03,899.0,11:50:00,13.46,12.1,Back-on-Track
+VR IC 274,VR-Yhtymä Oy,IC 265 = IC 274,Train régional,National,Kemijärvi,FI,Helsinki,FI,19:15,09:15,983.0,14:00:00,14.04,13.8,Back-on-Track
+VR IC 933,VR-Yhtymä Oy,IC 266 (T) = IC 933,Train régional,National,Turku,FI,Rovaniemi,FI,21:08,11:03,899.0,13:55:00,12.57,11.3,Back-on-Track
+VR P 269,VR-Yhtymä Oy,P 269 = P 276,Train régional,National,Helsinki,FI,Kolari,FI,20:29,10:55,989.0,14:26:00,14.05,13.9,Back-on-Track
+VR P 276,VR-Yhtymä Oy,P 269 = P 276,Train régional,National,Kolari,FI,Helsinki,FI,19:42,10:38,989.0,14:56:00,14.05,13.9,Back-on-Track
+VY 605,Vygruppen AS,F4,Train régional,National,Oslo S,NO,Bergen,NO,23:03,06:27,482.0,7:24:00,0.33,0.16,Back-on-Track
+VY 606,Vygruppen AS,F4,Train régional,National,Bergen,NO,Oslo S,NO,23:00,06:27,482.0,7:27:00,0.33,0.16,Back-on-Track
+VY Nattåg 3962,Opérateur non renseigné,Non renseigné,Train de nuit,National,Luleå C,XX,Stockholm C,XX,21:10,10:09,,12.98,14.0,,Back-on-Track
+ZSSK EC 283 / R801,Železničná spoločnosť Slovensko a.s.,Metropolitan / Poľana,Train régional,International,Praha hl.n.,SK,Košice,CZ,17:44,06:44,852.0,13:00:00,13.85,11.8,Back-on-Track
+ZSSK EN 1152,Železničná spoločnosť Slovensko a.s.,EN 1152 = EN 1153,Train régional,International,Split,SK,Bratislava Nové Mesto,HR,17:29,11:00,931.0,17:31:00,7.73,7.2,Back-on-Track
+ZSSK EN 1153,Železničná spoločnosť Slovensko a.s.,EN 1152 = EN 1153,Train régional,International,Bratislava Nové Mesto,SK,Split,HR,15:26,08:20,931.0,16:54:00,17.86,16.63,Back-on-Track
+ZSSK EN 442,Železničná spoločnosť Slovensko a.s.,EN 442 = EN 443,Train régional,International,Michalovce,SK,Praha hl.n.,CZ,19:52,07:48,745.0,11:56:00,16.91,12.6,Back-on-Track
+ZSSK EN 443,Železničná spoločnosť Slovensko a.s.,EN 442 = EN 443,Train régional,International,Praha hl.n.,SK,Michalovce,CZ,22:14,10:10,745.0,11:56:00,16.91,12.6,Back-on-Track
+ZSSK R 614,Železničná spoločnosť Slovensko a.s.,Zemplín,Train régional,National,Strážske,SK,Bratislava hl.st.,SK,22:01,05:33,529.0,7:32:00,8.88,4.7,Back-on-Track
+ZSSK R 615,Železničná spoločnosť Slovensko a.s.,Zemplín,Train régional,National,Bratislava hl.st.,SK,Strážske,SK,22:27,06:22,529.0,7:55:00,8.88,4.7,Back-on-Track
+ZSSK R800 / EC282,Železničná spoločnosť Slovensko a.s.,Metropolitan / Poľana,Train régional,International,Košice,SK,Praha hl.n.,CZ,22:46,10:11,852.0,11:25:00,13.85,11.8,Back-on-Track
+ÖBB NJ 233,ÖBB-Personenverkehr AG,NJ 233 = NJ 235,Train régional,International,Wien Hbf,AT,La Spezia Centrale,IT,19:18,11:10,1090.0,15:52:00,17.092615894039735,18.63,Back-on-Track
+ÖBB NJ 235,ÖBB-Personenverkehr AG,NJ 233 = NJ 235,Train régional,International,La Spezia Centrale,AT,Wien Hbf,IT,17:10,09:04,1090.0,15:54:00,17.092615894039735,18.63,Back-on-Track
+ÖBB NJ 236,ÖBB-Personenverkehr AG,NJ 236 = NJ 237,Train régional,International,Venezia Santa Lucia,DE,Stuttgart Hbf,IT,21:05,09:26,852.0,12:21:00,17.092615894039735,14.56,Back-on-Track
+ÖBB NJ 237,ÖBB-Personenverkehr AG,NJ 236 = NJ 237,Train régional,International,Stuttgart Hbf,DE,Venezia Santa Lucia,IT,20:01,08:34,852.0,12:33:00,17.092615894039735,14.56,Back-on-Track
+ÖBB NJ 294,ÖBB-Personenverkehr AG,NJ 294 = NJ 295,Train régional,International,Roma Tiburtina,DE,München Hbf,IT,18:10,09:22,1092.0,15:12:00,17.092615894039735,18.67,Back-on-Track
+ÖBB NJ 295,ÖBB-Personenverkehr AG,NJ 294 = NJ 295,Train régional,International,München Hbf,DE,Roma Termini,IT,20:10,09:10,1092.0,13:00:00,17.092615894039735,18.67,Back-on-Track
+ÖBB NJ 402,ÖBB-Personenverkehr AG,NJ 402 = NJ 403,Train régional,International,Zürich HB,DE,Amsterdam Centraal,NL,21:34,09:44,845.0,12:10:00,21.3,18.0,Back-on-Track
+ÖBB NJ 40233,ÖBB-Personenverkehr AG,NJ 40233 = NJ 40294,Train régional,International,Wien Hbf,AT,Roma Tiburtina,IT,19:18,10:05,1112.0,14:47:00,14.39,16.0,Back-on-Track
+ÖBB NJ 40235,ÖBB-Personenverkehr AG,NJ 40235 = NJ 40295,Train régional,International,Milano Lambrate,DE,München Hbf,IT,20:54,09:22,1044.0,12:28:00,17.092615894039735,17.84,Back-on-Track
+ÖBB NJ 40236,ÖBB-Personenverkehr AG,NJ 40236 = NJ 40466,Train régional,International,Venezia Santa Lucia,AT,Wien Hbf,IT,21:05,08:17,619.0,11:12:00,17.092615894039735,10.58,Back-on-Track
+ÖBB NJ 40294,ÖBB-Personenverkehr AG,NJ 40233 = NJ 40294,Train régional,International,Roma Tiburtina,AT,Wien Hbf,IT,18:10,08:52,1112.0,14:42:00,14.39,16.0,Back-on-Track
+ÖBB NJ 40295,ÖBB-Personenverkehr AG,NJ 40235 = NJ 40295,Train régional,International,München Hbf,DE,Milano Lambrate,IT,20:08,07:31,1044.0,11:23:00,17.092615894039735,17.84,Back-on-Track
+ÖBB NJ 403,ÖBB-Personenverkehr AG,NJ 402 = NJ 403,Train régional,International,Amsterdam Centraal,DE,Zürich HB,NL,20:15,08:05,845.0,11:50:00,21.3,18.0,Back-on-Track
+ÖBB NJ 40420,ÖBB-Personenverkehr AG,NJ 40420 = NJ 40491,Train régional,International,Innsbruck Hbf,DE,Hamburg Altona,AT,20:46,09:06,1112.0,12:20:00,14.39,16.0,Back-on-Track
+ÖBB NJ 40421,ÖBB-Personenverkehr AG,NJ 40421 = NJ 40490,Train régional,International,Amsterdam Centraal,DE,Wien Hbf,NL,18:28,09:17,,14:49:00,17.092615894039735,,Back-on-Track
+ÖBB NJ 40424,ÖBB-Personenverkehr AG,NJ 40424 = NJ 40469,Train régional,International,Berlin Ostbahnhof,DE,Paris Est,FR,18:55,09:38,1168.0,14:43:00,10.96,12.8,Back-on-Track
+ÖBB NJ 40425,ÖBB-Personenverkehr AG,NJ 40425 = NJ 40468,Train régional,International,Aachen Hbf,BE,Wien Hbf,AT,19:06,10:13,,15:07:00,17.092615894039735,,Back-on-Track
+ÖBB NJ 40466,ÖBB-Personenverkehr AG,NJ 40236 = NJ 40466,Train régional,International,Wien Hbf,AT,Venezia Santa Lucia,IT,21:39,08:34,619.0,10:55:00,17.092615894039735,10.58,Back-on-Track
+ÖBB NJ 40468,ÖBB-Personenverkehr AG,NJ 40425 = NJ 40468,Train régional,International,Wien Hbf,BE,Aachen Hbf,AT,18:08,09:56,,15:48:00,17.092615894039735,,Back-on-Track
+ÖBB NJ 40469,ÖBB-Personenverkehr AG,NJ 40424 = NJ 40469,Train régional,International,Paris Est,DE,Berlin Hbf,FR,19:12,08:26,1168.0,13:14:00,10.96,12.8,Back-on-Track
+ÖBB NJ 40490,ÖBB-Personenverkehr AG,NJ 40421 = NJ 40490,Train régional,International,Wien Hbf,DE,Amsterdam Centraal,NL,20:10,09:58,,13:48:00,17.092615894039735,,Back-on-Track
+ÖBB NJ 40491,ÖBB-Personenverkehr AG,NJ 40420 = NJ 40491,Train régional,International,Hamburg Altona,DE,Innsbruck Hbf,AT,19:56,09:14,1112.0,13:18:00,14.39,16.0,Back-on-Track
+ÖBB NJ 408,ÖBB-Personenverkehr AG,NJ 408 = NJ 409,Train régional,International,Berlin Hbf,DE,Zürich HB,CH,21:03,09:04,,12:01:00,17.092615894039735,,Back-on-Track
+ÖBB NJ 409,ÖBB-Personenverkehr AG,NJ 408 = NJ 409,Train régional,International,Zürich HB,DE,Berlin Hbf,CH,19:59,07:20,,11:21:00,17.092615894039735,,Back-on-Track
+ÖBB NJ 420,ÖBB-Personenverkehr AG,NJ 420 = NJ 421,Train régional,International,Innsbruck Hbf,DE,Amsterdam Centraal,NL,20:46,09:58,,13:12:00,17.092615894039735,,Back-on-Track
+ÖBB NJ 421,ÖBB-Personenverkehr AG,NJ 420 = NJ 421,Train régional,International,Amsterdam Centraal,DE,Innsbruck Hbf,NL,18:28,09:14,,14:46:00,17.092615894039735,,Back-on-Track
+ÖBB NJ 446,ÖBB-Personenverkehr AG,NJ 446 = NJ 447,Train régional,International,Wien Hbf,AT,Bregenz,CH,22:55,08:29,,9:34:00,17.092615894039735,,Back-on-Track
+ÖBB NJ 447,ÖBB-Personenverkehr AG,NJ 446 = NJ 447,Train régional,International,Bregenz,AT,Wien Hbf (Autoreisezuganlage),CH,21:40,07:04,,9:24:00,17.092615894039735,,Back-on-Track
+ÖBB NJ 456,ÖBB-Personenverkehr AG,NJ 456 = NJ 457,Train régional,International,Graz Hbf,DE,Berlin Hbf,AT,19:20,08:14,,12:54:00,17.092615894039735,,Back-on-Track
+ÖBB NJ 457,ÖBB-Personenverkehr AG,NJ 456 = NJ 457,Train régional,International,Berlin Hbf,DE,Graz Hbf,AT,19:20,09:59,,14:39:00,17.092615894039735,,Back-on-Track
+ÖBB NJ 464,ÖBB-Personenverkehr AG,NJ 464 = NJ 465,Train régional,International,Graz Hbf,AT,Zürich HB,CH,22:25,09:20,,10:55:00,17.092615894039735,,Back-on-Track
+ÖBB NJ 465,ÖBB-Personenverkehr AG,NJ 464 = NJ 465,Train régional,International,Zürich HB,AT,Graz Hbf,CH,20:40,06:58,,10:18:00,17.092615894039735,,Back-on-Track
+ÖBB NJ 468,ÖBB-Personenverkehr AG,NJ 468 = NJ 469,Train régional,International,Wien Hbf,DE,Paris Est,FR,18:13,09:38,,15:25:00,17.092615894039735,,Back-on-Track
+ÖBB NJ 469,ÖBB-Personenverkehr AG,NJ 468 = NJ 469,Train régional,International,Paris Est,DE,Wien Hbf,FR,19:12,10:13,,15:01:00,17.092615894039735,,Back-on-Track
+ÖBB NJ 470,ÖBB-Personenverkehr AG,NJ 470 = NJ 471,Train régional,International,Zürich HB,DE,Hamburg Dammtor,CH,20:59,08:09,1011.0,11:10:00,17.8,18.0,Back-on-Track
+ÖBB NJ 471,ÖBB-Personenverkehr AG,NJ 470 = NJ 471,Train régional,International,Hamburg Altona,DE,Zürich HB,CH,21:52,10:05,1011.0,12:13:00,17.8,18.0,Back-on-Track
+ÖBB NJ 490,ÖBB-Personenverkehr AG,NJ 490 = NJ 491,Train régional,International,Wien Hbf,DE,Hamburg Dammtor,AT,20:10,09:06,,12:56:00,17.092615894039735,,Back-on-Track
+ÖBB NJ 491,ÖBB-Personenverkehr AG,NJ 490 = NJ 491,Train régional,International,Hamburg Hbf,DE,Wien Hbf,AT,19:56,09:17,,13:21:00,17.092615894039735,,Back-on-Track
+ČD EC 458,České dráhy a.s.,Jižní expres,Train régional,International,Praha hl.n.,CH,Zürich HB,CZ,18:28,08:30,915.0,14:02:00,20.55,18.8,Back-on-Track
+ČD EN 40457,České dráhy a.s.,Metropol,Train régional,International,Praha hl.n.,HU,Budapest Nyugati,CZ,22:03,08:29,608.0,10:26:00,17.27,10.5,Back-on-Track
+ČD EN 40459,České dráhy a.s.,Jižní expres,Train régional,International,Zürich HB,CH,Praha hl.n.,CZ,19:59,09:23,915.0,13:24:00,20.55,18.8,Back-on-Track
+ČD EN 40476,České dráhy a.s.,Metropol,Train régional,International,Budapest-Nyugati,HU,Berlin Hbf,CZ,19:30,08:14,608.0,12:44:00,17.27,10.5,Back-on-Track
+ŽS/ŽPCG 1130 / 432,Opérateur non renseigné,Lovćen,Train régional,International,Bar,RS,Beograd Centar,ME,20:10,07:09,469.0,10:59:00,29.21,13.7,Back-on-Track
+ŽS/ŽPCG 433,Opérateur non renseigné,Lovćen,Train régional,International,Београд Центар,RS,Bar,ME,20:00,06:54,469.0,10:54:00,29.21,13.7,Back-on-Track
+
+
