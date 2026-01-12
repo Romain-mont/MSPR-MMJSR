@@ -93,7 +93,39 @@ def process_gtfs(routes, trips, stops, stop_times):
     merged = merged.rename(columns={'stop_name': 'destination_name', 'stop_lat': 'lat2', 'stop_lon': 'lon2'})
     
     return merged
+def gtfs_time_to_hours(time_str):
+    """
+    Convertit une heure GTFS 'HH:MM:SS' en nombre d'heures décimal (float).
+    Gère le cas spécial GTFS où l'heure peut dépasser 24h (ex: 25:30 = 01:30 le lendemain).
+    """
+    try:
+        h, m, s = map(int, time_str.split(':'))
+        return h + m/60 + s/3600
+    except:
+        return 0.0
 
+def determine_train_type(departure_h, duration_h):
+    """
+    Définit si c'est un train de Nuit ou de Jour selon les règles ObRail.
+    Règle simple : Si départ après 22h ou avant 5h, ou si le trajet passe la nuit.
+    """
+    # On normalise l'heure (si 25h -> 1h)
+    dep_mod = departure_h % 24
+    
+    # Critère arbitraire pour l'exercice (à affiner selon règles métier)
+    if (dep_mod >= 22 or dep_mod <= 5) and duration_h > 4:
+        return "Nuit"
+    return "Jour"
+
+def calculate_co2(distance_km, train_type):
+    """
+    Estime l'émission de CO2.
+    Facteurs moyens (source ADEME/SNCF approximative pour l'exercice) :
+    - Train Jour (TGV/Intercité électrique) : ~4 gCO2e/km
+    - Train Nuit (souvent tracté, parfois diesel sur segments) : ~14 gCO2e/km (selon exemple sujet)
+    """
+    factor = 14.0 if train_type == "Nuit" else 4.0
+    return round(distance_km * factor / 1000, 2) # Résultat en kgCO2e
 # === 4. EXÉCUTION ===
 if __name__ == "__main__":
     try:
@@ -111,6 +143,49 @@ if __name__ == "__main__":
         
         # 4. Filtre > 100km (Demande ObRail pour "Longue Distance")
         long_distance_trains = df_trips[df_trips['distance_km'] > 100].copy()
+        # === AJOUTS CALCULS MÉTIERS ===
+        print("🧮 Calculs métiers (Durée, Type, CO2)...")
+        
+        # A. Durée
+        # On applique la conversion sur les colonnes d'heures
+        long_distance_trains['dep_h_dec'] = long_distance_trains['departure_time'].apply(gtfs_time_to_hours)
+        long_distance_trains['arr_h_dec'] = long_distance_trains['arrival_time'].apply(gtfs_time_to_hours)
+        long_distance_trains['duration_h'] = long_distance_trains['arr_h_dec'] - long_distance_trains['dep_h_dec']
+        long_distance_trains['duration_h'] = long_distance_trains['duration_h'].round(2)
+
+        # B. Type (Jour/Nuit)
+        long_distance_trains['train_type'] = long_distance_trains.apply(
+            lambda row: determine_train_type(row['dep_h_dec'], row['duration_h']), axis=1
+        )
+
+        # C. CO2
+        long_distance_trains['total_emission_kgco2e'] = long_distance_trains.apply(
+            lambda row: calculate_co2(row['distance_km'], row['train_type']), axis=1
+        )
+
+        # 5. Sélection finale (Mise au format ObRail)
+        final_df = long_distance_trains[[
+            'trip_id', 
+            'origin_name', 
+            'destination_name', 
+            'departure_time', 
+            'arrival_time', 
+            'distance_km',
+            'duration_h',
+            'train_type',
+            'total_emission_kgco2e'
+        ]]
+        
+        print("\n✅ TRANSFORMATION TERMINÉE")
+        print(f"   -> Trajets totaux trouvés : {len(df_trips)}")
+        print(f"   -> Trajets longue distance (>100km) : {len(final_df)}")
+        
+        print("\n🔎 Aperçu des données finales enrichies :")
+        print(final_df.head(10).to_string()) # to_string permet de tout voir
+
+        # Sauvegarde finale
+        final_df.to_csv("data_trains_final.csv", index=False)
+        print("\n💾 Fichier 'data_trains_final.csv' généré.")
         
         # 5. Nettoyage final pour affichage
         final_df = long_distance_trains[[
@@ -126,8 +201,7 @@ if __name__ == "__main__":
         print("\n🔎 Aperçu des données :")
         print(final_df.head(10))
         
-        # Optionnel : Sauvegarder en CSV pour vérifier
-        # final_df.to_csv("resultat_test_gtfs.csv", index=False)
+        
 
     except FileNotFoundError:
         print(f"❌ Erreur : Le fichier {FILE_PATH} est introuvable. Vérifie le chemin.")

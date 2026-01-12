@@ -1,0 +1,440 @@
+trip_id,origin_name,destination_name,departure_time,arrival_time,distance_km,duration_h,train_type,total_emission_kgco2e
+IDFM:TN:SNCF:0034550a-7a18-429d-9eff-947ebd5a1f85,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,18:06:00,19:52:00,128.29830966332557,1.77,Jour,0.51
+IDFM:TN:SNCF:00fff477-a510-4168-8cbc-b734a6307770,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,08:35:00,09:56:00,128.29830966332557,1.35,Jour,0.51
+IDFM:TN:SNCF:014d085e-d535-4629-abee-82c358f8a543,Gare d'Austerlitz,Châteaudun,13:56:00,15:21:00,114.15900905533336,1.42,Jour,0.46
+IDFM:TN:SNCF:014fdd1d-78c2-473e-a47f-4094adf896fc,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,08:17:00,09:56:00,128.29830966332557,1.65,Jour,0.51
+IDFM:TN:SNCF:01fdc39b-f089-4f77-8b50-906bdbe40d88,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,18:55:00,20:30:00,128.29830966332557,1.58,Jour,0.51
+IDFM:TN:SNCF:037ab332-06c4-431c-89cf-0f71830a383e,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,17:27:00,18:59:00,128.28665759181973,1.53,Jour,0.51
+IDFM:TN:SNCF:03a1411b-01d1-4905-b8e4-5bebe58d8b4a,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,13:35:00,14:57:00,128.28665759181973,1.37,Jour,0.51
+IDFM:TN:SNCF:03f82a9c-bd10-4a75-87f5-296c925b1e7f,Laroche - Migennes,Gare de Lyon,05:53:00,07:48:00,129.07897995273925,1.92,Jour,0.52
+IDFM:TN:SNCF:0484b6b9-b56c-4c51-bc20-bf21088851fd,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,14:03:00,15:27:00,128.28970372757354,1.4,Jour,0.51
+IDFM:TN:SNCF:05c8c058-1481-489a-b2e2-00b962603dc4,Gare d'Austerlitz,Châteaudun,08:12:00,09:44:00,114.15900905533336,1.53,Jour,0.46
+IDFM:TN:SNCF:065d5944-dba5-43d9-b398-242aba6abccb,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,19:03:00,20:27:00,128.28970372757354,1.4,Jour,0.51
+IDFM:TN:SNCF:0753d387-2e79-4bda-b2a8-aa1092f28e9c,Paris-Bercy Bourgogne - Pays d'Auvergne,Châteaudun,19:20:00,20:53:30,114.82414885019467,1.56,Jour,0.46
+IDFM:TN:SNCF:087ebc71-5dcd-4e32-be8f-71da245d12fa,Gare d'Austerlitz,Châteaudun,19:16:00,20:44:00,114.15900905533336,1.47,Jour,0.46
+IDFM:TN:SNCF:09048e3a-cbc3-489b-960a-76e38deab6e8,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,06:03:30,07:41:00,128.29830966332557,1.62,Jour,0.51
+IDFM:TN:SNCF:09523dd2-a275-4171-9dc7-353b7d4a1046,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,17:04:00,18:28:00,128.29830966332557,1.4,Jour,0.51
+IDFM:TN:SNCF:09df428d-0eba-4b25-badd-ef42287314cc,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,16:14:00,17:56:00,128.29830966332557,1.7,Jour,0.51
+IDFM:TN:SNCF:0a00be03-33fa-48aa-95a6-fab8149e0d64,Châteaudun,Gare d'Austerlitz,19:58:00,21:35:00,114.15900905533336,1.62,Jour,0.46
+IDFM:TN:SNCF:0a495261-91e7-48f2-be2c-aaa8a6080b6f,Gare de Lyon,Laroche - Migennes,18:27:00,19:56:00,129.0673359581354,1.48,Jour,0.52
+IDFM:TN:SNCF:0bb3995d-3c34-4f31-8afc-1b1d71d2f589,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,11:05:00,12:31:00,128.29830966332557,1.43,Jour,0.51
+IDFM:TN:SNCF:0c293217-7a0d-4ab6-9b83-d1fd6505792c,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,21:03:00,22:27:00,128.28970372757354,1.4,Jour,0.51
+IDFM:TN:SNCF:0d806467-a932-4de8-aca5-aa10c8fc21a2,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,17:29:00,18:57:00,128.29830966332557,1.47,Jour,0.51
+IDFM:TN:SNCF:0dd102e2-86d8-43bc-86d2-7f75877231a7,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,19:27:00,20:57:00,128.28665759181973,1.5,Jour,0.51
+IDFM:TN:SNCF:0e0b46cb-2f4f-43cd-b0dc-501ec62accc8,Châteaudun,Gare d'Austerlitz,17:09:00,18:36:00,114.15900905533336,1.45,Jour,0.46
+IDFM:TN:SNCF:0e63c9ed-4ef6-441c-939a-ca76f5de22ec,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,14:03:00,15:28:00,128.29830966332557,1.42,Jour,0.51
+IDFM:TN:SNCF:0edc399f-1aa2-4396-960c-c993399483d6,Gare de Lyon,Laroche - Migennes,10:31:00,11:56:00,129.07897995273925,1.42,Jour,0.52
+IDFM:TN:SNCF:10275f4a-d6f8-4eed-8783-dde5b4debd50,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,22:35:00,24:15:30,128.29830966332557,1.68,Jour,0.51
+IDFM:TN:SNCF:10c75a23-a721-495f-9380-185e3a691512,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,19:25:00,20:57:00,128.29830966332557,1.53,Jour,0.51
+IDFM:TN:SNCF:10d0e5af-97cf-4f92-9fc5-64754ef92aa9,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,11:05:00,12:31:00,128.29830966332557,1.43,Jour,0.51
+IDFM:TN:SNCF:111714b9-4fea-4c35-bc34-f10a44348c83,Laroche - Migennes,Gare de Lyon,11:03:00,12:29:00,129.07897995273925,1.43,Jour,0.52
+IDFM:TN:SNCF:1141bf5d-2ff2-45cf-b125-f183463718ae,Châteaudun,Gare d'Austerlitz,12:09:00,13:37:30,114.15900905533336,1.47,Jour,0.46
+IDFM:TN:SNCF:1168f2dd-9ec1-4dfa-9033-2acd1b04b375,Gare d'Austerlitz,Châteaudun,19:15:00,20:44:00,114.15900905533336,1.48,Jour,0.46
+IDFM:TN:SNCF:12bc24c7-f60a-4baa-8fc6-9c45c441f4c6,Gare de Lyon,Laroche - Migennes,07:34:30,08:57:00,129.0673359581354,1.37,Jour,0.52
+IDFM:TN:SNCF:130a8c44-d8d4-4304-9e89-5c00a5aac5a6,Gare d'Austerlitz,Châteaudun,19:25:00,20:53:30,114.15900905533336,1.47,Jour,0.46
+IDFM:TN:SNCF:1315c51d-c300-425d-bbd7-2ecc21c79e02,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,19:03:00,20:28:00,128.29830966332557,1.42,Jour,0.51
+IDFM:TN:SNCF:137242a8-b9a0-4a7c-aa49-19be53f0ff2b,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,20:04:00,21:50:00,128.28970372757354,1.77,Jour,0.51
+IDFM:TN:SNCF:15fdc477-5fa6-49a5-832a-a2d77b76438b,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,14:35:00,15:56:00,128.28665759181973,1.35,Jour,0.51
+IDFM:TN:SNCF:16e9c3d0-5e69-4e70-99ad-326de9bcd631,Laroche - Migennes,Gare de Lyon,09:03:00,10:30:00,129.07897995273925,1.45,Jour,0.52
+IDFM:TN:SNCF:1751829e-c753-452a-a164-910d8c8eff35,Gare de Lyon,Laroche - Migennes,19:13:00,21:08:00,129.07897995273925,1.92,Jour,0.52
+IDFM:TN:SNCF:17727bed-57af-4d0d-a91d-f7f9cb8b8a65,Châteaudun,Gare d'Austerlitz,10:54:30,12:36:30,114.15900905533336,1.7,Jour,0.46
+IDFM:TN:SNCF:17a77573-b06f-492e-a0ca-c715bd518632,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,13:05:00,14:33:00,128.29830966332557,1.47,Jour,0.51
+IDFM:TN:SNCF:17ed8a50-ad52-4df1-8905-39eddac6d744,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,17:27:00,18:59:00,128.29830966332557,1.53,Jour,0.51
+IDFM:TN:SNCF:18236db3-2f38-4015-808b-c567dbd6fe10,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,15:03:00,16:37:00,128.29830966332557,1.57,Jour,0.51
+IDFM:TN:SNCF:1894e30f-9d6c-4aab-81f8-6c2b2b5d70b9,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,10:35:00,11:56:00,128.29830966332557,1.35,Jour,0.51
+IDFM:TN:SNCF:18b68671-7a38-48df-a327-360b91b6e8c1,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,12:16:00,13:56:00,128.29830966332557,1.67,Jour,0.51
+IDFM:TN:SNCF:18bfcb12-1e81-4278-9c0f-6d8cee743f56,Laroche - Migennes,Gare de Lyon,04:53:00,06:47:30,129.07897995273925,1.91,Jour,0.52
+IDFM:TN:SNCF:195786c7-a879-4182-aa16-a3f4694e9d82,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,08:03:30,09:33:30,128.29830966332557,1.5,Jour,0.51
+IDFM:TN:SNCF:19903666-92e2-4070-b529-8a9973edfa6b,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,09:23:00,10:57:00,128.28665759181973,1.57,Jour,0.51
+IDFM:TN:SNCF:19e83047-d844-4943-a011-ef7354ed51f3,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,14:03:00,15:40:00,128.29830966332557,1.62,Jour,0.51
+IDFM:TN:SNCF:19f155b7-0357-46e2-bd93-2f8db49f7f30,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,10:35:00,11:56:00,128.28665759181973,1.35,Jour,0.51
+IDFM:TN:SNCF:19f8c13d-73a0-4283-ac35-3368829a8ce6,Laroche - Migennes,Gare de Lyon,06:51:00,08:49:00,129.07897995273925,1.97,Jour,0.52
+IDFM:TN:SNCF:1a702c91-738c-4d9d-b80a-879830a63f72,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,13:33:00,15:09:00,128.29830966332557,1.6,Jour,0.51
+IDFM:TN:SNCF:1a9ca4c7-6db4-4135-9efd-f76c457f2125,Paris-Bercy Bourgogne - Pays d'Auvergne,Châteaudun,13:50:00,15:21:00,114.82414885019467,1.52,Jour,0.46
+IDFM:TN:SNCF:1b2f660a-cadb-4b5d-a87b-37d4573407fd,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,13:33:00,14:57:00,128.29830966332557,1.4,Jour,0.51
+IDFM:TN:SNCF:1d20411e-9d21-4037-9439-a49d939539ce,Laroche - Migennes,Gare de Lyon,10:04:00,11:33:00,129.07897995273925,1.48,Jour,0.52
+IDFM:TN:SNCF:1de78326-a33f-4a36-9b1e-58e2cb458709,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,12:35:00,13:56:00,128.28665759181973,1.35,Jour,0.51
+IDFM:TN:SNCF:1e69cbfd-c51b-4859-bac8-e72bb7f3bb50,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,05:03:30,06:35:00,128.28970372757354,1.52,Jour,0.51
+IDFM:TN:SNCF:1f3bb632-7755-467c-b73b-0a5a0f11e7ec,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,19:03:00,20:27:00,128.28970372757354,1.4,Jour,0.51
+IDFM:TN:SNCF:1fd43270-091f-437d-ac78-726978f9591f,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,14:35:00,15:56:00,128.29830966332557,1.35,Jour,0.51
+IDFM:TN:SNCF:211cb789-920b-485f-888f-e259b0b02cb1,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,22:47:00,24:44:00,128.29830966332557,1.95,Jour,0.51
+IDFM:TN:SNCF:2148a891-13b1-4a4d-b841-c436e37ea338,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,06:03:30,07:33:00,128.28970372757354,1.49,Jour,0.51
+IDFM:TN:SNCF:218d9a22-4fb0-40ff-9d21-a5666bf7c665,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,15:32:00,16:56:30,128.28665759181973,1.41,Jour,0.51
+IDFM:TN:SNCF:21b44e0e-5dfc-497f-8d41-c1f85bb7e72b,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,08:03:30,09:33:30,128.29830966332557,1.5,Jour,0.51
+IDFM:TN:SNCF:23d67da1-c58b-4752-af3a-f9143771116c,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,17:22:00,18:57:00,128.29830966332557,1.58,Jour,0.51
+IDFM:TN:SNCF:23f8ab70-ff94-4952-bea0-f6fc39d0a495,Gare de Lyon,Laroche - Migennes,07:34:30,08:57:00,129.0673359581354,1.37,Jour,0.52
+IDFM:TN:SNCF:25391313-60d6-4976-871c-8aa28a329f83,Gare de Lyon,Laroche - Migennes,11:35:00,12:57:00,129.07897995273925,1.37,Jour,0.52
+IDFM:TN:SNCF:25539331-2a76-4040-b108-0c77802a99a7,Laroche - Migennes,Gare de Lyon,05:53:00,07:48:00,129.07897995273925,1.92,Jour,0.52
+IDFM:TN:SNCF:2577598f-b21f-493c-b9bc-d0eded1c0f89,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,16:27:00,17:56:00,128.29830966332557,1.48,Jour,0.51
+IDFM:TN:SNCF:270e5a46-b398-420c-bb7f-d1ea761a2f0d,Laroche - Migennes,Gare de Lyon,16:03:00,17:27:30,129.07038042366028,1.41,Jour,0.52
+IDFM:TN:SNCF:2778c60c-df6d-434e-9f60-517290d49966,Gare de Lyon,Laroche - Migennes,18:17:30,19:56:00,129.07897995273925,1.64,Jour,0.52
+IDFM:TN:SNCF:28e10103-adeb-4b6f-94fc-e1ff6e2a4063,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,08:03:30,09:27:00,128.28970372757354,1.39,Jour,0.51
+IDFM:TN:SNCF:298f806e-b866-48a6-adb3-a5096992d9bc,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,10:04:00,11:33:00,128.28970372757354,1.48,Jour,0.51
+IDFM:TN:SNCF:29dd3309-4ca0-4ede-b7f9-ce1a5443ab1e,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,17:27:00,18:57:00,128.28665759181973,1.5,Jour,0.51
+IDFM:TN:SNCF:2a8e0c5d-2ff1-4db9-85c3-f334cd026175,Gare de Lyon,Laroche - Migennes,07:34:30,08:57:30,129.07897995273925,1.38,Jour,0.52
+IDFM:TN:SNCF:2ac55c53-d0e7-4dd0-87da-d3c0e40178a5,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,17:04:00,18:27:00,128.28970372757354,1.38,Jour,0.51
+IDFM:TN:SNCF:2be03207-dc64-415c-a3c8-bf3c6e42d64c,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,12:04:00,13:28:00,128.29830966332557,1.4,Jour,0.51
+IDFM:TN:SNCF:2ca4fdea-2989-4ca6-8b45-8b7f7f8fcc90,Gare d'Austerlitz,Châteaudun,17:59:00,19:35:00,114.15900905533336,1.6,Jour,0.46
+IDFM:TN:SNCF:2dd66b19-1ef0-4d8b-805f-5cf6cd6d6c88,Châteaudun,Gare d'Austerlitz,17:08:30,18:35:30,114.15900905533336,1.45,Jour,0.46
+IDFM:TN:SNCF:2eef34a3-53bd-4e4b-8597-210b5547b68d,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,15:03:00,16:27:00,128.28970372757354,1.4,Jour,0.51
+IDFM:TN:SNCF:2f8725b9-8586-4e25-bca0-f8637ce381b9,Gare d'Austerlitz,Châteaudun,16:25:00,17:56:00,114.15900905533336,1.52,Jour,0.46
+IDFM:TN:SNCF:2fd125e0-22ff-4fd7-934b-6019113e21b5,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,08:03:30,09:33:30,128.29830966332557,1.5,Jour,0.51
+IDFM:TN:SNCF:3073242e-c753-4a46-bdd3-b4352087a028,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,11:03:00,12:27:00,128.28970372757354,1.4,Jour,0.51
+IDFM:TN:SNCF:312c3722-b7e4-4b07-ab90-21c797219f5a,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,13:35:00,14:57:00,128.29830966332557,1.37,Jour,0.51
+IDFM:TN:SNCF:31913434-ce25-4077-9b2f-9cc321506df6,Laroche - Migennes,Gare de Lyon,05:53:00,07:55:00,129.07897995273925,2.03,Jour,0.52
+IDFM:TN:SNCF:3192546e-02cf-4388-8c16-7579ce92fe20,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,13:03:30,14:27:00,128.28970372757354,1.39,Jour,0.51
+IDFM:TN:SNCF:31e2fd0d-b72f-4b40-b4a6-b3c37fcae74c,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,18:05:00,19:46:00,128.29830966332557,1.68,Jour,0.51
+IDFM:TN:SNCF:32a35e65-c550-43cb-92fa-daa674e9ef61,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,07:03:00,08:30:00,128.28970372757354,1.45,Jour,0.51
+IDFM:TN:SNCF:32a82379-d5c5-4c8f-a469-759a2f076791,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,07:03:00,08:38:00,128.28970372757354,1.58,Jour,0.51
+IDFM:TN:SNCF:32f05bf6-bdb2-4fb7-9b9e-134b4f2f94ba,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,08:35:00,09:56:00,128.28665759181973,1.35,Jour,0.51
+IDFM:TN:SNCF:33e4adc0-13c8-499a-acd2-7ff83df116bd,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,11:05:00,12:30:00,128.29830966332557,1.42,Jour,0.51
+IDFM:TN:SNCF:34535124-a3fe-4b30-afe0-6ecc0aad81ec,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,15:35:00,16:57:30,128.29830966332557,1.37,Jour,0.51
+IDFM:TN:SNCF:34809493-482d-407e-9777-45a28cfb7734,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,11:33:00,13:09:00,128.29830966332557,1.6,Jour,0.51
+IDFM:TN:SNCF:3484e9f9-bdfe-49b8-ba81-a5fcf6676da6,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,05:03:30,06:35:00,128.29830966332557,1.52,Jour,0.51
+IDFM:TN:SNCF:3781a4f2-f7f0-4535-a830-ed7910429ebf,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,13:05:00,14:33:00,128.29830966332557,1.47,Jour,0.51
+IDFM:TN:SNCF:381b063a-601c-4c26-a6ed-93d41e40e634,Gare d'Austerlitz,Châteaudun,09:39:00,11:19:00,114.15900905533336,1.67,Jour,0.46
+IDFM:TN:SNCF:38624c5d-c8d4-4e8b-8f30-355c8b80e052,Châteaudun,Gare d'Austerlitz,12:09:00,13:37:30,114.15900905533336,1.47,Jour,0.46
+IDFM:TN:SNCF:392c4292-89df-4c70-959c-365359898506,Gare de Lyon,Laroche - Migennes,08:33:00,09:56:00,129.07897995273925,1.38,Jour,0.52
+IDFM:TN:SNCF:3bb35eb7-82c3-4529-a282-d9a8e5efbbe6,Laroche - Migennes,Gare de Lyon,06:51:00,08:49:00,129.07897995273925,1.97,Jour,0.52
+IDFM:TN:SNCF:3bf3ce4b-8717-4137-98f5-4a17f4e906d3,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,10:33:00,11:57:00,128.29830966332557,1.4,Jour,0.51
+IDFM:TN:SNCF:3c01de8f-f5f8-4ec9-9a95-156720ed8ef8,Laroche - Migennes,Gare de Lyon,05:53:00,07:48:00,129.07897995273925,1.92,Jour,0.52
+IDFM:TN:SNCF:3ca85ea5-19b5-4e0b-83dc-0ec7ed78f038,Châteaudun,Gare d'Austerlitz,17:09:00,18:36:00,114.15900905533336,1.45,Jour,0.46
+IDFM:TN:SNCF:3dba610d-866a-4420-ba6d-b8c4b43ee8fe,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,12:04:00,13:27:00,128.28970372757354,1.38,Jour,0.51
+IDFM:TN:SNCF:3e27e742-7568-4c9a-b93e-6bb581be99bd,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,19:27:00,20:57:00,128.29830966332557,1.5,Jour,0.51
+IDFM:TN:SNCF:3f36db28-eeeb-4341-a778-031daf54be53,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,20:35:00,21:56:00,128.28665759181973,1.35,Jour,0.51
+IDFM:TN:SNCF:3f623395-343a-45c2-b24d-668dffea6d44,Châteaudun,Gare d'Austerlitz,18:54:00,20:25:00,114.15900905533336,1.52,Jour,0.46
+IDFM:TN:SNCF:3fa5e3dd-4c98-4881-aaf5-081157ded339,Gare de Lyon,Laroche - Migennes,13:34:00,14:59:00,129.07897995273925,1.42,Jour,0.52
+IDFM:TN:SNCF:3fd95c90-e221-4c66-85b1-c113023b3c76,Gare de Lyon,Laroche - Migennes,17:12:00,19:07:30,129.07897995273925,1.93,Jour,0.52
+IDFM:TN:SNCF:403ff34b-2d83-483e-bb75-328dd50cbd98,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,21:03:00,22:27:00,128.29830966332557,1.4,Jour,0.51
+IDFM:TN:SNCF:40fe38d1-f53d-4f91-9423-28a5210659d8,Gare de Lyon,Laroche - Migennes,11:35:00,12:56:00,129.07897995273925,1.35,Jour,0.52
+IDFM:TN:SNCF:41377d60-f213-4838-aa71-9f24c3410ff1,Châteaudun,Gare d'Austerlitz,12:09:00,13:37:30,114.15900905533336,1.47,Jour,0.46
+IDFM:TN:SNCF:4170a4dd-4939-466b-8d40-0382cff1df54,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,16:27:00,17:55:00,128.28665759181973,1.47,Jour,0.51
+IDFM:TN:SNCF:418ab5ee-e270-45e6-9d68-3c1edbceec2e,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,14:03:00,15:39:00,128.29830966332557,1.6,Jour,0.51
+IDFM:TN:SNCF:41f1de99-bbf6-4b0d-acd1-a78dbe6e32ec,Gare de Lyon,Laroche - Migennes,07:34:00,09:00:00,129.07897995273925,1.43,Jour,0.52
+IDFM:TN:SNCF:429f6c72-e6bf-4db8-91bf-d5f0b2c60248,Châteaudun,Paris-Bercy Bourgogne - Pays d'Auvergne,12:09:00,13:41:00,114.82414885019467,1.53,Jour,0.46
+IDFM:TN:SNCF:4470fe9d-f69a-42ce-aa9c-6f01796cee50,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,21:03:00,22:28:00,128.29830966332557,1.42,Jour,0.51
+IDFM:TN:SNCF:44c61248-f80d-4f6e-a1fd-4f871c685eab,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,06:04:00,07:34:00,128.29830966332557,1.5,Jour,0.51
+IDFM:TN:SNCF:45c1e99f-b946-4e61-8a2b-73867e6c254f,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,14:03:00,15:27:00,128.29830966332557,1.4,Jour,0.51
+IDFM:TN:SNCF:45d801ca-33e2-410e-8a4f-5f7b92fd4a71,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,15:04:00,16:28:00,128.29830966332557,1.4,Jour,0.51
+IDFM:TN:SNCF:489c6bc1-1479-4da3-8bfb-aa05f9faae24,Châteaudun,Gare d'Austerlitz,10:54:30,12:36:30,114.15900905533336,1.7,Jour,0.46
+IDFM:TN:SNCF:48b9a8e6-111c-4027-bc74-8eb82be6a588,Gare de Lyon,Laroche - Migennes,18:26:30,19:56:00,129.07897995273925,1.49,Jour,0.52
+IDFM:TN:SNCF:495334b2-e536-4edc-8d61-0904e14f4548,Gare d'Austerlitz,Châteaudun,09:39:00,11:19:00,114.15900905533336,1.67,Jour,0.46
+IDFM:TN:SNCF:49d4177c-2400-4b64-abb1-7265d61bf821,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,19:27:00,20:57:00,128.28665759181973,1.5,Jour,0.51
+IDFM:TN:SNCF:4a0dd740-4aab-40c1-8bb1-3ba68e252012,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,12:20:00,13:56:00,128.29830966332557,1.6,Jour,0.51
+IDFM:TN:SNCF:4a128b25-a0f8-4bb9-84fd-72a6ca817f8f,Laroche - Migennes,Gare de Lyon,06:51:00,08:49:00,129.07897995273925,1.97,Jour,0.52
+IDFM:TN:SNCF:4bb29928-6fca-456a-bfc3-1a9f6dc2a127,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,16:24:00,17:55:00,128.29830966332557,1.52,Jour,0.51
+IDFM:TN:SNCF:4d4ad6a2-0500-41e8-9a09-530b99eb1346,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,18:05:00,19:46:00,128.29830966332557,1.68,Jour,0.51
+IDFM:TN:SNCF:4dc0d213-9f41-4d13-bcff-ab4b6e471d18,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,12:35:00,13:56:00,128.28665759181973,1.35,Jour,0.51
+IDFM:TN:SNCF:4f22f395-b37b-45aa-b942-dee82324ee4c,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,12:35:00,13:56:00,128.28665759181973,1.35,Jour,0.51
+IDFM:TN:SNCF:4f94155d-17f8-42ef-a121-aaa750680532,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,22:35:00,24:12:00,128.29830966332557,1.62,Jour,0.51
+IDFM:TN:SNCF:4fb3894f-96ed-47f0-b0c0-72a034070022,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,10:35:00,11:56:00,128.28665759181973,1.35,Jour,0.51
+IDFM:TN:SNCF:509fc3a5-c9fa-4dad-8fc3-e0f442d8c195,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,16:27:00,17:56:00,128.28665759181973,1.48,Jour,0.51
+IDFM:TN:SNCF:51a05cbd-e364-48ac-a1dd-1c0dde335e6e,Laroche - Migennes,Gare de Lyon,16:03:00,17:37:30,129.07897995273925,1.57,Jour,0.52
+IDFM:TN:SNCF:51dfb6b3-f8b4-44d9-8ade-37c7e9040419,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,21:03:00,22:27:00,128.28970372757354,1.4,Jour,0.51
+IDFM:TN:SNCF:52595ea0-d2ec-46c8-9dc7-42e2705e849b,Gare d'Austerlitz,Châteaudun,08:12:00,09:44:00,114.15900905533336,1.53,Jour,0.46
+IDFM:TN:SNCF:529da154-2866-41f7-8d06-07b30eddce3d,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,10:33:00,12:09:00,128.29830966332557,1.6,Jour,0.51
+IDFM:TN:SNCF:54c44ffa-a98c-4c7f-8022-b48dd92b3bf2,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,17:04:00,18:27:00,128.28970372757354,1.38,Jour,0.51
+IDFM:TN:SNCF:54dcf915-87a4-4482-a883-18a3c5017e27,Laroche - Migennes,Gare de Lyon,16:03:00,17:28:30,129.07897995273925,1.42,Jour,0.52
+IDFM:TN:SNCF:55018032-7c07-4337-a610-eae846cf07ae,Gare d'Austerlitz,Châteaudun,13:56:00,15:21:00,114.15900905533336,1.42,Jour,0.46
+IDFM:TN:SNCF:55f28828-3840-41ac-82d2-9f3faeb5e637,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,16:15:00,17:56:00,128.29830966332557,1.68,Jour,0.51
+IDFM:TN:SNCF:561a8ef4-8aac-4e2d-b8bf-5319449a5fd3,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,20:27:00,21:56:00,128.28665759181973,1.48,Jour,0.51
+IDFM:TN:SNCF:5624acfc-b285-48a1-8b62-29c9e9883bf6,Châteaudun,Gare d'Austerlitz,16:08:30,17:38:00,114.15900905533336,1.49,Jour,0.46
+IDFM:TN:SNCF:565608d5-0b58-4f98-a34b-ed61db9889ec,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,11:35:00,12:55:00,128.28665759181973,1.33,Jour,0.51
+IDFM:TN:SNCF:5718c90d-bcc8-4083-b5d5-141b826374d5,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,18:06:00,19:52:00,128.29830966332557,1.77,Jour,0.51
+IDFM:TN:SNCF:5741aba0-5b90-4273-80fb-fb4a9478b7ef,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,20:04:00,21:50:00,128.28970372757354,1.77,Jour,0.51
+IDFM:TN:SNCF:5889161e-e6db-46a5-8cde-5fa8ca30da7a,Laroche - Migennes,Gare de Lyon,18:05:00,19:28:00,129.07897995273925,1.38,Jour,0.52
+IDFM:TN:SNCF:5918fd3e-dc38-456c-a925-0db2eb728c89,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,16:27:00,17:56:00,128.28665759181973,1.48,Jour,0.51
+IDFM:TN:SNCF:5925ae9c-2516-49ed-875e-af82301c8706,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,13:03:00,14:37:00,128.29830966332557,1.57,Jour,0.51
+IDFM:TN:SNCF:5ad9d07d-f3dd-4c35-b9b0-0364c8537f98,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,17:27:00,18:56:30,128.28665759181973,1.49,Jour,0.51
+IDFM:TN:SNCF:5c841747-7c79-4004-a812-af7979cc6a77,Laroche - Migennes,Gare de Lyon,17:04:00,18:29:00,129.07897995273925,1.42,Jour,0.52
+IDFM:TN:SNCF:5cc081d0-4253-4047-a42b-f813c41d1886,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,10:04:00,11:33:00,128.28970372757354,1.48,Jour,0.51
+IDFM:TN:SNCF:5d8da054-93a1-4d20-94f9-666bdd0f4a05,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,09:03:00,10:37:00,128.29830966332557,1.57,Jour,0.51
+IDFM:TN:SNCF:5d98261f-f7a3-4138-a598-c7659f0f83b1,Gare de Lyon,Laroche - Migennes,18:13:00,20:08:00,129.0673359581354,1.92,Jour,0.52
+IDFM:TN:SNCF:5dd054c5-5156-4788-a1c7-fb00399218f8,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,18:06:00,19:49:00,128.28970372757354,1.72,Jour,0.51
+IDFM:TN:SNCF:5e2e23a5-a5c6-417f-b3a0-1bed13c49d54,Gare d'Austerlitz,Châteaudun,09:39:00,11:19:00,114.15900905533336,1.67,Jour,0.46
+IDFM:TN:SNCF:5e4307ec-7d4b-41bc-ab30-e2afbf8a5c2c,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,11:03:00,12:29:00,128.29830966332557,1.43,Jour,0.51
+IDFM:TN:SNCF:5f195ada-3950-42e6-bfa5-f9870e59df88,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,06:35:00,07:56:00,128.28665759181973,1.35,Jour,0.51
+IDFM:TN:SNCF:5f4f831e-79d6-4e4d-97a7-af19b7a7aecf,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,14:35:00,15:56:00,128.28665759181973,1.35,Jour,0.51
+IDFM:TN:SNCF:60d809b6-19b3-46fc-ad31-4939d5a7caf4,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,23:26:00,24:53:00,128.28665759181973,1.45,Jour,0.51
+IDFM:TN:SNCF:6157397a-ca0a-4996-9d30-d5d34d641656,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,09:20:00,10:55:00,128.28665759181973,1.58,Jour,0.51
+IDFM:TN:SNCF:61c942bb-baa1-4b1b-bed5-f54427d86fa3,Châteaudun,Gare d'Austerlitz,17:09:00,18:36:00,114.15900905533336,1.45,Jour,0.46
+IDFM:TN:SNCF:62ee11c6-f893-4d03-ab02-61b849e77af7,Gare d'Austerlitz,Châteaudun,13:56:00,15:21:00,114.15900905533336,1.42,Jour,0.46
+IDFM:TN:SNCF:62efe68e-5fc8-4f52-9d4f-4648ff84ecae,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,12:15:00,13:56:00,128.29830966332557,1.68,Jour,0.51
+IDFM:TN:SNCF:63701880-301a-410f-8aad-83e33d95de0b,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,11:05:00,12:31:00,128.29830966332557,1.43,Jour,0.51
+IDFM:TN:SNCF:63774b37-125a-4518-9285-c8654998fa59,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,17:27:00,18:59:00,128.28665759181973,1.53,Jour,0.51
+IDFM:TN:SNCF:63b8c3c8-12d7-4ca7-99f4-23d95dd9758f,Châteaudun,Gare d'Austerlitz,10:54:30,12:36:30,114.15900905533336,1.7,Jour,0.46
+IDFM:TN:SNCF:67ac70e5-be16-49bb-ba42-8d04379285d3,Gare d'Austerlitz,Châteaudun,08:12:00,09:44:00,114.15900905533336,1.53,Jour,0.46
+IDFM:TN:SNCF:683c9219-f77c-44c4-8ec9-cc62b9500df4,Châteaudun,Gare d'Austerlitz,18:42:00,20:34:00,114.15900905533336,1.87,Jour,0.46
+IDFM:TN:SNCF:6933b416-f2b6-453b-bf90-002275c49a00,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,18:27:00,19:57:30,128.29830966332557,1.51,Jour,0.51
+IDFM:TN:SNCF:69f67a72-873d-45e6-9896-7ef4a49a7f1f,Gare d'Austerlitz,Châteaudun,19:16:00,20:44:00,114.15900905533336,1.47,Jour,0.46
+IDFM:TN:SNCF:6a34cd7b-5859-4b20-88b4-e1566f310dbc,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,18:05:00,19:46:00,128.29830966332557,1.68,Jour,0.51
+IDFM:TN:SNCF:6a7f6f46-b6a2-4dda-861a-a3ebcc3747f6,Gare de Lyon,Laroche - Migennes,07:34:00,08:58:30,129.07897995273925,1.41,Jour,0.52
+IDFM:TN:SNCF:6adf9ea2-cbba-4c5f-9e4c-ba50c39f40a9,Gare d'Austerlitz,Châteaudun,06:25:00,07:55:00,114.15900905533336,1.5,Jour,0.46
+IDFM:TN:SNCF:6af7543f-5af0-4006-a834-6e17837aad09,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,08:19:00,09:56:00,128.29830966332557,1.62,Jour,0.51
+IDFM:TN:SNCF:6c3fce17-b6af-4735-aed6-8e68a98d8999,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,09:03:00,10:27:30,128.29830966332557,1.41,Jour,0.51
+IDFM:TN:SNCF:6cdceacd-b31e-4c45-9760-488eb233c36a,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,16:27:00,17:55:00,128.28665759181973,1.47,Jour,0.51
+IDFM:TN:SNCF:6d486a32-1a02-4e2f-bda4-4d16eaaa1999,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,16:04:00,17:27:00,128.29830966332557,1.38,Jour,0.51
+IDFM:TN:SNCF:6d7d6d49-b882-4cda-87f3-04e22751bb06,Châteaudun,Gare d'Austerlitz,12:09:00,13:37:30,114.15900905533336,1.47,Jour,0.46
+IDFM:TN:SNCF:6dbb053f-4d47-454d-b789-5957dcada69a,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,07:33:00,09:09:30,128.29830966332557,1.61,Jour,0.51
+IDFM:TN:SNCF:6e9f69df-d681-4eca-93ea-c79383200691,Gare de Lyon,Laroche - Migennes,18:17:30,19:56:00,129.07897995273925,1.64,Jour,0.52
+IDFM:TN:SNCF:6ec51a1e-25a5-4017-979d-937fd8b8ed92,Châteaudun,Gare d'Austerlitz,16:08:30,17:35:00,114.15900905533336,1.44,Jour,0.46
+IDFM:TN:SNCF:70754a31-12d9-4373-aeba-9202c28b9b11,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,13:35:00,14:57:00,128.28665759181973,1.37,Jour,0.51
+IDFM:TN:SNCF:71233001-3e3f-499a-b6f9-83b4c65b8ba4,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,22:46:00,24:44:30,128.29830966332557,1.98,Jour,0.51
+IDFM:TN:SNCF:7132a09b-62e8-4d74-b21a-db995f362a00,Gare d'Austerlitz,Châteaudun,13:56:00,15:21:00,114.15900905533336,1.42,Jour,0.46
+IDFM:TN:SNCF:72acd46d-6bc4-4288-b3b9-9dbe5a0845a8,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,19:03:00,20:37:00,128.29830966332557,1.57,Jour,0.51
+IDFM:TN:SNCF:72f70007-031b-421c-bd74-cfb262193cbd,Châteaudun,Gare d'Austerlitz,12:09:00,13:37:30,114.15900905533336,1.47,Jour,0.46
+IDFM:TN:SNCF:7352da57-0c0a-40fe-b0ec-9aaa783b242b,Châteaudun,Gare d'Austerlitz,10:54:30,12:36:30,114.15900905533336,1.7,Jour,0.46
+IDFM:TN:SNCF:737588a2-d9b6-4d16-9e58-a94151baf03b,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,09:03:00,10:30:00,128.28970372757354,1.45,Jour,0.51
+IDFM:TN:SNCF:7469e16b-a9af-4159-86ad-cecacbf84101,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,20:04:00,21:50:00,128.28970372757354,1.77,Jour,0.51
+IDFM:TN:SNCF:763864d6-0d4c-424a-97f3-22e7c660869c,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,20:04:00,21:54:00,128.29830966332557,1.83,Jour,0.51
+IDFM:TN:SNCF:76519cf1-a470-4831-94e6-7550fcb359a1,Châteaudun,Gare d'Austerlitz,18:54:00,20:34:30,114.15900905533336,1.68,Jour,0.46
+IDFM:TN:SNCF:76c7381a-337b-43a0-831e-6221836d989a,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,06:04:00,07:34:00,128.29830966332557,1.5,Jour,0.51
+IDFM:TN:SNCF:77075302-5df3-4d62-8410-1fe078277e3b,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,06:35:00,07:56:00,128.28665759181973,1.35,Jour,0.51
+IDFM:TN:SNCF:77805bca-c252-44c5-9c54-f7a9278f35b1,Gare d'Austerlitz,Châteaudun,16:25:00,17:56:00,114.15900905533336,1.52,Jour,0.46
+IDFM:TN:SNCF:77de79a7-0a6a-4fda-980f-24fab1e25c3d,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,14:03:00,15:27:00,128.28970372757354,1.4,Jour,0.51
+IDFM:TN:SNCF:78659558-d815-454f-8de9-39174d42ca2d,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,17:04:00,18:27:00,128.28970372757354,1.38,Jour,0.51
+IDFM:TN:SNCF:796ea666-11cb-4cdc-b6fc-901916ddb873,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,18:27:00,19:57:30,128.29830966332557,1.51,Jour,0.51
+IDFM:TN:SNCF:7b0c9e74-2afd-4a68-8fc6-9e9254813bab,Gare d'Austerlitz,Châteaudun,09:39:00,11:19:00,114.15900905533336,1.67,Jour,0.46
+IDFM:TN:SNCF:7b0d283e-b550-4aef-9e17-e174d38956c5,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,08:03:30,09:34:30,128.29830966332557,1.52,Jour,0.51
+IDFM:TN:SNCF:7b340415-64fe-4016-a55c-1bb3b575e984,Châteaudun,Gare d'Austerlitz,12:09:00,13:37:30,114.15900905533336,1.47,Jour,0.46
+IDFM:TN:SNCF:7bb230be-45f3-42db-a63c-62227ee119cd,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,08:04:00,09:36:00,128.29830966332557,1.53,Jour,0.51
+IDFM:TN:SNCF:7be47e77-c800-46c8-ac1c-aa51cc4fc164,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,20:10:00,21:56:00,128.29830966332557,1.77,Jour,0.51
+IDFM:TN:SNCF:7c104f7c-71f1-4c10-9e08-be83b4edadaa,Châteaudun,Gare d'Austerlitz,07:08:00,08:46:00,114.15900905533336,1.63,Jour,0.46
+IDFM:TN:SNCF:7c60308e-2efb-42f7-8d1d-2b8630dc6cdc,Gare de Lyon,Laroche - Migennes,20:28:00,21:56:00,129.07897995273925,1.47,Jour,0.52
+IDFM:TN:SNCF:7ceb956b-4698-4073-9f8e-8e85119204ac,Châteaudun,Gare d'Austerlitz,18:54:00,20:33:30,114.15900905533336,1.66,Jour,0.46
+IDFM:TN:SNCF:7d07b42d-e543-4f34-a442-4aaf584bbb36,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,12:04:00,13:27:00,128.28970372757354,1.38,Jour,0.51
+IDFM:TN:SNCF:806596cd-c7bf-4cbc-86f6-4dcffd635f1b,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,08:35:00,09:56:00,128.28665759181973,1.35,Jour,0.51
+IDFM:TN:SNCF:81349d71-af8c-4e13-9567-6d101fd3b09d,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,11:05:00,12:31:00,128.29830966332557,1.43,Jour,0.51
+IDFM:TN:SNCF:81651bfa-268c-49ad-8837-155fd708d01c,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,14:04:00,15:39:00,128.29830966332557,1.58,Jour,0.51
+IDFM:TN:SNCF:8201798f-1677-4bc0-a8ac-3c20474c1412,Gare d'Austerlitz,Châteaudun,20:54:00,22:24:00,114.15900905533336,1.5,Jour,0.46
+IDFM:TN:SNCF:820bcef2-7f3e-4bae-9612-5f89f86acdd0,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,20:35:00,21:56:00,128.28665759181973,1.35,Jour,0.51
+IDFM:TN:SNCF:82354245-2100-4008-9775-384f3a5f3827,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,07:35:00,08:59:30,128.29830966332557,1.41,Jour,0.51
+IDFM:TN:SNCF:8272a2fa-ef28-4793-a878-a7213ac9cb25,Gare de Lyon,Laroche - Migennes,19:13:00,21:08:00,129.07897995273925,1.92,Jour,0.52
+IDFM:TN:SNCF:82aa061a-55d4-4804-9f01-1564fffd6362,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,19:03:00,20:27:00,128.28970372757354,1.4,Jour,0.51
+IDFM:TN:SNCF:82f4a05a-d41b-4299-aaaf-5998b4e61f55,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,16:15:00,17:56:00,128.29830966332557,1.68,Jour,0.51
+IDFM:TN:SNCF:834d57fa-5380-4ccf-a7a3-e38e2c043f7d,Gare d'Austerlitz,Châteaudun,06:25:00,07:55:00,114.15900905533336,1.5,Jour,0.46
+IDFM:TN:SNCF:845cb258-00ec-44d4-8be4-54f5dcdb8a96,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,06:33:00,07:56:00,128.29830966332557,1.38,Jour,0.51
+IDFM:TN:SNCF:84743c2b-33ec-480d-a0c4-feeb8b07c770,Châteaudun,Gare d'Austerlitz,07:08:00,08:46:00,114.15900905533336,1.63,Jour,0.46
+IDFM:TN:SNCF:86b0e9e3-0cf2-43f7-8972-ba506a63268e,Laroche - Migennes,Gare de Lyon,14:03:00,15:29:00,129.07897995273925,1.43,Jour,0.52
+IDFM:TN:SNCF:871d0f3e-13df-47a2-8f85-6f60427501d3,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,09:03:00,10:27:30,128.29830966332557,1.41,Jour,0.51
+IDFM:TN:SNCF:8782a035-cd6e-41c2-bf2f-d76b2df78955,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,11:35:00,12:57:00,128.29830966332557,1.37,Jour,0.51
+IDFM:TN:SNCF:878f4ce8-316c-416b-b53d-6df272f29a73,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,13:35:00,14:57:00,128.28665759181973,1.37,Jour,0.51
+IDFM:TN:SNCF:87b0857a-6d32-4596-99b3-e431a359f5ff,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,10:04:00,11:35:00,128.29830966332557,1.52,Jour,0.51
+IDFM:TN:SNCF:880d98ba-2945-4caf-a895-1f3d58930632,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,07:35:00,09:00:00,128.28665759181973,1.42,Jour,0.51
+IDFM:TN:SNCF:88d8f28c-9939-4c41-892f-d85dc8912fc8,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,08:03:30,09:33:30,128.29830966332557,1.5,Jour,0.51
+IDFM:TN:SNCF:88df021e-3dad-4924-86c5-291a30d562d4,Châteaudun,Gare d'Austerlitz,18:42:00,20:34:00,114.15900905533336,1.87,Jour,0.46
+IDFM:TN:SNCF:892c0bfd-a5b3-4fdd-8775-0b531be7381e,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,08:35:00,09:56:00,128.28665759181973,1.35,Jour,0.51
+IDFM:TN:SNCF:8985de4a-af50-4863-8487-398fe58345cf,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,15:03:00,16:27:00,128.28970372757354,1.4,Jour,0.51
+IDFM:TN:SNCF:89de27a3-b768-42e4-92ad-bfd3555b1bbf,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,18:27:00,19:57:30,128.29830966332557,1.51,Jour,0.51
+IDFM:TN:SNCF:8a0f1fa6-6fda-495c-a88e-964f77280411,Gare de Lyon,Laroche - Migennes,18:27:00,19:56:00,129.07897995273925,1.48,Jour,0.52
+IDFM:TN:SNCF:8a3d2cb6-7ce4-45f9-ba8d-157cf3f187f4,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,14:35:00,15:56:00,128.29830966332557,1.35,Jour,0.51
+IDFM:TN:SNCF:8afe2148-af7e-480f-8852-e8adfc48fa33,Gare de Lyon,Laroche - Migennes,18:12:00,20:08:00,129.07897995273925,1.93,Jour,0.52
+IDFM:TN:SNCF:8c068f7c-0ca4-4feb-bebb-88d5470ec3b4,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,10:04:00,11:33:00,128.29830966332557,1.48,Jour,0.51
+IDFM:TN:SNCF:8eae74ea-df6a-4c90-ad6c-4039fc9543f1,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,12:04:00,13:27:00,128.28970372757354,1.38,Jour,0.51
+IDFM:TN:SNCF:8f57246b-d913-45ae-b157-082ab4e7da76,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,19:17:00,20:57:30,128.29830966332557,1.67,Jour,0.51
+IDFM:TN:SNCF:8f79f9ea-41a2-4930-8429-dab5b4b92b83,Gare d'Austerlitz,Châteaudun,17:59:00,19:35:00,114.15900905533336,1.6,Jour,0.46
+IDFM:TN:SNCF:8fa87972-205f-4c9c-8c14-499e707b9ec5,Laroche - Migennes,Gare de Lyon,07:56:30,09:28:00,129.07897995273925,1.52,Jour,0.52
+IDFM:TN:SNCF:902573c7-4fa0-475c-b832-500a676af658,Gare d'Austerlitz,Châteaudun,16:25:00,17:56:00,114.15900905533336,1.52,Jour,0.46
+IDFM:TN:SNCF:922a0bd5-7c9c-4264-999b-f1b3f254acea,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,19:21:00,20:57:00,128.29830966332557,1.6,Jour,0.51
+IDFM:TN:SNCF:925ac69c-6b21-41d7-8015-ad183c3e80dc,Gare d'Austerlitz,Châteaudun,19:25:00,21:05:00,114.15900905533336,1.67,Jour,0.46
+IDFM:TN:SNCF:932ef030-e447-430c-ba7a-e1e22152668f,Laroche - Migennes,Gare de Lyon,13:03:00,14:29:00,129.07897995273925,1.43,Jour,0.52
+IDFM:TN:SNCF:9430c7df-96c1-49f5-806b-1cef499dd473,Gare d'Austerlitz,Châteaudun,17:59:00,19:35:00,114.15900905533336,1.6,Jour,0.46
+IDFM:TN:SNCF:953ae45b-af77-4f28-87ce-cd6f60f45b65,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,17:27:00,18:57:00,128.29830966332557,1.5,Jour,0.51
+IDFM:TN:SNCF:9547b94d-016b-465e-8d5f-70cbab5c31e3,Châteaudun,Gare d'Austerlitz,06:05:00,07:45:00,114.15900905533336,1.67,Jour,0.46
+IDFM:TN:SNCF:95af1787-310a-4b5a-b161-4fe8abb02cf6,Gare d'Austerlitz,Châteaudun,19:25:00,21:05:00,114.15900905533336,1.67,Jour,0.46
+IDFM:TN:SNCF:95ce3c07-3956-4e1e-93c4-f3d10c0e65d0,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,08:35:00,09:56:00,128.28665759181973,1.35,Jour,0.51
+IDFM:TN:SNCF:9610d209-c211-4b89-8cb6-6a581da8eed9,Gare de Lyon,Laroche - Migennes,18:13:00,20:08:00,129.0673359581354,1.92,Jour,0.52
+IDFM:TN:SNCF:96403114-9671-44f8-a329-ff5777edf07c,Laroche - Migennes,Gare de Lyon,04:53:00,06:47:30,129.07897995273925,1.91,Jour,0.52
+IDFM:TN:SNCF:9668b8b6-f608-468a-a2ac-23b23100684d,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,07:56:30,09:27:00,128.29830966332557,1.51,Jour,0.51
+IDFM:TN:SNCF:974c1c17-2eb7-45bf-92a8-2d7e63003d93,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,13:05:00,14:33:00,128.29830966332557,1.47,Jour,0.51
+IDFM:TN:SNCF:975d7aed-b927-418d-bb69-482dbd4e00a5,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,08:34:00,09:57:00,128.29830966332557,1.38,Jour,0.51
+IDFM:TN:SNCF:98028dda-edb9-4d61-8272-3f4a9b1521ce,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,18:05:00,19:27:00,128.28970372757354,1.37,Jour,0.51
+IDFM:TN:SNCF:9833a866-bef3-45f8-ad58-ed84308e426a,Châteaudun,Gare d'Austerlitz,16:08:30,17:38:00,114.15900905533336,1.49,Jour,0.46
+IDFM:TN:SNCF:99014f14-4af9-412a-802e-853d56d6d238,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,20:35:00,21:56:00,128.29830966332557,1.35,Jour,0.51
+IDFM:TN:SNCF:991a7bd9-7017-4d75-ba1a-7c3846e4900b,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,11:03:00,12:37:00,128.29830966332557,1.57,Jour,0.51
+IDFM:TN:SNCF:995f4335-f527-46c0-a080-22d19ae455df,Châteaudun,Gare d'Austerlitz,16:08:30,17:38:00,114.15900905533336,1.49,Jour,0.46
+IDFM:TN:SNCF:9a3ed88f-291f-402c-9a95-0fe3cb4e8239,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,12:32:00,13:56:00,128.29830966332557,1.4,Jour,0.51
+IDFM:TN:SNCF:9a96c775-7c1c-481f-b6ef-4fbe348d6445,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,20:32:00,21:56:00,128.29830966332557,1.4,Jour,0.51
+IDFM:TN:SNCF:9c052a5f-9259-4f13-a38f-fad3bac4a073,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,17:03:00,18:37:00,128.29830966332557,1.57,Jour,0.51
+IDFM:TN:SNCF:9cf0896b-2d89-47d6-b5f3-004bafb9aff8,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,12:20:00,13:56:00,128.29830966332557,1.6,Jour,0.51
+IDFM:TN:SNCF:9f9b4f5c-5db7-4aff-a324-16a4652b9425,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,16:04:00,17:27:00,128.29830966332557,1.38,Jour,0.51
+IDFM:TN:SNCF:9fd60be0-783c-47e1-974e-4ef20b9d23cd,Laroche - Migennes,Gare de Lyon,04:53:00,06:48:00,129.07897995273925,1.92,Jour,0.52
+IDFM:TN:SNCF:a09a63ed-332b-427c-b8f8-1976a17bedad,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,13:35:00,14:57:00,128.28665759181973,1.37,Jour,0.51
+IDFM:TN:SNCF:a1c58fd4-4eb2-4cfb-98cf-e7c627c6d8c9,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,17:04:00,18:27:00,128.28970372757354,1.38,Jour,0.51
+IDFM:TN:SNCF:a325ac15-141e-4855-9fec-8e1f278bc3ed,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,06:04:00,07:34:00,128.29830966332557,1.5,Jour,0.51
+IDFM:TN:SNCF:a3fbc9db-8b41-4fd1-88f7-db9519d5aec5,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,15:03:00,16:27:00,128.28970372757354,1.4,Jour,0.51
+IDFM:TN:SNCF:a5251e14-f4cc-4c63-8b63-9ad85c5db943,Châteaudun,Gare d'Austerlitz,07:08:00,08:46:00,114.15900905533336,1.63,Jour,0.46
+IDFM:TN:SNCF:a529111d-ef0f-4cfd-abae-493ab70ad77f,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,06:35:00,07:56:00,128.29830966332557,1.35,Jour,0.51
+IDFM:TN:SNCF:a539188a-8eed-4f5b-9e21-d8564794ede9,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,17:27:00,18:56:30,128.29830966332557,1.49,Jour,0.51
+IDFM:TN:SNCF:a589eae1-5867-4289-83d8-01e41cd637db,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,17:02:00,18:57:00,128.29830966332557,1.92,Jour,0.51
+IDFM:TN:SNCF:a5d8778b-fc3d-4f2f-a239-8cc29c6fb635,Laroche - Migennes,Gare de Lyon,06:51:00,08:49:00,129.07897995273925,1.97,Jour,0.52
+IDFM:TN:SNCF:a68fb39c-99e0-4c3f-829b-2f385ddccea3,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,12:04:00,13:27:00,128.28970372757354,1.38,Jour,0.51
+IDFM:TN:SNCF:a7882fd1-5f51-4086-8ead-20d81cbc5eae,Laroche - Migennes,Gare de Lyon,12:04:00,13:29:00,129.07897995273925,1.42,Jour,0.52
+IDFM:TN:SNCF:a7cb0a7c-12d4-4f81-9c78-61ebffa9a69c,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,12:04:00,13:35:00,128.29830966332557,1.52,Jour,0.51
+IDFM:TN:SNCF:a860790c-5e94-4419-8cb6-ad8597664cc9,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,15:03:00,16:27:00,128.29830966332557,1.4,Jour,0.51
+IDFM:TN:SNCF:a888f944-a500-4094-a196-2f4bb2e46b5e,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,09:20:00,10:55:00,128.28665759181973,1.58,Jour,0.51
+IDFM:TN:SNCF:a8e5d502-a238-4ad3-aa65-3572096df449,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,20:04:00,21:51:00,128.29830966332557,1.78,Jour,0.51
+IDFM:TN:SNCF:aa504dd6-a472-4133-adba-d5a31827fdc0,Gare d'Austerlitz,Châteaudun,20:54:00,22:24:00,114.15900905533336,1.5,Jour,0.46
+IDFM:TN:SNCF:abb4bdbd-3c8f-40c5-97e7-b035befbb13e,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,11:03:00,12:39:30,128.29830966332557,1.61,Jour,0.51
+IDFM:TN:SNCF:abbbc849-464c-4429-8c65-4a374a6ab689,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,20:04:00,21:51:00,128.28970372757354,1.78,Jour,0.51
+IDFM:TN:SNCF:abe4e09d-fdf7-4c7e-a51f-efcd3ceedd9c,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,14:03:00,15:40:00,128.29830966332557,1.62,Jour,0.51
+IDFM:TN:SNCF:abef3059-e178-4684-addc-4625ee947d15,Gare d'Austerlitz,Châteaudun,06:25:00,07:55:00,114.15900905533336,1.5,Jour,0.46
+IDFM:TN:SNCF:ac64d090-df1f-4574-97f7-19e70292476b,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,16:27:00,17:55:00,128.29830966332557,1.47,Jour,0.51
+IDFM:TN:SNCF:ac884980-e0d0-4e21-8a41-d2518eedf621,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,18:27:00,19:57:30,128.29830966332557,1.51,Jour,0.51
+IDFM:TN:SNCF:ad243cc9-30eb-4c7d-99e8-055ee34e7362,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,12:25:00,13:56:00,128.29830966332557,1.52,Jour,0.51
+IDFM:TN:SNCF:ad4c6ef1-32d3-42e7-9a8c-c22c9367ea38,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,18:06:00,19:49:00,128.28970372757354,1.72,Jour,0.51
+IDFM:TN:SNCF:af15eb00-3ef8-4c12-a004-3126609bf922,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,13:03:00,14:28:00,128.29830966332557,1.42,Jour,0.51
+IDFM:TN:SNCF:af69c6e5-4b29-40db-a5bf-3f76209642d1,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,13:03:30,14:27:00,128.28970372757354,1.39,Jour,0.51
+IDFM:TN:SNCF:b048256d-15c1-440e-afd9-bf91d344fc1f,Laroche - Migennes,Gare de Lyon,08:03:30,09:29:00,129.07897995273925,1.42,Jour,0.52
+IDFM:TN:SNCF:b0666ae7-bd58-4463-b8b1-08d762b765ec,Châteaudun,Paris-Bercy Bourgogne - Pays d'Auvergne,17:09:00,18:39:00,114.82414885019467,1.5,Jour,0.46
+IDFM:TN:SNCF:b091f36d-fb53-40cb-b2bc-80c460a28035,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,07:03:00,08:38:00,128.28970372757354,1.58,Jour,0.51
+IDFM:TN:SNCF:b1800eb1-0a45-4549-8034-d10c6cf43bde,Châteaudun,Gare d'Austerlitz,07:08:00,08:46:00,114.15900905533336,1.63,Jour,0.46
+IDFM:TN:SNCF:b181d904-acd9-4113-bd78-d82c7ffcfbde,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,10:04:00,11:33:00,128.28970372757354,1.48,Jour,0.51
+IDFM:TN:SNCF:b1f0005c-67ed-4ee5-a00a-733b7c2905d1,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,06:04:00,07:36:30,128.29830966332557,1.54,Jour,0.51
+IDFM:TN:SNCF:b3358b28-6b97-4e7f-94ba-10d4e68c8bfe,Laroche - Migennes,Gare de Lyon,04:53:00,06:47:30,129.07897995273925,1.91,Jour,0.52
+IDFM:TN:SNCF:b40f2e29-9d37-4810-9018-cde8a63d6cf9,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,09:20:00,10:55:00,128.28665759181973,1.58,Jour,0.51
+IDFM:TN:SNCF:b44ce02a-95fe-479f-a4b4-22ee8853579a,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,18:05:00,19:27:00,128.28970372757354,1.37,Jour,0.51
+IDFM:TN:SNCF:b486b08a-c5ee-4dc2-bf69-630aeb40b095,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,11:35:00,12:57:00,128.28665759181973,1.37,Jour,0.51
+IDFM:TN:SNCF:b5243419-2ec5-4368-a688-9e56ca3b5b3f,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,13:35:00,14:57:00,128.28665759181973,1.37,Jour,0.51
+IDFM:TN:SNCF:b53c5195-e94e-4e04-90de-063c32ae976f,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,16:04:00,17:28:00,128.29830966332557,1.4,Jour,0.51
+IDFM:TN:SNCF:b5447b40-4868-4a31-8378-acdc576060cd,Gare de Lyon,Laroche - Migennes,11:35:00,12:54:00,129.0673359581354,1.32,Jour,0.52
+IDFM:TN:SNCF:b6442d97-23ac-4bb2-8c1e-be47513ec37a,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,20:35:00,21:56:00,128.28665759181973,1.35,Jour,0.51
+IDFM:TN:SNCF:b6dc76a8-39fd-4c02-a856-74cf68d090a3,Châteaudun,Gare d'Austerlitz,07:08:00,08:46:00,114.15900905533336,1.63,Jour,0.46
+IDFM:TN:SNCF:b6ee3e1d-e8d2-4a47-8e2b-4a8d26a539ba,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,11:35:00,12:55:00,128.28665759181973,1.33,Jour,0.51
+IDFM:TN:SNCF:b71d3902-449a-461f-8a0f-7f008616270f,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,18:06:00,19:49:00,128.28970372757354,1.72,Jour,0.51
+IDFM:TN:SNCF:b91aaa42-4597-44cd-84f3-0fa28baa1ad5,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,12:35:00,13:56:00,128.28665759181973,1.35,Jour,0.51
+IDFM:TN:SNCF:ba379eb7-5e97-4439-8d26-93ff6f77e5d6,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,15:03:00,16:27:00,128.29830966332557,1.4,Jour,0.51
+IDFM:TN:SNCF:ba46865e-8dfe-4ab1-ab16-8aadcaa32cea,Gare d'Austerlitz,Châteaudun,06:25:00,07:55:00,114.15900905533336,1.5,Jour,0.46
+IDFM:TN:SNCF:baa953f6-f78e-4e0d-8961-b6adab2cb465,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,06:04:00,07:34:00,128.29830966332557,1.5,Jour,0.51
+IDFM:TN:SNCF:baec7a7b-2bf2-46f5-b6d5-65f257aae285,Gare d'Austerlitz,Châteaudun,13:56:00,15:21:00,114.15900905533336,1.42,Jour,0.46
+IDFM:TN:SNCF:bb6301b7-6853-4c11-bcd8-b34e69a4edc5,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,21:03:00,22:38:00,128.29830966332557,1.58,Jour,0.51
+IDFM:TN:SNCF:bbfc9792-1368-4083-b509-50ed96d9fcb6,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,19:03:00,20:40:00,128.29830966332557,1.62,Jour,0.51
+IDFM:TN:SNCF:bd24d2fb-57c1-44f8-9506-78746b207fe7,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,10:35:00,11:56:00,128.28665759181973,1.35,Jour,0.51
+IDFM:TN:SNCF:bd9df1ae-6d12-47e5-abe9-55f6a2805f30,Gare d'Austerlitz,Châteaudun,19:25:00,21:05:00,114.15900905533336,1.67,Jour,0.46
+IDFM:TN:SNCF:bddcd425-10b2-49aa-bb28-bf579c5a0764,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,17:04:00,18:27:00,128.28970372757354,1.38,Jour,0.51
+IDFM:TN:SNCF:be4055dc-bcb2-4956-bc66-cb27c8a48fa1,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,19:03:00,20:27:00,128.28970372757354,1.4,Jour,0.51
+IDFM:TN:SNCF:be8b3770-ff2d-4af1-8480-d85f4539fe74,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,07:03:00,08:30:00,128.29830966332557,1.45,Jour,0.51
+IDFM:TN:SNCF:bebe5a9b-de69-4e4d-b098-4cc43c89073d,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,11:31:00,12:58:00,128.29830966332557,1.45,Jour,0.51
+IDFM:TN:SNCF:bed202b2-2c52-4dac-a8ad-2f00bf629ef7,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,14:33:00,15:56:00,128.29830966332557,1.38,Jour,0.51
+IDFM:TN:SNCF:bef83a89-a713-4b5e-8d10-4d35f57edc39,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,17:04:00,18:27:00,128.29830966332557,1.38,Jour,0.51
+IDFM:TN:SNCF:bf234c7e-d32f-41ed-a4b0-08a668679d15,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,18:05:00,19:35:00,128.29830966332557,1.5,Jour,0.51
+IDFM:TN:SNCF:bfb1a616-1e32-4f76-a488-001635b528cb,Laroche - Migennes,Gare de Lyon,06:03:30,07:34:00,129.07897995273925,1.51,Jour,0.52
+IDFM:TN:SNCF:c15f4e15-6f39-459b-a7fd-fa9227c9c01f,Châteaudun,Gare d'Austerlitz,06:05:00,07:45:00,114.15900905533336,1.67,Jour,0.46
+IDFM:TN:SNCF:c43047fd-1c8e-49e9-9af7-2c56cd9e4680,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,09:03:00,10:30:00,128.29830966332557,1.45,Jour,0.51
+IDFM:TN:SNCF:c4d14776-d334-4653-a787-2e2ff164ac4a,Gare de Lyon,Laroche - Migennes,18:26:30,19:56:00,129.0673359581354,1.49,Jour,0.52
+IDFM:TN:SNCF:c5048bd4-52a4-4821-8845-101a3a6dd0d5,Gare de Lyon,Laroche - Migennes,19:13:00,21:07:00,129.07897995273925,1.9,Jour,0.52
+IDFM:TN:SNCF:c53f993f-167b-41fb-946b-fad62b8971dc,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,08:19:00,09:56:00,128.29830966332557,1.62,Jour,0.51
+IDFM:TN:SNCF:c6a7a519-8dd4-4993-b6f7-11921e43b640,Gare de Lyon,Laroche - Migennes,19:13:00,21:08:00,129.07897995273925,1.92,Jour,0.52
+IDFM:TN:SNCF:c6ad0a83-c0a5-4dca-bffc-0517371aa683,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,10:04:00,11:33:00,128.28970372757354,1.48,Jour,0.51
+IDFM:TN:SNCF:c6b26514-0d15-4b6e-9ba8-c2d23c77f0dc,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,07:03:00,08:38:00,128.29830966332557,1.58,Jour,0.51
+IDFM:TN:SNCF:c6e4ebae-76f2-4106-96b6-fdc9b4a14a96,Gare d'Austerlitz,Châteaudun,13:56:00,15:21:00,114.15900905533336,1.42,Jour,0.46
+IDFM:TN:SNCF:c7f1c5cb-909d-4c4e-b8cb-9e70f5dacaef,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,15:32:00,16:56:30,128.29830966332557,1.41,Jour,0.51
+IDFM:TN:SNCF:c8adb06a-673f-4974-bb78-a833c7f8876b,Châteaudun,Gare d'Austerlitz,18:42:00,20:34:00,114.15900905533336,1.87,Jour,0.46
+IDFM:TN:SNCF:c8b742c6-2412-4dc6-8160-68451297e5b6,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,16:04:00,17:27:00,128.29830966332557,1.38,Jour,0.51
+IDFM:TN:SNCF:c8cb3de1-75f4-4454-bd84-80461edee752,Châteaudun,Gare d'Austerlitz,06:05:00,07:45:00,114.15900905533336,1.67,Jour,0.46
+IDFM:TN:SNCF:c936ba50-b226-4dd4-8e18-7920f76ad625,Châteaudun,Gare d'Austerlitz,17:09:00,18:36:00,114.15900905533336,1.45,Jour,0.46
+IDFM:TN:SNCF:c9b9c526-d9eb-4a2c-baa8-4bfb582ca3cf,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,22:35:00,24:15:30,128.29830966332557,1.68,Jour,0.51
+IDFM:TN:SNCF:ca4b3e41-b1f9-4797-ba54-62130f4c4f9d,Gare d'Austerlitz,Châteaudun,16:25:00,17:56:00,114.15900905533336,1.52,Jour,0.46
+IDFM:TN:SNCF:ca4db6c8-0986-4c12-a161-8f12d34d7d24,Châteaudun,Gare d'Austerlitz,18:42:00,20:34:00,114.15900905533336,1.87,Jour,0.46
+IDFM:TN:SNCF:ca73ca89-ff58-4430-8328-fe84fc6b7f84,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,10:35:00,11:56:00,128.28665759181973,1.35,Jour,0.51
+IDFM:TN:SNCF:cb817112-d63f-4bb1-a243-d398b846345d,Châteaudun,Paris-Bercy Bourgogne - Pays d'Auvergne,12:09:00,13:40:00,114.82414885019467,1.52,Jour,0.46
+IDFM:TN:SNCF:cc04f23a-e93d-47ae-b975-c73b7e3897d1,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,13:35:00,14:59:00,128.29830966332557,1.4,Jour,0.51
+IDFM:TN:SNCF:cc6cf457-b52a-4f40-8922-a5aba8b0b788,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,13:05:00,14:33:00,128.29830966332557,1.47,Jour,0.51
+IDFM:TN:SNCF:cc7bf2f0-041c-4c35-a952-472542ca1d11,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,14:35:00,15:56:00,128.28665759181973,1.35,Jour,0.51
+IDFM:TN:SNCF:cd135f64-79aa-4c01-b5b3-70e1aaf9bb98,Gare de Lyon,Laroche - Migennes,18:13:00,20:08:00,129.07897995273925,1.92,Jour,0.52
+IDFM:TN:SNCF:cdb65808-91ea-4cd0-b665-8d1d80a47468,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,20:35:00,21:56:00,128.28665759181973,1.35,Jour,0.51
+IDFM:TN:SNCF:ceccd720-7847-4132-9ab0-f2931fced10a,Gare d'Austerlitz,Châteaudun,17:59:00,19:35:00,114.15900905533336,1.6,Jour,0.46
+IDFM:TN:SNCF:d0ba55d2-649e-42ec-89b3-5c2fb86d1eae,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,12:04:00,13:27:00,128.28970372757354,1.38,Jour,0.51
+IDFM:TN:SNCF:d0f07ed9-f86a-4fa0-bb17-c64215d54ca4,Gare de Lyon,Laroche - Migennes,19:24:00,20:57:00,129.07897995273925,1.55,Jour,0.52
+IDFM:TN:SNCF:d12174bb-0956-4f3b-b4d8-1cb7a49487df,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,10:33:00,12:09:00,128.29830966332557,1.6,Jour,0.51
+IDFM:TN:SNCF:d1321806-1556-4a38-b65f-992891f00ec2,Gare de Lyon,Laroche - Migennes,17:13:00,19:08:00,129.07897995273925,1.92,Jour,0.52
+IDFM:TN:SNCF:d1c0036f-686f-4ae8-9114-19b0e697d3cf,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,15:03:00,16:27:00,128.29830966332557,1.4,Jour,0.51
+IDFM:TN:SNCF:d207fb46-efbe-420f-b52c-c56a153e2bc3,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,22:35:00,24:27:00,128.29830966332557,1.87,Jour,0.51
+IDFM:TN:SNCF:d2df5be6-3fb5-4df9-bf7a-5ed26c2ee23e,Gare d'Austerlitz,Châteaudun,19:25:00,20:53:30,114.15900905533336,1.47,Jour,0.46
+IDFM:TN:SNCF:d32802f6-fc7a-450f-a4c5-8624cf361000,Gare de Lyon,Laroche - Migennes,07:34:30,08:57:00,129.0673359581354,1.37,Jour,0.52
+IDFM:TN:SNCF:d3660f0b-677b-4055-ac75-c7a3108169a2,Laroche - Migennes,Gare de Lyon,18:05:00,19:28:00,129.07897995273925,1.38,Jour,0.52
+IDFM:TN:SNCF:d36c75e2-bc0e-468a-93bf-be1f3efccfea,Laroche - Migennes,Gare de Lyon,09:03:30,10:29:00,129.07897995273925,1.42,Jour,0.52
+IDFM:TN:SNCF:d3bf5cb9-3da3-4dfe-abbb-a391c132502d,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,21:03:00,22:27:00,128.28970372757354,1.4,Jour,0.51
+IDFM:TN:SNCF:d3ed5860-e588-49fe-bd3a-9b245e77a5aa,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,15:30:00,17:10:00,128.29830966332557,1.67,Jour,0.51
+IDFM:TN:SNCF:d4e29698-6671-4ca5-9e68-ee47fb24c259,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,15:35:00,16:55:30,128.28665759181973,1.34,Jour,0.51
+IDFM:TN:SNCF:d58ef9fb-2933-4717-af54-efd0d04be613,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,09:20:00,10:55:00,128.29830966332557,1.58,Jour,0.51
+IDFM:TN:SNCF:d5c0e1c5-2921-49e4-b6b3-55489c3cd61d,Gare d'Austerlitz,Châteaudun,08:12:00,09:44:00,114.15900905533336,1.53,Jour,0.46
+IDFM:TN:SNCF:d5f1af70-8d06-44d0-b466-7aff724faba7,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,09:03:00,10:28:00,128.29830966332557,1.42,Jour,0.51
+IDFM:TN:SNCF:d635fc41-2f30-4b40-8b43-506f949b7754,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,22:35:00,24:19:30,128.29830966332557,1.74,Jour,0.51
+IDFM:TN:SNCF:d63e3cfc-5441-4ce9-946a-f8d765e5020c,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,15:32:00,16:56:30,128.28665759181973,1.41,Jour,0.51
+IDFM:TN:SNCF:d67fbef9-a285-4299-899a-d621f9c50f7a,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,14:33:00,15:56:00,128.29830966332557,1.38,Jour,0.51
+IDFM:TN:SNCF:d68e14d5-39b9-4b6f-ab9e-772cd6eb490d,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,19:03:00,20:27:00,128.29830966332557,1.4,Jour,0.51
+IDFM:TN:SNCF:d6bb8468-e6c4-42fb-ac33-371db7f2b4d2,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,11:35:00,12:57:00,128.28665759181973,1.37,Jour,0.51
+IDFM:TN:SNCF:d79519b4-3592-4060-8ca0-a3558479f231,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,14:03:00,15:27:00,128.28970372757354,1.4,Jour,0.51
+IDFM:TN:SNCF:d7d1b30f-d453-4c24-b2e1-90b1c109ac9a,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,14:03:00,15:28:00,128.29830966332557,1.42,Jour,0.51
+IDFM:TN:SNCF:d80bade6-2e4b-46e2-8e9b-2e5d9518c2c4,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,21:03:00,22:27:00,128.28970372757354,1.4,Jour,0.51
+IDFM:TN:SNCF:d839d2f8-0863-4cf1-bb92-21e720822fe6,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,22:35:00,24:19:30,128.29830966332557,1.74,Jour,0.51
+IDFM:TN:SNCF:d8e228dd-64db-4f53-b5e3-a62a1aaba488,Châteaudun,Gare d'Austerlitz,06:05:00,07:45:00,114.15900905533336,1.67,Jour,0.46
+IDFM:TN:SNCF:daca62c4-7d66-4bef-9689-ad471d72f4e8,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,07:03:00,08:49:00,128.29830966332557,1.77,Jour,0.51
+IDFM:TN:SNCF:db6b5fb6-e520-493f-a4bc-f8d5fbf20b1b,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,22:35:00,24:12:00,128.29830966332557,1.62,Jour,0.51
+IDFM:TN:SNCF:dbae9dd1-d1d2-46bb-80aa-12c0b0c7aca2,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,19:00:00,20:58:00,128.29830966332557,1.97,Jour,0.51
+IDFM:TN:SNCF:dbcc2d56-d3ca-43b8-af42-47b95198f037,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,16:27:00,17:55:00,128.28665759181973,1.47,Jour,0.51
+IDFM:TN:SNCF:dc356e3c-468f-438e-b3bf-3fc9558f0d0f,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,05:03:30,06:35:00,128.28970372757354,1.52,Jour,0.51
+IDFM:TN:SNCF:dc92cca0-694e-42c5-82f6-1a24659a9523,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,12:35:00,13:56:00,128.28665759181973,1.35,Jour,0.51
+IDFM:TN:SNCF:dcf31510-945c-4e6e-9936-dc2b523f61bc,Laroche - Migennes,Gare de Lyon,16:03:00,17:27:30,129.07038042366028,1.41,Jour,0.52
+IDFM:TN:SNCF:ddb05f38-d1ec-4b9e-843c-f6ddf856159f,Gare de Lyon,Laroche - Migennes,16:26:00,17:56:00,129.07897995273925,1.5,Jour,0.52
+IDFM:TN:SNCF:ddf80ab0-4058-4548-9e2e-448690bc3ac0,Gare de Lyon,Laroche - Migennes,17:12:00,19:10:00,129.07897995273925,1.97,Jour,0.52
+IDFM:TN:SNCF:de0d2acc-b3b7-4e49-ba8e-36f29761ba5a,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,09:23:00,10:57:00,128.28665759181973,1.57,Jour,0.51
+IDFM:TN:SNCF:de23b7b0-ca68-42f0-b098-5536349b86b7,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,18:06:00,19:49:00,128.29830966332557,1.72,Jour,0.51
+IDFM:TN:SNCF:df033de3-362c-402e-9f49-7136e7fc4225,Gare de Lyon,Laroche - Migennes,18:13:00,20:08:00,129.0673359581354,1.92,Jour,0.52
+IDFM:TN:SNCF:e0778e86-545a-4f5b-98a1-97250ce5781b,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,09:03:30,10:30:00,128.29830966332557,1.44,Jour,0.51
+IDFM:TN:SNCF:e09e1f33-0257-426a-86f1-11c8bd8f6069,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,07:39:00,09:09:30,128.29830966332557,1.51,Jour,0.51
+IDFM:TN:SNCF:e0eaeaa8-abba-4bc4-a8b6-804de1fcdf2f,Laroche - Migennes,Gare de Lyon,04:53:00,06:47:30,129.07897995273925,1.91,Jour,0.52
+IDFM:TN:SNCF:e15a6d86-30a9-4b50-b399-673ec8cf88e0,Gare d'Austerlitz,Châteaudun,08:12:00,09:44:00,114.15900905533336,1.53,Jour,0.46
+IDFM:TN:SNCF:e171c16b-fbe0-4a26-bcec-a6d9dc820903,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,16:14:00,17:56:00,128.29830966332557,1.7,Jour,0.51
+IDFM:TN:SNCF:e280a018-4328-4b91-998c-8655279253c7,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,09:20:00,10:57:00,128.29830966332557,1.62,Jour,0.51
+IDFM:TN:SNCF:e2bce70d-35a1-4a9d-8943-6532ec629c67,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,19:27:00,20:57:00,128.28665759181973,1.5,Jour,0.51
+IDFM:TN:SNCF:e3a934cd-0926-4b7c-b407-9ec33aa78dfd,Gare d'Austerlitz,Châteaudun,08:12:00,09:44:00,114.15900905533336,1.53,Jour,0.46
+IDFM:TN:SNCF:e3c6970f-1409-4f8f-a1b5-02e5982f86be,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,20:04:00,21:50:00,128.29830966332557,1.77,Jour,0.51
+IDFM:TN:SNCF:e42788a5-bde4-48ba-978d-f3354cef659e,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,19:27:00,20:57:00,128.28665759181973,1.5,Jour,0.51
+IDFM:TN:SNCF:e4393e21-d0c3-47a1-a255-782115eb0689,Châteaudun,Gare d'Austerlitz,17:09:00,18:36:00,114.15900905533336,1.45,Jour,0.46
+IDFM:TN:SNCF:e4727d00-db5a-4807-a04d-1df8759fa4f0,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,21:03:00,22:27:00,128.28970372757354,1.4,Jour,0.51
+IDFM:TN:SNCF:e573d1b8-7c03-4e03-90c4-c35ea0305879,Châteaudun,Gare d'Austerlitz,17:08:30,18:35:30,114.15900905533336,1.45,Jour,0.46
+IDFM:TN:SNCF:e74c9788-dab7-4203-bef2-24935be3758d,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,15:35:00,16:57:30,128.28665759181973,1.37,Jour,0.51
+IDFM:TN:SNCF:e840406a-820a-44e0-830f-2fcccfce5fbf,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,19:27:00,20:57:00,128.28665759181973,1.5,Jour,0.51
+IDFM:TN:SNCF:e84ee899-8d0b-46fa-9df4-38ef703d9f5b,Gare de Lyon,Laroche - Migennes,17:13:00,19:10:00,129.07897995273925,1.95,Jour,0.52
+IDFM:TN:SNCF:e8714478-ca20-4098-85b9-399e4417ca11,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,18:06:00,19:49:00,128.29830966332557,1.72,Jour,0.51
+IDFM:TN:SNCF:e971f907-1777-4163-a2a4-4eaedafa86a7,Gare de Lyon,Laroche - Migennes,17:13:00,19:08:00,129.07897995273925,1.92,Jour,0.52
+IDFM:TN:SNCF:e99bd270-7b63-4c4a-a8fd-061413fa68ed,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,15:35:00,16:55:30,128.28665759181973,1.34,Jour,0.51
+IDFM:TN:SNCF:eaf13a7e-0cd2-487b-b57c-7cb86fd52c8c,Paris-Bercy Bourgogne - Pays d'Auvergne,Châteaudun,13:51:00,15:21:00,114.82414885019467,1.5,Jour,0.46
+IDFM:TN:SNCF:eb0a1044-1433-464e-8fc3-d49a5635b2a1,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,10:35:00,11:56:00,128.28665759181973,1.35,Jour,0.51
+IDFM:TN:SNCF:eb273b8a-91e4-424e-9356-51bf1c18daaf,Gare de Lyon,Laroche - Migennes,10:32:00,11:57:00,129.07897995273925,1.42,Jour,0.52
+IDFM:TN:SNCF:eb8308b9-5209-4bd9-ab6a-896fe6a099ce,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,16:04:00,17:27:00,128.29830966332557,1.38,Jour,0.51
+IDFM:TN:SNCF:ebc2e6ae-cf68-4a88-835d-fb84c8af8dcc,Gare de Lyon,Laroche - Migennes,20:31:00,21:56:00,129.07897995273925,1.42,Jour,0.52
+IDFM:TN:SNCF:ede980fd-1c33-4490-aa91-91d10d55ec3b,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,19:03:00,20:27:00,128.28970372757354,1.4,Jour,0.51
+IDFM:TN:SNCF:f103e7e9-a964-4a67-984d-a966efdc0b8f,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,18:05:00,19:35:00,128.29830966332557,1.5,Jour,0.51
+IDFM:TN:SNCF:f1352cb3-b7b6-4f4c-86d3-b55b3254139b,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,10:33:00,11:57:00,128.29830966332557,1.4,Jour,0.51
+IDFM:TN:SNCF:f1402ca6-9666-4658-96d6-0d570d5cc018,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,07:35:00,08:59:30,128.28665759181973,1.41,Jour,0.51
+IDFM:TN:SNCF:f144ca28-15b7-4ae7-9f31-7a8a24baccf0,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,18:05:00,19:46:00,128.29830966332557,1.68,Jour,0.51
+IDFM:TN:SNCF:f287c64d-9cb2-4f77-b849-58b7452ec928,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,09:16:00,10:57:00,128.29830966332557,1.68,Jour,0.51
+IDFM:TN:SNCF:f2df1ceb-54da-431d-bd10-0470f33495e9,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,17:27:00,18:59:00,128.28665759181973,1.53,Jour,0.51
+IDFM:TN:SNCF:f4940681-8f7f-4e75-b185-62298f5f5de4,Laroche - Migennes,Gare de Lyon,05:53:00,07:48:00,129.07897995273925,1.92,Jour,0.52
+IDFM:TN:SNCF:f54292c7-3336-4bea-b983-ec23d4374886,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,09:20:00,11:14:00,128.29830966332557,1.9,Jour,0.51
+IDFM:TN:SNCF:f66a128a-a72a-4115-b482-f6d88caf210a,Gare de Lyon,Laroche - Migennes,19:13:00,21:08:00,129.07897995273925,1.92,Jour,0.52
+IDFM:TN:SNCF:f6b9f8ec-619f-4e80-beff-52ff16c12a28,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,11:35:00,12:55:00,128.29830966332557,1.33,Jour,0.51
+IDFM:TN:SNCF:f7d920c6-ed18-4ca4-87aa-bd5398746410,Gare de Lyon,Laroche - Migennes,15:31:00,16:55:30,129.07897995273925,1.41,Jour,0.52
+IDFM:TN:SNCF:f7d9a4c6-d78b-46f9-8c03-ad8073ce5aa9,Gare de Lyon,Laroche - Migennes,17:13:00,19:08:00,129.07897995273925,1.92,Jour,0.52
+IDFM:TN:SNCF:f839c745-70f5-40b8-b81b-3e2a52a72027,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,14:03:00,15:27:00,128.28970372757354,1.4,Jour,0.51
+IDFM:TN:SNCF:f888449d-f469-4e1d-9b65-e748513cc4ff,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,14:33:00,15:56:00,128.29830966332557,1.38,Jour,0.51
+IDFM:TN:SNCF:f9e5ca8a-4e46-4c19-af01-e20a9c744b4f,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,18:24:00,19:57:00,128.29830966332557,1.55,Jour,0.51
+IDFM:TN:SNCF:fa127083-199b-403a-96f0-695babf590b9,Châteaudun,Gare d'Austerlitz,16:08:30,17:35:00,114.15900905533336,1.44,Jour,0.46
+IDFM:TN:SNCF:faa13384-21ca-477a-9359-c1edf800653a,Gare d'Austerlitz,Châteaudun,20:52:00,22:24:00,114.15900905533336,1.53,Jour,0.46
+IDFM:TN:SNCF:fade9a1e-038d-4e9f-b80b-a74a50508e83,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,05:03:30,06:35:00,128.28970372757354,1.52,Jour,0.51
+IDFM:TN:SNCF:fb34adb2-7bb8-40ff-935e-d0fd6277ac7a,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,14:03:00,15:27:00,128.28970372757354,1.4,Jour,0.51
+IDFM:TN:SNCF:fc075cf4-1043-4942-b89f-f20a6d497d47,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,12:04:00,13:27:00,128.29830966332557,1.38,Jour,0.51
+IDFM:TN:SNCF:fc9f9d00-1816-4df3-aeeb-2582d4f6275d,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,12:35:00,13:56:00,128.29830966332557,1.35,Jour,0.51
+IDFM:TN:SNCF:fd0d05eb-8a52-41c9-815a-197dcaf0f2f0,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,09:03:30,10:27:00,128.28970372757354,1.39,Jour,0.51
+IDFM:TN:SNCF:fd7551a3-1bd0-4bdc-98d7-380004669ebe,Laroche - Migennes,Gare de Lyon,09:03:30,10:28:00,129.07038042366028,1.41,Jour,0.52
+IDFM:TN:SNCF:fd7fe3a3-5987-4088-8f0a-23b4ebde5f9d,Gare de Lyon,Laroche - Migennes,17:13:00,19:10:00,129.07897995273925,1.95,Jour,0.52
+IDFM:TN:SNCF:fe07225e-906f-475a-97fe-74ff34c800ab,Gare de Lyon,Laroche - Migennes,12:31:00,13:56:00,129.07897995273925,1.42,Jour,0.52
+IDFM:TN:SNCF:fe3a037a-f741-4822-ada2-8fff71036c15,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,22:35:00,24:19:30,128.29830966332557,1.74,Jour,0.51
+IDFM:TN:SNCF:fee5500f-1910-4460-b76b-459bdd5c4964,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,22:52:00,24:31:00,128.29830966332557,1.65,Jour,0.51
+IDFM:TN:SNCF:fee5ae2f-2ee9-4679-9a5b-55dee9bf7c5b,Châteaudun,Gare d'Austerlitz,19:58:00,21:35:00,114.15900905533336,1.62,Jour,0.46
+IDFM:TN:SNCF:ff20bfe6-01c1-4f7c-b6c9-a4e5e7d9e18a,Paris-Bercy Bourgogne - Pays d'Auvergne,Laroche - Migennes,06:35:00,07:56:00,128.28665759181973,1.35,Jour,0.51
+IDFM:TN:SNCF:ff47e511-f72c-46b7-855b-b3cedc8bd24d,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,11:03:00,12:27:00,128.28970372757354,1.4,Jour,0.51
+IDFM:TN:SNCF:ffe82a9e-045b-4edc-88c0-6f205df8e298,Laroche - Migennes,Paris-Bercy Bourgogne - Pays d'Auvergne,07:03:00,08:38:00,128.28970372757354,1.58,Jour,0.51
