@@ -1,0 +1,70 @@
+# === ENVIRONNEMENT ===
+.env
+.env.local
+.env.*.local
+*.env
+**/.env
+
+# === PYTHON ===
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# === VIRTUAL ENVIRONMENTS ===
+.venv/
+venv/
+ENV/
+env/
+.conda/
+
+# === IDE ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# === JUPYTER ===
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# === DONNÉES VOLUMINEUSES ===
+*.zip
+*.gz
+*.tar
+*.7z
+data/MobilityDatabase/data/raw/
+data/MobilityDatabase/data/france/*.zip
+data/MobilityDatabase/data/germany/*.zip
+data/MobilityDatabase/data/switzerland/*.zip
+
+# === LOGS ===
+*.log
+logs/
+
+# === CACHE ===
+.cache/
+*.cache
+
+# === TESTS ===
+.pytest_cache/
+.coverage
+htmlcov/
