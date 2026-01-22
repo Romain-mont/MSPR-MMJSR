@@ -1,0 +1,52 @@
+import os
+import sys
+import argparse
+import requests
+import json
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Interroger l'API ImpactCO2 transport")
+    parser.add_argument("--api-key", help="Clé API (ou définir IMPACTCO2_API_KEY)")
+    parser.add_argument("--transport", default="train", help="Mode de transport")
+    parser.add_argument("--distance", type=float, default=660, help="Distance en km")
+    parser.add_argument("--base-url", default="https://api.impactco2.fr/v1", help="Base URL de l'API (ex: https://impactco2.fr)")
+    args = parser.parse_args()
+
+    DEFAULT_API_KEY = "bb5235c4-bf98-4c94-adf1-e2ea4add2cc2"
+    api_key = args.api_key or os.getenv("IMPACTCO2_API_KEY") or DEFAULT_API_KEY
+    if api_key == DEFAULT_API_KEY:
+        print("Attention: utilisation d'une clé API intégrée dans le script (moins sécurisé).")
+
+    url = f"{args.base_url.rstrip('/')}/transport"
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Accept": "application/json",
+        "User-Agent": "impactco2-client/1.0"
+    }
+    params = {"transport": args.transport, "distance": args.distance}
+
+    try:
+        r = requests.get(url, headers=headers, params=params, timeout=10)
+        r.raise_for_status()
+    except requests.RequestException as e:
+        print("Requête échouée:", e)
+        if hasattr(e, 'response') and e.response is not None:
+            try:
+                print(json.dumps(e.response.json(), indent=2, ensure_ascii=False))
+            except Exception:
+                print(e.response.text)
+        sys.exit(1)
+
+    try:
+        data = r.json()
+    except ValueError:
+        print("Réponse non JSON:")
+        print(r.text)
+        sys.exit(1)
+
+    print(json.dumps(data, indent=2, ensure_ascii=False))
+
+
+if __name__ == "__main__":
+    main()
