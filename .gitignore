@@ -55,6 +55,8 @@ data/MobilityDatabase/data/raw/
 data/MobilityDatabase/data/france/*.zip
 data/MobilityDatabase/data/germany/*.zip
 data/MobilityDatabase/data/switzerland/*.zip
+data/MobilityDatabase/data/Europe_Rail_Database/
+data/MobilityDatabase/data/*.csv
 
 # === LOGS ===
 *.log
