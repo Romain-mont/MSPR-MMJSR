@@ -51,7 +51,7 @@ def run_ingestion(clean_tables=True):
         # === ETAPE 0 : Nettoyage (Une seule fois au début) ===
         if clean_tables:
             print("   🧹 Nettoyage des tables existantes...")
-            with engine.begin() as conn:  # begin() fait un auto-commit à la fin
+            with engine.begin() as conn:  
                 conn.execute(text("TRUNCATE TABLE fact_em, dim_route, dim_vehicle_type RESTART IDENTITY CASCADE;"))
             print("     ✅ Tables vidées et commité.")
 
@@ -67,7 +67,7 @@ def run_ingestion(clean_tables=True):
             
             # Insertion
             routes.to_sql('dim_route', engine, if_exists='append', index=False)
-            print(f"     ✅ {len(routes)} routes insérées.")
+            print(f"  ✅ {len(routes)} routes insérées.")
 
             # === ETAPE B : Remplir DIM_VEHICLE_TYPE (Matériel) ===
             print("   ↳ Traitement des Véhicules...")
