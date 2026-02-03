@@ -1,23 +1,36 @@
 import pandas as pd
 from sqlalchemy import create_engine, text
-# from dotenv import load_dotenv  <-- On commente ça pour l'instant
+from dotenv import load_dotenv  # N'oublie pas cet import
 import os
+import sys
 
-# 1. Configuration EN DUR (Pour être sûr à 100%)
-DB_USER = "admin_rail"
-DB_PASS = "root"          # Le mot de passe défini dans ton docker-compose
-DB_HOST = "127.0.0.1"
-DB_PORT = "5432"          # Port exposé par Docker (voir docker-compose.yml)
-DB_NAME = "euro_rail_db"
+# 1. Chargement de la configuration
+load_dotenv() # Charge le fichier .env à la racine
+
+# Récupération des variables (avec valeurs par défaut au cas où)
+DB_USER = os.getenv("DB_USER")
+DB_PASS = os.getenv("DB_PASSWORD")
+DB_HOST = "127.0.0.1" # On force localhost pour le script Python
+DB_PORT = os.getenv("DB_PORT", "5432") 
+DB_NAME = os.getenv("DB_NAME")
+
+# Sécurité : Vérifier que tout est chargé
+if not DB_USER or not DB_PASS or not DB_NAME:
+    print("❌ ERREUR : Les variables d'environnement sont mal chargées.")
+    print("Vérifie ton fichier .env à la racine.")
+    print(f"DEBUG : User={DB_USER}, DB={DB_NAME}")
+    sys.exit(1)
 
 CSV_PATH = "data/MobilityDatabase/data/Europe_Rail_Database.csv"
+# (Vérifie bien que ce chemin est toujours le bon chez toi !)
 
-# Vérification visuelle (Optionnelle, pour que tu sois sûr)
-print(f"🔑 Tentative de connexion avec : {DB_USER} / {DB_PASS} sur le port {DB_PORT}...")
+print(f"🔑 Connexion via ENV : {DB_USER} / **** sur le port {DB_PORT}...")
 
 # Connexion à la base via SQLAlchemy
 DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 engine = create_engine(DATABASE_URL)
+
+# ... Le reste de la fonction run_ingestion ne change pas ...
 
 def run_ingestion(clean_tables=True):
     print("🚀 Démarrage de l'ingestion des données...")
