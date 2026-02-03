@@ -27,7 +27,7 @@ REFRESH_TOKEN = os.getenv("REFRESH_TOKEN")
 TARGET_COUNTRIES = ["FR", "CH", "DE"] # Ajoute les pays que tu veux
 DATA_DIR = "./data/raw"
 OUTPUT_FILE = "data/Europe_Rail_Database.csv"
-GLOBAL_STAGING_DIR = "./data/staging_global"
+GLOBAL_STAGING_DIR = "./data/staging_global" 
 
 # Filtres API
 EXCLUDE_KEYWORDS = ["bus", "shuttle", "tram", "metro", "urbain", "autocar", "car"]
