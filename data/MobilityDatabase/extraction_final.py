@@ -70,7 +70,7 @@ def process_single_gtfs(zip_path, provider_name, country_code):
     Décompresse, Transforme et retourne le DataFrame (Lazy) prêt à être écrit.
     Ne fait AUCUNE écriture intermédiaire.
     """
-    print(f"   ⚙️ Traitement de {os.path.basename(zip_path)}...")
+    print(f"Traitement de {os.path.basename(zip_path)}...")
     
     # Dossier temporaire pour les CSV extraits
     temp_csv_dir = f"./temp_unzip/{provider_name}_{country_code}"
@@ -141,7 +141,7 @@ def process_single_gtfs(zip_path, provider_name, country_code):
         return final_df
 
     except Exception as e:
-        print(f"      ⚠️ Erreur logique: {e}")
+        print(f"Erreur logique: {e}")
         return None
     
     # Note: On ne supprime PAS temp_unzip ici, on le fait dans le main après l'écriture
@@ -164,12 +164,9 @@ def is_interesting(feed):
     if any(k in txt for k in INCLUDE_KEYWORDS): return True
     return True
 
-if __name__ == "__main__":
-    print("=== 🚄 LANCEMENT PIPELINE EURO-RAIL (Version Direct-Write) ===")
-    
-    # Nettoyage initial complet
-    for d in [DATA_DIR, GLOBAL_STAGING_DIR, "./temp_unzip", "./data/temp_parquet"]:
-        shutil.rmtree(d, ignore_errors=True)
+def run_extraction():
+    """Fonction principale d'extraction"""
+    print("=== LANCEMENT PIPELINE EURO-RAIL (Version Direct-Write) ===")
     
     os.makedirs(DATA_DIR, exist_ok=True)
     
@@ -178,7 +175,7 @@ if __name__ == "__main__":
 
     if token:
         for country in TARGET_COUNTRIES:
-            print(f"\n🌍 PAYS : {country}")
+            print(f"PAYS : {country}")
             try:
                 r = requests.get(f"{API_URL}/gtfs_feeds", headers={"Authorization": f"Bearer {token}"}, params={"country_code": country, "limit": 100})
                 feeds = r.json()
@@ -197,7 +194,7 @@ if __name__ == "__main__":
                 try:
                     # 1. Télécharger
                     if not os.path.exists(zip_path):
-                        print(f"   ⬇️ {provider}...", end=" ", flush=True)
+                        print(f"{provider}...", end=" ", flush=True)
                         with open(zip_path, 'wb') as f:
                             f.write(requests.get(dataset.get("hosted_url")).content)
                         print("OK")
@@ -209,35 +206,31 @@ if __name__ == "__main__":
                     # C'est ici que Spark lit les CSV et écrit le Parquet final
                     if df is not None:
                         df.write.mode("append").parquet(GLOBAL_STAGING_DIR)
-                        print(f"      ✅ Traitement terminé et sauvegardé.")
+                        print(f"Traitement terminé et sauvegardé.")
                         processed_count += 1
                     else:
-                        print(f"      ⚪ Pas de données pertinentes.")
+                        print(f"Pas de données pertinentes.")
 
                 except Exception as e:
-                    print(f"      ❌ Erreur: {e}")
-
-                finally:
-                    # 4. Nettoyage immédiat
-                    if os.path.exists(zip_path): os.remove(zip_path) # Supprime le ZIP
-                    shutil.rmtree(temp_unzip_path, ignore_errors=True) # Supprime les CSV dézippés
+                    print(f"Erreur: {e}")
 
     # === 4. CONSOLIDATION FINALE ===
-    print("\n📦 GÉNÉRATION DU FICHIER FINAL...")
+    print("GÉNÉRATION DU FICHIER FINAL...")
     
     if processed_count > 0:
         try:
             # On relit simplement le dossier global qui contient tout
             full_df = spark.read.parquet(GLOBAL_STAGING_DIR)
-            print(f"📊 Total lignes : {full_df.count()}")
+            print(f"Total lignes : {full_df.count()}")
             
             full_df.coalesce(1).write.mode("overwrite").option("header", "true").csv(OUTPUT_FILE.replace('.csv', ''))
-            print(f"🎉 SUCCESS ! Base générée : {OUTPUT_FILE}")
+            print(f"SUCCESS ! Base générée : {OUTPUT_FILE}")
         except Exception as e:
-            print(f"❌ Erreur finale: {e}")
+            print(f"Erreur finale: {e}")
     else:
-        print("⚠️ Aucune donnée.")
+        print("Aucune donnée.")
 
-    # Ménage final
-    shutil.rmtree(GLOBAL_STAGING_DIR, ignore_errors=True)
     spark.stop()
+
+if __name__ == "__main__":
+    run_extraction()
