@@ -70,3 +70,5 @@ logs/
 .pytest_cache/
 .coverage
 htmlcov/
+
+postgres_data/
