@@ -1,0 +1,25 @@
+# ============================================
+# MSPR - ETL CO2 Emissions
+# Requirements Python
+# ============================================
+
+# === EXTRACTION ===
+requests>=2.31.0          # Appels API (Mobility Database, Google Sheets)
+python-dotenv>=1.0.0      # Chargement variables d'environnement (.env)
+
+# === TRANSFORMATION ===
+pyspark>=3.5.0            # ETL / Traitement données distribuées
+pandas>=2.0.0             # Manipulation données (backup / compatibilité)
+
+# === LOAD (Database) ===
+sqlalchemy>=2.0.0         # ORM / Connexion PostgreSQL
+psycopg2-binary>=2.9.9    # Driver PostgreSQL pour Python
+
+# === API (FastAPI) ===
+fastapi>=0.109.0          # Framework API REST
+uvicorn>=0.27.0           # Serveur ASGI pour FastAPI
+
+# === OPTIONNEL (si besoin plus tard) ===
+# geopy>=2.4.0            # Calcul distances géographiques (alternative à Haversine manuel)
+# fuzzywuzzy>=0.18.0      # Matching flou noms de gares
+# python-Levenshtein>=0.23.0  # Accélération fuzzywuzzy
