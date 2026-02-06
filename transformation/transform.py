@@ -45,7 +45,7 @@ OUTPUT_DIR = "./data/staging"
 OUTPUT_FILE = "staging_routes.csv"
 
 # Colonnes MINIMALES obligatoires (sans lesquelles on ne peut rien faire)
-REQUIRED_COLUMNS = ['origin', 'destination', 'train_type']
+REQUIRED_COLUMNS = ['origin', 'destination', 'vehicule_type', "aero_lat", "aero_long", "station_lat", "station_long", "category", "departure_time", "arrival_time"]
 
 
 # ===========================

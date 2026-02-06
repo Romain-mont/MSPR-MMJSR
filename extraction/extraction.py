@@ -1,12 +1,14 @@
 """
-EXTRACTION COMBINÉE - Mobility Database + Back on Track
-========================================================
-Ce fichier extrait UNIQUEMENT les données brutes des 2 sources :
+EXTRACTION COMBINÉE - Mobility Database + Back on Track + OurAirports
+======================================================================
+Ce fichier extrait UNIQUEMENT les données brutes des 3 sources :
 - Mobility Database : API GTFS (fichiers ZIP)
 - Back on Track : Google Sheets CSV
+- OurAirports : CSV des aéroports mondiaux
 
 Aucune transformation n'est effectuée ici.
 Les données sont stockées dans des dossiers distincts pour traitement ultérieur.
+Utilise PySpark pour le traitement des données.
 """
 
 import requests
@@ -14,8 +16,17 @@ import os
 import re
 import zipfile
 import shutil
-import pandas as pd
+import datetime as dt
+from pathlib import Path
+from urllib.request import urlopen, Request
 from dotenv import load_dotenv
+from pyspark.sql import SparkSession
+
+# === INITIALISATION SPARK ===
+spark = SparkSession.builder \
+    .appName("DataExtraction") \
+    .config("spark.driver.memory", "2g") \
+    .getOrCreate()
 
 # === CONFIGURATION ===
 load_dotenv()
@@ -28,6 +39,7 @@ TARGET_COUNTRIES = ["FR", "CH", "DE"]
 # Dossiers de sortie (données brutes)
 MOBILITY_RAW_DIR = "./data/raw/mobility_gtfs"
 BACKONTRACK_RAW_DIR = "./data/raw/backontrack_csv"
+AIRPORTS_RAW_DIR = "./data/raw/airports"
 
 # Filtres API (pour limiter les téléchargements)
 EXCLUDE_KEYWORDS = ["bus", "shuttle", "tram", "metro", "urbain", "autocar", "car"]
@@ -37,6 +49,84 @@ INCLUDE_KEYWORDS = ["sncf", "db", "sbb", "cff", "renfe", "trenitalia", "national
 BACKONTRACK_SHEET_ID = "15zsK-lBuibUtZ1s2FxVHvAmSu-pEuE0NDT6CAMYL2TY"
 BACKONTRACK_ONGLETS = ["agencies", "routes", "trips", "stops", "calendar", "trip_stop"]
 
+# OurAirports URL
+AIRPORTS_DATA_URL = "https://ourairports.com/data/airports.csv"
+
+# Mapping des colonnes OurAirports
+AIRPORTS_MAPPING = {
+    "latitude_deg": "aero_lat",
+    "longitude_deg": "aero_long", 
+    "type": "category",           # large_airport, medium_airport, etc.
+    "name": "airport_name",       # optionnel
+    "iata_code": "iata_code"      # pour jointure
+}
+
+# stops.csv (gares)
+STOPS_MAPPING = {
+    "stop_lat": "station_lat",
+    "stop_lon": "station_long",
+    "stop_name": "station_name"
+}
+
+# trips.csv + routes.csv
+TRIPS_MAPPING = {
+    "route_type": "vehicule_type",  # 2 = train
+}
+
+# trip_stop.csv (horaires)
+TRIP_STOP_MAPPING = {
+    "departure_time": "departure_time",
+    "arrival_time": "arrival_time"
+}
+
+# stops.txt
+GTFS_STOPS_MAPPING = {
+    "stop_lat": "station_lat",
+    "stop_lon": "station_long",
+    "stop_name": "origin"  # ou destination selon contexte
+}
+
+# stop_times.txt
+GTFS_TIMES_MAPPING = {
+    "departure_time": "departure_time",
+    "arrival_time": "arrival_time"
+}
+
+# routes.txt
+GTFS_ROUTES_MAPPING = {
+    "route_type": "vehicule_type"  # 2 = Rail
+}
+
+# === MAPPING DES COLONNES ===
+COLUMN_MAPPINGS = {
+    "airports": {
+        "latitude_deg": "aero_lat",
+        "longitude_deg": "aero_long",
+        "type": "category"
+    },
+    "stops": {
+        "stop_lat": "station_lat",
+        "stop_lon": "station_long"
+    },
+    "stop_times": {
+        "departure_time": "departure_time",
+        "arrival_time": "arrival_time"
+    },
+    "routes": {
+        "route_type": "vehicule_type"
+    }
+}
+
+def apply_column_mapping(df, mapping_key):
+    """Applique le renommage des colonnes selon le mapping"""
+    if mapping_key not in COLUMN_MAPPINGS:
+        return df
+    
+    mapping = COLUMN_MAPPINGS[mapping_key]
+    for old_col, new_col in mapping.items():
+        if old_col in df.columns:
+            df = df.withColumnRenamed(old_col, new_col)
+    return df
 
 # ===========================
 # PARTIE 1 : MOBILITY DATABASE
@@ -153,7 +243,7 @@ def extract_mobility_database():
 def extract_backontrack():
     """
     Extrait les CSV depuis Google Sheets Back on Track
-    Télécharge dans BACKONTRACK_RAW_DIR
+    Télécharge dans BACKONTRACK_RAW_DIR et convertit avec PySpark
     """
     print("\n📊 === EXTRACTION BACK ON TRACK ===")
     
@@ -162,19 +252,128 @@ def extract_backontrack():
 
     for onglet in BACKONTRACK_ONGLETS:
         url = f"https://docs.google.com/spreadsheets/d/{BACKONTRACK_SHEET_ID}/gviz/tq?tqx=out:csv&sheet={onglet}"
+        temp_file = f"{BACKONTRACK_RAW_DIR}/temp_{onglet}.csv"
         output_file = f"{BACKONTRACK_RAW_DIR}/back_on_track_{onglet}.csv"
         
         try:
             print(f"   ⬇️  {onglet}...", end=" ", flush=True)
-            df = pd.read_csv(url)
-            df.to_csv(output_file, index=False)
-            print(f"✅ ({len(df)} lignes)")
+            
+            # Télécharger le fichier CSV temporaire
+            response = requests.get(url)
+            response.raise_for_status()
+            with open(temp_file, 'wb') as f:
+                f.write(response.content)
+            
+            # Lire avec PySpark
+            df = spark.read.option("header", "true") \
+                          .option("inferSchema", "true") \
+                          .csv(temp_file)
+            
+            row_count = df.count()
+            
+            # Écrire le fichier final avec PySpark (mode coalesce pour un seul fichier)
+            df.coalesce(1).write.mode("overwrite") \
+                          .option("header", "true") \
+                          .csv(f"{BACKONTRACK_RAW_DIR}/spark_{onglet}")
+            
+            # Renommer le fichier Spark output vers le nom final
+            spark_output_dir = f"{BACKONTRACK_RAW_DIR}/spark_{onglet}"
+            for f_name in os.listdir(spark_output_dir):
+                if f_name.endswith('.csv'):
+                    shutil.move(f"{spark_output_dir}/{f_name}", output_file)
+                    break
+            shutil.rmtree(spark_output_dir, ignore_errors=True)
+            
+            # Nettoyer le fichier temporaire
+            if os.path.exists(temp_file):
+                os.remove(temp_file)
+            
+            print(f"✅ ({row_count} lignes)")
             extracted_count += 1
             
         except Exception as e:
             print(f"❌ Erreur : {e}")
+            # Nettoyer en cas d'erreur
+            if os.path.exists(temp_file):
+                os.remove(temp_file)
     
     print(f"\n✅ Back on Track : {extracted_count}/{len(BACKONTRACK_ONGLETS)} fichiers extraits")
+    return True
+
+
+# ===========================
+# PARTIE 3 : OURAIRPORTS
+# ===========================
+
+def extract_airports(overwrite=False):
+    """
+    Extrait les données des aéroports depuis OurAirports
+    Télécharge et traite avec PySpark dans AIRPORTS_RAW_DIR
+    """
+    print("\n✈️  === EXTRACTION OURAIRPORTS ===")
+    
+    output_dir = Path(AIRPORTS_RAW_DIR)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    
+    # Utilise la date du jour dans le nom du fichier
+    today = dt.date.today().strftime("%Y-%m-%d")
+    temp_file = output_dir / f"airports_{today}_temp.csv"
+    output_file = output_dir / f"airports_{today}.csv"
+    
+    # Si le fichier du jour existe déjà et qu'on ne veut pas le réécrire
+    if output_file.exists() and not overwrite:
+        print(f"   ⏭️  Fichier du jour déjà présent : {output_file}")
+        return True
+    
+    try:
+        print(f"   ⬇️  Téléchargement airports.csv...", end=" ", flush=True)
+        
+        # Télécharge le fichier depuis OurAirports
+        req = Request(AIRPORTS_DATA_URL, headers={"User-Agent": "Mozilla/5.0"})
+        with urlopen(req, timeout=60) as response:
+            if response.status != 200:
+                raise RuntimeError(f"HTTP error {response.status}")
+            content = response.read()
+        
+        # Écrit le fichier temporaire
+        temp_file.write_bytes(content)
+        print("✅")
+        
+        # Traiter avec PySpark
+        print(f"   🔄 Traitement avec PySpark...", end=" ", flush=True)
+        df = spark.read.option("header", "true") \
+                      .option("inferSchema", "true") \
+                      .csv(str(temp_file))
+        
+        row_count = df.count()
+        
+        # Écrire le fichier final avec PySpark
+        spark_output_dir = str(output_dir / "spark_airports")
+        df.coalesce(1).write.mode("overwrite") \
+                      .option("header", "true") \
+                      .csv(spark_output_dir)
+        
+        # Renommer le fichier Spark output vers le nom final
+        for f_name in os.listdir(spark_output_dir):
+            if f_name.endswith('.csv'):
+                shutil.move(f"{spark_output_dir}/{f_name}", str(output_file))
+                break
+        shutil.rmtree(spark_output_dir, ignore_errors=True)
+        
+        # Nettoyer le fichier temporaire
+        if temp_file.exists():
+            temp_file.unlink()
+        
+        print(f"✅ ({row_count} aéroports)")
+        
+    except Exception as e:
+        print(f"❌ Erreur : {e}")
+        # Nettoyer en cas d'erreur
+        if temp_file.exists():
+            temp_file.unlink()
+        return False
+    
+    print(f"\n✅ OurAirports : Fichier extrait → {output_file}")
     return True
 
 
@@ -184,27 +383,33 @@ def extract_backontrack():
 
 def run_extraction():
     """
-    Lance l'extraction complète des 2 sources
+    Lance l'extraction complète des 3 sources
     """
     print("=" * 60)
-    print("🚀 EXTRACTION COMBINÉE - Début du processus")
+    print("🚀 EXTRACTION COMBINÉE - Début du processus (PySpark)")
     print("=" * 60)
     
     # Nettoyage préalable (optionnel)
     # shutil.rmtree(MOBILITY_RAW_DIR, ignore_errors=True)
     # shutil.rmtree(BACKONTRACK_RAW_DIR, ignore_errors=True)
+    # shutil.rmtree(AIRPORTS_RAW_DIR, ignore_errors=True)
     
     success_mobility = extract_mobility_database()
     success_backontrack = extract_backontrack()
+    success_airports = extract_airports()
     
     print("\n" + "=" * 60)
-    if success_mobility and success_backontrack:
+    if success_mobility and success_backontrack and success_airports:
         print("🎉 EXTRACTION TERMINÉE AVEC SUCCÈS")
         print(f"📂 Mobility Database : {MOBILITY_RAW_DIR}")
         print(f"📂 Back on Track     : {BACKONTRACK_RAW_DIR}")
+        print(f"📂 OurAirports       : {AIRPORTS_RAW_DIR}")
     else:
         print("⚠️ EXTRACTION PARTIELLE (vérifier les erreurs ci-dessus)")
     print("=" * 60)
+    
+    # Arrêter la session Spark
+    spark.stop()
 
 
 if __name__ == "__main__":
