@@ -52,61 +52,25 @@ BACKONTRACK_ONGLETS = ["agencies", "routes", "trips", "stops", "calendar", "trip
 # OurAirports URL
 AIRPORTS_DATA_URL = "https://ourairports.com/data/airports.csv"
 
-# Mapping des colonnes OurAirports
-AIRPORTS_MAPPING = {
-    "latitude_deg": "aero_lat",
-    "longitude_deg": "aero_long", 
-    "type": "category",           # large_airport, medium_airport, etc.
-    "name": "airport_name",       # optionnel
-    "iata_code": "iata_code"      # pour jointure
-}
 
-# stops.csv (gares)
-STOPS_MAPPING = {
-    "stop_lat": "station_lat",
-    "stop_lon": "station_long",
-    "stop_name": "station_name"
-}
-
-# trips.csv + routes.csv
-TRIPS_MAPPING = {
-    "route_type": "vehicule_type",  # 2 = train
-}
-
-# trip_stop.csv (horaires)
-TRIP_STOP_MAPPING = {
-    "departure_time": "departure_time",
-    "arrival_time": "arrival_time"
-}
-
-# stops.txt
-GTFS_STOPS_MAPPING = {
-    "stop_lat": "station_lat",
-    "stop_lon": "station_long",
-    "stop_name": "origin"  # ou destination selon contexte
-}
-
-# stop_times.txt
-GTFS_TIMES_MAPPING = {
-    "departure_time": "departure_time",
-    "arrival_time": "arrival_time"
-}
-
-# routes.txt
-GTFS_ROUTES_MAPPING = {
-    "route_type": "vehicule_type"  # 2 = Rail
-}
-
-# === MAPPING DES COLONNES ===
+# ===========================
+# MAPPING DES COLONNES
+# ===========================
+# REQUIRED_COLUMNS = ['origin', 'destination', 'vehicule_type', 'aero_lat', 'aero_long', 
+#                     'station_lat', 'station_long', 'category', 'departure_time', 'arrival_time']
 COLUMN_MAPPINGS = {
     "airports": {
         "latitude_deg": "aero_lat",
         "longitude_deg": "aero_long",
-        "type": "category"
+        "type": "category",
+        "name": "airport_name",
+        "iata_code": "iata_code",
+        "iso_country": "country_code"
     },
     "stops": {
         "stop_lat": "station_lat",
-        "stop_lon": "station_long"
+        "stop_lon": "station_long",
+        "stop_name": "station_name"
     },
     "stop_times": {
         "departure_time": "departure_time",
@@ -269,6 +233,14 @@ def extract_backontrack():
                           .option("inferSchema", "true") \
                           .csv(temp_file)
             
+            # Appliquer le mapping des colonnes selon le type d'onglet
+            if onglet == "stops":
+                df = apply_column_mapping(df, "stops")
+            elif onglet == "routes":
+                df = apply_column_mapping(df, "routes")
+            elif onglet == "trip_stop":
+                df = apply_column_mapping(df, "stop_times")
+            
             row_count = df.count()
             
             # Écrire le fichier final avec PySpark (mode coalesce pour un seul fichier)
@@ -344,6 +316,9 @@ def extract_airports(overwrite=False):
         df = spark.read.option("header", "true") \
                       .option("inferSchema", "true") \
                       .csv(str(temp_file))
+        
+        # Appliquer le mapping des colonnes pour aéroports
+        df = apply_column_mapping(df, "airports")
         
         row_count = df.count()
         
