@@ -53,6 +53,12 @@ env/
 *.7z
 data/processed/
 data/raw/
+data/staging/
+data/spark_temp/
+data/temp_mobility/
+data/temp_mobility_parquet/
+data/temp_mobility_csv/
+spark_tmp/
 
 # === LOGS ===
 *.log

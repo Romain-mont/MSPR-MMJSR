@@ -22,11 +22,22 @@ from urllib.request import urlopen, Request
 from dotenv import load_dotenv
 from pyspark.sql import SparkSession
 
-# === INITIALISATION SPARK ===
-spark = SparkSession.builder \
-    .appName("DataExtraction") \
-    .config("spark.driver.memory", "2g") \
-    .getOrCreate()
+
+# Détection d'exécution dans Docker
+def running_in_docker():
+    path = '/.dockerenv'
+    return os.path.exists(path) or os.environ.get('RUNNING_IN_DOCKER') == '1'
+
+# INITIALISATION SPARK compatible Docker
+def get_spark():
+    builder = SparkSession.builder.appName("DataExtraction")
+    builder = builder.config("spark.driver.memory", "2g")
+    builder = builder.master("local[*]")
+    if not running_in_docker():
+        builder = builder.config("spark.hadoop.fs.defaultFS", "hdfs://namenode:9000")
+    return builder.getOrCreate()
+
+spark = get_spark()
 
 # === CONFIGURATION ===
 load_dotenv()
@@ -36,10 +47,11 @@ API_URL = "https://api.mobilitydatabase.org/v1"
 REFRESH_TOKEN = os.getenv("REFRESH_TOKEN")
 TARGET_COUNTRIES = ["FR", "CH", "DE"]
 
-# Dossiers de sortie (données brutes)
-MOBILITY_RAW_DIR = "./data/raw/mobility_gtfs"
-BACKONTRACK_RAW_DIR = "./data/raw/backontrack_csv"
-AIRPORTS_RAW_DIR = "./data/raw/airports"
+
+# Dossiers de sortie (données brutes) adaptables via env (Docker)
+MOBILITY_RAW_DIR = os.environ.get("RAW_MOBILITY_DIR", "./data/raw/mobility_gtfs")
+BACKONTRACK_RAW_DIR = os.environ.get("RAW_BACKONTRACK_DIR", "./data/raw/backontrack_csv")
+AIRPORTS_RAW_DIR = os.environ.get("RAW_AIRPORTS_DIR", "./data/raw/airports")
 
 # Filtres API (pour limiter les téléchargements)
 EXCLUDE_KEYWORDS = ["bus", "shuttle", "tram", "metro", "urbain", "autocar", "car"]
@@ -243,18 +255,8 @@ def extract_backontrack():
             
             row_count = df.count()
             
-            # Écrire le fichier final avec PySpark (mode coalesce pour un seul fichier)
-            df.coalesce(1).write.mode("overwrite") \
-                          .option("header", "true") \
-                          .csv(f"{BACKONTRACK_RAW_DIR}/spark_{onglet}")
-            
-            # Renommer le fichier Spark output vers le nom final
-            spark_output_dir = f"{BACKONTRACK_RAW_DIR}/spark_{onglet}"
-            for f_name in os.listdir(spark_output_dir):
-                if f_name.endswith('.csv'):
-                    shutil.move(f"{spark_output_dir}/{f_name}", output_file)
-                    break
-            shutil.rmtree(spark_output_dir, ignore_errors=True)
+            # Écrire le fichier final via Pandas (évite HADOOP_HOME sur Windows)
+            df.toPandas().to_csv(output_file, index=False)
             
             # Nettoyer le fichier temporaire
             if os.path.exists(temp_file):
@@ -322,18 +324,8 @@ def extract_airports(overwrite=False):
         
         row_count = df.count()
         
-        # Écrire le fichier final avec PySpark
-        spark_output_dir = str(output_dir / "spark_airports")
-        df.coalesce(1).write.mode("overwrite") \
-                      .option("header", "true") \
-                      .csv(spark_output_dir)
-        
-        # Renommer le fichier Spark output vers le nom final
-        for f_name in os.listdir(spark_output_dir):
-            if f_name.endswith('.csv'):
-                shutil.move(f"{spark_output_dir}/{f_name}", str(output_file))
-                break
-        shutil.rmtree(spark_output_dir, ignore_errors=True)
+        # Écrire le fichier final via Pandas (évite HADOOP_HOME sur Windows)
+        df.toPandas().to_csv(str(output_file), index=False)
         
         # Nettoyer le fichier temporaire
         if temp_file.exists():
