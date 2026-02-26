@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  etl:
+    build:
+      context: ..
+      dockerfile: etl-docker-project/Dockerfile
+    container_name: etl-pipeline
+    env_file:
+      - ../.env
+    environment:
+      - DB_HOST=db
+      - RAW_MOBILITY_DIR=./data/raw/mobility_gtfs
+      - RAW_BACKONTRACK_DIR=./data/raw/backontrack_csv
+      - RAW_AIRPORTS_DIR=./data/raw/airports
+      - OUTPUT_DIR=./data/staging
+      - OUTPUT_AIRPORTS_FILE=staging_airports.csv
+      - OUTPUT_INTERMODAL_FILE=staging_intermodal.csv
+      - OUTPUT_FINAL_FILE=final_routes.csv
+    volumes:
+      - ../data:/app/data
+      - ../extraction:/app/extraction
+      - ../transformation:/app/transformation
+      - ../load:/app/load
+      - ../database:/app/database
+      - ../requirements.txt:/app/requirements.txt
+      - ../main.py:/app/main.py
+    command: ["python", "main.py"]
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16-alpine
+    container_name: etl-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5432:5432"
+    volumes:
+      - ../postgres_data:/var/lib/postgresql/data
+      - ../database/init.sql:/docker-entrypoint-initdb.d/init.sql
