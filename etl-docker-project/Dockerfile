@@ -32,6 +32,8 @@ COPY ../extraction ./extraction
 COPY ../transformation ./transformation
 COPY ../load ./load
 COPY ../database ./database
+COPY ../analyse ./analyse
+COPY ../visualization ./visualization
 COPY ../main.py ./main.py
 
 # Créer le dossier data (monté en volume en prod)

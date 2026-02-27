@@ -33,6 +33,9 @@ OUTPUT_AIRPORTS_FILE   = os.environ.get("OUTPUT_AIRPORTS_FILE", "staging_airport
 OUTPUT_INTERMODAL_FILE = os.environ.get("OUTPUT_INTERMODAL_FILE", "staging_intermodal.csv")
 OUTPUT_FINAL_FILE      = os.environ.get("OUTPUT_FINAL_FILE", "final_routes.csv")
 
+# Pays européens cibles (synchronisé avec extraction.py)
+EU_COUNTRIES = ['FR']  # Limité à la France pour tests rapides - 27 pays disponibles: FR,DE,CH,BE,NL,AT,IT,ES,PT,PL,CZ,SK,HU,SI,HR,DK,SE,NO,FI,IE,GB,LU,RO,BG,GR,EE,LV,LT
+
 REQUIRED_COLUMNS_AIRPORTS = ["airport_name", "aero_lat", "aero_long", "category", "iata_code", "country_code"]
 
 CO2_FACTORS_PER_100KM = {
@@ -270,7 +273,15 @@ def read_mobility_provider(spark, provider_dir: str):
     routes = spark.read.option("header", "true").csv(routes_path)
 
     routes = routes.withColumn("route_type", F.col("route_type").cast("int"))
-    rail_routes = routes.filter((F.col("route_type") == 2) | ((F.col("route_type") >= 100) & (F.col("route_type") <= 117)))
+    
+    # Ajouter route_short_name et route_long_name pour classification
+    route_cols = ["route_id", "route_type"]
+    if "route_short_name" in routes.columns:
+        route_cols.append("route_short_name")
+    if "route_long_name" in routes.columns:
+        route_cols.append("route_long_name")
+    
+    rail_routes = routes.filter((F.col("route_type") == 2) | ((F.col("route_type") >= 100) & (F.col("route_type") <= 117))).select(*route_cols)
 
     # Low-RAM: éviter count() complet
     if not rail_routes.take(1):
@@ -278,7 +289,13 @@ def read_mobility_provider(spark, provider_dir: str):
 
     trip_sel = ["trip_id", "route_id"] + (["shape_id"] if "shape_id" in trips.columns else [])
     # Checkpoint après grosse jointure rail_trips
-    rail_trips = trips.select(*trip_sel).join(rail_routes.select("route_id", "route_type"), "route_id", "inner")
+    route_sel_cols = ["route_id", "route_type"]
+    if "route_short_name" in rail_routes.columns:
+        route_sel_cols.append("route_short_name")
+    if "route_long_name" in rail_routes.columns:
+        route_sel_cols.append("route_long_name")
+    
+    rail_trips = trips.select(*trip_sel).join(rail_routes.select(*route_sel_cols), "route_id", "inner")
     rail_trips_path = os.path.join(OUTPUT_DIR, f"staging_{os.path.basename(provider_dir)}_rail_trips.csv")
     rail_trips.write.mode("overwrite").option("header", "true").csv(rail_trips_path)
     del rail_trips
@@ -286,9 +303,9 @@ def read_mobility_provider(spark, provider_dir: str):
     rail_trips = spark.read.option("header", "true").csv(rail_trips_path)
 
     rail_stop_times = (
-        stop_times.join(rail_trips.select("trip_id", "route_type"), "trip_id", "inner")
+        stop_times.join(rail_trips.select([c for c in ["trip_id", "route_type", "route_short_name", "route_long_name"] if c in rail_trips.columns]), "trip_id", "inner")
         .withColumn("stop_sequence", F.col("stop_sequence").cast("int"))
-        .select("trip_id", "stop_id", "stop_sequence", "departure_time", "arrival_time", "route_type")
+        .select(*[c for c in ["trip_id", "stop_id", "stop_sequence", "departure_time", "arrival_time", "route_type", "route_short_name", "route_long_name"] if c in stop_times.columns or c in rail_trips.columns])
     )
     rail_stop_times_path = os.path.join(OUTPUT_DIR, f"staging_{os.path.basename(provider_dir)}_rail_stop_times.csv")
     rail_stop_times.write.mode("overwrite").option("header", "true").csv(rail_stop_times_path)
@@ -302,6 +319,8 @@ def read_mobility_provider(spark, provider_dir: str):
             F.min("stop_sequence").alias("min_seq"),
             F.max("stop_sequence").alias("max_seq"),
             F.first("route_type", ignorenulls=True).alias("route_type_val"),
+            F.first("route_short_name", ignorenulls=True).alias("route_short_name"),
+            F.first("route_long_name", ignorenulls=True).alias("route_long_name"),
         )
     )
     seqs_path = os.path.join(OUTPUT_DIR, f"staging_{os.path.basename(provider_dir)}_seqs.csv")
@@ -345,7 +364,7 @@ def read_mobility_provider(spark, provider_dir: str):
     dest = spark.read.option("header", "true").csv(dest_path)
 
     bounds = (
-        seqs.select("trip_id", "route_type_val")
+        seqs.select("trip_id", "route_type_val", "route_short_name", "route_long_name")
         .join(origin, "trip_id", "inner")
         .join(dest, "trip_id", "inner")
         .withColumn("shape_distance_km", F.lit(None).cast(DoubleType()))
@@ -370,9 +389,50 @@ def read_mobility_provider(spark, provider_dir: str):
     )
 
     df = bounds.join(origin_stops, "origin_stop_id").join(dest_stops, "dest_stop_id")
+    
+    # Ajouter route_short_name si disponible pour classification
+    if "route_short_name" in bounds.columns or "route_long_name" in bounds.columns:
+        pass  # Déjà dans bounds via la jointure avec rail_trips
+    
+    # Classification intelligente des trains selon les codes européens
+    df = df.withColumn("route_code", F.coalesce(F.col("route_short_name"), F.col("route_long_name"), F.lit("")))
+    
+    df = df.withColumn(
+        "vehicule_type_base",
+        F.when(F.upper(F.col("route_code")).rlike("TGV|INOUI"), F.lit("TGV"))
+         .when(F.upper(F.col("route_code")).rlike("ICE"), F.lit("ICE"))
+         .when(F.upper(F.col("route_code")).rlike("AVE"), F.lit("AVE"))
+         .when(F.upper(F.col("route_code")).rlike("FRECCIAROSSA|FRECCIARGENTO|FRECCIABIANCA"), F.lit("Frecciarossa"))
+         .when(F.upper(F.col("route_code")).rlike("^IC$|INTERCITY"), F.lit("InterCity"))
+         .when(F.upper(F.col("route_code")).rlike("^EC$|EUROCITY"), F.lit("EuroCity"))
+         .when(F.upper(F.col("route_code")).rlike("EN|EURONIGHT"), F.lit("EuroNight"))
+         .when(F.upper(F.col("route_code")).rlike("NJ|NIGHTJET"), F.lit("Nightjet"))
+         .when(F.col("route_type_val") == 102, F.lit("Train Nuit"))
+         .otherwise(F.lit("Train Longue Distance"))
+    )
+    
+    # Détection des trains de nuit basée sur les horaires (22h-6h)
+    df = df.withColumn(
+        "dep_hour",
+        F.when(F.col("departure_time").isNotNull(), 
+               F.substring(F.col("departure_time"), 1, 2).cast("int")).otherwise(F.lit(None))
+    )
+    
+    df = df.withColumn(
+        "is_night_train",
+        # Train de nuit si : départ entre 22h-23h59 OU départ entre 0h-6h OU type déjà "Nuit"
+        F.when((F.col("dep_hour") >= 22) | (F.col("dep_hour") <= 6), F.lit(True))
+         .when(F.col("vehicule_type_base").isin("Train Nuit", "EuroNight", "Nightjet"), F.lit(True))
+         .otherwise(F.lit(False))
+    )
+    
+    # Type final : ajouter "Nuit" si détecté comme train de nuit
     df = df.withColumn(
         "vehicule_type",
-        F.when(F.col("route_type_val") == 102, F.lit("Train Nuit")).otherwise(F.lit("Train Jour"))
+        F.when(F.col("is_night_train"), 
+               F.when(F.col("vehicule_type_base").isin("Train Nuit", "EuroNight", "Nightjet"), F.col("vehicule_type_base"))
+                .otherwise(F.concat(F.col("vehicule_type_base"), F.lit(" Nuit"))))
+         .otherwise(F.col("vehicule_type_base"))
     )
 
     return (
@@ -386,8 +446,7 @@ def read_mobility_provider(spark, provider_dir: str):
     )
 
 def read_all_mobility(spark, country_filter=None):
-    EU = ['FR','DE','CH','BE','NL','AT','IT','ES','PT','PL','CZ','SK','HU','SI','HR','DK','SE','NO','FI','IE','GB','LU','RO','BG','GR','EE','LV','LT']
-    countries = EU if country_filter is None else ([country_filter] if isinstance(country_filter, str) else country_filter)
+    countries = EU_COUNTRIES if country_filter is None else ([country_filter] if isinstance(country_filter, str) else country_filter)
 
     if not os.path.exists(RAW_MOBILITY_DIR):
         print(f"❌ Dossier introuvable : {RAW_MOBILITY_DIR}")
@@ -551,8 +610,7 @@ def read_airports(spark):
     )
 
     if "country_code" in df.columns:
-        eu = ['FR','DE','CH','IT','ES','BE','NL','AT','GB','PT','PL','CZ','DK','SE','NO','FI']
-        df = df.filter(F.col("country_code").isin(eu))
+        df = df.filter(F.col("country_code").isin(EU_COUNTRIES))
 
     return df
 
@@ -812,6 +870,21 @@ def run_transform():
         del df
         spark.catalog.clearCache(); gc.collect()
         df = spark.read.option("header", "true").csv(dist_path)
+        
+        # Filtre : Garder uniquement les trains longue distance (>= 100 km)
+        # Les trajets avion seront ajoutés plus tard et ne sont pas concernés par ce filtre
+        df = df.filter(
+            (F.col("distance_km").cast(DoubleType()) >= 100.0) | 
+            F.col("distance_km").isNull() | 
+            F.col("vehicule_type").contains("Avion")
+        )
+        
+        # Sauvegarde après filtre
+        filtered_path = os.path.join(OUTPUT_DIR, "staging_filtered_distance.csv")
+        df.write.mode("overwrite").option("header", "true").csv(filtered_path)
+        del df
+        spark.catalog.clearCache(); gc.collect()
+        df = spark.read.option("header", "true").csv(filtered_path)
 
         df = df.withColumn("co2_kg", co2_kg(F.col("distance_km"), F.col("vehicule_type")))
         co2_path = os.path.join(OUTPUT_DIR, "staging_co2.csv")

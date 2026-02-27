@@ -4,18 +4,22 @@ Génère des graphiques pour analyser les émissions carbone des trajets.
 """
 
 import pandas as pd
+import matplotlib
+matplotlib.use('Agg')  # Backend sans interface graphique pour Docker
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sqlalchemy import create_engine, text
 from dotenv import load_dotenv
 import os
+import shutil
+from pathlib import Path
 
 # Configuration
 load_dotenv()
 DB_USER = os.getenv("DB_USER")
 DB_PASS = os.getenv("DB_PASSWORD")
-DB_HOST = "127.0.0.1"
-DB_PORT = os.getenv("DB_PORT", "5433")
+DB_HOST = os.getenv("DB_HOST", "127.0.0.1")  # "db" dans Docker, "127.0.0.1" en local
+DB_PORT = os.getenv("DB_PORT", "5432")
 DB_NAME = os.getenv("DB_NAME")
 
 DATABASE_URL = f"postgresql+psycopg2://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
@@ -167,24 +171,39 @@ def generate_summary(df):
     for vtype in df['vehicule_type'].unique():
         subset = df[df['vehicule_type'] == vtype]
         print(f"   • {vtype}: {len(subset)} trajets, CO2 moy={subset['co2_kg'].mean():.3f} kg")
-    
-    print("\n" + "="*60)
 
 def main():
+    """Fonction principale."""
+    print("\n" + "="*60)
+    print("📊 GÉNÉRATION DU DASHBOARD DE VISUALISATION")
+    print("="*60)
+    
     print("🔄 Chargement des données...")
-    df = load_data()
+    try:
+        df = load_data()
+    except Exception as e:
+        print(f"❌ Erreur de connexion à la base de données: {e}")
+        print(f"   URL: {DATABASE_URL.replace(DB_PASS, '****')}")
+        return False
     
     if df.empty:
         print("❌ Aucune donnée dans le datamart !")
-        return
+        return False
     
     generate_summary(df)
     
     print("\n📊 Génération des graphiques...")
     
-    # Créer le dossier output
-    output_dir = "visualization/output"
-    os.makedirs(output_dir, exist_ok=True)
+    # Créer le dossier output (nettoyage si existe)
+    output_dir = Path("visualization/output")
+    
+    # Supprimer l'ancien dossier s'il existe
+    if output_dir.exists():
+        print(f"🗑️  Suppression des anciennes images dans {output_dir}/")
+        shutil.rmtree(output_dir)
+    
+    # Recréer le dossier vide
+    output_dir.mkdir(parents=True, exist_ok=True)
     
     # Générer et sauvegarder les graphiques
     figs = {
@@ -197,13 +216,14 @@ def main():
     }
     
     for name, fig in figs.items():
-        path = f"{output_dir}/{name}.png"
+        path = output_dir / f"{name}.png"
         fig.savefig(path, dpi=150, bbox_inches='tight')
         print(f"   ✅ {path}")
         plt.close(fig)
     
     print(f"\n🎉 {len(figs)} graphiques générés dans {output_dir}/")
-    print("   Ouvre les fichiers PNG pour voir les visualisations !")
+    print("="*60)
+    return True
 
 if __name__ == "__main__":
     main()
