@@ -211,7 +211,7 @@ def run_analysis():
     csv_path = os.environ.get("OUTPUT_DIR", "./data/staging") + "/" + \
                os.environ.get("OUTPUT_FINAL_FILE", "final_routes.csv")
     
-    output_path = os.environ.get("OUTPUT_DIR", "./data/staging") + "/rapport_analyse.txt"
+    output_path = "./analyse/rapport_analyse.md"
     
     print("\n" + "=" * 60)
     print("📊 GÉNÉRATION DU RAPPORT D'ANALYSE")
