@@ -17,10 +17,10 @@ app = FastAPI(
 DB_USER = os.getenv("DB_USER")
 DB_PASS = os.getenv("DB_PASSWORD")
 DB_HOST = "127.0.0.1"  # Localhost pour l'exécution locale
-DB_PORT = os.getenv("DB_PORT", "5432")
+DB_PORT = os.getenv("DB_PORT", "5433")
 DB_NAME = os.getenv("DB_NAME")
 
-DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+DATABASE_URL = f"postgresql+psycopg2://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 engine = create_engine(DATABASE_URL)
 
 # 3. Modèle de réponse (Ce que l'API renvoie au client)
@@ -56,9 +56,10 @@ def search_route(depart: str, arrivee: str):
         FROM fact_em f
         JOIN dim_route r ON f.route_id = r.route_id
         JOIN dim_vehicle_type v ON f.vehicle_type_id = v.vehicle_type_id
-        WHERE r.dep_name ILIKE :dep AND r.arr_name ILIKE :arr
+        WHERE r.dep_name ILIKE '%' || :dep || '%' 
+          AND r.arr_name ILIKE '%' || :arr || '%'
     """)
-    # Note : ILIKE permet de chercher sans se soucier des majuscules (ex: paRiS = Paris)
+    # Note : ILIKE avec % permet de chercher "contient" (ex: Paris matchera "Gare de Paris...")
 
     try:
         with engine.connect() as conn:

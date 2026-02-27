@@ -1,4 +1,4 @@
-import os, sys, glob, re, csv, shutil
+import os, sys, glob, re, csv, shutil, gc
 from functools import reduce
 
 from pyspark import StorageLevel
@@ -188,6 +188,11 @@ def get_spark_session():
     builder = builder.config("spark.sql.sources.commitProtocolClass",
                              "org.apache.spark.sql.execution.datasources.SQLHadoopMapReduceCommitProtocol")
     builder = builder.config("spark.hadoop.mapreduce.fileoutputcommitter.algorithm.version", "2")
+    
+    # FIX : Désactiver les vérifications de permissions (pour disques externes exFAT/FAT32)
+    builder = builder.config("spark.hadoop.fs.file.impl", "org.apache.hadoop.fs.RawLocalFileSystem")
+    builder = builder.config("spark.hadoop.fs.file.impl.disable.cache", "true")
+    
     # Pour Docker, on laisse le fs.defaultFS local (pas HDFS)
     if not running_in_docker():
         builder = builder.config("spark.hadoop.fs.defaultFS", "hdfs://namenode:9000")
@@ -672,6 +677,10 @@ def generate_plane_routes(df_routes, df_intermodal, min_plane_km=MIN_PLANE_DISTA
 
     dfp = pairs.join(inter_o, "origin", "inner").join(inter_d, "destination", "inner")
 
+    # Conversion explicite des coordonnées aéroports en DOUBLE (évite DATATYPE_MISMATCH)
+    for airport_coord in ["airport_origin_lat", "airport_origin_long", "airport_dest_lat", "airport_dest_long"]:
+        dfp = dfp.withColumn(airport_coord, F.col(airport_coord).cast(DoubleType()))
+
     dfp = dfp.withColumn(
         "distance_km",
         haversine_distance(
@@ -782,6 +791,11 @@ def run_transform():
         print("\n[3] Calcul distance + CO2...")
         has_coords = all(c in df.columns for c in ("station_lat", "station_long", "station_lat_dest", "station_long_dest"))
 
+        # Conversion explicite des coordonnées en DOUBLE (évite DATATYPE_MISMATCH)
+        if has_coords:
+            for coord_col in ["station_lat", "station_long", "station_lat_dest", "station_long_dest"]:
+                df = df.withColumn(coord_col, F.col(coord_col).cast(DoubleType()))
+        
         if has_coords:
             df = df.withColumn(
                 "distance_km",
@@ -811,13 +825,13 @@ def run_transform():
         if df_air is not None and has_coords:
             df_intermodal = build_intermodal_links(df, df_air)
             if df_intermodal is not None:
-                intermodal_path = os.path.join(OUTPUT_DIR, "staging_intermodal_links.csv")
-                df_intermodal.write.mode("overwrite").option("header", "true").csv(intermodal_path)
+                intermodal_tmp_dir = os.path.join(OUTPUT_DIR, "tmp_staging_intermodal_links")
+                df_intermodal.write.mode("overwrite").option("header", "true").csv(intermodal_tmp_dir)
+                out_inter = os.path.join(OUTPUT_DIR, OUTPUT_INTERMODAL_FILE)
+                _merge_part_csvs(intermodal_tmp_dir, out_inter)
                 del df_intermodal
                 spark.catalog.clearCache(); gc.collect()
-                df_intermodal = spark.read.option("header", "true").csv(intermodal_path)
-                out_inter = os.path.join(OUTPUT_DIR, OUTPUT_INTERMODAL_FILE)
-                export_to_hdfs(df_intermodal, "/data/final_intermodal")
+                df_intermodal = spark.read.option("header", "true").csv(out_inter)
                 print(f"   ✅ Intermodal exporté : {out_inter}")
             else:
                 print("   ⚠️ Intermodal : aucun lien généré")
@@ -859,13 +873,18 @@ def run_transform():
         ]
         df = df.select(*[c for c in final_cols if c in df.columns])
 
+        # Export final en CSV unique (fusion des parts pour le load)
         out_routes = os.path.join(OUTPUT_DIR, OUTPUT_FINAL_FILE)
-        export_to_hdfs(df, "/data/final_routes")
+        tmp_routes_dir = os.path.join(OUTPUT_DIR, "tmp_final_routes")
+        df.write.mode("overwrite").option("header", "true").csv(tmp_routes_dir)
+        _merge_part_csvs(tmp_routes_dir, out_routes)
         print(f"   ✅ Routes exportées : {out_routes}")
 
         if df_air is not None:
             out_air = os.path.join(OUTPUT_DIR, OUTPUT_AIRPORTS_FILE)
-            export_to_hdfs(df_air, "/data/final_airports")
+            tmp_airports_dir = os.path.join(OUTPUT_DIR, "tmp_final_airports")
+            df_air.write.mode("overwrite").option("header", "true").csv(tmp_airports_dir)
+            _merge_part_csvs(tmp_airports_dir, out_air)
             print(f"   ✅ Aéroports exportés : {out_air}")
 
         print("\n🎉 Transformation terminée (LOW RAM).")
