@@ -277,6 +277,88 @@ def run_load(stats: PipelineStats, clean_tables: bool = True):
 
 
 # ---------------------------
+# Phase 4 : Analyse
+# ---------------------------
+def run_analysis(stats: PipelineStats):
+    """
+    Génère un rapport d'analyse automatique des résultats.
+    """
+    print("\n" + "=" * 50)
+    log("PHASE 4: ANALYSE DES RÉSULTATS", "INFO")
+    print("=" * 50)
+
+    start = time.time()
+    try:
+        sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'analyse'))
+        from analyse_resultat import run_analysis as generate_report
+        
+        success = generate_report()
+        
+        duration = time.time() - start
+        stats.add_phase("analyse", duration, True)
+        log(f"ANALYSE - Terminé ({duration:.1f}s)", "SUCCESS")
+        return success
+        
+    except FileNotFoundError as e:
+        duration = time.time() - start
+        stats.add_phase("analyse", duration, False)
+        log(f"ANALYSE - Fichier non trouvé: {e}", "WARN")
+        return False
+        
+    except Exception as e:
+        duration = time.time() - start
+        stats.add_phase("analyse", duration, False)
+        log(f"ANALYSE - Erreur: {e}", "WARN")
+        import traceback
+        traceback.print_exc()
+        return False
+
+
+# ---------------------------
+# Phase 5 : Visualisation
+# ---------------------------
+def run_visualization(stats: PipelineStats):
+    """
+    Génère les graphiques de visualisation (dashboard).
+    """
+    print("\n" + "=" * 50)
+    log("PHASE 5: GÉNÉRATION DES GRAPHIQUES", "INFO")
+    print("=" * 50)
+
+    start = time.time()
+    try:
+        sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'visualization'))
+        from dashboard import main as generate_dashboard
+        
+        success = generate_dashboard()
+        
+        duration = time.time() - start
+        stats.add_phase("visualisation", duration, True if success else False)
+        
+        if success:
+            log(f"VISUALISATION - Terminé ({duration:.1f}s)", "SUCCESS")
+        else:
+            log(f"VISUALISATION - Échec ({duration:.1f}s)", "WARN")
+        
+        return success
+        
+    except ImportError as e:
+        duration = time.time() - start
+        stats.add_phase("visualisation", duration, False)
+        log(f"VISUALISATION - Dépendances manquantes: {e}", "WARN")
+        log("   Installer: pip install matplotlib seaborn sqlalchemy", "INFO")
+        return False
+        
+    except Exception as e:
+        duration = time.time() - start
+        stats.add_phase("visualisation", duration, False)
+        log(f"VISUALISATION - Erreur: {e}", "WARN")
+        import traceback
+        traceback.print_exc()
+        return False
+
+
+# ---------------------------
 # Summary + Pipelines
 # ---------------------------
 def print_summary(stats: PipelineStats, success: bool):
@@ -319,6 +401,12 @@ def run_parallel_pipeline(clean_tables: bool = True):
         log("Chargement échoué", "ERROR")
         success = False
 
+    # Phase 4 : Analyse (non bloquante si échec)
+    if success:
+        run_analysis(stats)
+        # Phase 5 : Visualisation (non bloquante si échec)
+        run_visualization(stats)
+
     stats.end()
     print_summary(stats, success)
     return success
@@ -349,6 +437,12 @@ def run_sequential_pipeline(clean_tables: bool = True):
     if success and not run_load(stats, clean_tables=clean_tables):
         log("Chargement échoué", "ERROR")
         success = False
+
+    # Phase 4 : Analyse (non bloquante si échec)
+    if success:
+        run_analysis(stats)
+        # Phase 5 : Visualisation (non bloquante si échec)
+        run_visualization(stats)
 
     stats.end()
     print_summary(stats, success)

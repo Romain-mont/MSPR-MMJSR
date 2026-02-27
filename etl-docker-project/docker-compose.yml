@@ -23,6 +23,8 @@ services:
       - ../transformation:/app/transformation
       - ../load:/app/load
       - ../database:/app/database
+      - ../analyse:/app/analyse
+      - ../visualization:/app/visualization
       - ../requirements.txt:/app/requirements.txt
       - ../main.py:/app/main.py
     command: ["python", "main.py"]
