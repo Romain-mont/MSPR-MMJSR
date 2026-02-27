@@ -31,7 +31,8 @@ INTERMODAL_CSV_PATH = os.environ.get("STAGING_INTERMODAL_CSV", "data/staging/sta
 def get_engine():
     """Crée l'engine SQLAlchemy (lazy loading)"""
     print(f"🔑 Connexion via ENV : {DB_USER} / **** sur le port {DB_PORT}...")
-    DATABASE_URL = f"postgresql+psycopg://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+    # Force l'utilisation de psycopg2 (binaire) au lieu de psycopg (v3 qui nécessite libpq)
+    DATABASE_URL = f"postgresql+psycopg2://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
     return create_engine(DATABASE_URL)
 
 

@@ -45,7 +45,7 @@ load_dotenv()
 # API Mobility Database
 API_URL = "https://api.mobilitydatabase.org/v1"
 REFRESH_TOKEN = os.getenv("REFRESH_TOKEN")
-TARGET_COUNTRIES = ["FR", "CH", "DE"]
+TARGET_COUNTRIES = ["FR"]
 
 
 # Dossiers de sortie (données brutes) adaptables via env (Docker)

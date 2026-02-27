@@ -13,11 +13,13 @@ from pyspark.sql.window import Window
 # === CONFIGURATION ===
 load_dotenv()
 
-# Initialiser SparkSession (Optimisée pour le Local)
+# Initialiser SparkSession (Optimisée pour le Local + Fix pour disques externes)
 spark = SparkSession.builder \
     .appName("EuroRailETL") \
     .config("spark.driver.memory", "4g") \
     .config("spark.sql.parquet.compression.codec", "snappy") \
+    .config("spark.hadoop.fs.file.impl", "org.apache.hadoop.fs.RawLocalFileSystem") \
+    .config("spark.hadoop.fs.file.impl.disable.cache", "true") \
     .getOrCreate()
 
 API_URL = "https://api.mobilitydatabase.org/v1"

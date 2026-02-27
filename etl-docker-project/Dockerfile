@@ -5,10 +5,19 @@ FROM python:3.11-slim
 WORKDIR /app
 
 
-# Installer Java (OpenJDK 21) pour PySpark
-RUN apt-get update && apt-get install -y openjdk-21-jre-headless && rm -rf /var/lib/apt/lists/*
-ENV JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
+# Installer Java (OpenJDK 21) pour PySpark + libpq pour PostgreSQL
+RUN apt-get update && apt-get install -y \
+    openjdk-21-jre-headless \
+    libpq-dev \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# Détection automatique de l'architecture (arm64 ou amd64)
+RUN ARCH=$(dpkg --print-architecture) && \
+    ln -s /usr/lib/jvm/java-21-openjdk-${ARCH} /usr/lib/jvm/java-21-openjdk
+ENV JAVA_HOME=/usr/lib/jvm/java-21-openjdk
 ENV PATH="$JAVA_HOME/bin:$PATH"
+
 # Debug Java (affiche JAVA_HOME et version Java au build)
 RUN echo "JAVA_HOME=$JAVA_HOME" && java -version
 

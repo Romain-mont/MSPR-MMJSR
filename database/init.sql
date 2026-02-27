@@ -1,4 +1,6 @@
 -- init.sql
+-- Note: L'utilisateur admin_rail est créé automatiquement via POSTGRES_USER dans docker-compose.yml
+-- Les permissions sont gérées automatiquement par PostgreSQL lors de la création
 
 -- 1. Table DIM_ROUTE (La Géographie)
 CREATE TABLE IF NOT EXISTS dim_route (
