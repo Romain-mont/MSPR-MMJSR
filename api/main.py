@@ -28,7 +28,7 @@ class TrajetResponse(BaseModel):
     depart: str
     arrivee: str
     distance_km: float
-    type_train: str
+    vehicule_type: str
     co2_kg: float
 
 # 4. Route de Test (Pour vérifier que l'API est en vie)
@@ -75,7 +75,7 @@ def search_route(depart: str, arrivee: str):
                 depart=row[0],
                 arrivee=row[1],
                 distance_km=row[2],
-                type_train=row[3],
+                vehicule_type=row[3],
                 co2_kg=row[4]
             ))
         
