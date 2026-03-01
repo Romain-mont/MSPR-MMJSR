@@ -45,7 +45,14 @@ load_dotenv()
 # API Mobility Database
 API_URL = "https://api.mobilitydatabase.org/v1"
 REFRESH_TOKEN = os.getenv("REFRESH_TOKEN")
-TARGET_COUNTRIES = ['FR']  # Limité à la France pour tests rapides - 27 pays disponibles: FR,DE,CH,BE,NL,AT,IT,ES,PT,PL,CZ,SK,HU,SI,HR,DK,SE,NO,FI,IE,GB,LU,RO,BG,GR,EE,LV,LT
+
+# TARGET_COUNTRIES : lit depuis variable d'environnement ou utilise FR par défaut
+import ast
+target_countries_env = os.getenv("TARGET_COUNTRIES", "['FR']")
+try:
+    TARGET_COUNTRIES = ast.literal_eval(target_countries_env)
+except:
+    TARGET_COUNTRIES = ['FR']  # Fallback si le parsing échoue
 
 
 # Dossiers de sortie (données brutes) adaptables via env (Docker)
