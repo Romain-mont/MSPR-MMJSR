@@ -536,12 +536,24 @@ def read_backontrack(spark):
         "left",
     ).drop("stop_name_match")
 
+    # Classification intelligente des trains Back on Track selon les codes européens
+    df = df.withColumn("train_code", F.coalesce(F.col("trip_short_name"), F.col("vehicule_type"), F.lit("")))
+    
     df = df.withColumn(
         "vehicule_type",
-        F.when(F.col("vehicule_type") == F.lit("102"), F.lit("Train Nuit"))
-         .when(F.col("vehicule_type") == F.lit("2"),   F.lit("Train Jour"))
-         .otherwise(F.lit("Train Jour"))
-    )
+        F.when(F.upper(F.col("train_code")).rlike("TGV|INOUI"), F.lit("TGV"))
+         .when(F.upper(F.col("train_code")).rlike("ICE"), F.lit("ICE"))
+         .when(F.upper(F.col("train_code")).rlike("AVE"), F.lit("AVE"))
+         .when(F.upper(F.col("train_code")).rlike("FRECCIAROSSA|FRECCIARGENTO|FRECCIABIANCA"), F.lit("Frecciarossa"))
+         .when(F.upper(F.col("train_code")).rlike("^IC$|INTERCITY"), F.lit("InterCity"))
+         .when(F.upper(F.col("train_code")).rlike("^EC$|EUROCITY"), F.lit("EuroCity"))
+         .when(F.upper(F.col("train_code")).rlike("EN|EURONIGHT"), F.lit("EuroNight"))
+         .when(F.upper(F.col("train_code")).rlike("NJ|NIGHTJET"), F.lit("Nightjet"))
+         .when(F.upper(F.col("train_code")).rlike("INTERCITÉS.*NUIT"), F.lit("Intercités Nuit"))
+         .when(F.col("vehicule_type") == F.lit("102"), F.lit("Train Nuit"))
+         .when(F.col("vehicule_type") == F.lit("2"), F.lit("InterCity"))
+         .otherwise(F.lit("InterCity"))
+    ).drop("train_code")
 
     return (
         df.select(
