@@ -6,7 +6,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sqlalchemy import create_engine
+import requests
 from dotenv import load_dotenv
 
 # ----------------------------
@@ -14,14 +14,8 @@ from dotenv import load_dotenv
 # ----------------------------
 load_dotenv()
 
-DB_USER = os.getenv("DB_USER")
-DB_PASS = os.getenv("DB_PASSWORD")
-DB_HOST = os.getenv("DB_HOST", "127.0.0.1")
-DB_PORT = os.getenv("DB_PORT", "5432")
-DB_NAME = os.getenv("DB_NAME")
-
-DATABASE_URL = f"postgresql+psycopg2://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
-engine = create_engine(DATABASE_URL)
+# Configuration de l'API
+API_URL = os.getenv("API_URL", "http://localhost:8000")
 
 sns.set_theme(style="whitegrid")
 plt.rcParams["figure.figsize"] = (12, 6)
@@ -32,20 +26,23 @@ plt.rcParams["font.size"] = 10
 # ----------------------------
 @st.cache_data(ttl=600, show_spinner=False)
 def load_data() -> pd.DataFrame:
-    query = """
-    SELECT 
-        r.dep_name AS origine,
-        r.arr_name AS destination,
-        r.distance_km,
-        r.is_long_distance,
-        v.label AS vehicule_type,
-        v.co2_vt AS facteur_co2,
-        f.co2_kg_passenger AS co2_kg
-    FROM fact_em f
-    JOIN dim_route r ON f.route_id = r.route_id
-    JOIN dim_vehicle_type v ON f.vehicle_type_id = v.vehicle_type_id
-    """
-    df = pd.read_sql(query, engine)
+    """Charge les données via l'API REST."""
+    try:
+        response = requests.get(f"{API_URL}/data", timeout=30)
+        response.raise_for_status()
+        data = response.json()
+        
+        if not data:
+            return pd.DataFrame()
+        
+        df = pd.DataFrame(data)
+    except requests.exceptions.RequestException as e:
+        st.error(f"❌ Erreur de connexion à l'API: {e}")
+        st.info(f"URL utilisée: {API_URL}/data")
+        return pd.DataFrame()
+    except Exception as e:
+        st.error(f"❌ Erreur lors du chargement des données: {e}")
+        return pd.DataFrame()
 
     # Nettoyage léger
     df["distance_km"] = pd.to_numeric(df["distance_km"], errors="coerce")

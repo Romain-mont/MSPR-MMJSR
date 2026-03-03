@@ -8,7 +8,7 @@ import matplotlib
 matplotlib.use('Agg')  # Backend sans interface graphique pour Docker
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sqlalchemy import create_engine, text
+import requests
 from dotenv import load_dotenv
 import os
 import shutil
@@ -16,14 +16,9 @@ from pathlib import Path
 
 # Configuration
 load_dotenv()
-DB_USER = os.getenv("DB_USER")
-DB_PASS = os.getenv("DB_PASSWORD")
-DB_HOST = os.getenv("DB_HOST", "127.0.0.1")  # "db" dans Docker, "127.0.0.1" en local
-DB_PORT = os.getenv("DB_PORT", "5432")
-DB_NAME = os.getenv("DB_NAME")
 
-DATABASE_URL = f"postgresql+psycopg2://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
-engine = create_engine(DATABASE_URL)
+# Configuration de l'API
+API_URL = os.getenv("API_URL", "http://localhost:8000")
 
 # Style
 sns.set_theme(style="whitegrid")
@@ -31,21 +26,28 @@ plt.rcParams['figure.figsize'] = (12, 6)
 plt.rcParams['font.size'] = 10
 
 def load_data():
-    """Charge les données du datamart."""
-    query = """
-    SELECT 
-        r.dep_name AS origine,
-        r.arr_name AS destination,
-        r.distance_km,
-        r.is_long_distance,
-        v.label AS vehicule_type,
-        v.co2_vt AS facteur_co2,
-        f.co2_kg_passenger AS co2_kg
-    FROM fact_em f
-    JOIN dim_route r ON f.route_id = r.route_id
-    JOIN dim_vehicle_type v ON f.vehicle_type_id = v.vehicle_type_id
-    """
-    return pd.read_sql(query, engine)
+    """Charge les données via l'API REST."""
+    try:
+        print(f"🔗 Connexion à l'API: {API_URL}/data")
+        response = requests.get(f"{API_URL}/data", timeout=30)
+        response.raise_for_status()
+        data = response.json()
+        
+        if not data:
+            print("⚠️  Aucune donnée retournée par l'API")
+            return pd.DataFrame()
+        
+        df = pd.DataFrame(data)
+        print(f"✅ {len(df)} lignes chargées depuis l'API")
+        return df
+        
+    except requests.exceptions.RequestException as e:
+        print(f"❌ Erreur de connexion à l'API: {e}")
+        print(f"   URL utilisée: {API_URL}/data")
+        return pd.DataFrame()
+    except Exception as e:
+        print(f"❌ Erreur lors du chargement des données: {e}")
+        return pd.DataFrame()
 
 def plot_distance_distribution(df):
     """Distribution des distances."""
@@ -178,16 +180,11 @@ def main():
     print("📊 GÉNÉRATION DU DASHBOARD DE VISUALISATION")
     print("="*60)
     
-    print("🔄 Chargement des données...")
-    try:
-        df = load_data()
-    except Exception as e:
-        print(f"❌ Erreur de connexion à la base de données: {e}")
-        print(f"   URL: {DATABASE_URL.replace(DB_PASS, '****')}")
-        return False
+    print("🔄 Chargement des données via API REST...")
+    df = load_data()
     
     if df.empty:
-        print("❌ Aucune donnée dans le datamart !")
+        print("❌ Aucune donnée disponible (API inaccessible ou vide)")
         return False
     
     generate_summary(df)
