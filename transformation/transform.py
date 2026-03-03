@@ -33,8 +33,8 @@ OUTPUT_AIRPORTS_FILE   = os.environ.get("OUTPUT_AIRPORTS_FILE", "staging_airport
 OUTPUT_INTERMODAL_FILE = os.environ.get("OUTPUT_INTERMODAL_FILE", "staging_intermodal.csv")
 OUTPUT_FINAL_FILE      = os.environ.get("OUTPUT_FINAL_FILE", "final_routes.csv")
 
-# Pays européens cibles (synchronisé avec extraction.py)
-EU_COUNTRIES = ['FR']  # Limité à la France pour tests rapides - 27 pays disponibles: FR,DE,CH,BE,NL,AT,IT,ES,PT,PL,CZ,SK,HU,SI,HR,DK,SE,NO,FI,IE,GB,LU,RO,BG,GR,EE,LV,LT
+# Note : Pas de filtrage par pays ici, la transformation traite tous les dossiers présents
+# Le filtrage par pays se fait uniquement à l'extraction via TARGET_COUNTRIES (contrainte RAM)
 
 REQUIRED_COLUMNS_AIRPORTS = ["airport_name", "aero_lat", "aero_long", "category", "iata_code", "country_code"]
 
@@ -272,7 +272,10 @@ def read_mobility_provider(spark, provider_dir: str):
     spark.catalog.clearCache(); gc.collect()
     routes = spark.read.option("header", "true").csv(routes_path)
 
-    routes = routes.withColumn("route_type", F.col("route_type").cast("int"))
+    # Cast robuste: try_cast retourne NULL pour valeurs invalides (ex: "TransporteAereo")
+    routes = routes.withColumn("route_type_int", F.expr("try_cast(route_type as int)"))
+    routes = routes.filter(F.col("route_type_int").isNotNull())  # Ignore les providers avec route_type invalide
+    routes = routes.withColumn("route_type", F.col("route_type_int")).drop("route_type_int")
     
     # Ajouter route_short_name et route_long_name pour classification
     route_cols = ["route_id", "route_type"]
@@ -304,7 +307,7 @@ def read_mobility_provider(spark, provider_dir: str):
 
     rail_stop_times = (
         stop_times.join(rail_trips.select([c for c in ["trip_id", "route_type", "route_short_name", "route_long_name"] if c in rail_trips.columns]), "trip_id", "inner")
-        .withColumn("stop_sequence", F.col("stop_sequence").cast("int"))
+        .withColumn("stop_sequence", F.expr("try_cast(stop_sequence as int)"))
         .select(*[c for c in ["trip_id", "stop_id", "stop_sequence", "departure_time", "arrival_time", "route_type", "route_short_name", "route_long_name"] if c in stop_times.columns or c in rail_trips.columns])
     )
     rail_stop_times_path = os.path.join(OUTPUT_DIR, f"staging_{os.path.basename(provider_dir)}_rail_stop_times.csv")
@@ -415,7 +418,7 @@ def read_mobility_provider(spark, provider_dir: str):
     df = df.withColumn(
         "dep_hour",
         F.when(F.col("departure_time").isNotNull(), 
-               F.substring(F.col("departure_time"), 1, 2).cast("int")).otherwise(F.lit(None))
+               F.expr("try_cast(substring(departure_time, 1, 2) as int)")).otherwise(F.lit(None))
     )
     
     df = df.withColumn(
@@ -445,17 +448,19 @@ def read_mobility_provider(spark, provider_dir: str):
         .withColumn("provider", F.lit(provider_name))
     )
 
-def read_all_mobility(spark, country_filter=None):
-    countries = EU_COUNTRIES if country_filter is None else ([country_filter] if isinstance(country_filter, str) else country_filter)
-
+def read_all_mobility(spark):
+    """Traite TOUS les providers GTFS présents, sans filtrage par pays.
+    Le filtrage se fait uniquement à l'extraction pour gérer la RAM."""
     if not os.path.exists(RAW_MOBILITY_DIR):
         print(f"❌ Dossier introuvable : {RAW_MOBILITY_DIR}")
         return None
 
     dfs = []
-    for provider_name in os.listdir(RAW_MOBILITY_DIR):
-        if not any(provider_name.startswith(f"{c}_") for c in countries):
-            continue
+    # TEST : limiter aux 50 premiers providers pour valider les corrections try_cast
+    all_providers = sorted(os.listdir(RAW_MOBILITY_DIR))[:50]
+    print(f"🧪 MODE TEST : Traitement de {len(all_providers)} premiers providers")
+    
+    for provider_name in all_providers:
         p = os.path.join(RAW_MOBILITY_DIR, provider_name)
         if not os.path.isdir(p):
             continue
@@ -621,8 +626,8 @@ def read_airports(spark):
         F.col("category").isin("large_airport", "medium_airport", "small_airport")
     )
 
-    if "country_code" in df.columns:
-        df = df.filter(F.col("country_code").isin(EU_COUNTRIES))
+    # Plus de filtrage par pays - traite tous les aéroports disponibles
+    # Le filtrage se fait uniquement à l'extraction pour gérer la RAM
 
     return df
 

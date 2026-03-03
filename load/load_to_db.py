@@ -62,6 +62,12 @@ def run_ingestion(clean_tables=True):
         print(f"❌ Erreur de lecture CSV : {e}")
         return
     
+    # === NORMALISATION DES COLONNES (compatibilité ancien/nouveau format) ===
+    # Ancien format: train_type -> Nouveau format: vehicule_type
+    if 'train_type' in df.columns and 'vehicule_type' not in df.columns:
+        df = df.rename(columns={'train_type': 'vehicule_type'})
+        print("   ℹ️  Colonne 'train_type' renommée en 'vehicule_type'")
+    
     # Filtrer les lignes sans distance (données invalides)
     df = df.dropna(subset=['distance_km', 'co2_kg'])
     print(f"   Lignes valides (avec distance/CO2) : {len(df)}")
