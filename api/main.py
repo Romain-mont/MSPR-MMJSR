@@ -40,6 +40,14 @@ class DataResponse(BaseModel):
     facteur_co2: float
     co2_kg: float
 
+class CompareResponse(BaseModel):
+    depart: str
+    arrivee: str
+    trains_jour: dict
+    trains_nuit: dict
+    gain_ecologique_pct: float
+    recommandation: str
+
 # 4. Route de Test (Pour vérifier que l'API est en vie)
 @app.get("/")
 def read_root():
@@ -159,4 +167,120 @@ def search_route(depart: str, arrivee: str, vehicle_type: str = None):
         raise
     except Exception as e:
         print(f"Erreur SQL : {e}")
+        raise HTTPException(status_code=500, detail="Erreur interne du serveur")
+
+# 7. Endpoint de Comparaison Écologique (Train Jour vs Train Nuit)
+@app.get("/compare", response_model=CompareResponse)
+def compare_day_night_trains(depart: str, arrivee: str):
+    """
+    Compare l'impact écologique des trains de jour vs trains de nuit.
+    Retourne les statistiques (moyenne CO2, nombre de trajets) et le gain écologique.
+    
+    Exemple: /compare?depart=Lyon&arrivee=Paris
+    """
+    
+    # Requête pour trains de JOUR (exclut les trains avec "nuit" dans le label)
+    query_day = text("""
+        SELECT 
+            AVG(f.co2_kg_passenger) as avg_co2,
+            COUNT(*) as count_trips,
+            MIN(f.co2_kg_passenger) as min_co2,
+            MAX(f.co2_kg_passenger) as max_co2
+        FROM fact_em f
+        JOIN dim_route r ON f.route_id = r.route_id
+        JOIN dim_vehicle_type v ON f.vehicle_type_id = v.vehicle_type_id
+        WHERE r.dep_name ILIKE '%' || :dep || '%'
+          AND r.arr_name ILIKE '%' || :arr || '%'
+          AND v.label NOT ILIKE '%nuit%'
+    """)
+    
+    # Requête pour trains de NUIT
+    query_night = text("""
+        SELECT 
+            AVG(f.co2_kg_passenger) as avg_co2,
+            COUNT(*) as count_trips,
+            MIN(f.co2_kg_passenger) as min_co2,
+            MAX(f.co2_kg_passenger) as max_co2
+        FROM fact_em f
+        JOIN dim_route r ON f.route_id = r.route_id
+        JOIN dim_vehicle_type v ON f.vehicle_type_id = v.vehicle_type_id
+        WHERE r.dep_name ILIKE '%' || :dep || '%'
+          AND r.arr_name ILIKE '%' || :arr || '%'
+          AND v.label ILIKE '%nuit%'
+    """)
+    
+    params = {"dep": depart, "arr": arrivee}
+    
+    try:
+        with engine.connect() as conn:
+            day_result = conn.execute(query_day, params).fetchone()
+            night_result = conn.execute(query_night, params).fetchone()
+        
+        # Vérifier qu'on a au moins des trains de jour
+        if not day_result or day_result[0] is None:
+            raise HTTPException(
+                status_code=404, 
+                detail=f"Aucun train de jour trouvé entre {depart} et {arrivee}"
+            )
+        
+        day_stats = {
+            "moyenne_co2_kg": round(float(day_result[0]), 2),
+            "nombre_trajets": int(day_result[1]),
+            "min_co2_kg": round(float(day_result[2]), 2),
+            "max_co2_kg": round(float(day_result[3]), 2)
+        }
+        
+        # Si pas de trains de nuit, on retourne quand même la comparaison
+        if not night_result or night_result[0] is None:
+            return CompareResponse(
+                depart=depart,
+                arrivee=arrivee,
+                trains_jour=day_stats,
+                trains_nuit={
+                    "moyenne_co2_kg": 0,
+                    "nombre_trajets": 0,
+                    "min_co2_kg": 0,
+                    "max_co2_kg": 0
+                },
+                gain_ecologique_pct=0.0,
+                recommandation=f"Aucun train de nuit disponible sur {depart} → {arrivee}. Privilégiez les trains de jour existants."
+            )
+        
+        night_stats = {
+            "moyenne_co2_kg": round(float(night_result[0]), 2),
+            "nombre_trajets": int(night_result[1]),
+            "min_co2_kg": round(float(night_result[2]), 2),
+            "max_co2_kg": round(float(night_result[3]), 2)
+        }
+        
+        # Calcul du gain écologique (en %)
+        gain_pct = round(
+            ((day_stats["moyenne_co2_kg"] - night_stats["moyenne_co2_kg"]) 
+             / day_stats["moyenne_co2_kg"]) * 100, 
+            1
+        )
+        
+        # Génération de la recommandation
+        if gain_pct > 15:
+            recommandation = f"🌙 Train de nuit RECOMMANDÉ : {gain_pct}% moins de CO2 ({day_stats['moyenne_co2_kg']}kg → {night_stats['moyenne_co2_kg']}kg)"
+        elif gain_pct > 0:
+            recommandation = f"✅ Léger avantage au train de nuit : {gain_pct}% de réduction CO2"
+        elif gain_pct < -15:
+            recommandation = f"☀️ Train de jour RECOMMANDÉ : {abs(gain_pct)}% moins de CO2"
+        else:
+            recommandation = f"≈ Impact similaire ({abs(gain_pct)}% de différence)"
+        
+        return CompareResponse(
+            depart=depart,
+            arrivee=arrivee,
+            trains_jour=day_stats,
+            trains_nuit=night_stats,
+            gain_ecologique_pct=gain_pct,
+            recommandation=recommandation
+        )
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"Erreur SQL dans /compare : {e}")
         raise HTTPException(status_code=500, detail="Erreur interne du serveur")
