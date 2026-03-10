@@ -2,7 +2,6 @@
 ANALYSE AUTOMATIQUE DES RÉSULTATS DU PIPELINE ETL
 ==================================================
 Ce script génère un rapport détaillé à la fin de l'exécution du pipeline.
-Créé automatiquement dans: data/staging/rapport_analyse.txt
 """
 
 import pandas as pd
@@ -11,9 +10,7 @@ from datetime import datetime
 
 
 def generate_analysis_report(csv_path, output_path):
-    """
-    Génère un rapport d'analyse complet des résultats ETL.
-    
+    """    
     Args:
         csv_path: Chemin vers le fichier final_routes.csv
         output_path: Chemin où sauvegarder le rapport
@@ -21,11 +18,11 @@ def generate_analysis_report(csv_path, output_path):
     
     # Vérifier que le fichier existe
     if not os.path.exists(csv_path):
-        print(f"❌ Fichier non trouvé: {csv_path}")
+        print(f"Fichier non trouvé: {csv_path}")
         return False
     
     # Charger les données
-    print(f"📊 Chargement des données depuis {csv_path}...")
+    print(f"Chargement des données depuis {csv_path}...")
     df = pd.read_csv(csv_path)
     
     # Créer le dossier de sortie si nécessaire
@@ -34,14 +31,14 @@ def generate_analysis_report(csv_path, output_path):
     # Générer le rapport
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write("=" * 80 + "\n")
-        f.write("📊 RAPPORT D'ANALYSE AUTOMATIQUE - PIPELINE ETL ObRail Europe\n")
+        f.write("RAPPORT D'ANALYSE AUTOMATIQUE - PIPELINE ETL ObRail Europe\n")
         f.write("=" * 80 + "\n")
         f.write(f"Date de génération: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
         f.write(f"Source: {csv_path}\n")
         f.write("=" * 80 + "\n\n")
         
         # 1. VUE D'ENSEMBLE
-        f.write("1️⃣  VUE D'ENSEMBLE\n")
+        f.write("1) VUE D'ENSEMBLE\n")
         f.write("-" * 80 + "\n")
         f.write(f"   Total routes extraites        : {len(df)}\n")
         f.write(f"   Routes valides (avec distance): {df['distance_km'].notna().sum()}\n")
@@ -56,7 +53,7 @@ def generate_analysis_report(csv_path, output_path):
         f.write("\n")
         
         # 2. RÉPARTITION PAR TYPE DE VÉHICULE
-        f.write("2️⃣  RÉPARTITION PAR TYPE DE VÉHICULE\n")
+        f.write("2) RÉPARTITION PAR TYPE DE VÉHICULE\n")
         f.write("-" * 80 + "\n")
         type_counts = df['vehicule_type'].value_counts()
         for vtype, count in type_counts.items():
@@ -64,8 +61,8 @@ def generate_analysis_report(csv_path, output_path):
             f.write(f"   • {vtype:35s}: {count:4d} trajets ({pct:5.1f}%)\n")
         f.write("\n")
         
-        # 3. STATISTIQUES PAR TYPE
-        f.write("3️⃣  STATISTIQUES PAR TYPE DE VÉHICULE\n")
+        # 3. STATISTIQUES PAR TYPE DE VÉHICULE
+        f.write("3) STATISTIQUES PAR TYPE DE VÉHICULE\n")
         f.write("-" * 80 + "\n")
         f.write(f"{'Type':<35} {'Count':>6} {'Dist.Moy (km)':>15} {'CO2 Moy (kg)':>15}\n")
         f.write("-" * 80 + "\n")
@@ -84,7 +81,7 @@ def generate_analysis_report(csv_path, output_path):
         f.write("\n")
         
         # 4. TOP 10 ROUTES LES PLUS LONGUES
-        f.write("4️⃣  TOP 10 ROUTES LES PLUS LONGUES\n")
+        f.write("4) TOP 10 ROUTES LES PLUS LONGUES\n")
         f.write("-" * 80 + "\n")
         top_routes = df.nlargest(10, 'distance_km')[['origin', 'destination', 'vehicule_type', 'distance_km', 'co2_kg']]
         for idx, (i, row) in enumerate(top_routes.iterrows(), 1):
@@ -93,14 +90,14 @@ def generate_analysis_report(csv_path, output_path):
         f.write("\n")
         
         # 5. COMPARAISON ENVIRONNEMENTALE TRAIN VS AVION
-        f.write("5️⃣  COMPARAISON ENVIRONNEMENTALE TRAIN vs AVION\n")
+        f.write("5) COMPARAISON ENVIRONNEMENTALE TRAIN vs AVION\n")
         f.write("-" * 80 + "\n")
         
         trains = df[df['vehicule_type'].str.contains('Train|Night|Euro|City', na=False)]
         avions = df[df['vehicule_type'] == 'Avion']
         
         if len(trains) > 0:
-            f.write(f"   🚆 TRAINS ({len(trains)} routes)\n")
+            f.write(f"   TRAINS ({len(trains)} routes)\n")
             f.write(f"      Distance moyenne    : {trains['distance_km'].mean():7.1f} km\n")
             f.write(f"      CO2 moyen           : {trains['co2_kg'].mean():7.2f} kg\n")
             f.write(f"      CO2 par km          : {(trains['co2_kg'].mean() / trains['distance_km'].mean()):7.4f} kg/km\n")
@@ -108,7 +105,7 @@ def generate_analysis_report(csv_path, output_path):
             f.write("\n")
         
         if len(avions) > 0:
-            f.write(f"   ✈️  AVIONS ({len(avions)} routes)\n")
+            f.write(f"   AVIONS ({len(avions)} routes)\n")
             f.write(f"      Distance moyenne    : {avions['distance_km'].mean():7.1f} km\n")
             f.write(f"      CO2 moyen           : {avions['co2_kg'].mean():7.2f} kg\n")
             f.write(f"      CO2 par km          : {(avions['co2_kg'].mean() / avions['distance_km'].mean()):7.4f} kg/km\n")
@@ -118,13 +115,13 @@ def generate_analysis_report(csv_path, output_path):
         if len(trains) > 0 and len(avions) > 0:
             facteur = (avions['co2_kg'].mean() / avions['distance_km'].mean()) / \
                      (trains['co2_kg'].mean() / trains['distance_km'].mean())
-            f.write(f"   ⚠️  CONCLUSION: L'avion émet {facteur:.1f}x plus de CO2 par km que le train\n")
-            f.write(f"   💚 Économie moyenne en prenant le train: {avions['co2_kg'].mean() - trains['co2_kg'].mean():.2f} kg CO2\n")
+            f.write(f"   CONCLUSION: L'avion émet {facteur:.1f}x plus de CO2 par km que le train\n")
+            f.write(f"   Économie moyenne en prenant le train: {avions['co2_kg'].mean() - trains['co2_kg'].mean():.2f} kg CO2\n")
         
         f.write("\n")
         
         # 6. CLASSIFICATION DES TRAINS
-        f.write("6️⃣  CLASSIFICATION DÉTAILLÉE DES TRAINS\n")
+        f.write("6) CLASSIFICATION DÉTAILLÉE DES TRAINS\n")
         f.write("-" * 80 + "\n")
         
         trains_only = df[df['vehicule_type'].str.contains('Train|Night|Euro|City', na=False)]
@@ -136,8 +133,8 @@ def generate_analysis_report(csv_path, output_path):
         
         f.write("\n")
         
-        # 7. DÉTECTION TRAINS DE NUIT
-        f.write("7️⃣  ANALYSE DES TRAINS DE NUIT\n")
+        # 7. ANALYSE DES TRAINS DE NUIT
+        f.write("7) ANALYSE DES TRAINS DE NUIT\n")
         f.write("-" * 80 + "\n")
         
         night_trains = df[df['vehicule_type'].str.contains('Nuit|Night', na=False)]
@@ -156,7 +153,7 @@ def generate_analysis_report(csv_path, output_path):
         f.write("\n")
         
         # 8. COUVERTURE GÉOGRAPHIQUE
-        f.write("8️⃣  COUVERTURE GÉOGRAPHIQUE\n")
+        f.write("8) COUVERTURE GÉOGRAPHIQUE\n")
         f.write("-" * 80 + "\n")
         
         if 'origin' in df.columns and 'destination' in df.columns:
@@ -178,7 +175,7 @@ def generate_analysis_report(csv_path, output_path):
         f.write("\n")
         
         # 9. QUALITÉ DES DONNÉES
-        f.write("9️⃣  QUALITÉ DES DONNÉES\n")
+        f.write("9) QUALITÉ DES DONNÉES\n")
         f.write("-" * 80 + "\n")
         
         total_rows = len(df)
@@ -195,13 +192,13 @@ def generate_analysis_report(csv_path, output_path):
         
         # 10. FOOTER
         f.write("=" * 80 + "\n")
-        f.write("✅ RAPPORT GÉNÉRÉ AVEC SUCCÈS\n")
+        f.write("10) FOOTER\n")
         f.write("=" * 80 + "\n")
         f.write(f"\nFichier de sortie: {output_path}\n")
         f.write(f"Généré par: analyse/analyse_resultat.py\n")
         f.write(f"Pipeline ETL: ObRail Europe - Comparatif Train vs Avion\n")
     
-    print(f"✅ Rapport d'analyse généré: {output_path}")
+    print(f"Rapport d'analyse généré: {output_path}")
     return True
 
 

@@ -23,9 +23,7 @@ if running_in_docker():
     os.environ["SPARK_LOCAL_IP"] = "127.0.0.1"
 
 
-# ---------------------------
 # Spark cleanup (Windows-friendly)
-# ---------------------------
 def hard_stop_spark():
     """Tente de stopper proprement tout Spark restant + nettoie les vars gateway."""
     # Stop SparkSession globale
@@ -60,9 +58,7 @@ def hard_stop_spark():
             pass
 
 
-# ---------------------------
 # Stats
-# ---------------------------
 class PipelineStats:
     def __init__(self):
         self.lock = threading.Lock()
@@ -95,9 +91,7 @@ def log(message: str, level: str = "INFO"):
     print(f"[{timestamp}] {icon} {message}")
 
 
-# ---------------------------
 # Phase 1 : Extraction
-# ---------------------------
 def run_extraction_mobility():
     log("MOBILITY - Démarrage...", "EXTRACT")
     start = time.time()
@@ -144,9 +138,7 @@ def run_extraction_airports():
 
 
 def run_extraction_all_parallel(stats: PipelineStats):
-    print("\n" + "=" * 50)
     log("PHASE 1: EXTRACTION PARALLÈLE", "INFO")
-    print("=" * 50)
 
     start = time.time()
     results = {}
@@ -176,9 +168,7 @@ def run_extraction_all_parallel(stats: PipelineStats):
 
 
 def run_extraction_sequential(stats: PipelineStats):
-    print("\n" + "=" * 50)
     log("PHASE 1: EXTRACTION SÉQUENTIELLE", "INFO")
-    print("=" * 50)
 
     start = time.time()
     ok1, d1 = run_extraction_backontrack()
@@ -193,9 +183,7 @@ def run_extraction_sequential(stats: PipelineStats):
     return ok1 and ok2 and ok3
 
 
-# ---------------------------
 # Phase 2 : Transformation (subprocess)
-# ---------------------------
 def _transform_entrypoint_args():
     """
     Retourne la commande la plus robuste possible :
@@ -213,9 +201,7 @@ def _transform_entrypoint_args():
 
 
 def run_transformation(stats: PipelineStats):
-    print("\n" + "=" * 50)
     log("PHASE 2: TRANSFORMATION (SPARK)", "TRANSFORM")
-    print("=" * 50)
 
     start = time.time()
     try:
@@ -251,13 +237,9 @@ def run_transformation(stats: PipelineStats):
         hard_stop_spark()
 
 
-# ---------------------------
 # Phase 3 : Load
-# ---------------------------
 def run_load(stats: PipelineStats, clean_tables: bool = True):
-    print("\n" + "=" * 50)
     log("PHASE 3: CHARGEMENT", "LOAD")
-    print("=" * 50)
 
     start = time.time()
     try:
@@ -276,16 +258,12 @@ def run_load(stats: PipelineStats, clean_tables: bool = True):
         return False
 
 
-# ---------------------------
 # Phase 4 : Analyse
-# ---------------------------
 def run_analysis(stats: PipelineStats):
     """
     Génère un rapport d'analyse automatique des résultats.
     """
-    print("\n" + "=" * 50)
     log("PHASE 4: ANALYSE DES RÉSULTATS", "INFO")
-    print("=" * 50)
 
     start = time.time()
     try:
@@ -314,16 +292,12 @@ def run_analysis(stats: PipelineStats):
         return False
 
 
-# ---------------------------
 # Phase 5 : Visualisation
-# ---------------------------
 def run_visualization(stats: PipelineStats):
     """
     Génère les graphiques de visualisation (dashboard).
     """
-    print("\n" + "=" * 50)
     log("PHASE 5: GÉNÉRATION DES GRAPHIQUES", "INFO")
-    print("=" * 50)
 
     start = time.time()
     try:
@@ -358,38 +332,30 @@ def run_visualization(stats: PipelineStats):
         return False
 
 
-# ---------------------------
 # Summary + Pipelines
-# ---------------------------
 def print_summary(stats: PipelineStats, success: bool):
     summary = stats.summary()
-    print("\n" + "=" * 60)
-    print("📊 RÉSUMÉ DU PIPELINE")
-    print("=" * 60)
+    print("RÉSUMÉ DU PIPELINE")
 
     for phase, info in summary["phases"].items():
-        status = "✅" if info["success"] else "❌"
+        status = if info["success"] else "error"
         print(f"   {status} {phase}: {info['duration']:.1f}s")
 
-    print(f"\n   ⏱️  Durée totale: {summary['total_duration']:.1f}s")
-    print(f"   {'🎉 SUCCÈS' if success else '❌ ÉCHEC'}")
-    print("=" * 60)
+    print(f"Durée totale: {summary['total_duration']:.1f}s")
+    print(f"   {'SUCCÈS' if success else 'ÉCHEC'}")
 
 
 def run_parallel_pipeline(clean_tables: bool = True):
     stats = PipelineStats()
     stats.start()
 
-    print("\n" + "=" * 60)
-    print("🚀 PIPELINE ETL PARALLÈLE")
-    print("=" * 60)
-    print(f"⏰ Début: {stats.start_time.strftime('%H:%M:%S')}")
-    print("=" * 60)
+    print("PIPELINE ETL PARALLÈLE")
+    print(f"Début: {stats.start_time.strftime('%H:%M:%S')}")
 
     success = True
 
     if not run_extraction_all_parallel(stats):
-        log("Certaines extractions ont échoué (on continue quand même)", "WARN")
+        log("Certaines extractions ont échoué, on continue", "WARN")
 
     hard_stop_spark()
 
@@ -416,11 +382,8 @@ def run_sequential_pipeline(clean_tables: bool = True):
     stats = PipelineStats()
     stats.start()
 
-    print("\n" + "=" * 60)
-    print("🚀 PIPELINE ETL SÉQUENTIEL")
-    print("=" * 60)
-    print(f"⏰ Début: {stats.start_time.strftime('%H:%M:%S')}")
-    print("=" * 60)
+    print("PIPELINE ETL SÉQUENTIEL")
+    print(f"Début: {stats.start_time.strftime('%H:%M:%S')}")
 
     success = True
 
@@ -465,7 +428,6 @@ def main():
     args = parser.parse_args()
     clean_tables = not args.no_clean
 
-    # stats minimal pour les modes partiels
     stats = PipelineStats()
     stats.start()
 
@@ -498,7 +460,7 @@ def main():
         sys.exit(0 if ok else 1)
 
     except KeyboardInterrupt:
-        log("\nInterruption utilisateur", "WARN")
+        log("Interruption utilisateur", "WARN")
         sys.exit(1)
 
 
