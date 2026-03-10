@@ -1,127 +1,116 @@
 ================================================================================
-📊 RAPPORT D'ANALYSE AUTOMATIQUE - PIPELINE ETL ObRail Europe
+RAPPORT D'ANALYSE AUTOMATIQUE - PIPELINE ETL ObRail Europe
 ================================================================================
-Date de génération: 2026-03-03 08:25:34
+Date de génération: 2026-03-10 19:41:52
 Source: ./data/staging/final_routes.csv
 ================================================================================
 
-1️⃣  VUE D'ENSEMBLE
+1) VUE D'ENSEMBLE
 --------------------------------------------------------------------------------
-   Total routes extraites        : 513
-   Routes valides (avec distance): 380
+   Total routes extraites        : 44687
+   Routes valides (avec distance): 44554
    Routes invalides              : 133
 
    Sources de données:
-      • back_on_track       :  377 routes
-      • mobility_db         :   77 routes
-      • airports            :   59 routes
+      • mobility_db         : 40368 routes
+      • airports            : 3946 routes
+      • back_on_track       :  373 routes
 
-2️⃣  RÉPARTITION PAR TYPE DE VÉHICULE
+2) RÉPARTITION PAR TYPE DE VÉHICULE
 --------------------------------------------------------------------------------
-   • InterCity                          :  317 trajets ( 61.8%)
-   • EuroNight                          :   61 trajets ( 11.9%)
-   • Avion                              :   59 trajets ( 11.5%)
-   • Nightjet                           :   32 trajets (  6.2%)
-   • Train Longue Distance              :   28 trajets (  5.5%)
-   • Train Longue Distance Nuit         :   16 trajets (  3.1%)
+   • Train Jour                         : 39064 trajets ( 87.4%)
+   • Avion                              : 3946 trajets (  8.8%)
+   • Train Nuit                         : 1677 trajets (  3.8%)
 
-3️⃣  STATISTIQUES PAR TYPE DE VÉHICULE
+3) STATISTIQUES PAR TYPE DE VÉHICULE
 --------------------------------------------------------------------------------
 Type                                 Count   Dist.Moy (km)    CO2 Moy (kg)
 --------------------------------------------------------------------------------
-Avion                                   59          261.51           58.84
-EuroNight                               61          401.97            3.62
-InterCity                              186          592.95            5.34
-Nightjet                                30          663.77            5.97
-Train Longue Distance                   28          375.35            3.38
-Train Longue Distance Nuit              16          543.99            4.90
+Avion                                 3946          292.93           65.82
+Train Jour                           38931           75.60            0.68
+Train Nuit                            1677          195.21            1.76
 
-4️⃣  TOP 10 ROUTES LES PLUS LONGUES
+4) TOP 10 ROUTES LES PLUS LONGUES
 --------------------------------------------------------------------------------
-    1. Gare de Saint-Nazaire     → Gare de Donges           
-       Train Longue Distance       5262.4 km   47.36 kg CO2
-    2. Gare de Saint-Nazaire     → Gare de Donges           
-       Train Longue Distance Nuit   5262.4 km   47.36 kg CO2
-    3. Edirne                    → Villach Hbf              
-       InterCity                   1154.3 km   10.39 kg CO2
-    4. Villach Hbf               → Edirne                   
-       InterCity                   1154.3 km   10.39 kg CO2
-    5. Konya                     → İzmir Basmane            
-       InterCity                   1127.1 km   10.14 kg CO2
-    6. İzmir Basmane             → Konya                    
-       InterCity                   1127.1 km   10.14 kg CO2
-    7. Milano Centrale           → Siracusa                 
-       InterCity                   1064.2 km    9.58 kg CO2
-    8. Siracusa                  → Milano Centrale          
-       InterCity                   1064.2 km    9.58 kg CO2
-    9. Reggio Calabria Centrale  → Torino Lingotto          
-       InterCity                   1015.4 km    9.14 kg CO2
-   10. Torino Lingotto           → Reggio Calabria Centrale 
-       InterCity                   1015.4 km    9.14 kg CO2
+    1. Hannover Hbf              → Hengelo                  
+       Train Jour                  5845.8 km   52.61 kg CO2
+    2. Amsterdam Centraal        → Osnabrück Hbf            
+       Train Jour                  5842.2 km   52.58 kg CO2
+    3. 6415                      → Mainz, Hauptbahnhof Bstg 
+       Train Jour                  5615.2 km   50.54 kg CO2
+    4. Mainz, Hauptbahnhof       → 6415                     
+       Train Jour                  5615.0 km   50.54 kg CO2
+    5. 6415                      → Nackenheim, Tankstelle   
+       Train Jour                  5607.2 km   50.46 kg CO2
+    6. 6415                      → Oppenheim, Bahnhof       
+       Train Jour                  5600.7 km   50.41 kg CO2
+    7. Frankenthal, Hauptbahnhof → 6415                     
+       Train Jour                  5565.6 km   50.09 kg CO2
+    8. LU-Oggersheim, Bahnhof    → 6415                     
+       Train Jour                  5561.3 km   50.05 kg CO2
+    9. 6415                      → Mannheim, Hauptbahnhof   
+       Train Jour                  5561.1 km   50.05 kg CO2
+   10. 6408                      → Mannheim, Hauptbahnhof   
+       Train Jour                  5561.1 km   50.05 kg CO2
 
-5️⃣  COMPARAISON ENVIRONNEMENTALE TRAIN vs AVION
+5) COMPARAISON ENVIRONNEMENTALE TRAIN vs AVION
 --------------------------------------------------------------------------------
-   🚆 TRAINS (454 routes)
-      Distance moyenne    :   541.9 km
-      CO2 moyen           :    4.88 kg
+   TRAINS (40741 routes)
+      Distance moyenne    :    80.5 km
+      CO2 moyen           :    0.72 kg
       CO2 par km          :  0.0090 kg/km
-      Distance min/max    : 100.2 / 5262.4 km
+      Distance min/max    : 0.0 / 5845.8 km
 
-   ✈️  AVIONS (59 routes)
-      Distance moyenne    :   261.5 km
-      CO2 moyen           :   58.84 kg
-      CO2 par km          :  0.2250 kg/km
-      Distance min/max    : 101.5 / 688.1 km
+   AVIONS (3946 routes)
+      Distance moyenne    :   292.9 km
+      CO2 moyen           :   65.82 kg
+      CO2 par km          :  0.2247 kg/km
+      Distance min/max    : 100.0 / 1072.0 km
 
-   ⚠️  CONCLUSION: L'avion émet 25.0x plus de CO2 par km que le train
-   💚 Économie moyenne en prenant le train: 53.96 kg CO2
+   CONCLUSION: L'avion émet 25.0x plus de CO2 par km que le train
+   Économie moyenne en prenant le train: 65.10 kg CO2
 
-6️⃣  CLASSIFICATION DÉTAILLÉE DES TRAINS
+6) CLASSIFICATION DÉTAILLÉE DES TRAINS
 --------------------------------------------------------------------------------
-   • InterCity                          :  317 trajets ( 69.8% des trains)
-   • EuroNight                          :   61 trajets ( 13.4% des trains)
-   • Nightjet                           :   32 trajets (  7.0% des trains)
-   • Train Longue Distance              :   28 trajets (  6.2% des trains)
-   • Train Longue Distance Nuit         :   16 trajets (  3.5% des trains)
+   • Train Jour                         : 39064 trajets ( 95.9% des trains)
+   • Train Nuit                         : 1677 trajets (  4.1% des trains)
 
-7️⃣  ANALYSE DES TRAINS DE NUIT
+7) ANALYSE DES TRAINS DE NUIT
 --------------------------------------------------------------------------------
-   Total trains de nuit détectés : 109
-   Distance moyenne              : 496.6 km
-   CO2 moyen                     : 4.47 kg
+   Total trains de nuit détectés : 1677
+   Distance moyenne              : 195.2 km
+   CO2 moyen                     : 1.76 kg
 
-      • EuroNight                     :  61 trajets
-      • Nightjet                      :  32 trajets
-      • Train Longue Distance Nuit    :  16 trajets
+      • Train Nuit                    : 1677 trajets
 
-8️⃣  COUVERTURE GÉOGRAPHIQUE
+8) COUVERTURE GÉOGRAPHIQUE
 --------------------------------------------------------------------------------
-   Gares/Aéroports d'origine     : 208
-   Gares/Aéroports de destination: 237
-   Total unique                  : 263
+   Gares/Aéroports d'origine     : 8318
+   Gares/Aéroports de destination: 15460
+   Total unique                  : 16555
 
    Top 10 gares/aéroports les plus connectés:
-       1. Kyiv Pasazhyrskyi                       :  42 connexions
-       2. București Nord                          :  27 connexions
-       3. Paris Austerlitz                        :  18 connexions
-       4. Odesa Holovna                           :  18 connexions
-       5. Gare de Nantes                          :  17 connexions
-       6. Paris-Orly Airport                      :  16 connexions
-       7. Kharkiv                                 :  16 connexions
-       8. Praha hl.n.                             :  15 connexions
-       9. Przemyśl Gł.                            :  14 connexions
-      10. Berlin Hbf                              :  14 connexions
+       1. Zürich HB                               : 469 connexions
+       2. München Hbf                             : 346 connexions
+       3. Basel SBB                               : 275 connexions
+       4. Köln Hbf                                : 270 connexions
+       5. Bern                                    : 254 connexions
+       6. Nürnberg Hbf                            : 248 connexions
+       7. Düsseldorf Hbf                          : 240 connexions
+       8. Dortmund Hbf                            : 240 connexions
+       9. Frankfurt (Main) Hauptbahnhof           : 224 connexions
+      10. Frankfurt(Main)Hbf                      : 218 connexions
 
-9️⃣  QUALITÉ DES DONNÉES
+9) QUALITÉ DES DONNÉES
 --------------------------------------------------------------------------------
-   Total lignes                  : 513
-   Données complètes (distance)  : 380 (74.1%)
-   Données complètes (CO2)       : 380 (74.1%)
-   Horaires de départ renseignés : 450 (87.7%)
-   Horaires d'arrivée renseignés : 450 (87.7%)
+   Total lignes                  : 44687
+   Données complètes (distance)  : 44554 (99.7%)
+   Données complètes (CO2)       : 44554 (99.7%)
+   Horaires de départ renseignés : 40737 (91.2%)
+   Horaires d'arrivée renseignés : 40737 (91.2%)
 
 ================================================================================
-✅ RAPPORT GÉNÉRÉ AVEC SUCCÈS
+10) FOOTER
 ================================================================================
 
 Fichier de sortie: ./analyse/rapport_analyse.md

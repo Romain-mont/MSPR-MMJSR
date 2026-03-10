@@ -51,7 +51,7 @@ class CompareResponse(BaseModel):
 # 4. Route de Test (Pour vérifier que l'API est en vie)
 @app.get("/")
 def read_root():
-    return {"status": "online", "message": "Bienvenue sur l'API Euro Rail ! 🚄"}
+    return {"status": "online", "message": "Bienvenue sur l'API Euro Rail !"}
 
 # 5. Endpoint pour récupérer toutes les données (pour dashboards)
 @app.get("/data", response_model=list[DataResponse])
@@ -113,8 +113,6 @@ def get_all_data(limit: int = None):
 def search_route(depart: str, arrivee: str, vehicle_type: str = None):
     """
     Cherche un trajet et renvoie les émissions de CO2.
-    Exemple: /search?depart=Paris&arrivee=Lyon
-    Filtre optionnel: /search?depart=Paris&arrivee=Lyon&vehicle_type=Train de Jour
     """
     
     # Requete SQL optimisée avec JOIN pour tout récupérer d'un coup

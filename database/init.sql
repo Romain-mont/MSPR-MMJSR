@@ -1,7 +1,3 @@
--- init.sql
--- Note: L'utilisateur admin_rail est créé automatiquement via POSTGRES_USER dans docker-compose.yml
--- Les permissions sont gérées automatiquement par PostgreSQL lors de la création
-
 -- 1. Table DIM_ROUTE (La Géographie)
 CREATE TABLE IF NOT EXISTS dim_route (
    route_id SERIAL PRIMARY KEY,
@@ -9,7 +5,7 @@ CREATE TABLE IF NOT EXISTS dim_route (
    arr_name VARCHAR(255) NOT NULL,
    distance_km NUMERIC(10,3) NOT NULL,
    is_long_distance BOOLEAN NOT NULL,
-   UNIQUE(dep_name, arr_name) -- Une seule entrée par liaison
+   UNIQUE(dep_name, arr_name)
 );
 
 -- 2. Table DIM_VEHICLE_TYPE (Le Matériel)

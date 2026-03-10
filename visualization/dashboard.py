@@ -5,7 +5,7 @@ Génère des graphiques pour analyser les émissions carbone des trajets.
 
 import pandas as pd
 import matplotlib
-matplotlib.use('Agg')  # Backend sans interface graphique pour Docker
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
 import requests
@@ -28,25 +28,25 @@ plt.rcParams['font.size'] = 10
 def load_data():
     """Charge les données via l'API REST."""
     try:
-        print(f"🔗 Connexion à l'API: {API_URL}/data")
+        print(f"Connexion à l'API: {API_URL}/data")
         response = requests.get(f"{API_URL}/data", timeout=30)
         response.raise_for_status()
         data = response.json()
         
         if not data:
-            print("⚠️  Aucune donnée retournée par l'API")
+            print("Aucune donnée retournée par l'API")
             return pd.DataFrame()
         
         df = pd.DataFrame(data)
-        print(f"✅ {len(df)} lignes chargées depuis l'API")
+        print(f"{len(df)} lignes chargées depuis l'API")
         return df
         
     except requests.exceptions.RequestException as e:
-        print(f"❌ Erreur de connexion à l'API: {e}")
-        print(f"   URL utilisée: {API_URL}/data")
+        print(f"Erreur de connexion à l'API: {e}")
+        print(f"URL utilisée: {API_URL}/data")
         return pd.DataFrame()
     except Exception as e:
-        print(f"❌ Erreur lors du chargement des données: {e}")
+        print(f"Erreur lors du chargement des données: {e}")
         return pd.DataFrame()
 
 def plot_distance_distribution(df):
@@ -149,54 +149,50 @@ def plot_distance_categories(df):
 
 def generate_summary(df):
     """Génère un résumé statistique."""
-    print("\n" + "="*60)
-    print("📊 RÉSUMÉ DU DATAMART CO2")
-    print("="*60)
-    print(f"\n📈 Statistiques générales:")
-    print(f"   • Nombre total de trajets : {len(df):,}")
-    print(f"   • Distance totale : {df['distance_km'].sum():,.0f} km")
-    print(f"   • CO2 total émis : {df['co2_kg'].sum():,.2f} kg")
+    print("RÉSUMÉ DU DATAMART CO2")
+    print(f"Statistiques générales:")
+    print(f"Nombre total de trajets : {len(df):,}")
+    print(f"Distance totale : {df['distance_km'].sum():,.0f} km")
+    print(f"CO2 total émis : {df['co2_kg'].sum():,.2f} kg")
     
-    print(f"\n📏 Distances:")
-    print(f"   • Moyenne : {df['distance_km'].mean():.1f} km")
-    print(f"   • Médiane : {df['distance_km'].median():.1f} km")
-    print(f"   • Min : {df['distance_km'].min():.1f} km")
-    print(f"   • Max : {df['distance_km'].max():.1f} km")
+    print(f"Distances:")
+    print(f"Moyenne : {df['distance_km'].mean():.1f} km")
+    print(f"Médiane : {df['distance_km'].median():.1f} km")
+    print(f"Min : {df['distance_km'].min():.1f} km")
+    print(f"Max : {df['distance_km'].max():.1f} km")
     
-    print(f"\n🌿 Émissions CO2:")
-    print(f"   • Moyenne : {df['co2_kg'].mean():.3f} kg/trajet")
-    print(f"   • Médiane : {df['co2_kg'].median():.3f} kg/trajet")
-    print(f"   • Min : {df['co2_kg'].min():.3f} kg")
-    print(f"   • Max : {df['co2_kg'].max():.3f} kg")
+    print(f"Émissions CO2:")
+    print(f"Moyenne : {df['co2_kg'].mean():.3f} kg/trajet")
+    print(f"Médiane : {df['co2_kg'].median():.3f} kg/trajet")
+    print(f"Min : {df['co2_kg'].min():.3f} kg")
+    print(f"Max : {df['co2_kg'].max():.3f} kg")
     
-    print(f"\n🚂 Types de véhicules:")
+    print(f"Types de véhicules:")
     for vtype in df['vehicule_type'].unique():
         subset = df[df['vehicule_type'] == vtype]
-        print(f"   • {vtype}: {len(subset)} trajets, CO2 moy={subset['co2_kg'].mean():.3f} kg")
+        print(f"{vtype}: {len(subset)} trajets, CO2 moy={subset['co2_kg'].mean():.3f} kg")
 
 def main():
     """Fonction principale."""
-    print("\n" + "="*60)
-    print("📊 GÉNÉRATION DU DASHBOARD DE VISUALISATION")
-    print("="*60)
+    print("GÉNÉRATION DU DASHBOARD DE VISUALISATION")
     
-    print("🔄 Chargement des données via API REST...")
+    print("Chargement des données via API REST...")
     df = load_data()
     
     if df.empty:
-        print("❌ Aucune donnée disponible (API inaccessible ou vide)")
+        print("Aucune donnée disponible (API inaccessible ou vide)")
         return False
     
     generate_summary(df)
     
-    print("\n📊 Génération des graphiques...")
+    print("Génération des graphiques...")
     
     # Créer le dossier output (nettoyage si existe)
     output_dir = Path("visualization/output")
     
     # Supprimer l'ancien dossier s'il existe
     if output_dir.exists():
-        print(f"🗑️  Suppression des anciennes images dans {output_dir}/")
+        print(f"Suppression des anciennes images dans {output_dir}/")
         shutil.rmtree(output_dir)
     
     # Recréer le dossier vide
@@ -215,11 +211,10 @@ def main():
     for name, fig in figs.items():
         path = output_dir / f"{name}.png"
         fig.savefig(path, dpi=150, bbox_inches='tight')
-        print(f"   ✅ {path}")
+        print(f"{path}")
         plt.close(fig)
     
-    print(f"\n🎉 {len(figs)} graphiques générés dans {output_dir}/")
-    print("="*60)
+    print(f"{len(figs)} graphiques générés dans {output_dir}/")
     return True
 
 if __name__ == "__main__":
