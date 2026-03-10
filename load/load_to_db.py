@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 import os
 import sys
 
-# 1. Chargement de la configuration
+# Chargement de la configuration
 load_dotenv()
 
 # Récupération des variables
@@ -18,22 +18,22 @@ DB_NAME = os.getenv("DB_NAME")
 
 # Sécurité : Vérifier que tout est chargé
 if not DB_USER or not DB_PASS or not DB_NAME:
-    print("❌ ERREUR : Les variables d'environnement sont mal chargées.")
+    print("ERREUR : Les variables d'environnement sont mal chargées.")
     print("Vérifie ton fichier .env à la racine.")
     print(f"DEBUG : User={DB_USER}, DB={DB_NAME}")
     sys.exit(1)
 
-# === CHEMINS DES FICHIERS STAGING (adaptables via env pour Docker) ===
+# CHEMINS DES FICHIERS STAGING (adaptables via env pour Docker)
 CSV_PATH = os.environ.get("FINAL_ROUTES_CSV", "data/staging/final_routes.csv")
 AIRPORTS_CSV_PATH = os.environ.get("STAGING_AIRPORTS_CSV", "data/staging/staging_airports.csv")
 INTERMODAL_CSV_PATH = os.environ.get("STAGING_INTERMODAL_CSV", "data/staging/staging_intermodal.csv")
 
-# === MODE INCRÉMENTAL (conservation des données existantes) ===
+# MODE INCRÉMENTAL (conservation des données existantes)
 INCREMENTAL_LOAD = os.getenv("INCREMENTAL_LOAD", "false").lower() == "true"
 
 def get_engine():
     """Crée l'engine SQLAlchemy (lazy loading)"""
-    print(f"🔑 Connexion via ENV : {DB_USER} / **** sur le port {DB_PORT}...")
+    print(f"Connexion via ENV : {DB_USER} / **** sur le port {DB_PORT}...")
     # Force l'utilisation de psycopg2 (binaire) au lieu de psycopg (v3 qui nécessite libpq)
     DATABASE_URL = f"postgresql+psycopg2://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
     return create_engine(DATABASE_URL)
@@ -42,53 +42,49 @@ def get_engine():
 def run_ingestion(clean_tables=True):
     """
     Charge les données transformées dans le datamart PostgreSQL.
-    
-    Prérequis : transform.py doit avoir été exécuté !
-    Les fichiers doivent être dans data/staging/
     """
-    print("🚀 Démarrage de l'ingestion des données...")
+    print("Démarrage de l'ingestion des données...")
 
     if not os.path.exists(CSV_PATH):
-        print(f"❌ Erreur : Fichier introuvable {CSV_PATH}")
-        print("   As-tu exécuté transform.py ?")
+        print(f"Erreur : Fichier introuvable {CSV_PATH}")
         return
 
-    # 2. Lecture du CSV
+    # Lecture du CSV
     try:
         df = pd.read_csv(CSV_PATH)
-        print(f"📦 CSV chargé : {len(df)} lignes trouvées.")
-        print(f"   Colonnes : {list(df.columns)}")
+        print(f"CSV chargé : {len(df)} lignes trouvées.")
+        print(f"Colonnes : {list(df.columns)}")
     except Exception as e:
-        print(f"❌ Erreur de lecture CSV : {e}")
+        print(f"Erreur de lecture CSV : {e}")
         return
     
-    # === NORMALISATION DES COLONNES (compatibilité ancien/nouveau format) ===
+    # NORMALISATION DES COLONNES (compatibilité ancien/nouveau format)
     # Ancien format: train_type -> Nouveau format: vehicule_type
     if 'train_type' in df.columns and 'vehicule_type' not in df.columns:
         df = df.rename(columns={'train_type': 'vehicule_type'})
-        print("   ℹ️  Colonne 'train_type' renommée en 'vehicule_type'")
+        print("Colonne 'train_type' renommée en 'vehicule_type'")
     
     # Filtrer les lignes sans distance (données invalides)
     df = df.dropna(subset=['distance_km', 'co2_kg'])
-    print(f"   Lignes valides (avec distance/CO2) : {len(df)}")
+    print(f"Lignes valides (avec distance/CO2) : {len(df)}")
 
     # Créer l'engine de connexion
     engine = get_engine()
 
     try:
-        # === ETAPE 0 : Gestion du mode de chargement ===
+        # ETAPE 0 : Gestion du mode de chargement
         if INCREMENTAL_LOAD:
-            print("   ♻️  MODE INCRÉMENTAL activé : conservation des données existantes")
-            print("   📌 Les nouvelles données seront ajoutées sans supprimer l'existant")
+            print("MODE INCRÉMENTAL activé : conservation des données existantes")
+            print("Les nouvelles données seront ajoutées sans supprimer l'existant")
         elif clean_tables:
-            print("   🗑️  MODE RESET : suppression des données existantes")
+            print("MODE RESET : suppression des données existantes")
             with engine.begin() as conn:  
                 conn.execute(text("TRUNCATE TABLE fact_em, dim_route, dim_vehicle_type RESTART IDENTITY CASCADE;"))
-            print("     ✅ Tables vidées.")
+            print("Tables vidées.")
         
-        # === ETAPE 0.1 : Ajout des contraintes d'unicité (mode incrémental) ===
+        # ETAPE 0.1 : Ajout des contraintes d'unicité (mode incrémental)
         if INCREMENTAL_LOAD:
-            print("   🔒 Vérification des contraintes d'unicité...")
+            print("Vérification des contraintes d'unicité...")
             with engine.begin() as conn:
                 # Contrainte sur dim_route pour éviter les doublons
                 conn.execute(text("""
@@ -103,11 +99,11 @@ def run_ingestion(clean_tables=True):
                     ALTER TABLE dim_vehicle_type ADD CONSTRAINT unique_vehicle 
                     UNIQUE (label, service_type);
                 """))
-            print("     ✅ Contraintes d'unicité vérifiées.")
+            print("Contraintes d'unicité vérifiées.")
 
         with engine.connect() as conn:
-            # === ETAPE A : Remplir DIM_ROUTE (Géographie) ===
-            print("   ↳ Traitement des Routes...")
+            # ETAPE A : Remplir DIM_ROUTE (Géographie)
+            print("Traitement des Routes...")
             routes = df.groupby(['origin', 'destination'], as_index=False).agg({
                 'distance_km': 'mean'
             })
@@ -127,29 +123,28 @@ def run_ingestion(clean_tables=True):
                 
                 if len(new_routes) > 0:
                     new_routes.to_sql('dim_route', engine, if_exists='append', index=False)
-                    print(f"     ✅ {len(new_routes)} nouvelles routes insérées (sur {len(routes)} dans le CSV)")
+                    print(f"{len(new_routes)} nouvelles routes insérées (sur {len(routes)} dans le CSV)")
                 else:
-                    print(f"     ℹ️  Aucune nouvelle route (toutes déjà présentes)")
+                    print(f"Aucune nouvelle route (toutes déjà présentes)")
             else:
                 routes.to_sql('dim_route', engine, if_exists='append', index=False)
-                print(f"     ✅ {len(routes)} routes insérées.")
+                print(f"{len(routes)} routes insérées.")
 
-            # === ETAPE B : Remplir DIM_VEHICLE_TYPE (Matériel) ===
-            print("   ↳ Traitement des Véhicules...")
+            # ETAPE B : Remplir DIM_VEHICLE_TYPE (Matériel)
+            print("Traitement des Véhicules...")
             vehicles = df[['vehicule_type']].drop_duplicates().reset_index(drop=True)
             
             # Labels et facteurs CO2 (kg/100km) selon le type
             # Conversion uniquement pour les types génériques
-            # Les types spécialisés (TGV, ICE, EuroNight, etc.) sont préservés
+            # Les types spécialisés (TGV, ICE, EuroNight, etc.) sont conservés tels quels
             def get_label(vt):
                 mapping = {
-                    "Train Jour": "InterCity",  # IC = Standard grandes lignes
+                    "Train Jour": "InterCity",
                     "Train Nuit": "Intercités Nuit",
                     "Train Longue Distance": "InterCity",
                     "Train Longue Distance Nuit": "Intercités Nuit",
                     "Avion": "Avion"
                 }
-                # Si type spécialisé (TGV, ICE, EuroNight, Nightjet, etc.), on le garde tel quel
                 return mapping.get(vt, vt)
             
             def get_co2_factor(vt):
@@ -170,9 +165,9 @@ def run_ingestion(clean_tables=True):
                     "Train Nuit": 0.9,
                     "Intercités Nuit": 0.9,
                     "Train Longue Distance Nuit": 0.9,
-                    "Avion": 18.45  # Moyen courrier
+                    "Avion": 18.45
                 }
-                return factors.get(vt, 0.9)  # Default: InterCity
+                return factors.get(vt, 0.9)
             
             vehicles['label'] = vehicles['vehicule_type'].apply(get_label)
             vehicles['service_type'] = vehicles['vehicule_type']
@@ -193,15 +188,15 @@ def run_ingestion(clean_tables=True):
                 
                 if len(new_vehicles) > 0:
                     new_vehicles.to_sql('dim_vehicle_type', engine, if_exists='append', index=False)
-                    print(f"     ✅ {len(new_vehicles)} nouveaux types de véhicules insérés (sur {len(vehicles)} dans le CSV)")
+                    print(f"{len(new_vehicles)} nouveaux types de véhicules insérés (sur {len(vehicles)} dans le CSV)")
                 else:
-                    print(f"     ℹ️  Aucun nouveau type de véhicule (tous déjà présents)")
+                    print(f"Aucun nouveau type de véhicule (tous déjà présents)")
             else:
                 vehicles_to_insert.to_sql('dim_vehicle_type', engine, if_exists='append', index=False)
-                print(f"     ✅ {len(vehicles)} types de véhicules insérés.")
+                print(f"{len(vehicles)} types de véhicules insérés.")
 
-            # === ETAPE C : Remplir FACT_EM (Les Faits) ===
-            print("   ↳ Création des liens (Jointures)...")
+            # ETAPE C : Remplir FACT_EM (Les Faits)
+            print("Création des liens (Jointures)...")
             
             sql_routes = pd.read_sql("SELECT route_id, dep_name, arr_name FROM dim_route", engine)
             sql_vehicles = pd.read_sql("SELECT vehicle_type_id, service_type FROM dim_vehicle_type", engine)
@@ -214,39 +209,37 @@ def run_ingestion(clean_tables=True):
             
             if INCREMENTAL_LOAD:
                 # Mode incrémental : éviter les doublons exacts dans fact_em
-                # Note: fact_em peut avoir plusieurs lignes identiques si trajets multiples
-                # On vérifie juste qu'on n'insère pas exactement les mêmes données
                 existing_facts_count = pd.read_sql("SELECT COUNT(*) as count FROM fact_em", engine).iloc[0]['count']
                 facts.to_sql('fact_em', engine, if_exists='append', index=False)
                 new_facts_count = pd.read_sql("SELECT COUNT(*) as count FROM fact_em", engine).iloc[0]['count']
                 added_facts = new_facts_count - existing_facts_count
-                print(f"     ✅ {added_facts} nouveaux faits insérés dans FACT_EM (total: {new_facts_count})")
+                print(f"{added_facts} nouveaux faits insérés dans FACT_EM (total: {new_facts_count})")
             else:
                 facts.to_sql('fact_em', engine, if_exists='append', index=False)
-                print(f"     ✅ {len(facts)} faits insérés dans FACT_EM.")
+                print(f"{len(facts)} faits insérés dans FACT_EM.")
 
-            print("\n🎉 SUCCÈS TOTAL : La base de données est remplie !")
+            print("SUCCÈS TOTAL : La base de données est remplie !")
             
             # Stats finales (totales en BDD)
             total_routes = pd.read_sql("SELECT COUNT(*) as count FROM dim_route", engine).iloc[0]['count']
             total_vehicles = pd.read_sql("SELECT COUNT(*) as count FROM dim_vehicle_type", engine).iloc[0]['count']
             total_facts = pd.read_sql("SELECT COUNT(*) as count FROM fact_em", engine).iloc[0]['count']
             
-            print("\n📊 Statistiques de cette exécution :")
-            print(f"   - Routes dans CSV : {len(routes)}")
-            print(f"   - Véhicules dans CSV : {len(vehicles)}")
-            print(f"   - Faits dans CSV : {len(facts)}")
-            print(f"   - Distance moyenne CSV : {df['distance_km'].mean():.2f} km")
-            print(f"   - CO2 moyen CSV : {df['co2_kg'].mean():.3f} kg")
+            print("Statistiques de cette exécution :")
+            print(f"Routes dans CSV : {len(routes)}")
+            print(f"Véhicules dans CSV : {len(vehicles)}")
+            print(f"Faits dans CSV : {len(facts)}")
+            print(f"Distance moyenne CSV : {df['distance_km'].mean():.2f} km")
+            print(f"CO2 moyen CSV : {df['co2_kg'].mean():.3f} kg")
             
             if INCREMENTAL_LOAD:
-                print("\n📊 Statistiques TOTALES en base de données :")
-                print(f"   - Total routes : {total_routes}")
-                print(f"   - Total véhicules : {total_vehicles}")
-                print(f"   - Total faits : {total_facts}")
+                print("Statistiques TOTALES en base de données :")
+                print(f"Total routes : {total_routes}")
+                print(f"Total véhicules : {total_vehicles}")
+                print(f"Total faits : {total_facts}")
 
     except Exception as e:
-        print(f"❌ Erreur critique SQL : {e}")
+        print(f"Erreur critique SQL : {e}")
         import traceback
         traceback.print_exc()
 

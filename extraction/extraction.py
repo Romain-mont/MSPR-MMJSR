@@ -5,10 +5,6 @@ Ce fichier extrait UNIQUEMENT les données brutes des 3 sources :
 - Mobility Database : API GTFS (fichiers ZIP)
 - Back on Track : Google Sheets CSV
 - OurAirports : CSV des aéroports mondiaux
-
-Aucune transformation n'est effectuée ici.
-Les données sont stockées dans des dossiers distincts pour traitement ultérieur.
-Utilise PySpark pour le traitement des données.
 """
 
 import requests
@@ -39,20 +35,19 @@ def get_spark():
 
 spark = get_spark()
 
-# === CONFIGURATION ===
+# CONFIGURATION
 load_dotenv()
 
 # API Mobility Database
 API_URL = "https://api.mobilitydatabase.org/v1"
 REFRESH_TOKEN = os.getenv("REFRESH_TOKEN")
 
-# TARGET_COUNTRIES : lit depuis variable d'environnement ou utilise FR par défaut
 import ast
 target_countries_env = os.getenv("TARGET_COUNTRIES", "['FR']")
 try:
     TARGET_COUNTRIES = ast.literal_eval(target_countries_env)
 except:
-    TARGET_COUNTRIES = ['FR']  # Fallback si le parsing échoue
+    TARGET_COUNTRIES = ['FR']
 
 
 # Dossiers de sortie (données brutes) adaptables via env (Docker)
@@ -72,9 +67,7 @@ BACKONTRACK_ONGLETS = ["agencies", "routes", "trips", "stops", "calendar", "trip
 AIRPORTS_DATA_URL = "https://ourairports.com/data/airports.csv"
 
 
-# ===========================
 # MAPPING DES COLONNES
-# ===========================
 # REQUIRED_COLUMNS = ['origin', 'destination', 'vehicule_type', 'aero_lat', 'aero_long', 
 #                     'station_lat', 'station_long', 'category', 'departure_time', 'arrival_time']
 COLUMN_MAPPINGS = {
@@ -111,21 +104,19 @@ def apply_column_mapping(df, mapping_key):
             df = df.withColumnRenamed(old_col, new_col)
     return df
 
-# ===========================
 # PARTIE 1 : MOBILITY DATABASE
-# ===========================
 
 def get_token():
     """Authentification API Mobility Database"""
     if not REFRESH_TOKEN: 
-        print("⚠️ REFRESH_TOKEN manquant dans .env")
+        print("REFRESH_TOKEN manquant dans .env")
         return None
     try:
         r = requests.post(f"{API_URL}/tokens", json={"refresh_token": REFRESH_TOKEN})
         r.raise_for_status()
         return r.json()["access_token"]
     except Exception as e:
-        print(f"❌ Erreur authentification : {e}")
+        print(f"Erreur authentification : {e}")
         return None
 
 
@@ -149,7 +140,7 @@ def extract_mobility_database():
     Extrait les fichiers GTFS depuis Mobility Database
     Télécharge et dézippe dans MOBILITY_RAW_DIR
     """
-    print("\n🌐 === EXTRACTION MOBILITY DATABASE ===")
+    print("EXTRACTION MOBILITY DATABASE")
     
     token = get_token()
     if not token: 
@@ -159,7 +150,7 @@ def extract_mobility_database():
     extracted_count = 0
 
     for country in TARGET_COUNTRIES:
-        print(f"\n📍 Pays : {country}")
+        print(f"Pays : {country}")
         
         try:
             r = requests.get(
@@ -169,7 +160,7 @@ def extract_mobility_database():
             )
             feeds = r.json()
         except Exception as e:
-            print(f"   ❌ Erreur requête API : {e}")
+            print(f"Erreur requête API : {e}")
             continue
         
         for feed in feeds:
@@ -193,7 +184,7 @@ def extract_mobility_database():
             
             # Téléchargement
             if not os.path.exists(provider_dir):
-                print(f"   ⬇️  {provider}...", end=" ", flush=True)
+                print(f"{provider}...", end=" ", flush=True)
                 try:
                     with open(zip_path, 'wb') as f:
                         f.write(requests.get(url).content)
@@ -204,31 +195,29 @@ def extract_mobility_database():
                     
                     # Suppression du ZIP (garder seulement les CSV)
                     os.remove(zip_path)
-                    
-                    print("✅")
+
+                    print("téléchargement et extraction finis")
                     extracted_count += 1
                     
                 except Exception as e:
-                    print(f"❌ {e}")
+                    print(f"Erreur : {e}")
                     if os.path.exists(zip_path):
                         os.remove(zip_path)
             else:
-                print(f"   ⏭️  {provider} (déjà extrait)")
+                print(f"{provider} (déjà extrait)")
     
-    print(f"\n✅ Mobility Database : {extracted_count} providers extraits")
+    print(f"Mobility Database : {extracted_count} providers extraits")
     return True
 
 
-# ===========================
 # PARTIE 2 : BACK ON TRACK
-# ===========================
 
 def extract_backontrack():
     """
     Extrait les CSV depuis Google Sheets Back on Track
     Télécharge dans BACKONTRACK_RAW_DIR et convertit avec PySpark
     """
-    print("\n📊 === EXTRACTION BACK ON TRACK ===")
+    print("EXTRACTION BACK ON TRACK")
     
     os.makedirs(BACKONTRACK_RAW_DIR, exist_ok=True)
     extracted_count = 0
@@ -239,7 +228,7 @@ def extract_backontrack():
         output_file = f"{BACKONTRACK_RAW_DIR}/back_on_track_{onglet}.csv"
         
         try:
-            print(f"   ⬇️  {onglet}...", end=" ", flush=True)
+            print(f"{onglet}...", end=" ", flush=True)
             
             # Télécharger le fichier CSV temporaire
             response = requests.get(url)
@@ -269,29 +258,27 @@ def extract_backontrack():
             if os.path.exists(temp_file):
                 os.remove(temp_file)
             
-            print(f"✅ ({row_count} lignes)")
+            print(f"({row_count} lignes)")
             extracted_count += 1
             
         except Exception as e:
-            print(f"❌ Erreur : {e}")
+            print(f"Erreur : {e}")
             # Nettoyer en cas d'erreur
             if os.path.exists(temp_file):
                 os.remove(temp_file)
     
-    print(f"\n✅ Back on Track : {extracted_count}/{len(BACKONTRACK_ONGLETS)} fichiers extraits")
+    print(f"Back on Track : {extracted_count}/{len(BACKONTRACK_ONGLETS)} fichiers extraits")
     return True
 
 
-# ===========================
 # PARTIE 3 : OURAIRPORTS
-# ===========================
 
 def extract_airports(overwrite=False):
     """
     Extrait les données des aéroports depuis OurAirports
     Télécharge et traite avec PySpark dans AIRPORTS_RAW_DIR
     """
-    print("\n✈️  === EXTRACTION OURAIRPORTS ===")
+    print("EXTRACTION OURAIRPORTS")
     
     output_dir = Path(AIRPORTS_RAW_DIR)
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -303,11 +290,11 @@ def extract_airports(overwrite=False):
     
     # Si le fichier du jour existe déjà et qu'on ne veut pas le réécrire
     if output_file.exists() and not overwrite:
-        print(f"   ⏭️  Fichier du jour déjà présent : {output_file}")
+        print(f"Fichier du jour déjà présent : {output_file}")
         return True
     
     try:
-        print(f"   ⬇️  Téléchargement airports.csv...", end=" ", flush=True)
+        print(f"Téléchargement airports.csv...", end=" ", flush=True)
         
         # Télécharge le fichier depuis OurAirports
         req = Request(AIRPORTS_DATA_URL, headers={"User-Agent": "Mozilla/5.0"})
@@ -318,10 +305,9 @@ def extract_airports(overwrite=False):
         
         # Écrit le fichier temporaire
         temp_file.write_bytes(content)
-        print("✅")
         
         # Traiter avec PySpark
-        print(f"   🔄 Traitement avec PySpark...", end=" ", flush=True)
+        print(f"Traitement avec PySpark...", end=" ", flush=True)
         df = spark.read.option("header", "true") \
                       .option("inferSchema", "true") \
                       .csv(str(temp_file))
@@ -338,30 +324,26 @@ def extract_airports(overwrite=False):
         if temp_file.exists():
             temp_file.unlink()
         
-        print(f"✅ ({row_count} aéroports)")
+        print(f"({row_count} aéroports)")
         
     except Exception as e:
-        print(f"❌ Erreur : {e}")
+        print(f"Erreur : {e}")
         # Nettoyer en cas d'erreur
         if temp_file.exists():
             temp_file.unlink()
         return False
     
-    print(f"\n✅ OurAirports : Fichier extrait → {output_file}")
+    print(f"OurAirports : Fichier extrait → {output_file}")
     return True
 
 
-# ===========================
 # ORCHESTRATION
-# ===========================
 
 def run_extraction():
     """
     Lance l'extraction complète des 3 sources
     """
-    print("=" * 60)
-    print("🚀 EXTRACTION COMBINÉE - Début du processus (PySpark)")
-    print("=" * 60)
+    print("EXTRACTION COMBINÉE - Début du processus (PySpark)")
     
     # Nettoyage préalable (optionnel)
     # shutil.rmtree(MOBILITY_RAW_DIR, ignore_errors=True)
@@ -372,15 +354,13 @@ def run_extraction():
     success_backontrack = extract_backontrack()
     success_airports = extract_airports()
     
-    print("\n" + "=" * 60)
     if success_mobility and success_backontrack and success_airports:
-        print("🎉 EXTRACTION TERMINÉE AVEC SUCCÈS")
-        print(f"📂 Mobility Database : {MOBILITY_RAW_DIR}")
-        print(f"📂 Back on Track     : {BACKONTRACK_RAW_DIR}")
-        print(f"📂 OurAirports       : {AIRPORTS_RAW_DIR}")
+        print("EXTRACTION TERMINÉE AVEC SUCCÈS")
+        print(f"Mobility Database : {MOBILITY_RAW_DIR}")
+        print(f"Back on Track     : {BACKONTRACK_RAW_DIR}")
+        print(f"OurAirports       : {AIRPORTS_RAW_DIR}")
     else:
-        print("⚠️ EXTRACTION PARTIELLE (vérifier les erreurs ci-dessus)")
-    print("=" * 60)
+        print("EXTRACTION PARTIELLE (vérifier les erreurs ci-dessus)")
     
     # Arrêter la session Spark
     spark.stop()

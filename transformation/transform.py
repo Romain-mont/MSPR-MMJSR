@@ -7,7 +7,7 @@ from pyspark.sql import functions as F
 from pyspark.sql.types import DoubleType
 from pyspark.sql.window import Window
 
-# Regex part-xxxxx*.csv (Spark)
+# Regex part-xxxxx*.csv
 _PART_RE = re.compile(r"part-(\d+).*\.csv$")
 
 
@@ -33,9 +33,6 @@ OUTPUT_AIRPORTS_FILE   = os.environ.get("OUTPUT_AIRPORTS_FILE", "staging_airport
 OUTPUT_INTERMODAL_FILE = os.environ.get("OUTPUT_INTERMODAL_FILE", "staging_intermodal.csv")
 OUTPUT_FINAL_FILE      = os.environ.get("OUTPUT_FINAL_FILE", "final_routes.csv")
 
-# Note : Pas de filtrage par pays ici, la transformation traite tous les dossiers présents
-# Le filtrage par pays se fait uniquement à l'extraction via TARGET_COUNTRIES (contrainte RAM)
-
 REQUIRED_COLUMNS_AIRPORTS = ["airport_name", "aero_lat", "aero_long", "category", "iata_code", "country_code"]
 
 CO2_FACTORS_PER_100KM = {
@@ -51,14 +48,12 @@ BBOX_MARGIN_DEG       = 1.0
 MIN_PLANE_DISTANCE_KM = 100
 
 
-# ===========================
 # 2) HELPERS
-# ===========================
 def ensure_dir(path: str):
     os.makedirs(path, exist_ok=True)
 
 def _spark_warmup(df):
-    # Matérialise "light" sans scanner tout le dataset (show évite un collect massif)
+    # Matérialise "light" sans scanner tout le dataset, show évite un collect massif
     df.limit(1).show()
 
 def read_csv(spark, path: str):
@@ -146,7 +141,7 @@ def export_to_hdfs(df, hdfs_path: str):
         df.write
           .mode("overwrite")
           .option("header", "true")
-          .option("compression", "gzip")  # important: réduit IO + disque
+          .option("compression", "gzip")
           .csv(hdfs_path)
     )
 
@@ -171,9 +166,7 @@ def validate_routes(df):
     )
 
 
-# ===========================
-# 1) SPARK SESSION (Windows + Hadoop + Low RAM)
-# ===========================
+# 1) SPARK SESSION (Windows + Hadoop)
 def get_spark_session():
     py = sys.executable
     builder = SparkSession.builder.appName("CO2_ETL_Europe_HDFS")
@@ -191,21 +184,17 @@ def get_spark_session():
     builder = builder.config("spark.sql.sources.commitProtocolClass",
                              "org.apache.spark.sql.execution.datasources.SQLHadoopMapReduceCommitProtocol")
     builder = builder.config("spark.hadoop.mapreduce.fileoutputcommitter.algorithm.version", "2")
-    
-    # FIX : Désactiver les vérifications de permissions (pour disques externes exFAT/FAT32)
+
     builder = builder.config("spark.hadoop.fs.file.impl", "org.apache.hadoop.fs.RawLocalFileSystem")
     builder = builder.config("spark.hadoop.fs.file.impl.disable.cache", "true")
     
-    # Pour Docker, on laisse le fs.defaultFS local (pas HDFS)
     if not running_in_docker():
         builder = builder.config("spark.hadoop.fs.defaultFS", "hdfs://namenode:9000")
     spark = builder.getOrCreate()
     return spark
 
 
-# ===========================
 # 3) DISTANCE + CO2
-# ===========================
 def haversine_distance(lat1, lon1, lat2, lon2):
     lat1r, lat2r = F.radians(lat1), F.radians(lat2)
     dlat, dlon = F.radians(lat2 - lat1), F.radians(lon2 - lon1)
@@ -233,9 +222,7 @@ def co2_kg(distance_km, vehicule_type):
     ).otherwise(F.lit(None).cast(DoubleType()))
 
 
-# ===========================
 # 4) MOBILITY (GTFS)
-# ===========================
 def read_mobility_provider(spark, provider_dir: str):
     provider_name = os.path.basename(provider_dir)
     required = ["stops.txt", "stop_times.txt", "trips.txt", "routes.txt"]
@@ -286,7 +273,7 @@ def read_mobility_provider(spark, provider_dir: str):
     
     rail_routes = routes.filter((F.col("route_type") == 2) | ((F.col("route_type") >= 100) & (F.col("route_type") <= 117))).select(*route_cols)
 
-    # Low-RAM: éviter count() complet
+    # éviter count() complet
     if not rail_routes.take(1):
         return None
 
@@ -452,13 +439,13 @@ def read_all_mobility(spark):
     """Traite TOUS les providers GTFS présents, sans filtrage par pays.
     Le filtrage se fait uniquement à l'extraction pour gérer la RAM."""
     if not os.path.exists(RAW_MOBILITY_DIR):
-        print(f"❌ Dossier introuvable : {RAW_MOBILITY_DIR}")
+        print(f"Dossier introuvable : {RAW_MOBILITY_DIR}")
         return None
 
     dfs = []
     # TEST : limiter aux 50 premiers providers pour valider les corrections try_cast
     all_providers = sorted(os.listdir(RAW_MOBILITY_DIR))[:50]
-    print(f"🧪 MODE TEST : Traitement de {len(all_providers)} premiers providers")
+    print(f"MODE TEST : Traitement de {len(all_providers)} premiers providers")
     
     for provider_name in all_providers:
         p = os.path.join(RAW_MOBILITY_DIR, provider_name)
@@ -474,9 +461,7 @@ def read_all_mobility(spark):
     return reduce(lambda a, b: a.unionByName(b, allowMissingColumns=True), dfs)
 
 
-# ===========================
 # 5) BACK ON TRACK
-# ===========================
 def read_backontrack(spark):
     files = {
         "routes": f"{RAW_BACKONTRACK_DIR}/back_on_track_routes.csv",
@@ -580,9 +565,7 @@ def read_backontrack(spark):
     )
 
 
-# ===========================
 # 6) AIRPORTS (OurAirports)
-# ===========================
 def read_airports(spark):
     if not os.path.exists(RAW_AIRPORTS_DIR):
         return None
@@ -626,15 +609,10 @@ def read_airports(spark):
         F.col("category").isin("large_airport", "medium_airport", "small_airport")
     )
 
-    # Plus de filtrage par pays - traite tous les aéroports disponibles
-    # Le filtrage se fait uniquement à l'extraction pour gérer la RAM
-
     return df
 
 
-# ===========================
-# 7) INTERMODALITÉ + AVION (Low RAM)
-# ===========================
+# 7) INTERMODALITÉ + AVION
 def _bbox_join_cond(st_lat, st_lon, ap_lat, ap_lon, margin_deg=BBOX_MARGIN_DEG):
     return (
         (F.abs(st_lat - ap_lat) <= F.lit(margin_deg)) &
@@ -643,10 +621,10 @@ def _bbox_join_cond(st_lat, st_lon, ap_lat, ap_lon, margin_deg=BBOX_MARGIN_DEG):
 
 def build_intermodal_links(df_routes, df_airports, radius_km=INTERMODAL_RADIUS_KM):
     """
-    Low-RAM intermodalité:
+    Intermodalité:
     - pas de repartition() gratuit
     - cache DISK_ONLY minimal
-    - Window remplacé par min-distance + join (souvent moins gourmand)
+    - Window remplacé par min-distance + join
     """
     if df_airports is None:
         return None
@@ -673,7 +651,6 @@ def build_intermodal_links(df_routes, df_airports, radius_km=INTERMODAL_RADIUS_K
         .dropDuplicates(["station_name", "station_lat", "station_long"])
     )
 
-    # Cache disque uniquement si dataset stations est gros
     stations = stations.persist(StorageLevel.DISK_ONLY)
     _spark_warmup(stations)
 
@@ -717,7 +694,6 @@ def build_intermodal_links(df_routes, df_airports, radius_km=INTERMODAL_RADIUS_K
         "station_airport_km"
     )
 
-    # Low-RAM: min distance + join (évite row_number + sort complet)
     best_dist = joined.groupBy("station_name").agg(F.min("station_airport_km").alias("min_km"))
     best = joined.join(
         best_dist,
@@ -732,7 +708,6 @@ def generate_plane_routes(df_routes, df_intermodal, min_plane_km=MIN_PLANE_DISTA
     if df_intermodal is None:
         return None
 
-    # Low-RAM: pas de repartition() => on garde la distribution existante
     pairs = df_routes.select("origin", "destination").dropDuplicates()
 
     inter_o = df_intermodal.select(
@@ -752,7 +727,7 @@ def generate_plane_routes(df_routes, df_intermodal, min_plane_km=MIN_PLANE_DISTA
 
     dfp = pairs.join(inter_o, "origin", "inner").join(inter_d, "destination", "inner")
 
-    # Conversion explicite des coordonnées aéroports en DOUBLE (évite DATATYPE_MISMATCH)
+    # Conversion explicite des coordonnées aéroports en double pour éviter DATATYPE_MISMATCH
     for airport_coord in ["airport_origin_lat", "airport_origin_long", "airport_dest_lat", "airport_dest_long"]:
         dfp = dfp.withColumn(airport_coord, F.col(airport_coord).cast(DoubleType()))
 
@@ -788,13 +763,9 @@ def generate_plane_routes(df_routes, df_intermodal, min_plane_km=MIN_PLANE_DISTA
     )
 
 
-# ===========================
 # 8) PIPELINE ORCHESTRATION
-# ===========================
 def run_transform():
-    print("=" * 60)
-    print("🚀 TRANSFORMATION - Pipeline datamart (train + avion) [LOW RAM]")
-    print("=" * 60)
+    print("TRANSFORMATION - Pipeline datamart train + avion")
 
     spark = get_spark_session()
     spark.sparkContext.setLogLevel("WARN")
@@ -804,14 +775,14 @@ def run_transform():
     df_intermodal = None
 
     try:
-        print("\n[1] Chargement des sources...")
+        print("Chargement des sources...")
         df_mob = read_all_mobility(spark)
         df_bot = read_backontrack(spark)
         df_air = read_airports(spark)
 
         routes_sources = [d for d in (df_mob, df_bot) if d is not None]
         if not routes_sources:
-            print("❌ Aucune donnée trajets (Mobility/BackOnTrack vides).")
+            print("Aucune donnée trajets (Mobility/BackOnTrack vides).")
             return
 
         df = reduce(lambda a, b: a.unionByName(b, allowMissingColumns=True), routes_sources)
@@ -826,7 +797,7 @@ def run_transform():
         # Recharge le CSV pour repartir d'un DataFrame plat
         df = spark.read.option("header", "true").csv(staging_union_path)
 
-        # Low-RAM: réduire tôt la largeur (moins de mémoire en shuffle)
+        # Réduire tôt la largeur
         base_cols = [
             "origin","destination","vehicule_type",
             "station_lat","station_long","station_lat_dest","station_long_dest",
@@ -834,7 +805,7 @@ def run_transform():
         ]
         df = df.select(*[c for c in base_cols if c in df.columns])
 
-        print("\n[2] Nettoyage + filtre grossier...")
+        print("Nettoyage + filtre grossier...")
 
         import gc
         df = validate_routes(df)
@@ -858,15 +829,13 @@ def run_transform():
         spark.catalog.clearCache(); gc.collect()
         df = spark.read.option("header", "true").csv(norm_dest_path)
 
-        # Cache disque seulement si on réutilise df plusieurs fois (distance + intermodal + plane)
-
         df = df.persist(StorageLevel.DISK_ONLY)
         _spark_warmup(df)
 
-        print("\n[3] Calcul distance + CO2...")
+        print("Calcul distance + CO2...")
         has_coords = all(c in df.columns for c in ("station_lat", "station_long", "station_lat_dest", "station_long_dest"))
 
-        # Conversion explicite des coordonnées en DOUBLE (évite DATATYPE_MISMATCH)
+        # Conversion explicite des coordonnées en double ppur éviter DATATYPE_MISMATCH
         if has_coords:
             for coord_col in ["station_lat", "station_long", "station_lat_dest", "station_long_dest"]:
                 df = df.withColumn(coord_col, F.col(coord_col).cast(DoubleType()))
@@ -887,9 +856,7 @@ def run_transform():
         del df
         spark.catalog.clearCache(); gc.collect()
         df = spark.read.option("header", "true").csv(dist_path)
-        
-        # Filtre : Garder uniquement les trains longue distance (>= 100 km)
-        # Les trajets avion seront ajoutés plus tard et ne sont pas concernés par ce filtre
+
         df = df.filter(
             (F.col("distance_km").cast(DoubleType()) >= 100.0) | 
             F.col("distance_km").isNull() | 
@@ -910,7 +877,7 @@ def run_transform():
         spark.catalog.clearCache(); gc.collect()
         df = spark.read.option("header", "true").csv(co2_path)
 
-        print("\n[4] Intermodalité (gare -> aéroport proche)...")
+        print("Intermodalité gare -> aéroport proche")
 
         if df_air is not None and has_coords:
             df_intermodal = build_intermodal_links(df, df_air)
@@ -922,13 +889,13 @@ def run_transform():
                 del df_intermodal
                 spark.catalog.clearCache(); gc.collect()
                 df_intermodal = spark.read.option("header", "true").csv(out_inter)
-                print(f"   ✅ Intermodal exporté : {out_inter}")
+                print(f"Intermodal exporté : {out_inter}")
             else:
-                print("   ⚠️ Intermodal : aucun lien généré")
+                print("Intermodal : aucun lien généré")
         else:
-            print("   ⚠️ Intermodal : airports ou coords manquants")
+            print("Intermodal : airports ou coords manquants")
 
-        print("\n[5] Génération trajets avion...")
+        print("Génération trajets avion...")
 
         df_planes = generate_plane_routes(df, df_intermodal) if df_intermodal is not None else None
         if df_planes is not None:
@@ -943,11 +910,11 @@ def run_transform():
             del df
             spark.catalog.clearCache(); gc.collect()
             df = spark.read.option("header", "true").csv(union_planes_path)
-            print("   ✅ Trajets avion ajoutés")
+            print("Trajets avion ajoutés")
         else:
-            print("   ⚠️ Aucun trajet avion généré")
+            print("Aucun trajet avion généré")
 
-        print("\n[6] Dédup + exports...")
+        print("Dédup + exports...")
         df = df.dropDuplicates(["origin", "destination", "vehicule_type", "source"])
         dedup_path = os.path.join(OUTPUT_DIR, "staging_dedup.csv")
         df.write.mode("overwrite").option("header", "true").csv(dedup_path)
@@ -963,21 +930,21 @@ def run_transform():
         ]
         df = df.select(*[c for c in final_cols if c in df.columns])
 
-        # Export final en CSV unique (fusion des parts pour le load)
+        # Export final en CSV unique, fusion des parts pour le load
         out_routes = os.path.join(OUTPUT_DIR, OUTPUT_FINAL_FILE)
         tmp_routes_dir = os.path.join(OUTPUT_DIR, "tmp_final_routes")
         df.write.mode("overwrite").option("header", "true").csv(tmp_routes_dir)
         _merge_part_csvs(tmp_routes_dir, out_routes)
-        print(f"   ✅ Routes exportées : {out_routes}")
+        print(f"Routes exportées : {out_routes}")
 
         if df_air is not None:
             out_air = os.path.join(OUTPUT_DIR, OUTPUT_AIRPORTS_FILE)
             tmp_airports_dir = os.path.join(OUTPUT_DIR, "tmp_final_airports")
             df_air.write.mode("overwrite").option("header", "true").csv(tmp_airports_dir)
             _merge_part_csvs(tmp_airports_dir, out_air)
-            print(f"   ✅ Aéroports exportés : {out_air}")
+            print(f"Aéroports exportés : {out_air}")
 
-        print("\n🎉 Transformation terminée (LOW RAM).")
+        print("Transformation terminée.")
 
     finally:
         try:
