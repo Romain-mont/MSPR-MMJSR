@@ -9,9 +9,7 @@ import seaborn as sns
 import requests
 from dotenv import load_dotenv
 
-# ----------------------------
 # Config / Style
-# ----------------------------
 load_dotenv()
 
 # Configuration de l'API
@@ -21,9 +19,7 @@ sns.set_theme(style="whitegrid")
 plt.rcParams["figure.figsize"] = (12, 6)
 plt.rcParams["font.size"] = 10
 
-# ----------------------------
 # Data
-# ----------------------------
 @st.cache_data(ttl=600, show_spinner=False)
 def load_data() -> pd.DataFrame:
     """Charge les données via l'API REST."""
@@ -37,11 +33,11 @@ def load_data() -> pd.DataFrame:
         
         df = pd.DataFrame(data)
     except requests.exceptions.RequestException as e:
-        st.error(f"❌ Erreur de connexion à l'API: {e}")
+        st.error(f"Erreur de connexion à l'API: {e}")
         st.info(f"URL utilisée: {API_URL}/data")
         return pd.DataFrame()
     except Exception as e:
-        st.error(f"❌ Erreur lors du chargement des données: {e}")
+        st.error(f"Erreur lors du chargement des données: {e}")
         return pd.DataFrame()
 
     # Nettoyage léger
@@ -67,9 +63,7 @@ def sample_df(df: pd.DataFrame, max_rows: int) -> pd.DataFrame:
         return df
     return df.sample(n=max_rows, random_state=42)
 
-# ----------------------------
 # Plots
-# ----------------------------
 def fig_hist_with_mean(series, title, xlabel):
     fig, ax = plt.subplots()
     sns.histplot(series, bins=50, kde=True, ax=ax)
@@ -188,11 +182,9 @@ def quality_report(df):
 
     return rep
 
-# ----------------------------
 # UI
-# ----------------------------
 st.set_page_config(page_title="Datamart CO2 — Dashboard", layout="wide")
-st.title("🌍 Datamart CO2 — Dashboard (v2)")
+st.title("Datamart CO2 — Dashboard")
 st.caption("Moins de filtres, plus de vision. Et un gros bouton refresh parce qu’on aime souffrir proprement.")
 
 # Actualiseur
