@@ -380,9 +380,9 @@ def read_mobility_provider(spark, provider_dir: str):
 
     df = bounds.join(origin_stops, "origin_stop_id").join(dest_stops, "dest_stop_id")
     
-    # Ajouter route_short_name si disponible pour classification
+    
     if "route_short_name" in bounds.columns or "route_long_name" in bounds.columns:
-        pass  # Déjà dans bounds via la jointure avec rail_trips
+        pass  
     
     # Classification intelligente des trains selon les codes européens
     df = df.withColumn("route_code", F.coalesce(F.col("route_short_name"), F.col("route_long_name"), F.lit("")))
@@ -443,7 +443,7 @@ def read_all_mobility(spark):
         return None
 
     dfs = []
-    # TEST : limiter aux 50 premiers providers pour valider les corrections try_cast
+   
     all_providers = sorted(os.listdir(RAW_MOBILITY_DIR))[:50]
     print(f"MODE TEST : Traitement de {len(all_providers)} premiers providers")
     

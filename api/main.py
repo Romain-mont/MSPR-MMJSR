@@ -16,7 +16,7 @@ app = FastAPI(
 # 2. Connexion Base de Données (Mêmes variables que l'ingest)
 DB_USER = os.getenv("DB_USER")
 DB_PASS = os.getenv("DB_PASSWORD")
-DB_HOST = os.getenv("DB_HOST", "127.0.0.1")  # "db" en Docker, "127.0.0.1" en local
+DB_HOST = os.getenv("DB_HOST", "127.0.0.1")  
 DB_PORT = os.getenv("DB_PORT", "5432")
 DB_NAME = os.getenv("DB_NAME")
 
@@ -138,7 +138,7 @@ def search_route(depart: str, arrivee: str, vehicle_type: str = None):
         params["vehicle_type"] = vehicle_type
     
     query = text(base_query)
-    # Note : ILIKE avec % permet de chercher "contient" (ex: Paris matchera "Gare de Paris...")
+    
 
     try:
         with engine.connect() as conn:
@@ -161,7 +161,7 @@ def search_route(depart: str, arrivee: str, vehicle_type: str = None):
         return response_list
 
     except HTTPException:
-        # Relancer les HTTPException (404, etc.) sans les transformer
+       
         raise
     except Exception as e:
         print(f"Erreur SQL : {e}")

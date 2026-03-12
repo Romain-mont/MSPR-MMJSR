@@ -22,19 +22,20 @@ ENV PATH="$JAVA_HOME/bin:$PATH"
 RUN echo "JAVA_HOME=$JAVA_HOME" && java -version
 
 # Copier le requirements.txt à la racine du projet
-COPY ../requirements.txt ./
+COPY requirements.txt ./
 
 # Installer les dépendances Python
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copier le code source et les dossiers utiles
-COPY ../extraction ./extraction
-COPY ../transformation ./transformation
-COPY ../load ./load
-COPY ../database ./database
-COPY ../analyse ./analyse
-COPY ../visualization ./visualization
-COPY ../main.py ./main.py
+COPY extraction ./extraction
+COPY transformation ./transformation
+COPY load ./load
+COPY database ./database
+COPY analyse ./analyse
+COPY visualization ./visualization
+COPY api ./api
+COPY main.py ./main.py
 
 # Créer le dossier data (monté en volume en prod)
 RUN mkdir -p ./data
