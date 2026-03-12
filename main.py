@@ -338,7 +338,7 @@ def print_summary(stats: PipelineStats, success: bool):
     print("RÉSUMÉ DU PIPELINE")
 
     for phase, info in summary["phases"].items():
-        status = if info["success"] else "error"
+        status = "susccess" if info["success"] else "error"
         print(f"   {status} {phase}: {info['duration']:.1f}s")
 
     print(f"Durée totale: {summary['total_duration']:.1f}s")

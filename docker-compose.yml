@@ -2,7 +2,7 @@ services:
   etl:
     build:
       context: .
-      dockerfile: etl-docker-project/Dockerfile
+      dockerfile: Dockerfile
     container_name: etl-pipeline
     env_file:
       - ./.env

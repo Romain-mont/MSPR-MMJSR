@@ -1,5 +1,4 @@
 import os
-import time
 import pandas as pd
 import streamlit as st
 import matplotlib
@@ -9,308 +8,290 @@ import seaborn as sns
 import requests
 from dotenv import load_dotenv
 
-# Config / Style
 load_dotenv()
-
-# Configuration de l'API
 API_URL = os.getenv("API_URL", "http://localhost:8000")
 
 sns.set_theme(style="whitegrid")
 plt.rcParams["figure.figsize"] = (12, 6)
 plt.rcParams["font.size"] = 10
 
-# Data
+NUIT_TYPES = {"EuroNight", "Nightjet", "Train Nuit", "Intercités Nuit",
+              "Train Longue Distance Nuit", "TGV Nuit", "ICE Nuit",
+              "InterCity Nuit", "EuroCity Nuit"}
+
+# ---------------------------------------------------------------------------
+# Chargement données
+# ---------------------------------------------------------------------------
 @st.cache_data(ttl=600, show_spinner=False)
 def load_data() -> pd.DataFrame:
-    """Charge les données via l'API REST."""
     try:
-        response = requests.get(f"{API_URL}/data", timeout=30)
-        response.raise_for_status()
-        data = response.json()
-        
+        r = requests.get(f"{API_URL}/data", timeout=30)
+        r.raise_for_status()
+        data = r.json()
         if not data:
             return pd.DataFrame()
-        
         df = pd.DataFrame(data)
     except requests.exceptions.RequestException as e:
-        st.error(f"Erreur de connexion à l'API: {e}")
-        st.info(f"URL utilisée: {API_URL}/data")
-        return pd.DataFrame()
-    except Exception as e:
-        st.error(f"Erreur lors du chargement des données: {e}")
+        st.error(f"Erreur de connexion à l'API : {e}")
         return pd.DataFrame()
 
-    # Nettoyage léger
     df["distance_km"] = pd.to_numeric(df["distance_km"], errors="coerce")
-    df["co2_kg"] = pd.to_numeric(df["co2_kg"], errors="coerce")
+    df["co2_kg"]      = pd.to_numeric(df["co2_kg"],      errors="coerce")
     df["facteur_co2"] = pd.to_numeric(df["facteur_co2"], errors="coerce")
-
     df = df.dropna(subset=["distance_km", "co2_kg", "vehicule_type", "origine", "destination"])
-    df = df[df["distance_km"] >= 0]
-    df = df[df["co2_kg"] >= 0]
+    df = df[(df["distance_km"] > 0) & (df["co2_kg"] >= 0)]
 
-    df["route"] = df["origine"].astype(str) + " → " + df["destination"].astype(str)
-    df["categorie_distance"] = df["is_long_distance"].map(
-        {True: "Longue (>500km)", False: "Courte (≤500km)"}
+    # Classification
+    df["mode"]       = df["vehicule_type"].apply(lambda v: "Avion" if "Avion" in str(v) else "Train")
+    df["train_type"] = df["vehicule_type"].apply(
+        lambda v: "Nuit" if (str(v) in NUIT_TYPES or "Nuit" in str(v)) else
+                  "Jour" if "Avion" not in str(v) else None
     )
-    df["co2_par_km"] = df["co2_kg"] / df["distance_km"].replace(0, pd.NA)
-    df["co2_par_km"] = df["co2_par_km"].fillna(0)
+    df["route"]      = df["origine"] + " → " + df["destination"]
+    df["co2_par_km"] = df["co2_kg"] / df["distance_km"]
 
     return df
 
-def sample_df(df: pd.DataFrame, max_rows: int) -> pd.DataFrame:
-    if len(df) <= max_rows:
-        return df
-    return df.sample(n=max_rows, random_state=42)
 
-# Plots
-def fig_hist_with_mean(series, title, xlabel):
-    fig, ax = plt.subplots()
-    sns.histplot(series, bins=50, kde=True, ax=ax)
-    ax.set_title(title)
-    ax.set_xlabel(xlabel)
-    ax.set_ylabel("Nombre")
-    ax.axvline(series.mean(), linestyle="--", label=f"Moyenne: {series.mean():.2f}")
+# ---------------------------------------------------------------------------
+# Helpers graphiques
+# ---------------------------------------------------------------------------
+def bar_co2_by_mode(df):
+    agg = df.groupby("mode", as_index=False)["co2_kg"].mean().sort_values("co2_kg", ascending=False)
+    fig, ax = plt.subplots(figsize=(7, 4))
+    colors = ["#e74c3c" if m == "Avion" else "#2ecc71" for m in agg["mode"]]
+    ax.bar(agg["mode"], agg["co2_kg"], color=colors, edgecolor="white", width=0.5)
+    for i, (_, row) in enumerate(agg.iterrows()):
+        ax.text(i, row["co2_kg"] + 0.5, f"{row['co2_kg']:.1f} kg", ha="center", fontweight="bold")
+    ax.set_ylabel("CO₂ moyen par trajet (kg)")
+    ax.set_title("CO₂ moyen : Train vs Avion")
+    plt.tight_layout()
+    return fig
+
+def scatter_train_vs_avion(df):
+    fig, ax = plt.subplots(figsize=(10, 5))
+    for mode, color in [("Train", "#2ecc71"), ("Avion", "#e74c3c")]:
+        sub = df[df["mode"] == mode]
+        ax.scatter(sub["distance_km"], sub["co2_kg"], alpha=0.4, s=15,
+                   label=mode, color=color)
+    ax.set_xlabel("Distance (km)")
+    ax.set_ylabel("CO₂ (kg)")
+    ax.set_title("CO₂ en fonction de la distance — Train vs Avion")
     ax.legend()
     plt.tight_layout()
     return fig
 
-def fig_cdf(series, title, xlabel):
-    s = series.sort_values().reset_index(drop=True)
-    y = (s.index + 1) / len(s)
-    fig, ax = plt.subplots()
-    ax.plot(s, y)
-    ax.set_title(title)
-    ax.set_xlabel(xlabel)
-    ax.set_ylabel("Proportion cumulée")
+def bar_co2_intensity(df):
+    agg = df.groupby("vehicule_type", as_index=False)["co2_par_km"].mean()
+    agg = agg.sort_values("co2_par_km", ascending=True)
+    fig, ax = plt.subplots(figsize=(10, max(4, len(agg) * 0.4)))
+    colors = ["#e74c3c" if "Avion" in v
+              else "#3498db" if (v in NUIT_TYPES or "Nuit" in v)
+              else "#2ecc71"
+              for v in agg["vehicule_type"]]
+    ax.barh(agg["vehicule_type"], agg["co2_par_km"], color=colors, edgecolor="white")
+    ax.set_xlabel("kg CO₂ / km")
+    ax.set_title("Intensité carbone par type de véhicule (kg CO₂/km)")
     plt.tight_layout()
     return fig
 
-def fig_scatter(df):
-    fig, ax = plt.subplots()
-    sns.scatterplot(
-        data=df, x="distance_km", y="co2_kg", hue="vehicule_type",
-        alpha=0.55, s=18, ax=ax
-    )
-    ax.set_title("CO2 en fonction de la distance")
-    ax.set_xlabel("Distance (km)")
-    ax.set_ylabel("CO2 (kg)")
-    plt.tight_layout()
-    return fig
+def bar_top_economies(df, n=15):
+    trains = df[df["mode"] == "Train"].groupby("route", as_index=False)["co2_kg"].mean().rename(columns={"co2_kg": "co2_train"})
+    avions = df[df["mode"] == "Avion"].groupby("route", as_index=False)["co2_kg"].mean().rename(columns={"co2_kg": "co2_avion"})
+    merged = trains.merge(avions, on="route")
+    merged["economie_kg"] = merged["co2_avion"] - merged["co2_train"]
+    merged["reduction_pct"] = (merged["economie_kg"] / merged["co2_avion"] * 100).round(1)
+    merged = merged[merged["economie_kg"] > 0].nlargest(n, "economie_kg")
 
-def fig_box_vehicle(df, ycol, title, ylabel):
-    fig, ax = plt.subplots(figsize=(12, 5))
-    sns.boxplot(data=df, x="vehicule_type", y=ycol, ax=ax)
-    ax.set_title(title)
-    ax.set_xlabel("")
-    ax.set_ylabel(ylabel)
-    plt.tight_layout()
-    return fig
-
-def fig_violin_vehicle(df, ycol, title, ylabel):
-    fig, ax = plt.subplots(figsize=(12, 5))
-    sns.violinplot(data=df, x="vehicule_type", y=ycol, inner="quartile", ax=ax)
-    ax.set_title(title)
-    ax.set_xlabel("")
-    ax.set_ylabel(ylabel)
-    plt.tight_layout()
-    return fig
-
-def fig_heatmap_corr(df):
-    num = df[["distance_km", "co2_kg", "facteur_co2", "co2_par_km"]].copy()
-    corr = num.corr(numeric_only=True)
-    fig, ax = plt.subplots(figsize=(7, 5))
-    sns.heatmap(corr, annot=True, fmt=".2f", ax=ax)
-    ax.set_title("Corrélations (numériques)")
-    plt.tight_layout()
-    return fig
-
-def fig_top_routes(df, n=15, metric="co2_sum"):
-    agg = df.groupby("route", as_index=False).agg(
-        distance_mean=("distance_km", "mean"),
-        co2_mean=("co2_kg", "mean"),
-        co2_sum=("co2_kg", "sum"),
-        trips=("route", "count"),
-    )
-    top = agg.nlargest(n, metric)
-
-    fig, ax = plt.subplots(figsize=(12, 8))
-    ax.barh(top["route"], top[metric])
+    fig, ax = plt.subplots(figsize=(12, max(5, len(merged) * 0.5)))
+    bars = ax.barh(merged["route"], merged["economie_kg"], color="#27ae60", edgecolor="white")
+    for bar, pct in zip(bars, merged["reduction_pct"]):
+        ax.text(bar.get_width() + 0.5, bar.get_y() + bar.get_height() / 2,
+                f"−{pct:.0f}%", va="center", fontsize=8, color="#27ae60")
     ax.invert_yaxis()
-    ax.set_title(f"Top {n} routes par {metric}")
-    ax.set_xlabel(metric)
+    ax.set_xlabel("kg CO₂ économisés par trajet (vs avion)")
+    ax.set_title(f"Top {n} routes — économie CO₂ en choisissant le train")
     plt.tight_layout()
-    return fig, top
+    return fig, merged
 
-def fig_co2_by_category(df):
-    agg = df.groupby("categorie_distance", as_index=False).agg(
-        co2_sum=("co2_kg", "sum"),
-        co2_mean=("co2_kg", "mean"),
-        trips=("co2_kg", "count"),
-        dist_sum=("distance_km", "sum"),
-    )
-    fig, ax = plt.subplots(figsize=(10, 4))
-    sns.barplot(data=agg, x="categorie_distance", y="co2_sum", ax=ax)
-    ax.set_title("CO2 total par catégorie (courte/longue)")
-    ax.set_xlabel("")
-    ax.set_ylabel("CO2 total (kg)")
+def pie_jour_nuit(df):
+    sub = df[df["mode"] == "Train"]
+    counts = sub["train_type"].value_counts()
+    fig, ax = plt.subplots(figsize=(5, 5))
+    colors = ["#3498db", "#9b59b6"]
+    ax.pie(counts, labels=counts.index, autopct="%1.1f%%", colors=colors,
+           startangle=90, wedgeprops={"edgecolor": "white"})
+    ax.set_title("Répartition Trains Jour / Nuit")
     plt.tight_layout()
-    return fig, agg
+    return fig
+
+def bar_jour_nuit_co2(df):
+    sub = df[df["mode"] == "Train"].dropna(subset=["train_type"])
+    agg = sub.groupby("train_type", as_index=False).agg(
+        co2_moyen=("co2_kg", "mean"),
+        nb_trajets=("co2_kg", "count"),
+    )
+    fig, axes = plt.subplots(1, 2, figsize=(12, 4))
+    colors = ["#3498db", "#9b59b6"]
+    axes[0].bar(agg["train_type"], agg["co2_moyen"], color=colors, edgecolor="white", width=0.4)
+    axes[0].set_title("CO₂ moyen par trajet")
+    axes[0].set_ylabel("CO₂ (kg)")
+    axes[1].bar(agg["train_type"], agg["nb_trajets"], color=colors, edgecolor="white", width=0.4)
+    axes[1].set_title("Nombre de trajets")
+    axes[1].set_ylabel("Trajets")
+    plt.tight_layout()
+    return fig
 
 def quality_report(df):
     rep = {}
-    rep["rows"] = len(df)
-    rep["nulls_total"] = int(df.isna().sum().sum())
+    rep["rows"]         = len(df)
+    rep["nulls_total"]  = int(df.isna().sum().sum())
     rep["nulls_by_col"] = df.isna().sum().sort_values(ascending=False)
-
-    # Doublons “logiques”
     key_cols = ["origine", "destination", "vehicule_type", "distance_km", "co2_kg"]
-    rep["duplicates"] = int(df.duplicated(subset=key_cols).sum())
-
-    # Anomalies simples
-    rep["negative_distance"] = int((df["distance_km"] < 0).sum())
-    rep["negative_co2"] = int((df["co2_kg"] < 0).sum())
-
-    # Outliers IQR sur co2_kg
+    rep["duplicates"]   = int(df.duplicated(subset=key_cols).sum())
     q1 = df["co2_kg"].quantile(0.25)
     q3 = df["co2_kg"].quantile(0.75)
     iqr = q3 - q1
-    low = q1 - 1.5 * iqr
-    high = q3 + 1.5 * iqr
-    rep["outliers_co2_iqr"] = int(((df["co2_kg"] < low) | (df["co2_kg"] > high)).sum())
-    rep["co2_iqr_bounds"] = (float(low), float(high))
-
+    low, high = q1 - 1.5 * iqr, q3 + 1.5 * iqr
+    rep["outliers_co2"]    = int(((df["co2_kg"] < low) | (df["co2_kg"] > high)).sum())
+    rep["co2_iqr_bounds"]  = (float(low), float(high))
     return rep
 
+
+# ---------------------------------------------------------------------------
 # UI
-st.set_page_config(page_title="Datamart CO2 — Dashboard", layout="wide")
-st.title("Datamart CO2 — Dashboard")
-st.caption("Moins de filtres, plus de vision. Et un gros bouton refresh parce qu’on aime souffrir proprement.")
+# ---------------------------------------------------------------------------
+st.set_page_config(page_title="ObRail — Comparateur CO₂ Ferroviaire", layout="wide")
+st.title("🚆 ObRail Europe — Comparateur CO₂ : Train vs Avion")
+st.caption("Source : Mobility Database (GTFS) · Back on Track · OurAirports · Référentiel ADEME")
 
-# Actualiseur
-cA, cB, cC = st.columns([1, 2, 2])
-with cA:
-    if st.button("🔄 Actualiser les données"):
-        st.cache_data.clear()
-        st.rerun()
+if st.button("🔄 Actualiser les données"):
+    st.cache_data.clear()
+    st.rerun()
 
-with cB:
-    auto = st.toggle("⏱️ Auto-refresh", value=False)
-with cC:
-    interval = st.number_input("Intervalle (secondes)", min_value=5, max_value=600, value=60, step=5)
-    if auto:
-        # rerun soft
-        time.sleep(int(interval))
-        st.rerun()
-
-# Load
-with st.spinner("Chargement depuis PostgreSQL…"):
-    try:
-        df = load_data()
-    except Exception as e:
-        st.error("Erreur de connexion à la base de données.")
-        st.code(str(e))
-        st.stop()
+with st.spinner("Chargement des données…"):
+    df = load_data()
 
 if df.empty:
-    st.warning("Aucune donnée trouvée.")
+    st.warning("Aucune donnée disponible. Vérifiez que l'API et la base de données sont démarrées.")
     st.stop()
 
-# Filtres (light)
-st.sidebar.header("🎛️ Filtres (light)")
-vehicules = sorted(df["vehicule_type"].unique().tolist())
-vsel = st.sidebar.multiselect("Véhicules", vehicules, default=vehicules)
+# Sidebar filtre distance
+st.sidebar.header("Filtres")
+distance_min, distance_max = int(df["distance_km"].min()), int(df["distance_km"].max())
+dist_range = st.sidebar.slider("Distance (km)", distance_min, distance_max,
+                                (distance_min, distance_max), step=50)
+df = df[(df["distance_km"] >= dist_range[0]) & (df["distance_km"] <= dist_range[1])]
 
-cat = st.sidebar.radio("Catégorie distance", ["Toutes", "Courte (≤500km)", "Longue (>500km)"], index=0)
-max_rows = st.sidebar.slider("Échantillon max (perf)", 2000, 50000, 20000, 2000)
+# KPIs globaux
+nb_train      = len(df[df["mode"] == "Train"])
+nb_avion      = len(df[df["mode"] == "Avion"])
+co2_moy_train = df[df["mode"] == "Train"]["co2_kg"].mean()
+co2_moy_avion = df[df["mode"] == "Avion"]["co2_kg"].mean()
+ratio = co2_moy_avion / co2_moy_train if co2_moy_train > 0 else 0
 
-filtered = df[df["vehicule_type"].isin(vsel)].copy()
-if cat != "Toutes":
-    filtered = filtered[filtered["categorie_distance"] == cat]
-
-filtered = sample_df(filtered, max_rows=max_rows)
-
-# KPIs
 k1, k2, k3, k4, k5 = st.columns(5)
-k1.metric("Trajets", f"{len(filtered):,}".replace(",", " "))
-k2.metric("Distance totale (km)", f"{filtered['distance_km'].sum():,.0f}".replace(",", " "))
-k3.metric("CO2 total (kg)", f"{filtered['co2_kg'].sum():,.2f}".replace(",", " "))
-k4.metric("CO2 moyen (kg/trajet)", f"{filtered['co2_kg'].mean():.3f}")
-k5.metric("Intensité moyenne (kg/km)", f"{filtered['co2_par_km'].mean():.4f}")
+k1.metric("Trajets ferroviaires",      f"{nb_train:,}".replace(",", " "))
+k2.metric("Trajets aériens (virtuels)", f"{nb_avion:,}".replace(",", " "))
+k3.metric("CO₂ moyen Train",           f"{co2_moy_train:.1f} kg")
+k4.metric("CO₂ moyen Avion",           f"{co2_moy_avion:.1f} kg")
+k5.metric("L'avion émet en moyenne",   f"× {ratio:.1f} plus de CO₂")
+
+st.divider()
 
 tabs = st.tabs([
-    "📊 Distributions",
-    "🧭 Relations & corrélations",
-    "🏆 Tops (routes)",
-    "🚂 Par véhicule",
+    "✈️🚆 Train vs Avion",
+    "🌙 Trains Jour vs Nuit",
+    "🏆 Top économies CO₂",
     "🧪 Qualité des données",
-    "🧾 Données"
 ])
 
+# TAB 1 — Train vs Avion
 with tabs[0]:
+    st.subheader("Comparaison de l'empreinte carbone : Train vs Avion")
+
     c1, c2 = st.columns(2)
     with c1:
-        st.subheader("Distance — histogramme")
-        st.pyplot(fig_hist_with_mean(filtered["distance_km"], "Distribution des distances", "Distance (km)"))
-        st.subheader("Distance — CDF")
-        st.pyplot(fig_cdf(filtered["distance_km"], "CDF distances", "Distance (km)"))
+        st.pyplot(bar_co2_by_mode(df))
     with c2:
-        st.subheader("CO2 — histogramme")
-        st.pyplot(fig_hist_with_mean(filtered["co2_kg"], "Distribution CO2/trajet", "CO2 (kg)"))
-        st.subheader("CO2 — CDF")
-        st.pyplot(fig_cdf(filtered["co2_kg"], "CDF CO2", "CO2 (kg)"))
+        st.pyplot(scatter_train_vs_avion(df))
 
-    st.subheader("Intensité CO2 (kg/km)")
-    st.pyplot(fig_hist_with_mean(filtered["co2_par_km"], "Distribution CO2 par km", "kg CO2 / km"))
+    st.subheader("Intensité carbone par type de véhicule (kg CO₂ / km)")
+    st.pyplot(bar_co2_intensity(df))
+    st.caption("🟢 Train jour  🔵 Train nuit  🔴 Avion — Référentiel ADEME")
 
+# TAB 2 — Jour vs Nuit
 with tabs[1]:
-    c1, c2 = st.columns([2, 1])
-    with c1:
-        st.subheader("Distance vs CO2")
-        st.pyplot(fig_scatter(filtered))
-    with c2:
-        st.subheader("Heatmap corrélations")
-        st.pyplot(fig_heatmap_corr(filtered))
+    st.subheader("Trains de Jour vs Trains de Nuit")
 
+    trains_df = df[df["mode"] == "Train"]
+    if trains_df.empty:
+        st.info("Pas de données ferroviaires disponibles.")
+    else:
+        c1, c2 = st.columns([1, 2])
+        with c1:
+            st.pyplot(pie_jour_nuit(trains_df))
+        with c2:
+            st.pyplot(bar_jour_nuit_co2(trains_df))
+
+        st.subheader("Détail par type de train")
+        agg_type = (
+            trains_df.groupby("vehicule_type", as_index=False)
+            .agg(nb_trajets=("co2_kg", "count"),
+                 co2_moyen=("co2_kg", "mean"),
+                 distance_moyenne=("distance_km", "mean"))
+            .sort_values("co2_moyen")
+        )
+        agg_type["co2_moyen"]        = agg_type["co2_moyen"].round(2)
+        agg_type["distance_moyenne"] = agg_type["distance_moyenne"].round(1)
+        st.dataframe(agg_type, use_container_width=True)
+
+# TAB 3 — Top économies
 with tabs[2]:
-    st.subheader("Top routes")
-    n = st.slider("Top N", 5, 50, 15, 5)
-    metric = st.selectbox("Critère", ["co2_sum", "co2_mean", "distance_mean", "trips"], index=0)
+    st.subheader("Routes où prendre le train est le plus bénéfique pour le climat")
+    n = st.slider("Nombre de routes à afficher", 5, 30, 15, 5)
+    fig, table = bar_top_economies(df, n=n)
 
-    fig, top = fig_top_routes(filtered, n=n, metric=metric)
-    st.pyplot(fig)
-    st.dataframe(top, width="stretch", height=300)
+    if table.empty:
+        st.info("Pas assez de routes communes entre train et avion pour comparer. "
+                "Vérifiez que les données intermodales sont bien chargées.")
+    else:
+        st.pyplot(fig)
+        table_display = table[["route", "co2_train", "co2_avion", "economie_kg", "reduction_pct"]].copy()
+        table_display.columns = ["Route", "CO₂ Train (kg)", "CO₂ Avion (kg)", "Économie (kg)", "Réduction (%)"]
+        table_display = table_display.round(2)
+        st.dataframe(table_display, use_container_width=True)
 
-    st.subheader("CO2 total par catégorie")
-    fig2, cat_stats = fig_co2_by_category(filtered)
-    st.pyplot(fig2)
-    st.dataframe(cat_stats, width="stretch")
+        st.success(
+            f"Sur ces {len(table)} routes, choisir le train plutôt que l'avion économise en moyenne "
+            f"**{table['economie_kg'].mean():.0f} kg de CO₂** par trajet "
+            f"(−{table['reduction_pct'].mean():.0f}%)."
+        )
 
+# TAB 4 — Qualité
 with tabs[3]:
-    st.subheader("CO2 par véhicule (boxplot)")
-    st.pyplot(fig_box_vehicle(filtered, "co2_kg", "CO2 par véhicule (boxplot)", "CO2 (kg)"))
-
-    st.subheader("CO2 par km par véhicule (violin)")
-    st.pyplot(fig_violin_vehicle(filtered, "co2_par_km", "Intensité CO2 par véhicule", "kg/km"))
-
-with tabs[4]:
-    st.subheader("Qualité des données (contrôle)")
-    rep = quality_report(filtered)
+    st.subheader("Contrôle qualité des données")
+    rep = quality_report(df)
 
     q1, q2, q3, q4 = st.columns(4)
-    q1.metric("Lignes", f"{rep['rows']:,}".replace(",", " "))
-    q2.metric("Nulls total", rep["nulls_total"])
+    q1.metric("Lignes totales",        f"{rep['rows']:,}".replace(",", " "))
+    q2.metric("Valeurs nulles",        rep["nulls_total"])
     q3.metric("Doublons (clé logique)", rep["duplicates"])
-    q4.metric("Outliers CO2 (IQR)", rep["outliers_co2_iqr"])
+    q4.metric("Outliers CO₂ (IQR)",    rep["outliers_co2"])
+    st.caption(f"Bornes IQR CO₂ : {rep['co2_iqr_bounds'][0]:.2f} → {rep['co2_iqr_bounds'][1]:.2f} kg")
 
-    st.caption(f"Bornes IQR CO2: {rep['co2_iqr_bounds'][0]:.3f} → {rep['co2_iqr_bounds'][1]:.3f}")
+    c1, c2 = st.columns(2)
+    with c1:
+        st.subheader("Répartition par mode")
+        mode_counts = df["mode"].value_counts().reset_index()
+        mode_counts.columns = ["Mode", "Trajets"]
+        st.dataframe(mode_counts, use_container_width=True)
 
-    st.subheader("Nulls par colonne")
-    st.dataframe(rep["nulls_by_col"].rename("nulls").to_frame(), width="stretch")
+    with c2:
+        st.subheader("Nulls par colonne")
+        st.dataframe(rep["nulls_by_col"].rename("nulls").to_frame(), use_container_width=True)
 
-with tabs[5]:
-    st.subheader("Données (échantillonnées)")
-    st.dataframe(filtered, width="stretch", height=420)
-
-    csv = filtered.to_csv(index=False).encode("utf-8")
-    st.download_button("⬇️ Télécharger CSV", data=csv, file_name="datamart_co2_filtered.csv", mime="text/csv")
+    st.subheader("Échantillon de données brutes")
+    st.dataframe(df.sample(min(200, len(df)), random_state=42), use_container_width=True, height=300)
+    csv = df.to_csv(index=False).encode("utf-8")
+    st.download_button("⬇️ Télécharger CSV", data=csv, file_name="obrail_co2_data.csv", mime="text/csv")

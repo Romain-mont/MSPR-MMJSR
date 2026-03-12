@@ -58,8 +58,7 @@ def run_ingestion(clean_tables=True):
         print(f"Erreur de lecture CSV : {e}")
         return
     
-    # NORMALISATION DES COLONNES (compatibilité ancien/nouveau format)
-    # Ancien format: train_type -> Nouveau format: vehicule_type
+    # NORMALISATION DES COLONNES 
     if 'train_type' in df.columns and 'vehicule_type' not in df.columns:
         df = df.rename(columns={'train_type': 'vehicule_type'})
         print("Colonne 'train_type' renommée en 'vehicule_type'")

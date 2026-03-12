@@ -68,8 +68,7 @@ AIRPORTS_DATA_URL = "https://ourairports.com/data/airports.csv"
 
 
 # MAPPING DES COLONNES
-# REQUIRED_COLUMNS = ['origin', 'destination', 'vehicule_type', 'aero_lat', 'aero_long', 
-#                     'station_lat', 'station_long', 'category', 'departure_time', 'arrival_time']
+
 COLUMN_MAPPINGS = {
     "airports": {
         "latitude_deg": "aero_lat",
@@ -345,10 +344,6 @@ def run_extraction():
     """
     print("EXTRACTION COMBINÉE - Début du processus (PySpark)")
     
-    # Nettoyage préalable (optionnel)
-    # shutil.rmtree(MOBILITY_RAW_DIR, ignore_errors=True)
-    # shutil.rmtree(BACKONTRACK_RAW_DIR, ignore_errors=True)
-    # shutil.rmtree(AIRPORTS_RAW_DIR, ignore_errors=True)
     
     success_mobility = extract_mobility_database()
     success_backontrack = extract_backontrack()
