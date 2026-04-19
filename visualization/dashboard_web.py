@@ -48,6 +48,11 @@ def load_data() -> pd.DataFrame:
                   "Jour" if "Avion" not in str(v) else None
     )
     df["route"]      = df["origine"] + " → " + df["destination"]
+    # Clé métier de comparaison: ville -> ville (train et avion comparables)
+    if "origine_ville" in df.columns and "destination_ville" in df.columns:
+        df["city_route"] = df["origine_ville"] + " → " + df["destination_ville"]
+    else:
+        df["city_route"] = df["route"]
     df["co2_par_km"] = df["co2_kg"] / df["distance_km"]
 
     return df
@@ -96,9 +101,10 @@ def bar_co2_intensity(df):
     return fig
 
 def bar_top_economies(df, n=15):
-    trains = df[df["mode"] == "Train"].groupby("route", as_index=False)["co2_kg"].mean().rename(columns={"co2_kg": "co2_train"})
-    avions = df[df["mode"] == "Avion"].groupby("route", as_index=False)["co2_kg"].mean().rename(columns={"co2_kg": "co2_avion"})
-    merged = trains.merge(avions, on="route")
+    trains = df[df["mode"] == "Train"].groupby("city_route", as_index=False)["co2_kg"].mean().rename(columns={"co2_kg": "co2_train"})
+    avions = df[df["mode"] == "Avion"].groupby("city_route", as_index=False)["co2_kg"].mean().rename(columns={"co2_kg": "co2_avion"})
+    merged = trains.merge(avions, on="city_route")
+    merged = merged.rename(columns={"city_route": "route"})
     merged["economie_kg"] = merged["co2_avion"] - merged["co2_train"]
     merged["reduction_pct"] = (merged["economie_kg"] / merged["co2_avion"] * 100).round(1)
     merged = merged[merged["economie_kg"] > 0].nlargest(n, "economie_kg")

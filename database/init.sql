@@ -3,6 +3,8 @@ CREATE TABLE IF NOT EXISTS dim_route (
    route_id SERIAL PRIMARY KEY,
    dep_name VARCHAR(255) NOT NULL,
    arr_name VARCHAR(255) NOT NULL,
+   dep_city VARCHAR(255),
+   arr_city VARCHAR(255),
    distance_km NUMERIC(10,3) NOT NULL,
    is_long_distance BOOLEAN NOT NULL,
    UNIQUE(dep_name, arr_name)

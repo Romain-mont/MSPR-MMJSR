@@ -34,6 +34,8 @@ class TrajetResponse(BaseModel):
 class DataResponse(BaseModel):
     origine: str
     destination: str
+    origine_ville: str
+    destination_ville: str
     distance_km: float
     is_long_distance: bool
     vehicule_type: str
@@ -65,6 +67,8 @@ def get_all_data(limit: int = None):
         SELECT 
             r.dep_name AS origine,
             r.arr_name AS destination,
+            COALESCE(r.dep_city, r.dep_name) AS origine_ville,
+            COALESCE(r.arr_city, r.arr_name) AS destination_ville,
             r.distance_km,
             r.is_long_distance,
             v.label AS vehicule_type,
@@ -92,11 +96,13 @@ def get_all_data(limit: int = None):
             response_list.append(DataResponse(
                 origine=row[0],
                 destination=row[1],
-                distance_km=row[2],
-                is_long_distance=row[3],
-                vehicule_type=row[4],
-                facteur_co2=row[5],
-                co2_kg=row[6]
+                origine_ville=row[2],
+                destination_ville=row[3],
+                distance_km=row[4],
+                is_long_distance=row[5],
+                vehicule_type=row[6],
+                facteur_co2=row[7],
+                co2_kg=row[8]
             ))
         
         return response_list
