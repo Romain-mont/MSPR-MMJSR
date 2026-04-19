@@ -28,6 +28,11 @@ RAW_MOBILITY_DIR    = os.environ.get("RAW_MOBILITY_DIR", "./data/raw/mobility_gt
 RAW_BACKONTRACK_DIR = os.environ.get("RAW_BACKONTRACK_DIR", "./data/raw/backontrack_csv")
 RAW_AIRPORTS_DIR    = os.environ.get("RAW_AIRPORTS_DIR", "./data/raw/airports")
 OUTPUT_DIR          = os.environ.get("OUTPUT_DIR", "./data/staging")
+FINAL_OUTPUT_DIR    = os.environ.get("FINAL_OUTPUT_DIR", OUTPUT_DIR)
+# Répertoire local pour les writes Spark intermédiaires (évite les problèmes Hadoop sur disques externes)
+LOCAL_TMP_DIR       = os.environ.get("LOCAL_TMP_DIR", os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), "..", "data", "tmp_staging"
+))
 
 OUTPUT_AIRPORTS_FILE   = os.environ.get("OUTPUT_AIRPORTS_FILE", "staging_airports.csv")
 OUTPUT_INTERMODAL_FILE = os.environ.get("OUTPUT_INTERMODAL_FILE", "staging_intermodal.csv")
@@ -35,22 +40,72 @@ OUTPUT_FINAL_FILE      = os.environ.get("OUTPUT_FINAL_FILE", "final_routes.csv")
 
 REQUIRED_COLUMNS_AIRPORTS = ["airport_name", "aero_lat", "aero_long", "category", "iata_code", "country_code"]
 
-CO2_FACTORS_PER_100KM = {
-    "TGV": 0.29, "Train Jour": 0.29,
-    "Intercité": 0.9, "Train Nuit": 0.9,
-    "Avion Court": 22.5, "Avion Moyen": 18.45, "Avion Moyen-Long": 16.68, "Avion Long": 17.79,
-    "default": 0.9
+# ── EcoPassenger methodology (UIC/IFEU 2016) ──────────────────────────────────
+# Table 2-3 : CO2 electricity supply per country (kg CO2/kWh)
+_ELEC_CO2_KWH = {
+    "AT": 0.18, "BA": 1.17, "BE": 0.22, "BG": 0.87,
+    "CH": 0.01, "CZ": 0.77, "DE": 0.65, "DK": 0.48,
+    "EE": 1.38, "GR": 0.88, "ES": 0.34, "FI": 0.29,
+    "FR": 0.09, "HR": 0.36, "HU": 0.48, "IE": 0.57,
+    "IT": 0.51, "LT": 0.53, "LU": 0.42, "LV": 0.29,
+    "ME": 0.59, "NL": 0.57, "NO": 0.01, "PL": 1.09,
+    "PT": 0.42, "RO": 0.58, "RS": 1.18, "RU": 0.76,
+    "SE": 0.03, "SI": 0.43, "SK": 0.28, "TR": 0.75,
+    "GB": 0.60,
 }
+_ELEC_CO2_EU_AVG = 0.40  # fallback moyenne européenne
+
+# Table 2-7 : consommation train électrique (Wh/passager-km)
+_TRAIN_WH_PKM = 88.2
+
+# Table 2-9 : kérosène avion (g/siège-km) par borne supérieure de distance
+_AVIA_KEROSENE = [(187.5, 120.5), (312.5, 75.7), (437.5, 60.1), (562.5, 42.7),
+                  (687.5, 38.4), (875.0, 36.0), (1000.0, 33.2), (float("inf"), 19.0)]
+# Load factors avion par borne supérieure de distance
+_AVIA_LOAD = [(375, 0.71), (625, 0.75), (float("inf"), 0.80)]
+# Table 2-10 : facteurs RFI par borne supérieure de distance
+_AVIA_RFI = [(499, 1.0), (624, 1.27), (749, 1.47), (999, 1.60), (float("inf"), 1.87)]
+# Table 2-12 : kérosène CO2 WtW (kg CO2/kg kérosène)
+_KEROSENE_CO2_WTW = 3.78
+
+# Bounding boxes pays : (code, lat_min, lat_max, lon_min, lon_max)
+_COUNTRY_BBOX = [
+    ("LU", 49.4, 50.2,  5.7,  6.5), ("BE", 49.5, 51.5,  2.5,  6.4),
+    ("NL", 50.8, 53.6,  3.3,  7.2), ("CH", 45.8, 47.8,  6.0, 10.5),
+    ("SI", 45.4, 46.9, 13.4, 16.6), ("ME", 41.8, 43.6, 18.4, 20.4),
+    ("SK", 47.7, 49.6, 16.8, 22.6), ("HU", 45.7, 48.6, 16.1, 22.9),
+    ("AT", 46.4, 49.0,  9.5, 17.2), ("CZ", 48.6, 51.1, 12.1, 18.9),
+    ("PT", 36.9, 42.2, -9.5, -6.2), ("IE", 51.4, 55.4,-10.5, -6.0),
+    ("LU", 49.4, 50.2,  5.7,  6.5), ("EE", 57.5, 59.7, 21.5, 28.2),
+    ("LV", 55.7, 58.1, 21.0, 28.2), ("LT", 53.9, 56.4, 21.0, 26.8),
+    ("BA", 42.6, 45.3, 15.7, 19.6), ("RS", 42.2, 46.2, 19.0, 23.0),
+    ("HR", 42.4, 46.6, 13.5, 19.4), ("GR", 35.0, 41.8, 20.0, 26.6),
+    ("BG", 41.2, 44.2, 22.4, 28.6), ("RO", 43.6, 48.3, 20.2, 29.7),
+    ("PL", 49.0, 54.8, 14.1, 24.1), ("DK", 54.6, 57.8,  8.1, 15.2),
+    ("FI", 59.8, 70.1, 20.0, 31.6), ("NO", 57.9, 71.2,  4.5, 31.1),
+    ("SE", 55.3, 69.1, 11.0, 24.2), ("GB", 49.9, 60.9, -8.2,  1.8),
+    ("ES", 36.0, 43.8, -9.3,  3.3), ("IT", 36.6, 47.1,  6.6, 18.5),
+    ("DE", 47.3, 55.1,  5.9, 15.0), ("FR", 41.3, 51.1, -5.1,  9.6),
+    ("TR", 36.0, 42.1, 26.0, 44.8), ("RU", 41.2, 70.0, 28.0,180.0),
+]
 EARTH_RADIUS_KM = 6371.0
 
 INTERMODAL_RADIUS_KM  = 50
 BBOX_MARGIN_DEG       = 1.0
 MIN_PLANE_DISTANCE_KM = 100
+MAX_MOBILITY_PROVIDERS = int(os.environ.get("MAX_MOBILITY_PROVIDERS", "300"))
+# Ex: TARGET_COUNTRIES=FR,DE,CH  → filtre les providers GTFS par préfixe pays
+_tc = os.environ.get("TARGET_COUNTRIES", "")
+TARGET_COUNTRIES = [c.strip().upper() for c in _tc.split(",") if c.strip()] if _tc else []
 
 
 # 2) HELPERS
 def ensure_dir(path: str):
     os.makedirs(path, exist_ok=True)
+
+def safe_rmtree(path: str):
+    if path and os.path.exists(path):
+        shutil.rmtree(path, ignore_errors=True)
 
 def _spark_warmup(df):
     # Matérialise "light" sans scanner tout le dataset, show évite un collect massif
@@ -187,8 +242,11 @@ def get_spark_session():
 
     builder = builder.config("spark.hadoop.fs.file.impl", "org.apache.hadoop.fs.RawLocalFileSystem")
     builder = builder.config("spark.hadoop.fs.file.impl.disable.cache", "true")
+
+    spark_local_dir = os.environ.get("SPARK_LOCAL_DIR", LOCAL_TMP_DIR)
+    builder = builder.config("spark.local.dir", spark_local_dir)
     
-    if not running_in_docker():
+    if running_in_docker():
         builder = builder.config("spark.hadoop.fs.defaultFS", "hdfs://namenode:9000")
     spark = builder.getOrCreate()
     return spark
@@ -207,19 +265,47 @@ def haversine_distance(lat1, lon1, lat2, lon2):
         dist
     ).otherwise(F.lit(None).cast(DoubleType()))
 
-def co2_kg(distance_km, vehicule_type):
-    factor = (
-        F.when(vehicule_type.contains("Avion") & (distance_km <= 1000), F.lit(CO2_FACTORS_PER_100KM["Avion Court"]))
-         .when(vehicule_type.contains("Avion") & (distance_km <= 2000), F.lit(CO2_FACTORS_PER_100KM["Avion Moyen"]))
-         .when(vehicule_type.contains("Avion") & (distance_km <= 5000), F.lit(CO2_FACTORS_PER_100KM["Avion Moyen-Long"]))
-         .when(vehicule_type.contains("Avion"), F.lit(CO2_FACTORS_PER_100KM["Avion Long"]))
-         .when(vehicule_type.isin("Train Jour", "Train Nuit"), F.lit(CO2_FACTORS_PER_100KM["default"]))
-         .otherwise(F.lit(CO2_FACTORS_PER_100KM["default"]))
-    )
-    return F.when(
-        distance_km.isNotNull() & vehicule_type.isNotNull(),
-        (distance_km * factor / 100.0)
-    ).otherwise(F.lit(None).cast(DoubleType()))
+def _lookup_country(lat, lon):
+    """Retourne le code pays ISO2 à partir des coordonnées GPS (bounding boxes)."""
+    if lat is None or lon is None:
+        return None
+    try:
+        lat, lon = float(lat), float(lon)
+    except (ValueError, TypeError):
+        return None
+    if lat == 0.0 and lon == 0.0:
+        return None
+    for cc, lat_min, lat_max, lon_min, lon_max in _COUNTRY_BBOX:
+        if lat_min <= lat <= lat_max and lon_min <= lon <= lon_max:
+            return cc
+    return None
+
+
+@F.udf(returnType=DoubleType())
+def co2_kg(distance_km, vehicule_type, lat, lon):
+    """Calcul CO2 par passager (kg) selon méthodologie EcoPassenger (UIC/IFEU 2016).
+
+    Train électrique : distance × 88.2 Wh/pkm × facteur_pays (kg CO2/kWh) / 1000
+    Avion           : distance × (kérosène_g/skm / load_factor) × 3.78 kg/kg / 1000 × RFI
+    """
+    if distance_km is None or vehicule_type is None:
+        return None
+    try:
+        d = float(distance_km)
+    except (ValueError, TypeError):
+        return None
+    if d <= 0:
+        return None
+
+    if "Avion" in str(vehicule_type):
+        kerosene = next((v for upper, v in _AVIA_KEROSENE if d <= upper), 19.0)
+        lf       = next((v for upper, v in _AVIA_LOAD    if d <= upper), 0.80)
+        rfi      = next((v for upper, v in _AVIA_RFI     if d <= upper), 1.87)
+        return d * (kerosene / lf) * _KEROSENE_CO2_WTW / 1000.0 * rfi
+    else:
+        country  = _lookup_country(lat, lon)
+        elec_co2 = _ELEC_CO2_KWH.get(country, _ELEC_CO2_EU_AVG) if country else _ELEC_CO2_EU_AVG
+        return d * _TRAIN_WH_PKM * elec_co2 / 1000.0
 
 
 # 4) MOBILITY (GTFS)
@@ -232,28 +318,28 @@ def read_mobility_provider(spark, provider_dir: str):
     import gc
     # Checkpoint après chaque gros read_csv
     stops      = read_csv(spark, f"{provider_dir}/stops.txt")
-    stops_path = os.path.join(OUTPUT_DIR, f"staging_{os.path.basename(provider_dir)}_stops.csv")
+    stops_path = os.path.join(LOCAL_TMP_DIR, f"staging_{os.path.basename(provider_dir)}_stops.csv")
     stops.write.mode("overwrite").option("header", "true").csv(stops_path)
     del stops
     spark.catalog.clearCache(); gc.collect()
     stops = spark.read.option("header", "true").csv(stops_path)
 
     stop_times = read_csv(spark, f"{provider_dir}/stop_times.txt")
-    stop_times_path = os.path.join(OUTPUT_DIR, f"staging_{os.path.basename(provider_dir)}_stop_times.csv")
+    stop_times_path = os.path.join(LOCAL_TMP_DIR, f"staging_{os.path.basename(provider_dir)}_stop_times.csv")
     stop_times.write.mode("overwrite").option("header", "true").csv(stop_times_path)
     del stop_times
     spark.catalog.clearCache(); gc.collect()
     stop_times = spark.read.option("header", "true").csv(stop_times_path)
 
     trips      = read_csv(spark, f"{provider_dir}/trips.txt")
-    trips_path = os.path.join(OUTPUT_DIR, f"staging_{os.path.basename(provider_dir)}_trips.csv")
+    trips_path = os.path.join(LOCAL_TMP_DIR, f"staging_{os.path.basename(provider_dir)}_trips.csv")
     trips.write.mode("overwrite").option("header", "true").csv(trips_path)
     del trips
     spark.catalog.clearCache(); gc.collect()
     trips = spark.read.option("header", "true").csv(trips_path)
 
     routes     = read_csv(spark, f"{provider_dir}/routes.txt")
-    routes_path = os.path.join(OUTPUT_DIR, f"staging_{os.path.basename(provider_dir)}_routes.csv")
+    routes_path = os.path.join(LOCAL_TMP_DIR, f"staging_{os.path.basename(provider_dir)}_routes.csv")
     routes.write.mode("overwrite").option("header", "true").csv(routes_path)
     del routes
     spark.catalog.clearCache(); gc.collect()
@@ -286,7 +372,7 @@ def read_mobility_provider(spark, provider_dir: str):
         route_sel_cols.append("route_long_name")
     
     rail_trips = trips.select(*trip_sel).join(rail_routes.select(*route_sel_cols), "route_id", "inner")
-    rail_trips_path = os.path.join(OUTPUT_DIR, f"staging_{os.path.basename(provider_dir)}_rail_trips.csv")
+    rail_trips_path = os.path.join(LOCAL_TMP_DIR, f"staging_{os.path.basename(provider_dir)}_rail_trips.csv")
     rail_trips.write.mode("overwrite").option("header", "true").csv(rail_trips_path)
     del rail_trips
     spark.catalog.clearCache(); gc.collect()
@@ -297,7 +383,7 @@ def read_mobility_provider(spark, provider_dir: str):
         .withColumn("stop_sequence", F.expr("try_cast(stop_sequence as int)"))
         .select(*[c for c in ["trip_id", "stop_id", "stop_sequence", "departure_time", "arrival_time", "route_type", "route_short_name", "route_long_name"] if c in stop_times.columns or c in rail_trips.columns])
     )
-    rail_stop_times_path = os.path.join(OUTPUT_DIR, f"staging_{os.path.basename(provider_dir)}_rail_stop_times.csv")
+    rail_stop_times_path = os.path.join(LOCAL_TMP_DIR, f"staging_{os.path.basename(provider_dir)}_rail_stop_times.csv")
     rail_stop_times.write.mode("overwrite").option("header", "true").csv(rail_stop_times_path)
     del rail_stop_times
     spark.catalog.clearCache(); gc.collect()
@@ -313,7 +399,7 @@ def read_mobility_provider(spark, provider_dir: str):
             F.first("route_long_name", ignorenulls=True).alias("route_long_name"),
         )
     )
-    seqs_path = os.path.join(OUTPUT_DIR, f"staging_{os.path.basename(provider_dir)}_seqs.csv")
+    seqs_path = os.path.join(LOCAL_TMP_DIR, f"staging_{os.path.basename(provider_dir)}_seqs.csv")
     seqs.write.mode("overwrite").option("header", "true").csv(seqs_path)
     del seqs
     spark.catalog.clearCache(); gc.collect()
@@ -330,7 +416,7 @@ def read_mobility_provider(spark, provider_dir: str):
             F.col("st.departure_time").alias("departure_time"),
         )
     )
-    origin_path = os.path.join(OUTPUT_DIR, f"staging_{os.path.basename(provider_dir)}_origin.csv")
+    origin_path = os.path.join(LOCAL_TMP_DIR, f"staging_{os.path.basename(provider_dir)}_origin.csv")
     origin.write.mode("overwrite").option("header", "true").csv(origin_path)
     del origin
     spark.catalog.clearCache(); gc.collect()
@@ -347,7 +433,7 @@ def read_mobility_provider(spark, provider_dir: str):
             F.col("st.arrival_time").alias("arrival_time"),
         )
     )
-    dest_path = os.path.join(OUTPUT_DIR, f"staging_{os.path.basename(provider_dir)}_dest.csv")
+    dest_path = os.path.join(LOCAL_TMP_DIR, f"staging_{os.path.basename(provider_dir)}_dest.csv")
     dest.write.mode("overwrite").option("header", "true").csv(dest_path)
     del dest
     spark.catalog.clearCache(); gc.collect()
@@ -359,7 +445,7 @@ def read_mobility_provider(spark, provider_dir: str):
         .join(dest, "trip_id", "inner")
         .withColumn("shape_distance_km", F.lit(None).cast(DoubleType()))
     )
-    bounds_path = os.path.join(OUTPUT_DIR, f"staging_{os.path.basename(provider_dir)}_bounds.csv")
+    bounds_path = os.path.join(LOCAL_TMP_DIR, f"staging_{os.path.basename(provider_dir)}_bounds.csv")
     bounds.write.mode("overwrite").option("header", "true").csv(bounds_path)
     del bounds
     spark.catalog.clearCache(); gc.collect()
@@ -425,7 +511,7 @@ def read_mobility_provider(spark, provider_dir: str):
          .otherwise(F.col("vehicule_type_base"))
     )
 
-    return (
+    result_df = (
         df.select(
             "origin", "destination", "vehicule_type",
             "station_lat", "station_long", "station_lat_dest", "station_long_dest",
@@ -435,18 +521,41 @@ def read_mobility_provider(spark, provider_dir: str):
         .withColumn("provider", F.lit(provider_name))
     )
 
+    # Matérialise un seul checkpoint final par provider pour éviter de conserver
+    # tous les checkpoints intermédiaires volumineux (stop_times, trips, etc.).
+    provider_final_path = os.path.join(LOCAL_TMP_DIR, f"staging_{provider_name}_final.csv")
+    result_df.write.mode("overwrite").option("header", "true").csv(provider_final_path)
+    result_df = spark.read.option("header", "true").csv(provider_final_path)
+
+    provider_prefix = f"staging_{provider_name}_"
+    final_dir_name = os.path.basename(provider_final_path)
+    for entry in os.listdir(LOCAL_TMP_DIR):
+        if not entry.startswith(provider_prefix):
+            continue
+        if entry == final_dir_name:
+            continue
+        full_path = os.path.join(LOCAL_TMP_DIR, entry)
+        if os.path.isdir(full_path):
+            safe_rmtree(full_path)
+
+    return result_df
+
 def read_all_mobility(spark):
-    """Traite TOUS les providers GTFS présents, sans filtrage par pays.
-    Le filtrage se fait uniquement à l'extraction pour gérer la RAM."""
+    """Traite les providers GTFS présents, filtrés par TARGET_COUNTRIES si défini."""
     if not os.path.exists(RAW_MOBILITY_DIR):
         print(f"Dossier introuvable : {RAW_MOBILITY_DIR}")
         return None
 
     dfs = []
-   
-    all_providers = sorted(os.listdir(RAW_MOBILITY_DIR))[:50]
-    print(f"MODE TEST : Traitement de {len(all_providers)} premiers providers")
-    
+
+    all_providers = sorted(os.listdir(RAW_MOBILITY_DIR))[:MAX_MOBILITY_PROVIDERS]
+
+    if TARGET_COUNTRIES:
+        all_providers = [p for p in all_providers if p[:2].upper() in TARGET_COUNTRIES]
+        print(f"Filtre pays actif : {TARGET_COUNTRIES} → {len(all_providers)} providers GTFS")
+    else:
+        print(f"Traitement de {len(all_providers)} providers GTFS (limite={MAX_MOBILITY_PROVIDERS})")
+
     for provider_name in all_providers:
         p = os.path.join(RAW_MOBILITY_DIR, provider_name)
         if not os.path.isdir(p):
@@ -473,21 +582,21 @@ def read_backontrack(spark):
 
     import gc
     routes = read_csv(spark, files["routes"])
-    routes_path = os.path.join(OUTPUT_DIR, "staging_backontrack_routes.csv")
+    routes_path = os.path.join(LOCAL_TMP_DIR, "staging_backontrack_routes.csv")
     routes.write.mode("overwrite").option("header", "true").csv(routes_path)
     del routes
     spark.catalog.clearCache(); gc.collect()
     routes = spark.read.option("header", "true").csv(routes_path)
 
     trips  = read_csv(spark, files["trips"])
-    trips_path = os.path.join(OUTPUT_DIR, "staging_backontrack_trips.csv")
+    trips_path = os.path.join(LOCAL_TMP_DIR, "staging_backontrack_trips.csv")
     trips.write.mode("overwrite").option("header", "true").csv(trips_path)
     del trips
     spark.catalog.clearCache(); gc.collect()
     trips = spark.read.option("header", "true").csv(trips_path)
 
     stops  = read_csv(spark, files["stops"])
-    stops_path = os.path.join(OUTPUT_DIR, "staging_backontrack_stops.csv")
+    stops_path = os.path.join(LOCAL_TMP_DIR, "staging_backontrack_stops.csv")
     stops.write.mode("overwrite").option("header", "true").csv(stops_path)
     del stops
     spark.catalog.clearCache(); gc.collect()
@@ -508,7 +617,7 @@ def read_backontrack(spark):
     )
 
     df = trips.join(routes.select("route_id", "vehicule_type"), "route_id", "left")
-    df_path = os.path.join(OUTPUT_DIR, "staging_backontrack_joined.csv")
+    df_path = os.path.join(LOCAL_TMP_DIR, "staging_backontrack_joined.csv")
     df.write.mode("overwrite").option("header", "true").csv(df_path)
     del df
     spark.catalog.clearCache(); gc.collect()
@@ -577,7 +686,7 @@ def read_airports(spark):
     latest = sorted(airport_files)[-1]
     import gc
     df = read_csv(spark, latest)
-    airports_path = os.path.join(OUTPUT_DIR, "staging_airports_loaded.csv")
+    airports_path = os.path.join(LOCAL_TMP_DIR, "staging_airports_loaded.csv")
     df.write.mode("overwrite").option("header", "true").csv(airports_path)
     del df
     spark.catalog.clearCache(); gc.collect()
@@ -744,12 +853,18 @@ def generate_plane_routes(df_routes, df_intermodal, min_plane_km=MIN_PLANE_DISTA
 
     dfp = (
         dfp.withColumn("vehicule_type", F.lit("Avion"))
-           .withColumn("co2_kg", co2_kg(F.col("distance_km"), F.col("vehicule_type")))
+           .withColumn("co2_kg", co2_kg(F.col("distance_km"), F.col("vehicule_type"),
+                                        F.col("airport_origin_lat"), F.col("airport_origin_long")))
     )
 
+    # Harmonisation : origin/destination = gares/villes (corridor ferroviaire), infos aéroport en colonnes séparées
     return dfp.select(
-        F.col("airport_origin").alias("origin"),
-        F.col("airport_dest").alias("destination"),
+        F.col("origin").alias("origin"),
+        F.col("destination").alias("destination"),
+        F.col("airport_origin").alias("airport_origin_name"),
+        F.col("airport_dest").alias("airport_dest_name"),
+        F.col("origin").alias("origin_city"),
+        F.col("destination").alias("destination_city"),
         "vehicule_type",
         F.col("airport_origin_lat").alias("station_lat"),
         F.col("airport_origin_long").alias("station_long"),
@@ -769,7 +884,8 @@ def run_transform():
 
     spark = get_spark_session()
     spark.sparkContext.setLogLevel("WARN")
-    ensure_dir(OUTPUT_DIR)
+    ensure_dir(LOCAL_TMP_DIR)
+    ensure_dir(FINAL_OUTPUT_DIR)
 
     df = None
     df_intermodal = None
@@ -788,7 +904,7 @@ def run_transform():
         df = reduce(lambda a, b: a.unionByName(b, allowMissingColumns=True), routes_sources)
 
         # Sauvegarde intermédiaire après union pour libérer la RAM
-        staging_union_path = os.path.join(OUTPUT_DIR, "staging_union.csv")
+        staging_union_path = os.path.join(LOCAL_TMP_DIR, "staging_union.csv")
         print(f"[INFO] Sauvegarde intermédiaire après union → {staging_union_path}")
         df.write.mode("overwrite").option("header", "true").csv(staging_union_path)
         del df
@@ -809,25 +925,39 @@ def run_transform():
 
         import gc
         df = validate_routes(df)
-        validate_path = os.path.join(OUTPUT_DIR, "staging_validated.csv")
+        # Filtre coordonnées nulles ou (0,0) — stop_id non résolu en nom/coords
+        df = df.filter(
+            F.col("station_lat").isNull() | (F.col("station_lat").cast(DoubleType()) != 0.0)
+        ).filter(
+            F.col("station_long").isNull() | (F.col("station_long").cast(DoubleType()) != 0.0)
+        )
+        # Filtre origin/destination qui sont des stop_id numériques (pas des noms de gare)
+        df = df.filter(
+            ~F.col("origin").rlike(r"^\d+$") & ~F.col("destination").rlike(r"^\d+$")
+        )
+        validate_path = os.path.join(LOCAL_TMP_DIR, "staging_validated.csv")
         df.write.mode("overwrite").option("header", "true").csv(validate_path)
         del df
         spark.catalog.clearCache(); gc.collect()
         df = spark.read.option("header", "true").csv(validate_path)
 
         df = normalize_station_col(df, "origin")
-        norm_origin_path = os.path.join(OUTPUT_DIR, "staging_norm_origin.csv")
+        norm_origin_path = os.path.join(LOCAL_TMP_DIR, "staging_norm_origin.csv")
         df.write.mode("overwrite").option("header", "true").csv(norm_origin_path)
         del df
         spark.catalog.clearCache(); gc.collect()
         df = spark.read.option("header", "true").csv(norm_origin_path)
 
         df = normalize_station_col(df, "destination")
-        norm_dest_path = os.path.join(OUTPUT_DIR, "staging_norm_dest.csv")
+        norm_dest_path = os.path.join(LOCAL_TMP_DIR, "staging_norm_dest.csv")
         df.write.mode("overwrite").option("header", "true").csv(norm_dest_path)
         del df
         spark.catalog.clearCache(); gc.collect()
         df = spark.read.option("header", "true").csv(norm_dest_path)
+
+        # Pour les trajets ferroviaires, la ville de comparaison est la route elle-même
+        df = df.withColumn("origin_city", F.col("origin"))
+        df = df.withColumn("destination_city", F.col("destination"))
 
         df = df.persist(StorageLevel.DISK_ONLY)
         _spark_warmup(df)
@@ -851,7 +981,7 @@ def run_transform():
         else:
             df = df.withColumn("distance_km", F.lit(None).cast(DoubleType()))
 
-        dist_path = os.path.join(OUTPUT_DIR, "staging_distance.csv")
+        dist_path = os.path.join(LOCAL_TMP_DIR, "staging_distance.csv")
         df.write.mode("overwrite").option("header", "true").csv(dist_path)
         del df
         spark.catalog.clearCache(); gc.collect()
@@ -864,14 +994,15 @@ def run_transform():
         )
         
         # Sauvegarde après filtre
-        filtered_path = os.path.join(OUTPUT_DIR, "staging_filtered_distance.csv")
+        filtered_path = os.path.join(LOCAL_TMP_DIR, "staging_filtered_distance.csv")
         df.write.mode("overwrite").option("header", "true").csv(filtered_path)
         del df
         spark.catalog.clearCache(); gc.collect()
         df = spark.read.option("header", "true").csv(filtered_path)
 
-        df = df.withColumn("co2_kg", co2_kg(F.col("distance_km"), F.col("vehicule_type")))
-        co2_path = os.path.join(OUTPUT_DIR, "staging_co2.csv")
+        df = df.withColumn("co2_kg", co2_kg(F.col("distance_km"), F.col("vehicule_type"),
+                                            F.col("station_lat"), F.col("station_long")))
+        co2_path = os.path.join(LOCAL_TMP_DIR, "staging_co2.csv")
         df.write.mode("overwrite").option("header", "true").csv(co2_path)
         del df
         spark.catalog.clearCache(); gc.collect()
@@ -882,10 +1013,11 @@ def run_transform():
         if df_air is not None and has_coords:
             df_intermodal = build_intermodal_links(df, df_air)
             if df_intermodal is not None:
-                intermodal_tmp_dir = os.path.join(OUTPUT_DIR, "tmp_staging_intermodal_links")
+                intermodal_tmp_dir = os.path.join(LOCAL_TMP_DIR, "tmp_staging_intermodal_links")
                 df_intermodal.write.mode("overwrite").option("header", "true").csv(intermodal_tmp_dir)
-                out_inter = os.path.join(OUTPUT_DIR, OUTPUT_INTERMODAL_FILE)
+                out_inter = os.path.join(FINAL_OUTPUT_DIR, OUTPUT_INTERMODAL_FILE)
                 _merge_part_csvs(intermodal_tmp_dir, out_inter)
+                safe_rmtree(intermodal_tmp_dir)
                 del df_intermodal
                 spark.catalog.clearCache(); gc.collect()
                 df_intermodal = spark.read.option("header", "true").csv(out_inter)
@@ -899,13 +1031,13 @@ def run_transform():
 
         df_planes = generate_plane_routes(df, df_intermodal) if df_intermodal is not None else None
         if df_planes is not None:
-            planes_path = os.path.join(OUTPUT_DIR, "staging_planes.csv")
+            planes_path = os.path.join(LOCAL_TMP_DIR, "staging_planes.csv")
             df_planes.write.mode("overwrite").option("header", "true").csv(planes_path)
             del df_planes
             spark.catalog.clearCache(); gc.collect()
             df_planes = spark.read.option("header", "true").csv(planes_path)
             df = df.unionByName(df_planes, allowMissingColumns=True)
-            union_planes_path = os.path.join(OUTPUT_DIR, "staging_union_planes.csv")
+            union_planes_path = os.path.join(LOCAL_TMP_DIR, "staging_union_planes.csv")
             df.write.mode("overwrite").option("header", "true").csv(union_planes_path)
             del df
             spark.catalog.clearCache(); gc.collect()
@@ -916,7 +1048,7 @@ def run_transform():
 
         print("Dédup + exports...")
         df = df.dropDuplicates(["origin", "destination", "vehicule_type", "source"])
-        dedup_path = os.path.join(OUTPUT_DIR, "staging_dedup.csv")
+        dedup_path = os.path.join(LOCAL_TMP_DIR, "staging_dedup.csv")
         df.write.mode("overwrite").option("header", "true").csv(dedup_path)
         del df
         spark.catalog.clearCache(); gc.collect()
@@ -924,6 +1056,7 @@ def run_transform():
 
         final_cols = [
             "origin", "destination", "vehicule_type",
+            "origin_city", "destination_city",
             "station_lat", "station_long", "station_lat_dest", "station_long_dest",
             "distance_km", "co2_kg", "departure_time", "arrival_time",
             "source", "provider"
@@ -931,18 +1064,27 @@ def run_transform():
         df = df.select(*[c for c in final_cols if c in df.columns])
 
         # Export final en CSV unique, fusion des parts pour le load
-        out_routes = os.path.join(OUTPUT_DIR, OUTPUT_FINAL_FILE)
-        tmp_routes_dir = os.path.join(OUTPUT_DIR, "tmp_final_routes")
+        out_routes = os.path.join(FINAL_OUTPUT_DIR, OUTPUT_FINAL_FILE)
+        tmp_routes_dir = os.path.join(LOCAL_TMP_DIR, "tmp_final_routes")
         df.write.mode("overwrite").option("header", "true").csv(tmp_routes_dir)
         _merge_part_csvs(tmp_routes_dir, out_routes)
+        safe_rmtree(tmp_routes_dir)
         print(f"Routes exportées : {out_routes}")
 
         if df_air is not None:
-            out_air = os.path.join(OUTPUT_DIR, OUTPUT_AIRPORTS_FILE)
-            tmp_airports_dir = os.path.join(OUTPUT_DIR, "tmp_final_airports")
+            out_air = os.path.join(FINAL_OUTPUT_DIR, OUTPUT_AIRPORTS_FILE)
+            tmp_airports_dir = os.path.join(LOCAL_TMP_DIR, "tmp_final_airports")
             df_air.write.mode("overwrite").option("header", "true").csv(tmp_airports_dir)
             _merge_part_csvs(tmp_airports_dir, out_air)
+            safe_rmtree(tmp_airports_dir)
             print(f"Aéroports exportés : {out_air}")
+
+        # Nettoyage de tous les checkpoints finaux provider devenus inutiles.
+        for entry in os.listdir(LOCAL_TMP_DIR):
+            if entry.startswith("staging_") and entry.endswith("_final.csv"):
+                full_path = os.path.join(LOCAL_TMP_DIR, entry)
+                if os.path.isdir(full_path):
+                    safe_rmtree(full_path)
 
         print("Transformation terminée.")
 

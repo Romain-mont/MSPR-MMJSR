@@ -80,6 +80,13 @@ def run_ingestion(clean_tables=True):
             with engine.begin() as conn:  
                 conn.execute(text("TRUNCATE TABLE fact_em, dim_route, dim_vehicle_type RESTART IDENTITY CASCADE;"))
             print("Tables vidées.")
+
+        # Colonnes ville (présence garantie quel que soit le mode de chargement)
+        with engine.begin() as conn:
+            conn.execute(text("""
+                ALTER TABLE dim_route ADD COLUMN IF NOT EXISTS dep_city VARCHAR(255);
+                ALTER TABLE dim_route ADD COLUMN IF NOT EXISTS arr_city VARCHAR(255);
+            """))
         
         # ETAPE 0.1 : Ajout des contraintes d'unicité (mode incrémental)
         if INCREMENTAL_LOAD:
@@ -101,13 +108,22 @@ def run_ingestion(clean_tables=True):
             print("Contraintes d'unicité vérifiées.")
 
         with engine.connect() as conn:
+            # Compatibilité: si les colonnes ville n'existent pas dans le CSV, fallback sur origin/destination
+            if 'origin_city' not in df.columns:
+                df['origin_city'] = df['origin']
+            if 'destination_city' not in df.columns:
+                df['destination_city'] = df['destination']
+
             # ETAPE A : Remplir DIM_ROUTE (Géographie)
             print("Traitement des Routes...")
-            routes = df.groupby(['origin', 'destination'], as_index=False).agg({
-                'distance_km': 'mean'
-            })
+            routes = df.groupby(['origin', 'destination', 'origin_city', 'destination_city'], as_index=False).agg({'distance_km': 'mean'})
             routes['is_long_distance'] = routes['distance_km'] > 100
-            routes = routes.rename(columns={'origin': 'dep_name', 'destination': 'arr_name'})
+            routes = routes.rename(columns={
+                'origin': 'dep_name',
+                'destination': 'arr_name',
+                'origin_city': 'dep_city',
+                'destination_city': 'arr_city'
+            })
             
             if INCREMENTAL_LOAD:
                 # Mode incrémental : INSERT avec gestion des conflits via pandas + SQL brut
