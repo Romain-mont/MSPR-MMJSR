@@ -137,17 +137,81 @@ def run_extraction_airports():
         return False, duration
 
 
+def run_extraction_sncf_frequentation():
+    log("SNCF FRÉQUENTATION - Démarrage...", "EXTRACT")
+    start = time.time()
+    try:
+        from extraction.extraction import extract_sncf_frequentation
+        success = extract_sncf_frequentation()
+        duration = time.time() - start
+        log(f"SNCF FRÉQUENTATION - {'Terminé' if success else 'Échec'} ({duration:.1f}s)", "SUCCESS" if success else "ERROR")
+        return success, duration
+    except Exception as e:
+        duration = time.time() - start
+        log(f"SNCF FRÉQUENTATION - Erreur: {e}", "ERROR")
+        return False, duration
+
+
+def run_extraction_eurostat_population():
+    log("EUROSTAT POPULATION - Démarrage...", "EXTRACT")
+    start = time.time()
+    try:
+        from extraction.extraction import extract_population_eurostat
+        success = extract_population_eurostat()
+        duration = time.time() - start
+        log(f"EUROSTAT POPULATION - {'Terminé' if success else 'Échec'} ({duration:.1f}s)", "SUCCESS" if success else "ERROR")
+        return success, duration
+    except Exception as e:
+        duration = time.time() - start
+        log(f"EUROSTAT POPULATION - Erreur: {e}", "ERROR")
+        return False, duration
+
+
+def run_extraction_geonames():
+    log("GEONAMES - Démarrage...", "EXTRACT")
+    start = time.time()
+    try:
+        from extraction.extraction import extract_population_geonames
+        success = extract_population_geonames()
+        duration = time.time() - start
+        log(f"GEONAMES - {'Terminé' if success else 'Échec'} ({duration:.1f}s)", "SUCCESS" if success else "ERROR")
+        return success, duration
+    except Exception as e:
+        duration = time.time() - start
+        log(f"GEONAMES - Erreur: {e}", "ERROR")
+        return False, duration
+
+
+def run_extraction_communes_france():
+    log("COMMUNES FRANCE - Démarrage...", "EXTRACT")
+    start = time.time()
+    try:
+        from extraction.extraction import extract_population_communes_france
+        success = extract_population_communes_france()
+        duration = time.time() - start
+        log(f"COMMUNES FRANCE - {'Terminé' if success else 'Échec'} ({duration:.1f}s)", "SUCCESS" if success else "ERROR")
+        return success, duration
+    except Exception as e:
+        duration = time.time() - start
+        log(f"COMMUNES FRANCE - Erreur: {e}", "ERROR")
+        return False, duration
+
+
 def run_extraction_all_parallel(stats: PipelineStats):
     log("PHASE 1: EXTRACTION PARALLÈLE", "INFO")
 
     start = time.time()
     results = {}
 
-    with ThreadPoolExecutor(max_workers=3) as executor:
+    with ThreadPoolExecutor(max_workers=6) as executor:
         futures = {
-            executor.submit(run_extraction_backontrack): "backontrack",
-            executor.submit(run_extraction_airports): "airports",
-            executor.submit(run_extraction_mobility): "mobility",
+            executor.submit(run_extraction_backontrack):         "backontrack",
+            executor.submit(run_extraction_airports):            "airports",
+            executor.submit(run_extraction_mobility):            "mobility",
+            executor.submit(run_extraction_sncf_frequentation): "sncf_frequentation",
+            executor.submit(run_extraction_eurostat_population): "eurostat_population",
+            executor.submit(run_extraction_communes_france):     "communes_france",
+            executor.submit(run_extraction_geonames):            "geonames",
         }
 
         for future in as_completed(futures):
@@ -163,7 +227,8 @@ def run_extraction_all_parallel(stats: PipelineStats):
 
     total_duration = time.time() - start
     success_count = sum(1 for v in results.values() if v)
-    log(f"EXTRACTION - {success_count}/3 sources extraites ({total_duration:.1f}s)", "SUCCESS" if success_count == 3 else "WARN")
+    total = len(results)
+    log(f"EXTRACTION - {success_count}/{total} sources extraites ({total_duration:.1f}s)", "SUCCESS" if success_count == total else "WARN")
     return all(results.values())
 
 

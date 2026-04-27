@@ -1,0 +1,571 @@
+route_id,agency_id,route_short_name,route_long_name,route_type
+12-275-s24-1,1,275,Holzkirchen - Föching - Holzkirchen,3
+12-276-s24-1,1,276,Bad Aibling - Götting - Bruckmühl - Feldkirchen - Aying,3
+12-277-s24-1,1,277,Bad Aibling - Heufeld - Bruckmühl - Feldkirchen - Aying,3
+12-278-s24-1,1,278,(Beyharting) - Großhöhenrain - Ginsham - Bruckmühl,3
+12-311-s24-1,1,311,Bad Tölz - ZOB Isarkai - Oberfischbach - Kurhaus - ZOB Isarkai - Stadtwerke - Bad Tölz,3
+12-312-s24-1,1,312,Bad Tölz - Behördenzentrum - Karwendelsiedlung - ZOB Isarkai - Karwendelsiedlung - Behördenzentrum - Bad Tölz,3
+12-313-s24-1,1,313,Bad Tölz - Friedhof - Im Farchet - Friedhof - Bad Tölz,3
+12-328-s24-1,1,9608,Garmisch-Partenkirchen - Mittenwald - Walchensee - Kochel,3
+12-331-s24-3,1,331,StadtBus Kolbermoor Kolbermoor Bahnhof - Siedlerplatz  - Kolbermoor Bahnhof,3
+12-332-s24-3,1,332,Stadtbus Kolbermoor Kolbermoor Bahnhof - Moorkultur - Kolbermoor Bahnhof,3
+12-333-s24-3,1,333,Stadtbus Kolbermoor Kolbermoor Bahnhof - Hertopark - Schlarbhofen - Kolbermoor Bahnhof,3
+12-334-s24-3,1,334,Stadtbus Kolbermoor Kolbermoor Bahnhof - Schlarbhofen - Hertopark - Kolbermoor Bahnhof,3
+12-335-s24-3,1,335,Stadtbus Kolbermoor Kolbermoor Bahnhof - Conradty-Altenheim - Kolbermoor Bahnhof,3
+12-336-s24-1,1,336,Brannenburg - Raubling - Rohrdorf - Höhenmoos - Pfraundorf,3
+12-337-s24-1,1,337,(Raubling -) Brannenburg - Nußdorf (- Achenmühle),3
+12-338-s24-1,1,338,Windshausen - Nußdorf - Brannenburg - Raubling,3
+12-339-s24-1,1,339,Brannenburg - Raubling - Altenmarkt (Inn) - Winkl,3
+12-340-s24-8,1,340,"(Ellmosen -) Bad Aibling - Kolbermoor - Rosenheim - Rosenheim, Stadtmitte",3
+12-341-s24-8,1,341,Moor-Express Bad Aibling Therme - Bahnhof - Kurpark Bf - Harthausen - Bahnhof - Therme,3
+12-342-s24-1,1,342,Rosenheim - Kolbermoor - Bad Aibling,3
+12-343-s24-1,1,343,Bad Aibling - Au - Bad Feilnbach,3
+12-344-s24-1,1,344,Bad Aibling - Kolbermoor - Großkarolinenfeld,3
+12-345-s24-1,1,345,Bad Aibling - Maxlrain - Hohenthann - Grafing Bahnhof,3
+12-345-s24-3,1,345,Bad Aibling - Maxlrain - Hohenthann - Grafing Bahnhof,3
+12-346-s24-1,1,346,Bad Aibling - Beyharting - Ostermünchen - Tattenhausen - Rosenheim,3
+12-347-s24-2,1,347,"Kiefersfelden, Grenze - Oberaudorf - Brannenburg - Raubling",3
+12-348-s24-1,1,348,(Brannenburg -) Au - Bad Feilnbach - Raubling - Rosenheim,3
+12-349-s24-2,1,349,Wendelstein-Ringlinie Kurs A Bayrischzell - Bad Feilnbach - Brannenburg - Bayrischzell - Fischbachau,3
+12-349-s24-4,1,349,Wendelstein-Ringlinie Kurs A Bayrischzell - Bad Feilnbach - Brannenburg - Bayrischzell - Fischbachau,3
+12-352-s24-1,1,352,Leitzach-/Schlierachtal Ringlinie A Miesbach - Hundham - Fischbachau - Schliersee - Miesbach,3
+12-352-s24-9,1,352,Leitzach-/Schlierachtal Ringlinie A Miesbach - Hundham - Fischbachau - Schliersee - Miesbach,3
+12-353-s24-1,1,353,Holzkirchen - Sachsenkam - Bad Tölz - Lenggries (- Hohenburg),3
+12-353-s24-2,1,353,Holzkirchen - Sachsenkam - Bad Tölz - Lenggries (- Hohenburg),3
+12-354-s24-2,1,354,Tegernsee - Gmund - Wall - Miesbach - Agatharied,3
+12-355-s24-1,1,355,Tegernsee - Gmund - Schliersee - Neuhaus - Fischbachau,3
+12-356-s24-1,1,356,Tegernsee - Rottach-Egern - Wallberg - Kreuth - Stuben,3
+12-357-s24-1,1,357,Tegernsee - Rottach-Egern - Bad Wiessee - Gmund - Waakirchen - Reichersbeuern - Bad Tölz,3
+12-358-s24-1,1,358,Tegernsee - Gmund - Hausham - Miesbach - Irschenberg,3
+12-359-s24-1,1,359,Ringlinie A: Tegernsee - Rottach-Egern - Bad Wiessee - Gmund - Tegernsee,3
+12-360-s24-1,1,360,Tegernsee - Rottach-Egern - Enterrottach - Moni-Alm,3
+12-361-s24-1,1,361,Holzkirchen - Darching - Weyarn - Miesbach - Schliersee,3
+12-362-s24-1,1,362,Schliersee - Neuhaus - Spitzingsee,3
+12-363-s24-1,1,363,Kleinhöhenkirchen - Weyarn - Miesbach,3
+12-364-s24-3,1,364,Bad Tölz - Wackersberg - Arzbach - Lenggries (- Brauneckbahn - Hohenburg),3
+12-364-s24-4,1,364,Bad Tölz - Wackersberg - Arzbach - Lenggries (- Brauneckbahn - Hohenburg),3
+12-365-s24-2,1,365,Moni-Alm - Valepp - Spitzingsee,3
+12-366-s24-2,1,366,Tegernsee - Bad Wiessee - Gmund - Warngau - Holzkirchen,3
+12-367-s24-2,1,367,Holzkirchen - Warngau - Wall - Miesbach,3
+12-368-s24-1,1,368,Holzkirchen - Otterfing - Dietramszell - Bad Tölz,3
+12-369-s24-1,1,369,(Bad Tölz -) Lenggries - Vorderriß - Oswaldhütte - Eng (Tirol),3
+12-390-s24-1,1,390,Tegernsee - Rottach-Egern - Kreuth - Achenkirch - Pertisau,3
+12-391-s24-1,1,391,Bad Tölz - Blombergbahn - Bad Heilbrunn - Penzberg,3
+12-392-s24-2,1,392,(Hohenburg -) Bad Tölz - Bad Heilbrunn - Benediktbeuern - Kochel,3
+12-392-s24-5,1,392,(Hohenburg -) Bad Tölz - Bad Heilbrunn - Benediktbeuern - Kochel,3
+12-393-s24-2,1,9611,Kochel - Großweil - Achrain / Ohlstadt - Murnau,3
+12-394-s24-1,1,9613,Penzberg - Benediktbeuern - Kochel - Schlehdorf,3
+12-395-s24-1,1,395,Lenggries - Wegscheid - Jachenau,3
+12-401-s24-2,1,401,Stadtmitte - Hochschule - Kaserne - Stadtmitte,3
+12-402-s24-3,1,402,Stadtmitte - Bahnhof - Endorfer Au - Am Gries - Bahnhof - Stadtmitte,3
+12-403-s24-5,1,403,Stadtmitte - Bahnhof - Traberhof - Alt-Happing,3
+12-404-s24-4,1,404,Stadtmitte - Unterfürstätt - Küpferling - Stadtmitte,3
+12-405-s24-3,1,405,Stadtmitte - Langenpfunzen - (Pfaffenhofen) - Egarten - Stadtmitte,3
+12-406-s24-2,1,406,Stadtmitte - Klinikum - Erlenau - Stadtmitte,3
+12-407-s24-1,1,407,Stadtmitte - Bahnhof - Heilig Blut - Oberwöhr - Schwaig,3
+12-407-s24-6,1,407,Stadtmitte - Bahnhof - Kalten Eck - Schwaig - Oberwöhr,3
+12-407-s24-7,1,407,Stadtmitte - Bahnhof - Heilig Blut - Oberwöhr - Schwaig,3
+12-408-s24-2,1,408,"Rosenheim, Stadtmitte - Rosenheim - Kolbermoor - Kolbermoor, Siedlerplatz",3
+12-409-s24-1,1,409,"Rosenheim, Stadtmitte - Rosenheim - Aicherpark - Kolbermoor - Kolbermoor, Königseestraße",3
+12-410-s24-2,1,410,Stadtmitte - Kastenau,3
+12-411-s24-2,1,411,Stadtmitte - Rosenheim - Aisingerwies - Aising - Pang - Schwaig - Rosenheim - Stadtmitte,3
+12-412-s24-2,1,412,Stadtmitte - Rosenheim - Schwaig - Pang - Aising - Aisingerwies - Rosenheim - Stadtmitte,3
+12-413-s24-2,1,413,Schülerverkehr Aising - Pang - Schwaig - Aisingerwies,3
+12-413-s24-3,1,413,Schülerverkehr Aising - Pang - Schwaig - Aisingerwies,3
+12-414-s24-1,1,414,Schülerverkehr Stadtmitte - Bahnhof - Aisingerwies - Aising - Pang,3
+12-420-s24-1,1,420,Stadtmitte - Bahnhof - Happing - Kastenau - Stadtmitte,3
+12-421-s24-1,1,421,Stadtmitte - Rosenheim - Aisingerwies - Pang - Schwaig - Rosenheim - Stadtmitte,3
+12-421-s24-4,1,421,Stadtmitte - Rosenheim - Aisingerwies - Pang - Schwaig - Rosenheim - Stadtmitte,3
+12-422-s24-1,1,422,Stadtmitte - Rosenheim - Schwaig - Pang - Aisingerwies - Rosenheim - Stadtmitte,3
+12-422-s24-4,1,422,Stadtmitte - Rosenheim - Schwaig - Pang - Aisingerwies - Rosenheim - Stadtmitte,3
+12-423-s24-1,1,423,Stadtmitte - Rosenheim - Traberhof - Alt-Happing - Rosenheim - Stadtmitte,3
+12-424-s24-1,1,424,Stadtmitte - Unterfürstätt - Küpferling - Stadtmitte,3
+12-426-s24-1,1,426,Stadtmitte - Erlenau - Langenpfunzen - Westerndorf - Kaserne - Stadtmitte,3
+12-429-s24-1,1,429,"Rosenheim, Stadtmitte - Rosenheim - Kolbermoor - Kolbermoor, Königsseestr.",3
+12-431-s24-3,1,431,Stadtbus Wasserburg Badria - Stadt Busbahnhof - Wasserburg Bf (Reitmehring),3
+12-432-s24-1,1,432,Wasserburg - Edling - Pfaffing - Rettenbach,3
+12-433-s24-1,1,9413,Wasserburg Stadt - Weiglham - (Frabertsham) - Schnaitsee - Waldhausen,3
+12-434-s24-1,1,434,Wasserburg Stadt - Halfing - Bad Endorf - Prien,3
+12-434-s24-4,1,434,Wasserburg Stadt - Halfing - Bad Endorf - Prien,3
+12-434-s24-5,1,434,Wasserburg Stadt - Halfing - Bad Endorf - Prien,3
+12-435-s24-1,1,435,Rosenheim - Vogtareuth - Griesstätt - Wasserburg Stadt,3
+12-435-s24-3,1,435,Rosenheim - Vogtareuth - Griesstätt - Wasserburg Stadt,3
+12-436-s24-1,1,436,Rosenheim - Pfaffenhofen - Rott a. Inn - Attel - Wasserburg Bf (Reitmehring) - Wasserburg Stadt,3
+12-437-s24-1,1,437,Wasserburg Stadt - Wasserburg Bf (Reitmehring) - Ebersberg - Grafing Bahnhof,3
+12-438-s24-1,1,9441,Trostberg - Altenmarkt - Obing - Kirchensur - Wasserburg Stadt,3
+12-439-s24-1,1,439,Wasserburg Stadt - Eiselfing - Evenhausen - Amerang,3
+12-439-s24-2,1,439,Wasserburg Stadt - Eiselfing - Evenhausen - Amerang,3
+12-467-s24-1,1,9410,Gars - Hohenlinden - Forstinning - Max-Weber-Platz,3
+12-481-s24-1,1,481,Ortsverkehr Prien Bahnhof - (Osternach) - Hafen - Harras - Hafen - Bahnhof,3
+12-482-s24-1,1,482,"Wildbichl - Sachrang - Aschau - Bernau - Bernau-Felden, Schiff",3
+12-482-s24-5,1,482,"Niederndorf (Tirol) - Sachrang - Aschau - Bernau - Bernau-Felden, Schiff",3
+12-483-s24-1,1,9480,Amerang - Obing - Pittenhart - Bad Endorf / Prien,3
+12-484-s24-1,1,9520,Traunstein - Chieming - Seebruck - Rimsting - Prien,3
+12-485-s24-2,1,9505,Reit im Winkl - Marquartstein - Bernau - Prien,3
+12-486-s24-5,1,9586,Traunstein - Bernau - Prien - Seebruck - Traunstein,3
+12-488-s24-1,1,488,Bad Endorf - Hemhof - Eggstätt - Rimsting - Prien,3
+12-489-s24-1,1,489,Riedering - Söllhuben - Prien,3
+12-490-s24-1,1,490,Rosenheim - Raubling - Altenmarkt (Inn) - Nußdorf (Inn) - Windshausen,3
+12-490-s24-11,1,490,Rosenheim - Raubling - Altenmarkt (Inn) - Nußdorf (Inn) - Windshausen,3
+12-491-s24-1,1,491,Rosenheim - Prutting - Krottenmühl - Bad Endorf - Prien,3
+12-492-s24-2,1,492,Rosenheim - Prutting - Halfing - Höslwang - Amerang,3
+12-493-s24-1,1,493,Rosenheim - Lauterbach - Achenmühle - Grainbach - Roßholzen,3
+12-493-s24-2,1,493,Rosenheim - Lauterbach - Achenmühle - Grainbach - Roßholzen,3
+12-494-s24-1,1,494,Rosenheim - Rohrdorf - Frasdorf - Prien,3
+12-495-s24-1,1,495,Rosenheim - Großkarolinenfeld - Tattenhausen,3
+12-496-s24-1,1,496,Rosenheim - Riedering - Söllhuben - Frasdorf - Aschau,3
+12-497-s24-1,1,497,Rosenheim - Stephanskirchen - Riedering - Moosen - Mauerkirchen - Prien,3
+12-497-s24-2,1,497,Rosenheim - Stephanskirchen - Riedering - Moosen - Mauerkirchen - Prien,3
+12-498-s24-1,1,498,Rosenheim - Schloßberg - Stephanskirchen - Baierbach,3
+12-498-s24-2,1,498,Rosenheim - Schloßberg - Stephanskirchen - Baierbach,3
+12-588-s24-1,1,9411,Wasserburg - Soyen - Haag (- Maitenbeth / Oberornau),3
+16-400-0-s24-4,1,4000,Aying - Egmating - Glonn - Baiern,715
+16-480-0-s24-2,1,4800,Grafing Bahnhof - Bruck - Moosach - Glonn - Baiern,715
+16-490-0-s24-2,1,4900,Neuperlach Süd / Zorneding - Oberpframmern - Egmating - Glonn - Baiern,715
+16-700-0-s24-2,1,7000,Hebertshausen - Schwabhausen - Bachern - Dachau,715
+16-701-0-s24-1,1,7010,Vierkirchen-Esterhofen Ost - Giebig - Weichs - Ainhofen,715
+16-702-0-s24-1,1,7020,Röhrmoos - Haimhausen - Lohhof,715
+16-703-0-s24-1,1,7030,Maisach - Sulzemoos - Odelzhausen - Erdweg,715
+16-704-0-s24-1,1,7040,Haag - Wollomoos - Altomünster  - Hohenzell - Altomünster,715
+16-705-0-s24-1,1,7050,"Schwabhausen - Erdweg - Markt Indersdorf - Ried, Nord",715
+16-706-0-s24-1,1,7060,Markt Indersdorf - Langenpettenbach - Hilgertshausen,715
+16-707-0-s24-1,1,7070,Petershausen P+R-Platz - Jetzendorf - Hilgertshausen - Tandern,715
+16-708-0-s24-1,1,7080,Korridor A Markt Indersdorf - Ebersbach - Weichs - Petershausen,715
+16-709-0-s24-1,1,7090,Hebertshausen - Röhrmoos - Hebertshausen,715
+16-710-0-s24-2,1,7100,Korridor A Dachau - Bergkirchen - Bachern,715
+16-800-0-s24-1,1,8000,MVV-RufTaxi Fürstenfeldbruck / Emmering,715
+16-820-0-s24-1,1,8200,MVV-RufTaxi Landsberied / Jesenwang / Adelshofen / Moorenweis,715
+16-830-0-s24-1,1,8300,MVV-RufTaxi Gernlinden / Olching / Puchheim / Gröbenzell,715
+16-840-0-s24-2,1,8400,MVV-RufTaxi Alling / Schöngeising Grafrath / Türkenfeld,715
+16-850-0-s24-3,1,8500,MVV-RufTaxi Fürstenfeldbruck / Alling / Eichenau / Germering-Unterpfaffenhofen,715
+16-870-0-s24-1,1,8700,MVV-RufTaxi Maisach / Unterschweinbach / Egenhofen / Pfaffenhofen a.d. Glonn,715
+16-870-0-s24-2,1,8700,MVV-RufTaxi Maisach / Unterschweinbach / Egenhofen / Pfaffenhofen a.d. Glonn,715
+16-880-0-s24-1,1,8800,MVV-RufTaxi Mammendorf / Oberschweinbach / Hattenhofen / Althegnenberg / Mittelstetten,715
+18-501-0-s24-2,1,5010,Moosburg - Langenpreising - Wartenberg - Erding,715
+18-502-0-s24-2,1,5020,Wartenberg - Langenpreising - Eitting - Erding,715
+18-505-0-s24-1,1,5050,Mittbach - Isen - Markt Schwaben,715
+18-540-3-s24-1,1,5403,"Dorfen, Bahnhof - Taufkirchen (Vils), Busbahnhof",715
+18-562-1-s24-2,1,5621,Taufkirchen (Vils) - Hohenpolding - Schröding - Sulding - Taufkirchen (Vils),715
+18-567-0-s24-1,1,5670,Walpertskirchen - Wörth - Pretzen - Erding,715
+18-568-0-s24-1,1,5680,Markt Schwaben - Finsing - Moosinning - Klinikum - Erding,715
+18-600-1-s24-1,1,6001,Freising - Pettenbrunn - Itzling - Haindlfing - Garten,715
+18-600-2-s24-1,1,6002,Freising - Sünzhausen - Pallhausen,715
+18-600-3-s24-1,1,6003,Freising - Dürneck - Achering - Pulling,715
+18-600-4-s24-1,1,6004,Freising - Altenhausen - Edenhofen - Zellhausen,715
+19-210-s24-5,1,210,"Brunnthal, Zusestraße - Ottobrunn - Neuperlach Süd",701
+19-211-s24-2,1,211,Putzbrunn - Isarweg - Neubiberg - Neuperlach Süd,701
+19-211-V-s24-1,1,211V,"Neubiberg, Realschule - Neubiberg - Unterbiberg",701
+19-211-W-s24-1,1,211W,"Solalinden - Ottobrunn, Karl-Stieler-Str. - Riemerling, Th.-Heuss-Str. - Solalinden - Putzbrunn",701
+19-212-s24-3,1,212,Grasbrunn - Putzbrunn - Ottobrunn - Neubiberg - Neuperlach Süd,701
+19-214-s24-5,1,214,"Riemerling, Altenheim - Ottobrunn - Hohenbrunn",701
+19-214-V-s24-1,1,214V,"Ottobrunn, Einsteinstraße - Ottobrunn - Neubiberg, Realschule",701
+19-215-s24-1,1,215,Lohhof Süd - Sportpark - Unterschleißheim Ost,701
+19-216-s24-1,1,216,"Taufkirchen, Hugo-Junkers-Str. - Höhenkirchen-Sieg. - Brunnthal - Hofolding - Faistenhaar",701
+19-216-V-s24-1,1,216V,"Neubiberg, Realschule - Höhenkirchen-Sieg. - Brunnthal - Faistenhaar, Waldsiedlung / Hofolding",701
+19-217-s24-1,1,217,Neuperlach Süd - Unterbiberg - Unterhaching,701
+19-218-s24-2,1,218,Unterschleißheim West - Gewerbegebiet - Lohhof Süd,701
+19-219-s24-1,1,219,"Garching-Hochbrück - Unterschleißheim Ost - Unterschleißheim, Business Campus Süd",701
+19-219-V-s24-1,1,219V,"Hochbrück, Jahnstr. - Lohhof, Sportpark",701
+19-220-s24-3,1,220,"Brunnthal, Zusestraße - Winning - Unterhaching - Sankt-Quirin-Platz - Giesing",701
+19-220-V-s24-1,1,220V,Unterhaching - Fasanenpark,701
+19-221-s24-1,1,221,"Unterhaching - Ottobrunn - München, Waldheimplatz",701
+19-222-s24-1,1,222,Neuperlach Süd - Brunnthal Nord - Deisenhofen West - Höllriegelskreuth,701
+19-222-s24-10,1,222,Neuperlach Süd - Brunnthal Nord - Deisenhofen West - Höllriegelskreuth,701
+19-222-s24-8,1,222,Neuperlach Süd - Brunnthal Nord - Deisenhofen West - Höllriegelskreuth,701
+19-222-s24-9,1,222,Neuperlach Süd - Brunnthal Nord - Deisenhofen West - Höllriegelskreuth,701
+19-222-V-s24-1,1,222V,Bergham/Taufkirchen - Oberhaching - Grünwald - Pullach/Straßlach,701
+19-222-V-s24-2,1,222V,Bergham/Taufkirchen - Oberhaching - Grünwald - Pullach/Straßlach,701
+19-223-s24-1,1,223,"Sauerlach, Mühlweg - Sauerlach - Arget",701
+19-224-s24-1,1,224,"Unterhaching, Schule am Sportpark - Unterhaching - Taufkirchen - Deisenhofen Ost - Oberhaching, Kugler Alm",701
+19-225-s24-2,1,225,Taufkirchen - Gewerbegebiet Potzham,701
+19-226-s24-1,1,226,Sauerlach - Altkirchen - Deisenhofen Ost,701
+19-226-s24-2,1,226,Sauerlach - Altkirchen - Deisenhofen Ost,701
+19-227-s24-3,1,227,Ortsbus Oberhaching,701
+19-229-s24-1,1,229,"Ottobrunn, Phönix-Bad - Karl-Stieler-Str. - Neubiberg - Neuperlach Süd",701
+19-230-s24-4,1,230,Haar - Feldkirchen - Ismaning - Garching - Forschungszentrum,701
+19-230-V-s24-1,1,230V,"Garching, Untere Straßäcker - Ismaning",701
+19-231-s24-1,1,231,Ismaning - Unterföhring - Studentenstadt,701
+19-231-V-s24-1,1,231V,"Unterföhring, Siedlerstraße - Ismaning",701
+19-232-s24-2,1,232,Ortsbus Unterföhring,701
+19-233-s24-1,1,233,"Studentenstadt - Unterföhring, Gewerbegebiet - Unterföhring",701
+19-234-s24-1,1,234,Messestadt West - Feldkirchen - Aschheim - Unterföhring,701
+19-234-V-s24-2,1,234V,"Messestadt Ost - Feldkirchen - Aschheim, Realschule",701
+19-236-s24-2,1,236,Fischerhäuser - Ismaning - Waldorfschule,701
+19-236-s24-8,1,236,Fischerhäuser - Ismaning - Waldorfschule,701
+19-240-s24-1,1,240,"Höhenkirchen-Sieg. - Harthausen - Grasbrunn - Neukeferloh, Bahnhofstr.",701
+19-240-V-s24-2,1,240V,Harthausen - Grasbrunn - Neukeferloh - Vaterstetten / Haar,701
+19-240-V-s24-5,1,240V,Harthausen - Grasbrunn - Neukeferloh - Vaterstetten / Haar,701
+19-241-s24-9,1,241,"Haar - Ottobrunn - Taufkirchen - Taufkirchen, Friedhof",701
+19-242-s24-1,1,242,Haar - Ottendichl -  Gronsdorf,701
+19-242-V-s24-1,1,242V,Gronsdorf - Ottendichl -  Haar,701
+19-243-s24-1,1,243,"Haar, Lise-Meitner-Weg - Haar - Neukeferloh, Ostring - Baldham, Realschule",701
+19-244-s24-1,1,244,"Taufkirchen, Hugo-Junkers-Straße - Höhenkirchen-Sieg. - Brunnthal - Sauerlach",701
+19-258-s24-1,1,258,"Lochham, Starnberger Str. - Lochham - Gräfelfing, Rathaus - Planegg - Gräfelfing",701
+19-258-s24-6,1,258,"Lochham, Starnberger Str. - Lochham - Gräfelfing, Rathaus - Planegg - Gräfelfing",701
+19-259-s24-2,1,259,"Pasing Bf - Gräfelfing, Am Haag - Martinsried",701
+19-260-s24-1,1,260,Germering-Unterpfaffenhofen - Planegg - Fürstenried West,701
+19-260-s24-2,1,260,Germering-Unterpfaffenhofen - Planegg - Fürstenried West,701
+19-260-V-s24-2,1,260V,"Neuried, Hainbuchenring - Planegg Gymnasium",701
+19-261-s24-2,1,261,"Neuried, Hainbuchenring - Fürstenried West",701
+19-262-s24-2,1,262,Messestadt Ost - Feldkirchen - Kirchheim - Pliening - Neufinsing,701
+19-263-s24-1,1,263,Messestadt West - Riem Dornach - Aschheim - Kirchheim - Heimstetten Nord - Feldkirchen,701
+19-263-s24-9,1,263,Messestadt West - Riem Dornach - Aschheim - Kirchheim - Heimstetten Nord - Feldkirchen,701
+19-263-V-s24-16,1,263V,"Messestadt Ost - Feldkirchen - Kirchheim - Aschheim, Realschule - Riem Dornach - Messestadt West",701
+19-263-V-s24-2,1,263V,"Messestadt Ost - Feldkirchen - Kirchheim - Aschheim, Realschule - Riem Dornach - Messestadt West",701
+19-264-s24-1,1,264,Messestadt West - Dornach Gewerbegebiet - Riem Dornach,701
+19-265-s24-2,1,265,Pasing Bf - Gräfelfing - Steinkirchen - Planegg,701
+19-266-s24-1,1,266,Planegg - Martinsried - Klinikum Großhadern,701
+19-266-s24-8,1,266,Planegg - Martinsried - Klinikum Großhadern,701
+19-267-s24-1,1,267,Altenburgstr. - Lochham - Martinsried - Fürstenried West,701
+19-267-V-s24-1,1,267V,"Neuried, Rathaus - Martinsried - Pasing, Gymnasium",701
+19-268-s24-1,1,268,Waldfriedhof - Großhadern - Gräfelfing,701
+19-268-s24-7,1,268,Waldfriedhof - Großhadern - Gräfelfing,701
+19-269-s24-1,1,269,"Neuried, Maxhofweg - Klinikum Großhadern",701
+19-270-s24-1,1,270,Höllriegelskreuth - Pullach - Georgenstraße - Solln,701
+19-270-s24-2,1,270,Höllriegelskreuth - Pullach - Georgenstraße - Solln,701
+19-270-V-s24-1,1,270V,"München, Siemensallee - Pullach, Gartenstr. / Rathaus",701
+19-271-s24-1,1,271,Dietramszell - Straßlach - Höllriegelskreuth,701
+19-271-s24-11,1,271,Dietramszell - Straßlach - Höllriegelskreuth,701
+19-271-s24-7,1,271,Dietramszell - Straßlach - Höllriegelskreuth,701
+19-271-V-s24-1,1,271V,"Egling - Straßlach - Grünwald, Gymnasium",701
+19-271-V-s24-5,1,271V,"Egling - Straßlach - Grünwald, Gymnasium",701
+19-272-N-s24-1,1,N272,Nachtbuslinie Grünwald,3
+19-290-s24-2,1,290,Stadtbus Garching Untere Straßäcker - Garching-Hochbrück - Hochbrück,3
+19-290-V-s24-2,1,290V,"Hochbrück, Jahnstr. - Prof.-Angermair-Ring",3
+19-291-s24-1,1,291,Dachau - Oberschleißheim - Unterschleißheim West,701
+19-292-s24-4,1,292,Garching-Forschungszentrum - Garching - Garching-Hochbrück - Oberschleißheim - Sonnenstraße,701
+19-293-s24-1,1,293,Dirnismaning - Garching,701
+19-294-s24-1,1,294,Am Hart - Helmholtz-Zentrum - Garching-Hochbrück,701
+19-295-s24-1,1,295,Am Hart - Helmholtz-Zentrum - Oberschleißheim,701
+19-299-s24-1,1,299,"(Lohhof, Schulzentrum) - Unterschleißheim West - Riedmoos",701
+19-301-s24-1,1,301,Wolfratshausen -  Farchet B11 - Waldram - Stobäusstraße - Wolfratshausen,3
+19-302-s24-1,1,302,Wolfratshausen - Stobäusstraße - Waldram - Farchet B11 - Wolfratshausen,3
+19-310-s24-1,1,310,Stadtbus Geretsried Steiner Ring Süd - Schulzentrum - Fasanenweg - Lilienstraße,3
+19-310-s24-2,1,310,Stadtbus Geretsried Steiner Ring Süd - Schulzentrum - Fasanenweg - Lilienstraße,3
+19-370-s24-1,1,370,"Geretsried, Stein - Feuerwehrschule - Fasanenweg - Wolfratshausen",701
+19-370-V-s24-1,1,370V,"Geretsried, Stein - Schulzentrum - Wolfratshausen",701
+19-372-s24-1,1,372,Geretsried - Beuerberg - Eurasburg - Wolfratshausen,701
+19-373-s24-1,1,373,Seeshaupt - Münsing - Wolfratshausen,701
+19-373-V-s24-1,1,373V,Ammerland/Ambach - Münsing - Wolfratshausen,701
+19-374-s24-1,1,374,Penzberg - Beuerberg - Königsdorf - Wolfratshausen,701
+19-375-s24-1,1,375,Endlhausen - Egling - Wolfratshausen,701
+19-375-V-s24-1,1,375V,"Neufahrn - Deining - Egling - Ascholding - Geretsried, Schulzentrum",701
+19-376-s24-1,1,376,Bad Heilbrunn - Schönrain - Geretsried - Wolfratshausen,701
+19-377-s24-1,1,377,Bad Tölz - Ascholding - Egling - Wolfratshausen,701
+19-377-V-s24-1,1,377V,Egling  - Wolfratshausen - Geretsried,701
+19-378-s24-1,1,378,"Geretsried, Stein - Am Stern - Johannisplatz - Lilienstr. (- Gelting) - Wolfratshausen",701
+19-379-s24-2,1,379,Bad Tölz - Geretsried - Wolfratshausen,701
+19-379-V-s24-1,1,379V,Wolfratshausen - Königsdorf - (Bad Tölz),701
+19-381-s24-1,1,381,Deisenhofen Ost - Endlhausen - Dietramszell - Ascholding - Geretsried,701
+19-381-s24-2,1,381,Deisenhofen Ost - Endlhausen - Dietramszell - Ascholding - Geretsried,701
+19-381-V-s24-1,1,381V,"Dietramszell - Ascholding, Kirche - Geretsried, Schulzentrum",701
+19-381-V-s24-2,1,381V,"Dietramszell - Ascholding, Kirche - Geretsried, Schulzentrum",701
+19-396-1-s24-3,1,396,Bergbus München Ostbahnhof - Bayrischzell - Hinterthiersee,3
+19-396-2-s24-3,1,396,Bergbus München Ostbahnhof - Bayrischzell - Hinterthiersee,3
+19-440-s24-7,1,440,"Glonn - Moosach / Bruck - Grafing Bahnhof (- Grafing, Gymnasium/Ebersberg, Realschule)",701
+19-442-s24-2,1,442,"Grafing Bahnhof - Ebersberg - Kirchseeon - Eglharting, Westring (- Buch)",701
+19-443-s24-1,1,443,Steinhöring - Frauenneuharting - Tulling - Abersdorf - Steinhöring,701
+19-444-s24-2,1,444,Grafing Bahnhof - Frauenneuharting - Aßling - Rott am Inn - Griesstätt,701
+19-444-V-s24-3,1,444V,"Ebersberg, Realschule - Schalldorf / Moos - Emmering - Ostermünchen",701
+19-445-s24-1,1,445,Ebersberg - Hohenlinden - Forstern - Erding Forstern - Erding,701
+19-446-s24-3,1,446,(Poing Nord -) Markt Schwaben - Anzing - (Hohenlinden -) Ebersberg,701
+19-446-V-s24-1,1,446V,Markt Schwaben - Forstinning / Anzing - Niederried,701
+19-447-s24-1,1,447,"Aßling, Rathaus - Aßling - Oberelkofen - Grafing Bahnhof",701
+19-448-s24-1,1,448,Grafing Bf - Grafing Öxinger Platz - Oberndorf - Ebersberg Gewerbegebiet Nord - Grafing Bf,701
+19-451-s24-2,1,451,Vaterstetten - Sportzentrum - Baldham Nord - Karwendelplatz - Vaterstetten,701
+19-452-s24-1,1,452,Vaterstetten - Baldham Dorf - Weißenfeld - Parsdorf - Grub Süd,701
+19-453-s24-2,1,453,Glonn - Egmating - Oberpframmern - Putzbrunn - Neuperlach Süd,701
+19-454-s24-4,1,454,Kirchseeon - Moosach - Glonn - Egmating - Höhenkirchen-Siegertsbrunn,701
+19-455-s24-3,1,455,Antholing - Glonn - Oberpframmern - Putzbrunn - Neuperlach Süd,701
+19-456-s24-4,1,456,Zorneding - Oberpframmern - Egmating - Höhenkirchen-Siegertsbrunn,701
+19-459-s24-2,1,459,Hohenlinden - Anzing - Poing Süd - Parsdorf - Messestadt Ost,701
+19-460-s24-1,1,460,Poing Nord - Grub Nord - Pliening - Gelting - Poing Nord,701
+19-461-s24-1,1,461,Poing Nord - Anzing - Obelfing,701
+19-462-s24-1,1,462,"Poing Süd - Poing, Rathaus Süd  - Angelbrechting - Poing Süd",701
+19-463-s24-1,1,463,Markt Schwaben - Pliening - Poing Nord - Pliening - Markt Schwaben,701
+19-463-V-s24-1,1,463V,"Poing, Margeritenstraße - Pliening, Herdweg",701
+19-464-s24-1,1,464,Poing Nord - Mitterfeldring/Stahlgruber - Bergfeldsee - Poing Nord,701
+19-465-s24-2,1,465,Poing Süd - Neufarn - Anzing - Baldham Nord,701
+19-465-V-s24-2,1,465V,"Baldham, Realschule / Nord - Anzing - Neufarn - Poing Blumenstraße",701
+19-466-s24-1,1,466,Parsdorf Posthalterring - Weißenfeld - Hergolding - Baldham Dorf - Baldham Nord,701
+19-466-V-s24-1,1,466V,"Baldham Nord - Hergolding - Parsdorf, Dorfplatz",701
+19-469-s24-3,1,469,(Ebersberg -) Hohenlinden - Forstern - Forstinning - Markt Schwaben,701
+19-469-V-s24-1,1,469V,Markt Schwaben - Forstinning / Hohenlinden / Preisendorf,701
+19-501-s24-10,1,501,Gammelsdorf - Moosburg - Langenpreising - Wartenberg - Erding,701
+19-501-s24-9,1,501,Gammelsdorf - Moosburg - Langenpreising - Wartenberg - Erding,701
+19-501-V-s24-8,1,501V,Gammelsdorf - Moosburg / Wartenberg - Erding,701
+19-502-s24-3,1,502,Wartenberg - Langenpreising - Berglern - Erding,701
+19-502-s24-4,1,502,Wartenberg - Langenpreising - Berglern - Erding,701
+19-502-V-s24-1,1,502V,"Mitterlern - Eichenkofen - Erding, K.-Aigner-Gymnasium",701
+19-505-s24-3,1,505,Hohenlinden - Mittbach - Isen - Markt Schwaben,701
+19-505-V-s24-1,1,505V,"Pastetten, Rathaus  - Markt Schwaben, Schule",701
+19-507-s24-5,1,507,Markt Schwaben - Ottenhofen - Notzing - Erding,701
+19-507-s24-6,1,507,Markt Schwaben - Ottenhofen - Notzing - Erding,701
+19-511-s24-3,1,511,"Erding - Notzing/Oberding - Schwaig - Freising, Berufsschule/Obervellacher Str. - Freising",701
+19-511-s24-6,1,511,"Erding - Notzing/Oberding - Schwaig - Freising, Berufsschule/Obervellacher Str. - Freising",701
+19-511-V-s24-1,1,511V,"Erding, Klinikum Nord - Berufsschule - Niederding - Schwaig",701
+19-511-V-s24-2,1,511V,"Erding, Klinikum Nord - Berufsschule - Niederding - Schwaig",701
+19-512-s24-2,1,512,"Erding - Oberding - Schwaig - Flughafen München, MAC/Terminal 1",701
+19-512-V-s24-3,1,512V,Oberding - Niederding - Klinikum Süd - Erding / Maria Thalheim,701
+19-515-s24-11,1,515,"Hallbergmoos - Notzing - Erding, Gewerbegebiet West - Berufsschule - Erding",701
+19-515-s24-9,1,515,"Hallbergmoos - Notzing - Erding, Gewerbegebiet West - Berufsschule - Erding",701
+19-520-s24-1,1,520,Erding - Pretzen - Altenerding - Gewerbegebiet West - Klinikum,701
+19-530-s24-1,1,530,Erding - Williamsville - Am Stadion - Brauerei - Erding,701
+19-530-s24-3,1,530,Erding - Williamsville - Am Stadion - Brauerei - Erding,701
+19-531-s24-1,1,531,Erding - Klinikum - Neuer Friedhof (Therme) - Moosinning - Ismaning,701
+19-531-s24-2,1,531,Erding - Klinikum - Neuer Friedhof (Therme) - Moosinning - Ismaning,701
+19-531-V-s24-1,1,531V,"Oberding, Schule - Moosinning - Eichenried - Zengermoos",701
+19-540-s24-1,1,540,Erding - Brauerei - Am Stadion - Williamsville - Erding,701
+19-540-s24-3,1,540,Erding - Brauerei - Am Stadion - Williamsville - Erding,701
+19-540-V-s24-1,1,540V,"Erding, Brauerstr. - Erding - Erding, Berufsschule",701
+19-540-V-s24-2,1,540V,"Erding, Brauerstr. - Erding - Erding, Berufsschule",701
+19-550-s24-1,1,550,Erding - Altenerding - Therme Erding - Stadtmitte - Erding,701
+19-560-s24-1,1,560,Erding - Stadtmitte - Landratsamt - Altenerding - Erding,701
+19-561-s24-2,1,561,Wartenberg - Kirchberg - Steinkirchen - Fraunberg - Erding,701
+19-561-s24-4,1,561,Wartenberg - Kirchberg - Steinkirchen - Fraunberg - Erding,701
+19-562-s24-1,1,562,"Taufkirchen (Vils), Gewerbegebiet - Inning am Holz - Erding",701
+19-562-s24-2,1,562,"Taufkirchen (Vils), Gewerbegebiet - Inning am Holz - Erding",701
+19-562-V-s24-1,1,562V,Erding - Mauggen - Bockhorn - Grünbach,701
+19-564-s24-1,1,564,"Buchbach - Dorfen, Bahnhof - Kirchasch - Ammersdorf - Erding",701
+19-564-s24-2,1,564,"Buchbach - Dorfen, Bahnhof - Kirchasch - Ammersdorf - Erding",701
+19-564-V-s24-1,1,564V,Unterstrogn - Bockhorn - Erding - Klinikum,701
+19-565-s24-1,1,565,"Dorfen, Bahnhof - Landersdorf - Kirchasch - Papferding - Erding",701
+19-565-s24-2,1,565,"Dorfen, Bahnhof - Landersdorf - Kirchasch - Papferding - Erding",701
+19-567-s24-1,1,567,"Dorfen, Marienplatz  - St. Wolfgang - Isen - Walpertskirchen - Erding",701
+19-567-s24-3,1,567,"Dorfen, Marienplatz  - St. Wolfgang - Isen - Walpertskirchen - Erding",701
+19-567-V-s24-1,1,567V,"Dorfen, Bahnhof  - St. Wolfgang - Isen - Erding, Klinikum -  Berufsschule",701
+19-567-V-s24-2,1,567V,"Dorfen, Bahnhof  - St. Wolfgang - Isen - Erding, Klinikum -  Berufsschule",701
+19-568-s24-2,1,568,"Markt Schwaben - Finsing - Moosinning - Erding, Klinikum - Erding",701
+19-568-V-s24-2,1,568V,"Markt Schwaben, Wittelsb. Weg - Erding, Klinikum Nord",701
+19-569-s24-1,1,569,Gaden - Eittingermoos - Eitting - Erding / Herzog-Tassilo-Realschule,701
+19-569-s24-2,1,569,Gaden - Eittingermoos - Eitting - Erding / Herzog-Tassilo-Realschule,701
+19-569-V-s24-1,1,569V,"Gaden - Berglern - Niedering - Oberding, Schule",701
+19-570-s24-1,1,570,Erding - Stadtmitte - Altenerding - Therme Erding - Erding,701
+19-580-s24-1,1,580,Eichenkofen - Erding - Kronthaler Weiher / Klinikum - Therme Erding,701
+19-601-s24-4,1,601,Schweitenkirchen - Paunzhausen - Kirchdorf - Wolfersdorf - Freising,701
+19-601-V-s24-3,1,601V,Nörting/Kirchdorf - Freising,701
+19-601-V-s25-3,1,601V,Nörting/Kirchdorf - Freising,701
+19-602-s24-5,1,602,Mainburg - Rudelzhausen - Au - Attenkirchen - Freising,701
+19-602-s25-1,1,602,Mainburg - Rudelzhausen - Au - Attenkirchen - Freising,701
+19-602-V-s24-3,1,602V,Verstärkerfahrten,701
+19-602-V-s25-1,1,602V,Mainburg - Rudelzhausen - Au - Attenkirchen - Freising,701
+19-603-s24-6,1,603,Mainburg - Rudelzhausen - Nandlstadt - Zolling - Freising,701
+19-603-s25-1,1,603,Rudelzhausen - Nandlstadt - Zolling - Freising,701
+19-614-s24-2,1,614,Haimhausen/Deutenhausen - Hetzenhausen/Massenhausen - Freising,701
+19-614-s24-3,1,614,Haimhausen/Deutenhausen - Hetzenhausen/Massenhausen - Freising,701
+19-615-s24-1,1,615,Viehbach/Höchenberg - Sickenhausen - Freising,701
+19-615-s24-2,1,615,Viehbach/Höchenberg - Sickenhausen - Freising,701
+19-616-s24-3,1,616,Freising - Kranzberg - Allershausen - Hohenkammer,701
+19-616-s24-5,1,616,Freising - Kranzberg - Allershausen - Hohenkammer,701
+19-617-s24-3,1,617,Rudelzhausen - Berg - Oberhaindlfing - Wolfersdorf - Freising,701
+19-618-s24-1,1,618,Sünzhausen - Gütlsdorf - Jägersdorf - Freising,701
+19-619-s24-7,1,619,Freising - Schönbichl/Eberspoint - Allershausen - Hohenkammer - Petershausen,701
+19-619-s24-8,1,619,Freising - Schönbichl/Eberspoint - Allershausen - Hohenkammer - Petershausen,701
+19-620-s24-1,1,620,Freising -  Berufsschule - Waldfriedhof - Neustift - Freising,701
+19-620-V-s24-1,1,620V,Verstärkerfahrten,701
+19-621-s24-1,1,621,Freising -  Neustift - Waldfriedhof - Schönmetzlerstr. - Freising,701
+19-621-V-s24-1,1,621V,Verstärkerfahrten,701
+19-622-s24-1,1,622,"Freising - Haggertystraße - Freising, P+R-Platz - Haggertystraße - Freising",701
+19-622-V-s24-3,1,622V,Verstärkerfahrten (Gelenkbus),701
+19-623-s24-1,1,623,P+R-Platz - Gute Änger - Jagdstraße - P+R-Platz,701
+19-624-s24-1,1,624,"Freising, P+R-Platz - Haggertystraße - Freising, P+R-Platz - Kirche St. Lantpert - Freising, P+R-Platz",701
+19-630-s24-1,1,630,Freising -  Prinz-Ludwig-Str. - Kleine Wies - Seniorenzentrum - Freising,701
+19-631-s24-1,1,631,Freising -  Seniorenzentrum - Kleine Wies - Prinz-Ludwig-Straße - Freising,701
+19-633-s24-1,1,633,"Freising, Gutenbergstraße - Freising - Marzling",701
+19-633-V-s24-1,1,633V,Verstärkerfahrten,701
+19-634-s24-4,1,634,P+R-Platz - Rabenweg - Clemensänger - Attaching,701
+19-634-V-s24-1,1,634V,Verstärkerfahrten (Gelenkbus),701
+19-635-s24-1,1,635,Freising - Flughafen,701
+19-637-s24-1,1,637,Freising - Dürnast - Hohenbachern und zurück,701
+19-637-s24-3,1,637,Freising - Hohenbachern und zurück,701
+19-638-s24-1,1,638,Freising - Weihenstephan - Fraunhofer-Institut,701
+19-639-s24-1,1,639,Freising - Weihenstephan - Lange Point - Schönmetzlerstr. - Freising,701
+19-640-s24-1,1,640,Freising -  Weihenstephan - Waldfriedhof - Neustift  - Freising,701
+19-641-s24-1,1,641,Freising - Haggertystraße - Landshuter Straße - Freising,701
+19-650-s24-4,1,650,Freising - Marienplatz Christopher-Paudiß-Platz - Ottostr./Heiliggeistgasse - Freising,701
+19-651-s24-1,1,651,Freising - Fürstendamm - Johannisstraße - Obere Hauptstraße - Freising,701
+19-680-s24-2,1,680,Hagsdorf/Sixthaselbach - Thann - Haag (Amper) - Moosburg,701
+19-681-s24-3,1,681,"Au, Hopfenhalle - Attenkirchen - Moosburg",701
+19-681-V-s24-3,1,681V,Moosburg - Attenkirchen - Au,701
+19-681-V-s25-3,1,681V,Moosburg - Attenkirchen - Au,701
+19-682-s24-4,1,682,Leitersdorf - Nandlstadt - Mauern - Moosburg,701
+19-682-V-s24-4,1,682V,Pfettrach - Mauern - Moosburg,701
+19-682-V-s25-4,1,682V,Pfettrach - Mauern - Moosburg,701
+19-683-s24-4,1,683,Mainburg - Rudelzhausen - Hörgertshausen - Moosburg,701
+19-683-s24-7,1,683,Mainburg - Rudelzhausen - Hörgertshausen - Moosburg,701
+19-683-V-s24-3,1,683V,Hörgertshausen - Moosburg,701
+19-683-V-s25-3,1,683V,Hörgertshausen - Moosburg,701
+19-684-s24-2,1,684,Tegernbach (Lkr.FS) - Nandlstadt - Bergen - Moosburg,701
+19-687-s24-3,1,687,Buch am Erlbach/Wang - Moosburg,701
+19-688-s24-2,1,688,Zolling - Langenbach - Moosburg,701
+19-690-s24-1,1,690,"Eching Ost/Ort -  Neufahrn - Garching, Forschungszentrum",701
+19-691-s24-4,1,691,Freising - Hallbergmoos - Neufahrn,701
+19-691-V-s24-4,1,691V,VERSTÄRKERFAHRTEN,701
+19-691-V-s24-5,1,691V,VERSTÄRKERFAHRTEN,701
+19-692-s24-3,1,692,Hallbergmoos/Ort - Mintraching - Neufahrn,701
+19-693-s24-4,1,693,Hohenkammer - Kammerberg - Lohhof Süd/Schulzentrum,701
+19-694-s24-1,1,694,Neufahrn -  Massenhausen - Giggenhausen,701
+19-695-s24-5,1,695,Kirchdorf a. d. Amper - Allershausen - Eching Nord/Süd - Garching-Hochbrück,701
+19-695-s24-6,1,695,Kirchdorf a. d. Amper - Allershausen - Eching Nord/Süd - Garching-Hochbrück,701
+19-695-s24-7,1,695,Kirchdorf a. d. Amper - Allershausen - Eching Nord/Süd - Garching-Hochbrück,701
+19-696-s25-1,1,696,"Deutenhausen - Eching, Nord/Süd - Gewerbeg. - Deutenhausen",701
+19-698-s24-3,1,698,Ortsverkehr Hallbergmoos Hallbergmoos - Gewerbegebiet/Rathaus - Hallbergmoos,701
+19-698-s25-1,1,698,Ortsverkehr Hallbergmoos Hallbergmoos - Gewerbegebiet/Rathaus - Hallbergmoos,701
+19-698-V-s24-1,1,698,nichtveröffentlichte Verstärkerfahrten,701
+19-701-s24-1,1,701,"Karlsfeld, Schwarzhölzlstraße - Karlsfeld",701
+19-702-s24-3,1,702,"Karlsfeld - Dachau - Dachau, Schulen",701
+19-703-s24-1,1,703,Erdweg/Gaggers - Odelzhausen - Dachau - Karlsfelder Straße,701
+19-704-s24-1,1,704,"Lauterbach, Abzw. - Thalhausen - Kleinberghofen - Schwabhausen - Dachau",701
+19-705-s24-1,1,705,Altomünster - Kleinberghofen - Erdweg - Dachau - Karlsfelder Straße,701
+19-706-s24-4,1,706,(Klenau/Schiltberg-) Hilgertshausen - Markt Indersdorf  - Dachau - Karlsfeld - Vogelloh / Allach Ost,701
+19-707-s24-1,1,707,Altomünster - Tandern - Hilgertshausen - Jetzendorf - Petershausen,701
+19-708-s24-1,1,708,Niederroth - Markt Indersdorf - Weichs - Vierkirchen-Esterhofen - Massenhausen,701
+19-710-s24-1,1,710,Moosach - Karlsfeld - Dachau,701
+19-711-s24-1,1,711,"Karlsfeld - Karlsfeld, Ludwig-Ganghofer-Straße - Karlsfeld",701
+19-712-s24-1,1,712,Karlsfeld - Schwarzhölzlstr. - Reschenbachstr. - Karlsfeld,701
+19-715-s24-5,1,715,Altomünster - Kleinberghofen bzw. Altomünster - Stumpfenbach - Kleinberghofen - Oberndorf,701
+19-721-s24-4,1,721,Unterumbach - Odelzhausen - Dachau,701
+19-723-s24-4,1,723,"Haimhausen - Inhausermoos - Hebertshausen (Walpertshofen) - DAH, Schulen",701
+19-725-s24-3,1,725,"Fahrenzhausen - Hebertshausen - Dachau - Dachau, Schulen - Karlsfelder Straße",701
+19-727-s24-3,1,727,"Hebertshausen, Schule - Röhrmoos - Sigmertshausen",701
+19-728-s24-6,1,728,Sigmertshausen - Niederroth - Markt Indersdorf - Petershausen - Obermarbach,701
+19-729-s24-1,1,729,Vierkirchen-Esterh. - Weichs - Ainhofen - Markt Indersdorf,701
+19-733-V-s24-1,1,733,Verstärkerfahrt,701
+19-736-s24-2,1,736,"Olching - Bergkirchen - Dachau - Dachau, Schulzentrum",701
+19-771-s24-1,1,771,Petershausen - Kammerberg - Haimhausen -  Lohhof,701
+19-772-s24-1,1,772,Markt Indersdorf - Röhrmoos - Haimhausen -  Unterschleißheim,701
+19-782-s24-1,1,782,Randelsried - Pipinsried - Arnzell - Markt Indersdorf,701
+19-785-s24-3,1,785,Erdweg - Markt Indersdorf - Weichs - Petershausen P+R-Platz,701
+19-786-s24-1,1,786,Weißling - Ziegelberg - Petershausen P+R-Platz,701
+19-791-s24-3,1,791,Gröbenried - Eschenried - Dachau - Bergkirchen,701
+19-803-s24-1,1,803,"Schöngeising - Grafrath - Inning, Marktplatz",701
+19-804-s24-1,1,804,Grafrath - Unteralting - Mauern - Jexhof,701
+19-805-s24-1,1,805,Grafrath - Kottgeisering - Pleitmannswang - Zankenhausen  - Türkenfeld,701
+19-805-s24-4,1,805,Grafrath - Kottgeisering - Pleitmannswang - Zankenhausen  - Türkenfeld,701
+19-807-s24-1,1,807,Türkenfeld - Beuern - Neugreifenberg - Greifenberg - Eching - Türkenfeld,701
+19-810-s24-1,1,810,Mammendorf - Landsberied - Jesenwang - Moorenweis - Geltendorf,701
+19-810-s24-3,1,810,Mammendorf - Landsberied - Jesenwang - Moorenweis - Geltendorf,701
+19-815-s24-1,1,815,"Fürstenfeldbruck - Fürstenfeldbruck, Fliegerhorst",3
+19-815-s24-2,1,815,"Fürstenfeldbruck - Fürstenfeldbruck, Fliegerhorst",3
+19-820-s24-3,1,820,"Seefeld-Hechendorf - Inning - Grafrath - Buchenau - Fürstenfeldbruck, Schöngeisinger Straße",701
+19-820-s24-4,1,820,"Seefeld-Hechendorf - Inning - Grafrath - Buchenau - Fürstenfeldbruck, Schöngeisinger Straße",701
+19-822-s24-4,1,822,Mammendorf - Adelshofen - Jesenwang - Schöngeising - Fürstenfeldbruck,701
+19-822-s24-5,1,822,Mammendorf - Adelshofen - Jesenwang - Schöngeising - Fürstenfeldbruck,701
+19-823-s24-1,1,823,Dünzelbach - Adelshofen - Jesenwang - Fürstenfeldbruck,701
+19-825-s24-1,1,825,Dünzelbach - Moorenweis - Jesenwang - Landsberied - Fürstenfeldbruck,701
+19-825-s24-2,1,825,Dünzelbach - Moorenweis - Jesenwang - Landsberied - Fürstenfeldbruck,701
+19-826-s24-1,1,826,Grafrath - Moorenweis - Grunertshofen - Dünzelbach - Moorenweis - Grafrath,701
+19-826-s24-4,1,826,Türkenfeld - Moorenweis - Grunertshofen - Dünzelbach - Moorenweis - Türkenfeld,701
+19-828-s24-3,1,828,Egling a.d. Paar - Moorenweis - Jesenwang - Grafrath,701
+19-829-s24-1,1,829,"Mammendorf - Jesenwang, Schule - Mammendorf, Schule - Moorenweis",701
+19-830-s24-5,1,830,Puchheim Nord - Gröbenzell - Lochhausen,701
+19-831-s24-1,1,831,"Olching, Gewerbegebiet - Olching - Schwaigfeld - Olchinger See",3
+19-831-s24-15,1,831,"Olching, Gewerbegebiet - Olching - Schwaigfeld - Olchinger See",3
+19-831-s24-16,1,831,"Olching, Gewerbegebiet - Olching - Schwaigfeld - Olchinger See",3
+19-831-s24-17,1,831,"Olching, Gewerbegebiet - Olching - Schwaigfeld - Olchinger See",3
+19-831-s24-19,1,831,"Olching, Gewerbegebiet - Olching - Schwaigfeld - Olchinger See",3
+19-831-s24-20,1,831,"Olching, Gewerbegebiet - Olching - Schwaigfeld - Olchinger See",3
+19-832-s24-1,1,832,Olching - Gröbenzell - Puchheim Nord Lochhausen - Langwied,701
+19-833-s24-1,1,833,"Eichenau Nord - Olching, Grundschule - Olching - Olching, Cronenbergstraße",701
+19-833-s24-2,1,833,"Eichenau Nord - Olching, Grundschule - Olching - Olching, Cronenbergstraße",701
+19-835-s24-2,1,835,"Esting, Schloß - Esting - Geiselbullach - Graßlfing - Olching",3
+19-835-s24-4,1,835,"Esting, Wachtweg - Esting - Geiselbullach - Graßlfing - Olching",3
+19-838-s24-2,1,838,Tegernbach  - Mittelstetten - Oberschweinbach - Mammendorf - Buchenau,701
+19-838-s24-6,1,838,Tegernbach  - Mittelstetten - Oberschweinbach - Mammendorf - Buchenau,701
+19-839-s24-2,1,839,Tegernbach - Mittelstetten - Althegnenberg - Mammendorf - Fürstenfeldbruck,701
+19-839-s24-4,1,839,Tegernbach - Mittelstetten - Althegnenberg - Mammendorf - Fürstenfeldbruck,701
+19-840-s24-1,1,840,Fürstenfeldbruck - Buchenau,3
+19-843-s24-1,1,843,Olching - Emmering - Fürstenfeldbruck,701
+19-843-s24-6,1,843,Olching - Emmering - Fürstenfeldbruck,701
+19-851-s24-1,1,851,"Germering, Salzstraße - Germering, Kleiner Stachus - Harthaus Nord",3
+19-851-s24-2,1,851,"Germering, Salzstraße - Germering, Kleiner Stachus - Harthaus Nord",3
+19-852-s24-1,1,852,"Fürstenfeldbruck - Alling - Germering-Unterpfaffenhofen - Germering, Kerschensteiner Schule",701
+19-852-s24-3,1,852,"Fürstenfeldbruck - Alling - Germering-Unterpfaffenhofen - Germering, Kerschensteiner Schule",701
+19-853-s24-2,1,853,"Puchheim Bf, Bgm.-Ertl-Str. - Puchheim Süd - Germering-Unterpf.",701
+19-854-s24-1,1,854,"Puchheim Ort, Vogelsangstraße - Puchheim Süd",3
+19-855-s24-1,1,855,Puchheim Nord - Gewerbegebiet Nord - Lußstraße - Puchheim Nord,3
+19-857-s24-1,1,857,"Germering, GEP - Germering, Rathaus - Germering-Unterpfaffenhofen",3
+19-858-s24-1,1,858,"Germering, Freibad/Polariom - Germering-Unterpfaffenhofen - Germering, Kriemhildenstraße",3
+19-859-s24-1,1,859,"Harthaus Süd - Germering, Kleiner Stachus - Germering, Freibad/Polariom",3
+19-860-s24-1,1,860,"Freiham - Puchheim Ort - Eichenau Nord - Olching - Graßlfing, Georgenstraße",701
+19-860-s24-6,1,860,"Freiham - Puchheim Ort - Eichenau Nord - Olching - Graßlfing, Georgenstraße",701
+19-861-s24-2,1,861,"Eichenau, Spechtstraße - Eichenau Süd",701
+19-861-s24-3,1,861,"Eichenau, Spechtstraße - Eichenau Süd",701
+19-862-s24-6,1,862,Fürstenfeldbruck - Eichenau Nord - Puchheim Süd,701
+19-863-s24-2,1,863,"Buchenau - Fürstenfeldbruck, Fliegerhorst - Emmering - Eichenau Nord",701
+19-870-s24-3,1,870,Waltenhofen - Egenhofen - Rottbach - Überacker - Maisach,701
+19-871-s24-1,1,871,Pfaffenhofen (a. d. Glonn) - Egenhofen - Aufkirchen - Maisach,701
+19-872-s24-1,1,872,"Maisach - Maisach, Am Strasserwinkel - Maisach",701
+19-873-s24-1,1,873,Fürstenfeldbruck - Maisach,701
+19-874-s24-1,1,874,"Egenhofen, Dirlesried - Malching - Maisach, Schulen",701
+19-875-s24-1,1,875,"Gernlinden - Maisach, Am Strasserwinkel - Gernlinden",701
+19-885-s24-1,1,885,"Germering-Unterpfaffenhofen - Germering, Neue Gautinger Straße -  Planegg West",701
+19-889-s24-5,1,889,Althegnenberg - Tegernbach - Oberschweinbach - Mammendorf - Fürstenfeldbruck,701
+19-889-s24-6,1,889,Althegnenberg - Tegernbach - Oberschweinbach - Mammendorf - Fürstenfeldbruck,701
+19-889-s24-7,1,889,Althegnenberg - Tegernbach - Oberschweinbach - Mammendorf - Fürstenfeldbruck,701
+19-901-s24-2,1,901,Starnberg - Blumensiedlung - Hanfeld - Starnberg,3
+19-902-s24-4,1,902,Starnberg Nord - Starnberg - Klinikum-MediCenter - Cappius - Söcking,3
+19-903-s24-3,1,903,Waldspielplatz - Starnberg - Auersberg,3
+19-904-s24-21,1,904,"Starnberg Nord - Wangen - Schäftlarn, Kloster - Leutstetten - Starnberg Nord",701
+19-906-s24-1,1,906,Planegg West  - KIM (- Gauting - KIM) - Planegg West,701
+19-909-s24-1,1,909,Maising - Starnberg - Starnberg Nord,701
+19-921-s24-1,1,921,Herrsching - Inning am Ammersee - Weßling,701
+19-921-V-s24-1,1,921V,"Buch am Ammersee - Inning - Etterschlag - Gilching, Gymnasium",701
+19-923-s24-1,1,923,GP Inning/Wörthsee - Steinebach - Weßling - ESPE/3M - Steinebach,701
+19-924-s24-1,1,924,Seefeld-Hechendorf - Oberalting - Seefeld-Hechendorf,701
+19-928-s24-3,1,928,Andechs - Seefeld-Hechendorf - Steinebach - Walchstadt,701
+19-928-V-s24-1,1,928V,"Breitbrunn - Bachern / Walchstadt - Gilching, Gymnasium Seefeld-Hechendorf - Walchstadt",701
+19-936-s24-23,1,936,Gauting - Fürstenried West,701
+19-947-s24-21,1,947,Gilching-Argelsried - Neugilching - DLR - Weßling,701
+19-949-s24-21,1,949,Gilching-Argelsried - Gauting,701
+19-950-s24-4,1,950,Herrsching - Frieding - Oberalting - Starnberg Nord,701
+19-950-V-s24-3,1,950V,"Herrsching, Martinsweg - Seefeld-Hechendorf Gilching, Gymnasium - Frieding - Oberalting",701
+19-951-s24-3,1,951,Starnberg Nord - Andechs - Herrsching,701
+19-955-s24-1,1,955,Starnberg Nord - Weßling,701
+19-956-s24-3,1,956,Aschering - Wieling - Pöcking - Possenhofen - Starnberg,701
+19-958-s24-2,1,958,Herrsching - Andechs - Tutzing,701
+19-958-s24-3,1,958,Herrsching - Andechs - Tutzing,701
+19-961-s24-1,1,961,Ammerland - Münsing - Starnberg Nord,701
+19-963-s24-4,1,963,Gauting - Pentenried - Unterbrunn,701
+19-963-s24-5,1,963,Gauting - Pentenried - Unterbrunn,701
+19-965-s24-1,1,965,Buchendorf - Gauting,701
+19-966-s24-1,1,966,Gauting - KIM/Krailling - Gauting,701
+19-967-s24-1,1,967,Planegg - Krailling,701
+19-968-s24-6,1,968,"Planegg West - Stockdorf, Harmsplatz - Gauting",701
+19-969-s24-4,1,969,Unterbrunn - Oberbrunn - Gauting,701
+19-974-s24-4,1,974,Ortsverkehr Berg Icking - Berg,701
+19-975-s24-21,1,975,Wolfratshausen - Starnberg,701
+19-976-s24-3,1,976,Traubing - Feldafing - Possenhofen - Maising,701
+19-977-s24-1,1,977,"Tutzing, Heimgartenstraße - Tutzing - Unterzeismering",701
+19-978-s24-1,1,978,Feldafing - Tutzing - Feldafing,701
+19-978-V-s24-1,1,978V,Frieding - Aschering - Traubing - Feldafing / Tutzing Gymnasium,701
+19-978-V-s24-2,1,978V,Frieding - Aschering - Traubing - Feldafing / Tutzing Gymnasium,701
+19-979-s24-1,1,979,"Tutzing - Tutzing, Am Kallerbach - Kampberg - Diemendorf",701
+19-996-1-s24-5,1,996,BergBus München Pasing - Pfronten - Wieskirche,3
+19-996-2-s24-3,1,996,BergBus München Pasing - Pfronten - Wieskirche,3
+20-200-s24-1,1,X200,"München, Ostbahnhof - Taufkirchen, Lilienthalstraße",702
+20-201-s24-4,1,X201,Dachau - Oberschleißheim - Garching-Hochbrück - Garching-Forschungszentrum,702
+20-202-s24-7,1,X202,Unterschleißheim - Garching-Hochbrück - Ismaning - Aschheim - Haar,702
+20-203-s24-3,1,X203,"Deisenhofen West - Tfk., Hugo-Junkers-Straße - Putzbrunn - Haar - Heimstetten",702
+20-204-s24-1,1,X204,Putzbrunn - Ottobrunn - Unterhaching - Candidplatz - Brudermühlstraße - St. Achaz,702
+20-205-s24-1,1,X205,Arabellapark - Unterföhring - Ismaning - Garching - Garching-Forschungszentrum,702
+20-206-s24-2,1,X206,Lohhof Nord - Oberschleißheim - Feldmoching,702
+20-320-s24-1,1,X320,Deisenhofen West - Endlhausen - Egling - Wolfratshausen,702
+20-660-s24-1,1,X660,"Freising, Weihenstephan - Freising - Garching, Forschungszentrum",702
+20-732-s24-2,1,X732,Dasing /Egenhofen/Gaggers - Odelzhausen - Pasing,702
+20-800-s24-3,1,X800,Buchenau - Esting - Dachau,702
+20-800-s24-4,1,X800,Buchenau - Esting - Dachau,702
+20-850-s24-1,1,X850,Fürstenfeldbruck - Germering-Unterpfaffenhofen,702
+20-900-s24-3,1,X900,Starnberg - Gilching-Argelsried - Fürstenfeldbruck - Buchenau,702
+20-900-s24-7,1,X900,Starnberg - Gilching-Argelsried - Fürstenfeldbruck - Buchenau,702
+20-910-s24-2,1,X910,Klinikum Großhadern - Gauting - DLR - Weßling,702
+20-920-s24-1,1,X920,Fürstenfeldbruck - Gilching-Argelsried - KIM - Krailling - Klinikum Großhadern,702
+20-970-s24-1,1,X970,Bad Tölz - Wolfratshausen - Starnberg,702
+65-716-s24-1,1,716,Dachau - Watzmannstraße - Schulzentrum - I.-Taschner-Gymnasium - Dachau,701
+65-717-s24-1,1,717,"Dachau - Dachau, Moosstraße",701
+65-718-s24-1,1,718,Dachau - Am Rennplatz - Stadtweiher - Eschenrieder Straße - Dachau,701
+65-719-s24-1,1,719,Dachau - Festwiese - Rathaus - Frühlingstraße - Dachau,701
+65-720-s24-1,1,720,Stadtverkehr Dachau Dachau - Landratsamt - Klinikum - Rathaus - Dachau,701
+65-722-s24-1,1,722,Stadtverkehr Dachau Dachau - Rathaus - Klinikum - Landratsamt - Dachau,701
+65-726-s24-1,1,726,Saubachsiedlung - KZ-Gedenkstätte - Dachau,701
+65-744-s24-1,1,744,"Dachau, Kräutergarten - Dachau",701

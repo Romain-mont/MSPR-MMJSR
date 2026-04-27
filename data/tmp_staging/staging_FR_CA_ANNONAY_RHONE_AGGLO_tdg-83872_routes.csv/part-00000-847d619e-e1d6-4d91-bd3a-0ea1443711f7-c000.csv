@@ -1,0 +1,12 @@
+route_id,agency_id,route_short_name,route_long_name,route_desc,route_type,route_url,route_color,route_text_color
+338200001,2,Ligne G,Ligne G - Vinzieux / Annonay,,3,,00E8E8,000000
+345850001,2,Ligne E,Ligne E - St Desirat / Annonay,,3,,ECEC00,000000
+347840001,2,Ligne D,Ligne D - Serrieres / Annonay,,3,,FFA94A,000000
+353690001,2,Ligne B,Ligne B - Ardoix /Quintenas/Fely/Annonay,,3,,FDCD40,000000
+363640001,2,Ligne 3S,Ligne 3S - Roiffieux / Annonay,,3,,00A54F,000000
+369340001,2,Ligne A,Ligne A - St-Julien / Annonay,,3,,80277B,000000
+369340002,2,Ligne F,Ligne F - St Pierre de Boeuf / Annonay,,3,,09FF40,000000
+371200001,2,Ligne C,Ligne C - Talencieux / Annonay,,3,,FF4255,000000
+387730001,2,Ligne H,Ligne H - St Marcel / Savas / St Clair/ Boulieu / Annonay,,3,,0080E8,000000
+LIGNE-5S,2,Ligne 5S,Ligne 5S - St Cyr / Annonay,,3,,19008e,fffefe
+LIGNE-6S,2,Ligne 6S,Ligne 6S - Pont Arnaud / Gare routière,,3,,ff00b5,ffffff

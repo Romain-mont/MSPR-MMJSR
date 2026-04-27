@@ -1,0 +1,5 @@
+route_id,agency_id,route_short_name,route_long_name,route_desc,route_type,route_url,route_color,route_text_color
+M009-01,TM,M009-01,GIROLATA-PORTO-M009-01,,4,,eb7272,f7f4f4
+M009-02,TM,M009-02,PORTO--GALERIA-02,,4,,000000,ffffff
+M009-03,TM,M009-03,GIROLATA-GALERIA-M009-03,,4,,000000,ffffff
+VIGGIRM9,TM,M009,VIGNOLA-GIROLATA - M009,,4,,de7e7e,f5ebeb

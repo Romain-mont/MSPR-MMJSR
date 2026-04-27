@@ -1,32 +1,52 @@
--- 1. Table DIM_ROUTE (La Géographie)
+-- 1. DIM_ROUTE
 CREATE TABLE IF NOT EXISTS dim_route (
-   route_id SERIAL PRIMARY KEY,
-   dep_name VARCHAR(255) NOT NULL,
-   arr_name VARCHAR(255) NOT NULL,
-   dep_city VARCHAR(255),
-   arr_city VARCHAR(255),
-   distance_km NUMERIC(10,3) NOT NULL,
-   is_long_distance BOOLEAN NOT NULL,
-   UNIQUE(dep_name, arr_name)
+    route_id          SERIAL PRIMARY KEY,
+    dep_name          VARCHAR(255) NOT NULL,
+    arr_name          VARCHAR(255) NOT NULL,
+    distance_km       NUMERIC(10,3),
+    is_long_distance  BOOLEAN,
+    UNIQUE(dep_name, arr_name)
 );
 
--- 2. Table DIM_VEHICLE_TYPE (Le Matériel)
+-- 2. DIM_VEHICLE_TYPE
 CREATE TABLE IF NOT EXISTS dim_vehicle_type (
-   vehicle_type_id SERIAL PRIMARY KEY,
-   label VARCHAR(50) NOT NULL,      
-   co2_vt NUMERIC(10,3) NOT NULL,    
-   service_type VARCHAR(50) NOT NULL 
+    vehicle_type_id  SERIAL PRIMARY KEY,
+    label            VARCHAR(100) NOT NULL,
+    service_type     VARCHAR(100) NOT NULL,
+    co2_vt           NUMERIC(10,4),
+    UNIQUE(label, service_type)
 );
 
--- 3. Table FACT_EM (Les Faits / Mesures)
-CREATE TABLE IF NOT EXISTS fact_em (
-   fact_id SERIAL PRIMARY KEY,
-   
-   route_id INTEGER NOT NULL,
-   vehicle_type_id INTEGER NOT NULL,
-   
-   co2_kg_passenger NUMERIC(10,3) NOT NULL,
-   
-   FOREIGN KEY(route_id) REFERENCES dim_route(route_id),
-   FOREIGN KEY(vehicle_type_id) REFERENCES dim_vehicle_type(vehicle_type_id)
+-- 3. DIM_STATION_FREQUENTATION
+CREATE TABLE IF NOT EXISTS dim_station_frequentation (
+    station_id              SERIAL PRIMARY KEY,
+    station_name            VARCHAR(255) NOT NULL,
+    city                    VARCHAR(255),
+    lat                     NUMERIC(10,6),
+    lon                     NUMERIC(10,6),
+    country_code            CHAR(2),
+    annual_station_traffic  BIGINT,
+    city_population         BIGINT,
+    UNIQUE(station_name)
+);
+
+-- 4. FACT_ROUTE_ANALYSIS
+CREATE TABLE IF NOT EXISTS fact_route_analysis (
+    fact_id              SERIAL PRIMARY KEY,
+
+    route_id             INTEGER NOT NULL,
+    vehicle_type_id      INTEGER,
+    origin_station_id    INTEGER,
+    dest_station_id      INTEGER,
+
+    co2_train_kg         NUMERIC(10,4),
+    co2_avion_kg         NUMERIC(10,4),
+    co2_saved_kg         NUMERIC(10,4),
+    traffic_share_pct    NUMERIC(5,2),
+    is_substitutable     SMALLINT,
+
+    FOREIGN KEY (route_id)          REFERENCES dim_route(route_id),
+    FOREIGN KEY (vehicle_type_id)   REFERENCES dim_vehicle_type(vehicle_type_id),
+    FOREIGN KEY (origin_station_id) REFERENCES dim_station_frequentation(station_id),
+    FOREIGN KEY (dest_station_id)   REFERENCES dim_station_frequentation(station_id)
 );
