@@ -11,7 +11,8 @@
       "WebFetch(domain:api.deutschebahn.com)",
       "WebFetch(domain:opendata.deutschebahn.com)",
       "WebSearch",
-      "WebFetch(domain:www.govdata.de)"
+      "WebFetch(domain:www.govdata.de)",
+      "Bash(docker exec etl-postgres psql -U mspr_user -d mspr_db -c ' *)"
     ]
   }
 }

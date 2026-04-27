@@ -29,7 +29,7 @@ def get_spark():
     builder = SparkSession.builder.appName("DataExtraction")
     builder = builder.config("spark.driver.memory", "2g")
     builder = builder.master("local[*]")
-    if not running_in_docker():
+    if running_in_docker():
         builder = builder.config("spark.hadoop.fs.defaultFS", "hdfs://namenode:9000")
     return builder.getOrCreate()
 
@@ -453,7 +453,7 @@ def extract_population_eurostat():
     """
     Extrait la population totale des grandes villes européennes.
     Source : Eurostat urb_cpop1 (Urban Audit) - sans authentification.
-    Dimensions filtrées : sexe=Total, âge=Total, villes sélectionnées, 2018+.
+    Requêtes par batch de 5 codes pour éviter l'erreur 413.
     """
     print("EXTRACTION EUROSTAT - POPULATION VILLES EUROPÉENNES")
     os.makedirs(EUROSTAT_POP_DIR, exist_ok=True)
@@ -466,35 +466,40 @@ def extract_population_eurostat():
         return True
 
     try:
-        print("Requête Eurostat urb_cpop1...", end=" ", flush=True)
+        all_rows = []
+        print(f"Requête Eurostat urb_cpop1 ({len(EUROSTAT_CITY_CODES)} villes, 1 par requête)...", flush=True)
 
-        # Répétition du paramètre "geo" : syntaxe acceptée par l'API Eurostat
-        params = [
-            ("format", "JSON"),
-            ("lang",   "EN"),
-            ("sex",    "T"),
-            ("age",    "TOTAL"),
-            ("sinceTimePeriod", "2018"),
-        ] + [("geo", code) for code in EUROSTAT_CITY_CODES]
+        for code in EUROSTAT_CITY_CODES:
+            try:
+                params = [
+                    ("format", "JSON"),
+                    ("lang",   "EN"),
+                    ("sex",    "T"),
+                    ("age",    "TOTAL"),
+                    ("time",   "2021"),
+                    ("geo",    code),
+                ]
+                r = requests.get(EUROSTAT_URB_URL, params=params, timeout=30)
+                r.raise_for_status()
+                rows = _parse_eurostat_sdmx(r.json())
+                all_rows.extend(rows)
+                print(f"  {code} : {len(rows)} entrées")
+            except Exception as e:
+                print(f"  {code} : ignoré ({e})")
 
-        r = requests.get(EUROSTAT_URB_URL, params=params, timeout=90)
-        r.raise_for_status()
-        data = r.json()
-
-        rows = _parse_eurostat_sdmx(data)
-        if not rows:
+        if not all_rows:
             print("Aucune donnée retournée par Eurostat")
             return False
 
         import csv
-        fieldnames = list(rows[0].keys())
+        fieldnames = list(all_rows[0].keys())
         with open(output_file, "w", newline="", encoding="utf-8") as f:
             writer = csv.DictWriter(f, fieldnames=fieldnames)
             writer.writeheader()
-            writer.writerows(rows)
+            writer.writerows(all_rows)
 
-        n_cities = len({row.get("geo") for row in rows})
-        print(f"({len(rows)} entrées - {n_cities} villes)")
+        n_cities = len({row.get("geo") for row in all_rows})
+        print(f"({len(all_rows)} entrées - {n_cities} villes)")
         return True
 
     except Exception as e:
@@ -507,11 +512,12 @@ def extract_population_eurostat():
 # PARTIE 6 : POPULATION DES COMMUNES FRANÇAISES - API GEO (INSEE)
 
 # API Geo (api.gouv.fr) - données INSEE, sans authentification requise
-GEO_API_COMMUNES_URL = (
-    "https://geo.api.gouv.fr/communes"
-    "?fields=nom,code,codeDepartement,codeRegion,codesPostaux,population"
-    "&format=csv"
-)
+GEO_API_COMMUNES_URL = "https://geo.api.gouv.fr/communes"
+GEO_API_COMMUNES_PARAMS = {
+    "fields": "nom,code,codeDepartement,codeRegion,population",
+    "format": "json",
+    "boost":  "population",
+}
 INSEE_POP_DIR = os.environ.get("RAW_INSEE_POP_DIR", "./data/raw/population")
 
 
@@ -533,15 +539,99 @@ def extract_population_communes_france():
 
     try:
         print("Téléchargement communes françaises...", end=" ", flush=True)
-        r = requests.get(GEO_API_COMMUNES_URL, timeout=120)
+        r = requests.get(GEO_API_COMMUNES_URL, params=GEO_API_COMMUNES_PARAMS, timeout=120)
         r.raise_for_status()
 
-        content = r.content.decode("utf-8", errors="replace")
-        with open(output_file, "w", encoding="utf-8") as f:
-            f.write(content)
+        data = r.json()
+        if not data:
+            print("Aucune donnée retournée")
+            return False
 
-        n_lines = max(0, content.count("\n") - 1)
-        print(f"({n_lines} communes)")
+        import csv as csv_mod
+        fieldnames = list(data[0].keys())
+        with open(output_file, "w", newline="", encoding="utf-8") as f:
+            writer = csv_mod.DictWriter(f, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(data)
+
+        print(f"({len(data)} communes)")
+        return True
+
+    except Exception as e:
+        print(f"Erreur : {e}")
+        if os.path.exists(output_file):
+            os.remove(output_file)
+        return False
+
+
+# PARTIE 7 : POPULATION VILLES EUROPÉENNES - GEONAMES
+
+GEONAMES_URL = "https://download.geonames.org/export/dump/cities15000.zip"
+GEONAMES_DIR = os.environ.get("RAW_GEONAMES_DIR", "./data/raw/population")
+
+
+def extract_population_geonames():
+    """
+    Extrait la population des villes européennes depuis GeoNames.
+    Source : cities15000.zip — toutes villes >15k hab, monde entier, gratuit.
+    Colonnes utiles : name, country_code, population, latitude, longitude.
+    """
+    print("EXTRACTION GEONAMES - POPULATION VILLES EUROPÉENNES")
+    os.makedirs(GEONAMES_DIR, exist_ok=True)
+
+    today = dt.date.today().strftime("%Y-%m-%d")
+    output_file = f"{GEONAMES_DIR}/geonames_cities_{today}.csv"
+
+    if os.path.exists(output_file):
+        print(f"Fichier du jour déjà présent : {output_file}")
+        return True
+
+    try:
+        import zipfile, io, csv as csv_mod
+
+        print("Téléchargement GeoNames cities15000...", end=" ", flush=True)
+        r = requests.get(GEONAMES_URL, timeout=120)
+        r.raise_for_status()
+
+        with zipfile.ZipFile(io.BytesIO(r.content)) as z:
+            with z.open("cities15000.txt") as f:
+                content = f.read().decode("utf-8")
+
+        # Colonnes GeoNames (tab-séparé, pas de header)
+        col_indices = {
+            "geonameid": 0, "name": 1, "asciiname": 2,
+            "country_code": 8, "population": 14,
+            "latitude": 4, "longitude": 5,
+        }
+        european_countries = {
+            "FR","DE","CH","AT","BE","NL","ES","IT","PT","GB","IE",
+            "SE","NO","DK","FI","PL","CZ","SK","HU","RO","BG","HR",
+            "SI","RS","BA","ME","GR","LU","LV","LT","EE","TR",
+        }
+
+        rows = []
+        for line in content.splitlines():
+            parts = line.split("\t")
+            if len(parts) < 15:
+                continue
+            cc = parts[col_indices["country_code"]]
+            if cc not in european_countries:
+                continue
+            rows.append({
+                "name":         parts[col_indices["name"]],
+                "asciiname":    parts[col_indices["asciiname"]],
+                "country_code": cc,
+                "population":   parts[col_indices["population"]],
+                "latitude":     parts[col_indices["latitude"]],
+                "longitude":    parts[col_indices["longitude"]],
+            })
+
+        with open(output_file, "w", newline="", encoding="utf-8") as f:
+            writer = csv_mod.DictWriter(f, fieldnames=list(rows[0].keys()))
+            writer.writeheader()
+            writer.writerows(rows)
+
+        print(f"({len(rows)} villes européennes)")
         return True
 
     except Exception as e:
@@ -565,6 +655,7 @@ def run_extraction():
     success_sncf_freq   = extract_sncf_frequentation()
     success_eurostat    = extract_population_eurostat()
     success_communes    = extract_population_communes_france()
+    success_geonames    = extract_population_geonames()
 
     results = [
         ("Mobility Database",        success_mobility,    MOBILITY_RAW_DIR),
@@ -573,6 +664,7 @@ def run_extraction():
         ("SNCF Fréquentation gares", success_sncf_freq,   SNCF_FREQ_DIR),
         ("Eurostat Population",      success_eurostat,    EUROSTAT_POP_DIR),
         ("Communes France (INSEE)",  success_communes,    INSEE_POP_DIR),
+        ("GeoNames Villes EU",       success_geonames,    GEONAMES_DIR),
     ]
 
     all_ok = all(ok for _, ok, _ in results)

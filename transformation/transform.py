@@ -27,6 +27,9 @@ if sys.platform == "win32" and not running_in_docker():
 RAW_MOBILITY_DIR    = os.environ.get("RAW_MOBILITY_DIR", "./data/raw/mobility_gtfs")
 RAW_BACKONTRACK_DIR = os.environ.get("RAW_BACKONTRACK_DIR", "./data/raw/backontrack_csv")
 RAW_AIRPORTS_DIR    = os.environ.get("RAW_AIRPORTS_DIR", "./data/raw/airports")
+RAW_SNCF_FREQ_DIR   = os.environ.get("RAW_SNCF_FREQ_DIR",   "./data/raw/sncf_frequentation")
+RAW_INSEE_POP_DIR   = os.environ.get("RAW_INSEE_POP_DIR",   "./data/raw/population")
+RAW_GEONAMES_DIR    = os.environ.get("RAW_GEONAMES_DIR",    "./data/raw/population")
 OUTPUT_DIR          = os.environ.get("OUTPUT_DIR", "./data/staging")
 FINAL_OUTPUT_DIR    = os.environ.get("FINAL_OUTPUT_DIR", OUTPUT_DIR)
 # Répertoire local pour les writes Spark intermédiaires (évite les problèmes Hadoop sur disques externes)
@@ -37,6 +40,12 @@ LOCAL_TMP_DIR       = os.environ.get("LOCAL_TMP_DIR", os.path.join(
 OUTPUT_AIRPORTS_FILE   = os.environ.get("OUTPUT_AIRPORTS_FILE", "staging_airports.csv")
 OUTPUT_INTERMODAL_FILE = os.environ.get("OUTPUT_INTERMODAL_FILE", "staging_intermodal.csv")
 OUTPUT_FINAL_FILE      = os.environ.get("OUTPUT_FINAL_FILE", "final_routes.csv")
+
+# Nouveau schéma dimensionnel
+OUTPUT_DIM_ROUTE_FILE    = os.environ.get("OUTPUT_DIM_ROUTE_FILE",    "staging_dim_route.csv")
+OUTPUT_DIM_VEHICLE_FILE  = os.environ.get("OUTPUT_DIM_VEHICLE_FILE",  "staging_dim_vehicle_type.csv")
+OUTPUT_DIM_STATION_FILE  = os.environ.get("OUTPUT_DIM_STATION_FILE",  "staging_dim_station_frequentation.csv")
+OUTPUT_FACT_FILE         = os.environ.get("OUTPUT_FACT_FILE",         "staging_fact_route_analysis.csv")
 
 REQUIRED_COLUMNS_AIRPORTS = ["airport_name", "aero_lat", "aero_long", "category", "iata_code", "country_code"]
 
@@ -389,6 +398,36 @@ def read_mobility_provider(spark, provider_dir: str):
     spark.catalog.clearCache(); gc.collect()
     rail_stop_times = spark.read.option("header", "true").csv(rail_stop_times_path)
 
+    # Distance cumulative par stops (GTFS uniquement) : haversine stop-à-stop
+    stop_coords = stops.select(
+        "stop_id",
+        F.col("stop_lat").cast(DoubleType()).alias("_lat"),
+        F.col("stop_lon").cast(DoubleType()).alias("_lon"),
+    ).filter(F.col("_lat").isNotNull() & F.col("_lon").isNotNull() &
+             (F.col("_lat") != 0.0) & (F.col("_lon") != 0.0))
+
+    st_with_coords = (
+        rail_stop_times.select("trip_id", "stop_id", "stop_sequence")
+        .withColumn("stop_sequence", F.col("stop_sequence").cast("int"))
+        .join(stop_coords, "stop_id", "left")
+    )
+    w_dist = Window.partitionBy("trip_id").orderBy("stop_sequence")
+    st_with_coords = st_with_coords \
+        .withColumn("prev_lat", F.lag("_lat").over(w_dist)) \
+        .withColumn("prev_lon", F.lag("_lon").over(w_dist)) \
+        .withColumn("seg_km", haversine_distance(
+            F.col("prev_lat"), F.col("prev_lon"),
+            F.col("_lat"), F.col("_lon")
+        ))
+    trip_dists = st_with_coords.groupBy("trip_id").agg(
+        F.sum("seg_km").alias("stop_distance_km")
+    )
+    trip_dists_path = os.path.join(LOCAL_TMP_DIR, f"staging_{os.path.basename(provider_dir)}_trip_dists.csv")
+    trip_dists.write.mode("overwrite").option("header", "true").csv(trip_dists_path)
+    del trip_dists, st_with_coords, stop_coords
+    spark.catalog.clearCache(); gc.collect()
+    trip_dists = spark.read.option("header", "true").csv(trip_dists_path)
+
     seqs = (
         rail_stop_times.groupBy("trip_id")
         .agg(
@@ -405,70 +444,58 @@ def read_mobility_provider(spark, provider_dir: str):
     spark.catalog.clearCache(); gc.collect()
     seqs = spark.read.option("header", "true").csv(seqs_path)
 
-    origin = (
-        rail_stop_times.alias("st")
-        .join(seqs.alias("s"),
-              (F.col("st.trip_id") == F.col("s.trip_id")) & (F.col("st.stop_sequence") == F.col("s.min_seq")),
-              "inner")
-        .select(
-            F.col("st.trip_id").alias("trip_id"),
-            F.col("st.stop_id").alias("origin_stop_id"),
-            F.col("st.departure_time").alias("departure_time"),
-        )
-    )
-    origin_path = os.path.join(LOCAL_TMP_DIR, f"staging_{os.path.basename(provider_dir)}_origin.csv")
-    origin.write.mode("overwrite").option("header", "true").csv(origin_path)
-    del origin
-    spark.catalog.clearCache(); gc.collect()
-    origin = spark.read.option("header", "true").csv(origin_path)
+    # Toutes les paires de stops : pour chaque trip, génère (stop_a, stop_b) avec seq_a < seq_b
+    stop_cols = stops.select(
+        "stop_id",
+        F.col("stop_name").alias("sname"),
+        F.col("stop_lat").cast(DoubleType()).alias("lat"),
+        F.col("stop_lon").cast(DoubleType()).alias("lon"),
+    ).filter(F.col("sname").isNotNull() & F.col("lat").isNotNull() & (F.col("lat") != 0.0))
 
-    dest = (
-        rail_stop_times.alias("st")
-        .join(seqs.alias("s"),
-              (F.col("st.trip_id") == F.col("s.trip_id")) & (F.col("st.stop_sequence") == F.col("s.max_seq")),
-              "inner")
-        .select(
-            F.col("st.trip_id").alias("trip_id"),
-            F.col("st.stop_id").alias("dest_stop_id"),
-            F.col("st.arrival_time").alias("arrival_time"),
-        )
+    st_all = (
+        rail_stop_times
+        .select("trip_id", "stop_id", "stop_sequence", "departure_time", "arrival_time")
+        .withColumn("stop_sequence", F.col("stop_sequence").cast("int"))
+        .join(stop_cols, "stop_id", "left")
+        .filter(F.col("sname").isNotNull())
+        .join(seqs.select("trip_id", "route_type_val", "route_short_name", "route_long_name"),
+              "trip_id", "left")
     )
-    dest_path = os.path.join(LOCAL_TMP_DIR, f"staging_{os.path.basename(provider_dir)}_dest.csv")
-    dest.write.mode("overwrite").option("header", "true").csv(dest_path)
-    del dest
-    spark.catalog.clearCache(); gc.collect()
-    dest = spark.read.option("header", "true").csv(dest_path)
+    st_all_path = os.path.join(LOCAL_TMP_DIR, f"staging_{os.path.basename(provider_dir)}_st_all.csv")
+    st_all.write.mode("overwrite").option("header", "true").csv(st_all_path)
+    del st_all; spark.catalog.clearCache(); gc.collect()
+    st_all = spark.read.option("header", "true").csv(st_all_path)
 
-    bounds = (
-        seqs.select("trip_id", "route_type_val", "route_short_name", "route_long_name")
-        .join(origin, "trip_id", "inner")
-        .join(dest, "trip_id", "inner")
+    st_a = st_all.alias("a")
+    st_b = st_all.alias("b")
+    df = (
+        st_a.join(
+            st_b,
+            (F.col("a.trip_id") == F.col("b.trip_id")) &
+            (F.col("a.stop_sequence").cast("int") < F.col("b.stop_sequence").cast("int")),
+            "inner"
+        )
+        .select(
+            F.col("a.sname").alias("origin"),
+            F.col("b.sname").alias("destination"),
+            F.col("a.lat").cast(DoubleType()).alias("station_lat"),
+            F.col("a.lon").cast(DoubleType()).alias("station_long"),
+            F.col("b.lat").cast(DoubleType()).alias("station_lat_dest"),
+            F.col("b.lon").cast(DoubleType()).alias("station_long_dest"),
+            F.col("a.departure_time").alias("departure_time"),
+            F.col("b.arrival_time").alias("arrival_time"),
+            F.col("a.route_type_val"),
+            F.col("a.route_short_name"),
+            F.col("a.route_long_name"),
+        )
+        .filter(F.col("origin") != F.col("destination"))
+        .dropDuplicates(["origin", "destination"])
         .withColumn("shape_distance_km", F.lit(None).cast(DoubleType()))
     )
-    bounds_path = os.path.join(LOCAL_TMP_DIR, f"staging_{os.path.basename(provider_dir)}_bounds.csv")
-    bounds.write.mode("overwrite").option("header", "true").csv(bounds_path)
-    del bounds
-    spark.catalog.clearCache(); gc.collect()
-    bounds = spark.read.option("header", "true").csv(bounds_path)
-
-    origin_stops = stops.select(
-        F.col("stop_id").alias("origin_stop_id"),
-        F.col("stop_name").alias("origin"),
-        F.col("stop_lat").cast(DoubleType()).alias("station_lat"),
-        F.col("stop_lon").cast(DoubleType()).alias("station_long"),
-    )
-    dest_stops = stops.select(
-        F.col("stop_id").alias("dest_stop_id"),
-        F.col("stop_name").alias("destination"),
-        F.col("stop_lat").cast(DoubleType()).alias("station_lat_dest"),
-        F.col("stop_lon").cast(DoubleType()).alias("station_long_dest"),
-    )
-
-    df = bounds.join(origin_stops, "origin_stop_id").join(dest_stops, "dest_stop_id")
-    
-    
-    if "route_short_name" in bounds.columns or "route_long_name" in bounds.columns:
-        pass  
+    pairs_path = os.path.join(LOCAL_TMP_DIR, f"staging_{os.path.basename(provider_dir)}_pairs.csv")
+    df.write.mode("overwrite").option("header", "true").csv(pairs_path)
+    del df; spark.catalog.clearCache(); gc.collect()
+    df = spark.read.option("header", "true").csv(pairs_path)  
     
     # Classification intelligente des trains selon les codes européens
     df = df.withColumn("route_code", F.coalesce(F.col("route_short_name"), F.col("route_long_name"), F.lit("")))
@@ -878,6 +905,145 @@ def generate_plane_routes(df_routes, df_intermodal, min_plane_km=MIN_PLANE_DISTA
     )
 
 
+# 7b) ENRICHISSEMENT DIM_STATION (SNCF fréquentation + INSEE population)
+def _normalize_name(s):
+    """Normalise un nom de gare/ville pour le matching : majuscules, sans accents, sans tirets."""
+    if not isinstance(s, str):
+        return ""
+    import unicodedata
+    s = unicodedata.normalize("NFD", s)
+    s = "".join(c for c in s if unicodedata.category(c) != "Mn")
+    return s.upper().replace("-", " ").replace("_", " ").strip()
+
+
+def _enrich_stations_pandas(df_stations_pd):
+    """
+    Enrichit le DataFrame pandas des stations avec :
+    - annual_station_traffic depuis SNCF fréquentation (matching sur nom normalisé)
+    - city_population depuis INSEE communes (matching sur ville normalisée)
+    Retourne le DataFrame enrichi.
+    """
+    import pandas as pd
+
+    df = df_stations_pd.copy()
+    df["_norm"] = df["station_name"].apply(_normalize_name)
+
+    # --- SNCF fréquentation ---
+    sncf_files = sorted(glob.glob(f"{RAW_SNCF_FREQ_DIR}/sncf_frequentation_*.csv"))
+    if sncf_files:
+        try:
+            df_sncf = pd.read_csv(sncf_files[-1], sep=";", encoding="utf-8-sig")
+            # Colonne nom et trafic 2024 (ou 2023 en fallback)
+            nom_col = "Nom de la gare"
+            traffic_col = "Total Voyageurs 2024" if "Total Voyageurs 2024" in df_sncf.columns else "Total Voyageurs 2023"
+            df_sncf = df_sncf[[nom_col, traffic_col]].dropna(subset=[nom_col])
+            df_sncf["_norm"] = df_sncf[nom_col].apply(_normalize_name)
+            df_sncf[traffic_col] = pd.to_numeric(df_sncf[traffic_col], errors="coerce")
+            sncf_map = df_sncf.set_index("_norm")[traffic_col].to_dict()
+
+            def match_sncf(norm_station):
+                # 1. Exact match
+                if norm_station in sncf_map:
+                    return sncf_map[norm_station]
+                # 2. Le nom SNCF est contenu dans le nom gare GTFS
+                for sncf_norm, val in sncf_map.items():
+                    if sncf_norm and sncf_norm in norm_station:
+                        return val
+                # 3. Le nom gare GTFS est contenu dans le nom SNCF
+                for sncf_norm, val in sncf_map.items():
+                    if norm_station and norm_station in sncf_norm:
+                        return val
+                return None
+
+            df["annual_station_traffic"] = df["_norm"].apply(match_sncf)
+            matched = df["annual_station_traffic"].notna().sum()
+            print(f"SNCF fréquentation : {matched}/{len(df)} gares matchées")
+        except Exception as e:
+            print(f"WARN enrichissement SNCF : {e}")
+    else:
+        print("WARN : aucun fichier SNCF fréquentation trouvé")
+
+    # --- INSEE population communes ---
+    insee_files = sorted(glob.glob(f"{RAW_INSEE_POP_DIR}/communes_population_france_*.csv"))
+    if insee_files:
+        try:
+            df_insee = pd.read_csv(insee_files[-1], dtype={"code": str})
+            df_insee = df_insee[["nom", "population"]].dropna(subset=["nom"])
+            df_insee["_norm"] = df_insee["nom"].apply(_normalize_name)
+            df_insee["population"] = pd.to_numeric(df_insee["population"], errors="coerce")
+            # Garder la plus grande commune si doublon de nom
+            insee_map = df_insee.sort_values("population", ascending=False) \
+                                 .drop_duplicates("_norm").set_index("_norm")["population"].to_dict()
+            _PREFIXES = ["GARE DE ", "GARE D ", "GARE DU ", "GARE DES ",
+                         "AEROPORT DE ", "AEROPORT D ", "AEROPORT DU "]
+
+            def _strip_prefix(s):
+                for p in _PREFIXES:
+                    if s.startswith(p):
+                        return s[len(p):]
+                return s
+
+            def match_insee(norm_station):
+                # Essai direct et sans préfixe
+                for candidate_base in [norm_station, _strip_prefix(norm_station)]:
+                    if candidate_base in insee_map:
+                        return insee_map[candidate_base]
+                    # Prefix progressif (retire tokens depuis la droite)
+                    tokens = candidate_base.split() if candidate_base else []
+                    for length in range(len(tokens), 0, -1):
+                        candidate = " ".join(tokens[:length])
+                        if candidate in insee_map:
+                            return insee_map[candidate]
+                return None
+
+            df["city_population"] = df["_norm"].apply(match_insee)
+            matched = df["city_population"].notna().sum()
+            print(f"INSEE population : {matched}/{len(df)} villes matchées")
+        except Exception as e:
+            print(f"WARN enrichissement INSEE : {e}")
+    else:
+        print("WARN : aucun fichier INSEE communes trouvé")
+
+    # --- GeoNames : fallback pour les villes non-françaises ---
+    geonames_files = sorted(glob.glob(f"{RAW_GEONAMES_DIR}/geonames_cities_*.csv"))
+    if geonames_files and df["city_population"].isna().any():
+        try:
+            df_geo = pd.read_csv(geonames_files[-1])
+            df_geo = df_geo[["asciiname", "name", "population"]].dropna(subset=["asciiname"])
+            df_geo["population"] = pd.to_numeric(df_geo["population"], errors="coerce")
+            df_geo["_norm_ascii"] = df_geo["asciiname"].apply(_normalize_name)
+            df_geo["_norm_name"]  = df_geo["name"].apply(_normalize_name)
+            geo_map = {}
+            for _, row in df_geo.sort_values("population", ascending=False).iterrows():
+                for key in [row["_norm_ascii"], row["_norm_name"]]:
+                    if key and key not in geo_map:
+                        geo_map[key] = row["population"]
+
+            def match_geonames(norm_station):
+                for candidate_base in [norm_station, _strip_prefix(norm_station)]:
+                    if candidate_base in geo_map:
+                        return geo_map[candidate_base]
+                    tokens = candidate_base.split() if candidate_base else []
+                    for length in range(len(tokens), 0, -1):
+                        c = " ".join(tokens[:length])
+                        if c in geo_map:
+                            return geo_map[c]
+                return None
+
+            mask_null = df["city_population"].isna()
+            df.loc[mask_null, "city_population"] = df.loc[mask_null, "_norm"].apply(match_geonames)
+            matched_geo = df["city_population"].notna().sum()
+            print(f"GeoNames population : {matched_geo}/{len(df)} villes matchées (total avec INSEE)")
+        except Exception as e:
+            print(f"WARN enrichissement GeoNames : {e}")
+    else:
+        if not geonames_files:
+            print("WARN : aucun fichier GeoNames trouvé")
+
+    df.drop(columns=["_norm"], inplace=True)
+    return df
+
+
 # 8) PIPELINE ORCHESTRATION
 def run_transform():
     print("TRANSFORMATION - Pipeline datamart train + avion")
@@ -1079,7 +1245,117 @@ def run_transform():
             safe_rmtree(tmp_airports_dir)
             print(f"Aéroports exportés : {out_air}")
 
-        # Nettoyage de tous les checkpoints finaux provider devenus inutiles.
+        # --- Schéma dimensionnel : pivot train/avion par corridor ---
+        print("Construction du schéma dimensionnel...")
+
+        df_train = df.filter(~F.col("vehicule_type").contains("Avion"))
+        df_avion = df.filter(F.col("vehicule_type").contains("Avion"))
+
+        # dim_vehicle_type staging
+        dim_vt_stg = df_train.select(
+            F.col("vehicule_type").alias("service_type"),
+            F.col("vehicule_type").alias("label"),
+        ).dropDuplicates(["service_type"])
+
+        # dim_route staging
+        dim_route_stg = df_train.groupBy("origin", "destination").agg(
+            F.avg(F.col("distance_km").cast(DoubleType())).alias("distance_km"),
+            F.first("origin_city", ignorenulls=True).alias("dep_city"),
+            F.first("destination_city", ignorenulls=True).alias("arr_city"),
+        ).withColumn("is_long_distance", F.col("distance_km") > 100) \
+         .select(
+            F.col("origin").alias("dep_name"),
+            F.col("destination").alias("arr_name"),
+            "dep_city", "arr_city", "distance_km", "is_long_distance"
+         ).dropDuplicates(["dep_name", "arr_name"])
+
+        # Agrégation train par corridor × vehicule_type
+        train_corridor = df_train.groupBy("origin", "destination", "vehicule_type").agg(
+            F.min(F.col("co2_kg").cast(DoubleType())).alias("co2_train_kg"),
+            F.avg(F.col("distance_km").cast(DoubleType())).alias("distance_km"),
+            F.first("station_lat",      ignorenulls=True).alias("station_lat"),
+            F.first("station_long",     ignorenulls=True).alias("station_long"),
+            F.first("station_lat_dest", ignorenulls=True).alias("station_lat_dest"),
+            F.first("station_long_dest",ignorenulls=True).alias("station_long_dest"),
+            F.first("origin_city",      ignorenulls=True).alias("origin_city"),
+            F.first("destination_city", ignorenulls=True).alias("destination_city"),
+        )
+
+        # Min CO2 avion par corridor
+        avion_corridor = df_avion.groupBy("origin", "destination").agg(
+            F.min(F.col("co2_kg").cast(DoubleType())).alias("co2_avion_kg"),
+        )
+
+        # Pivot join : une ligne = corridor × type de train
+        fact_stg = train_corridor.join(avion_corridor, ["origin", "destination"], "left")
+        fact_stg = fact_stg \
+            .withColumn("co2_saved_kg",
+                F.when(F.col("co2_avion_kg").isNotNull(),
+                       F.col("co2_avion_kg") - F.col("co2_train_kg")
+                ).otherwise(F.lit(None).cast(DoubleType()))
+            ) \
+            .withColumn("is_substitutable",
+                # Loi française 2023 : substituable si train < 2h30 ≈ 600km en TGV
+                # ET un vol existe sur ce corridor (co2_avion non NULL)
+                F.when(
+                    (F.col("distance_km").cast(DoubleType()) <= 600) &
+                    F.col("co2_avion_kg").isNotNull(),
+                    F.lit(1)
+                ).otherwise(F.lit(0))
+            ) \
+            .withColumn("traffic_share_pct", F.lit(None).cast(DoubleType()))
+
+        # dim_station staging : toutes les gares uniques
+        stations_o = fact_stg.select(
+            F.col("origin").alias("station_name"),
+            F.col("origin_city").alias("city"),
+            F.col("station_lat").cast(DoubleType()).alias("lat"),
+            F.col("station_long").cast(DoubleType()).alias("lon"),
+        )
+        stations_d = fact_stg.select(
+            F.col("destination").alias("station_name"),
+            F.col("destination_city").alias("city"),
+            F.col("station_lat_dest").cast(DoubleType()).alias("lat"),
+            F.col("station_long_dest").cast(DoubleType()).alias("lon"),
+        )
+        dim_station_stg = stations_o.unionByName(stations_d) \
+            .dropDuplicates(["station_name"]) \
+            .withColumn("country_code",           F.lit(None).cast("string")) \
+            .withColumn("annual_station_traffic",  F.lit(None).cast("long")) \
+            .withColumn("city_population",         F.lit(None).cast("long")) \
+            .select("station_name", "city", "lat", "lon",
+                    "country_code", "annual_station_traffic", "city_population")
+
+        # Enrichissement SNCF fréquentation + INSEE population (pandas, fichiers légers)
+        dim_station_pd = dim_station_stg.toPandas()
+        dim_station_pd = _enrich_stations_pandas(dim_station_pd)
+
+        def _export(df_exp, tmp_name, out_path):
+            tmp = os.path.join(LOCAL_TMP_DIR, tmp_name)
+            df_exp.write.mode("overwrite").option("header", "true").csv(tmp)
+            _merge_part_csvs(tmp, out_path)
+            safe_rmtree(tmp)
+            print(f"Exporté : {out_path}")
+
+        _export(dim_route_stg, "tmp_dim_route", os.path.join(FINAL_OUTPUT_DIR, OUTPUT_DIM_ROUTE_FILE))
+        _export(dim_vt_stg,    "tmp_dim_vt",   os.path.join(FINAL_OUTPUT_DIR, OUTPUT_DIM_VEHICLE_FILE))
+        # Export dim_station via pandas (déjà enrichi SNCF + INSEE)
+        out_station = os.path.join(FINAL_OUTPUT_DIR, OUTPUT_DIM_STATION_FILE)
+        dim_station_pd.to_csv(out_station, index=False)
+        print(f"Exporté : {out_station}")
+
+        fact_cols = ["origin", "destination", "vehicule_type",
+                     "co2_train_kg", "co2_avion_kg", "co2_saved_kg",
+                     "is_substitutable", "traffic_share_pct",
+                     "distance_km", "station_lat", "station_long",
+                     "station_lat_dest", "station_long_dest"]
+        _export(
+            fact_stg.select(*[c for c in fact_cols if c in fact_stg.columns]),
+            "tmp_fact",
+            os.path.join(FINAL_OUTPUT_DIR, OUTPUT_FACT_FILE)
+        )
+
+        # Nettoyage des checkpoints finaux provider
         for entry in os.listdir(LOCAL_TMP_DIR):
             if entry.startswith("staging_") and entry.endswith("_final.csv"):
                 full_path = os.path.join(LOCAL_TMP_DIR, entry)

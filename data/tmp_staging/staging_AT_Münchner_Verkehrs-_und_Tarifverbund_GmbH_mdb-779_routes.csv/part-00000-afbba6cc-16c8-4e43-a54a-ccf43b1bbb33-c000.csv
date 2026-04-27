@@ -1,0 +1,724 @@
+route_id,agency_id,route_short_name,route_long_name,route_type,route_color,route_text_color,route_url,ticketing_deep_link_id
+mvv-1-001E-1,1,S1,Neufahrn - Flughafen/Airport Schienenersatzverkehr S1,3,005262,FFFFFF,,MVV_ticketing
+mvv-1-002E-1,1,S2,Schienenersatzverkehr S2 Markt Schwaben - Erding,3,005262,FFFFFF,,MVV_ticketing
+mvv-1-003E-1,1,S3,Schienenersatzverkehr S3 Diesenhofen - Holzkirchen,3,005262,FFFFFF,,MVV_ticketing
+mvv-1-004E-1,1,S4,Schienenersatzverkehr S4 Buchenau - Pasing,3,005262,FFFFFF,,MVV_ticketing
+mvv-1-004E-2,1,S4,Schienenersatzverkehr S4 Pasing - Puchheim/Buchenau,3,005262,FFFFFF,,MVV_ticketing
+mvv-1-004E-3,1,S4,Schienenersatzverkehr S4 Pasing - Fürstenfeldbruck,3,005262,FFFFFF,,MVV_ticketing
+mvv-1-006E-1,1,S6,Schienenersatzverkehr S6 Tutzing - Gauting,3,005262,FFFFFF,,MVV_ticketing
+mvv-1-007E-1,1,S7,Schienenersatzverkehr S7 Wolfratshausen - Höllriegelskreuth,3,005262,FFFFFF,,MVV_ticketing
+mvv-1-008E-1,1,S8,Schienenersatzverkehr S8 Ostbahnhof - Johanneskirchen,3,005262,FFFFFF,,MVV_ticketing
+mvv-1-999E-1,1,S,Schienenersatzverkehr Stammstrecke Donnersbergerbrücke - Pasing,3,005262,FFFFFF,,MVV_ticketing
+mvv-12-276-1,1,276,Bad Aibling - Götting - Bruckmühl - Feldkirchen - Aying,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12276___H_s25_1.pdf,MVV_ticketing
+mvv-12-277-1,1,277,Bad Aibling - Heufeld - Bruckmühl - Feldkirchen - Aying,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12277___H_s25_1.pdf,MVV_ticketing
+mvv-12-278-1,1,278,(Beyharting -) Großhöhenrain - Ginsham - Bruckmühl,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12278___H_s25_1.pdf,MVV_ticketing
+mvv-12-316-1,1,316,Oberammergau - Ettal - Graswang - Schloss Linderhof,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12316___H_s25_1.pdf,MVV_ticketing
+mvv-12-318-1,1,318,Grafenaschau - Grafenaschau Bf - Seeleiten-Berggeist - Murnau,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12318___H_s25_1.pdf,MVV_ticketing
+mvv-12-321-1,1,321,OrtsBus Garmisch-Partenkirchen Klinikum - Bahnhof - Marienplatz - Äußere Maximiliansstraße,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12321___H_s25_1.pdf,MVV_ticketing
+mvv-12-322-1,1,322,OrtsBus Garmisch-Partenkirchen Klinikum - Bahnhof - Marienplatz - Äuß. Maximiliansstr. - Kreuzeck-/Alpspitzbahn,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12322___H_s25_1.pdf,MVV_ticketing
+mvv-12-323-1,1,323,EibseeBus Garmisch-Partenkirchen - Untergrainau - Hammersbach - Grainau - Eibsee,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12323___H_s25_1.pdf,MVV_ticketing
+mvv-12-324-1,1,324,Farchant - Wankbahn - Sebastiansk. - Bahnhof - Marienplatz - Burgrain - Farchant,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12324___H_s25_1.pdf,MVV_ticketing
+mvv-12-325-1,1,325,Farchant - Burgrain - Marienplatz - Bahnhof - Sebastiansk. - Wankbahn - Farchant,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12325___H_s25_1.pdf,MVV_ticketing
+mvv-12-326-1,1,326,Garmisch-Partenkirchen - Ettal - Oberammergau - Echelsbacher Brücke - Wieskirche - Steingaden - Schlauch (- Hohenschwangau - Füssen),3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12326___H_s25_1.pdf,MVV_ticketing
+mvv-12-328-1,1,328,Garmisch-Partenkirchen - Mittenwald - Wallgau - Walchensee - Kochel,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12328___H_s25_1.pdf,MVV_ticketing
+mvv-12-329-1,1,329,Garmisch-Partenkirchen - Klais - Krün - Wallgau (- Walchensee),3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12329___H_s25_1.pdf,MVV_ticketing
+mvv-12-331-1,1,331,StadtBus Kolbermoor Kolbermoor Bf - Siedlerpl. (- Conradty-Altenheim) - Kolbermoor Bf,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12331___H_s25_1.pdf,MVV_ticketing
+mvv-12-332-1,1,332,StadtBus Kolbermoor Kolbermoor Bf - Tierheim - Moorkultur - Kolbermoor Bf,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12332___H_s25_1.pdf,MVV_ticketing
+mvv-12-333-1,1,333,StadtBus Kolbermoor Kolbermoor Bf - Hertopark - Schlarbhofen - Kolbermoor Bf,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12333___H_s25_1.pdf,MVV_ticketing
+mvv-12-334-1,1,334,StadtBus Kolbermoor Kolbermoor Bf (- Conrady-Altenh.) - Schlarbhofen - Hertopark - Kolbermoor Bf,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12334___H_s25_1.pdf,MVV_ticketing
+mvv-12-336-1,1,336,Brannenburg - Raubling - Rohrdorf - Höhenmoos - Pfraundorf,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12336___H_s25_1.pdf,MVV_ticketing
+mvv-12-337-1,1,337,(Raubling -) Brannenburg - Nußdorf (- Achenmühle),3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12337___H_s25_1.pdf,MVV_ticketing
+mvv-12-338-1,1,338,Windshausen - Nußdorf - Brannenburg - Raubling,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12338___H_s25_1.pdf,MVV_ticketing
+mvv-12-339-1,1,339,Brannenburg - Raubling - Altenmarkt (Inn) - Winkl,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12339___H_s25_1.pdf,MVV_ticketing
+mvv-12-340-1,1,340,"(Ellmosen -) Bad Aibling - Kolbermoor - Rosenheim - Rosenheim, Stadtmitte",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12340___H_s25_1.pdf,MVV_ticketing
+mvv-12-341-1,1,341,Moor-Express Bad Aibling Therme - Bahnhof - Kurpark Bf - Harthausen - Bahnhof - Therme,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12341___H_s25_1.pdf,MVV_ticketing
+mvv-12-342-1,1,342,Rosenheim - Kolbermoor - Bad Aibling,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12342___H_s25_1.pdf,MVV_ticketing
+mvv-12-343-1,1,343,Bad Aibling - Au - Bad Feilnbach,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12343___H_s25_1.pdf,MVV_ticketing
+mvv-12-344-1,1,344,Bad Aibling - Kolbermoor - Großkarolinenfeld,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12344___H_s25_1.pdf,MVV_ticketing
+mvv-12-345-1,1,345,Bad Aibling - Maxlrain - Hohenthann - Grafing Bahnhof,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12345___H_s25_1.pdf,MVV_ticketing
+mvv-12-346-1,1,346,Bad Aibling - Beyharting - Ostermünchen - Tattenhausen - Rosenheim,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12346___H_s25_1.pdf,MVV_ticketing
+mvv-12-347-1,1,347,Kiefersfelden - Oberaudorf - Brannenburg - Raubling,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12347___H_s25_1.pdf,MVV_ticketing
+mvv-12-348-1,1,348,Bad Feilnbach - Großholzhausen (- Brannenburg) - Raubling - Rosenheim,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12348___H_s25_1.pdf,MVV_ticketing
+mvv-12-352-1,1,352,Leitzach-/Schlierachtal Ringlinie A Miesbach - Hundham - Fischbachau - Schliersee - Miesbach,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12352___H_s25_1.pdf,MVV_ticketing
+mvv-12-354-1,1,354,Tegernsee - Gmund - Wall - Miesbach - Agatharied,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12354___H_s25_1.pdf,MVV_ticketing
+mvv-12-355-1,1,355,Tegernsee - Gmund - Schliersee - Neuhaus - Fischbachau,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12355___H_s25_1.pdf,MVV_ticketing
+mvv-12-356-1,1,356,Tegernsee - Rottach-Egern - Wallberg - Kreuth - Stuben,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12356___H_s25_1.pdf,MVV_ticketing
+mvv-12-357-1,1,357,Tegernsee - Bad Wiessee - Gmund - Waakirchen - Bad Tölz,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12357___H_s25_1.pdf,MVV_ticketing
+mvv-12-358-1,1,358,Tegernsee - Gmund - Hausham - Miesbach - Irschenberg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12358___H_s25_1.pdf,MVV_ticketing
+mvv-12-359-1,1,359,Ringlinie A: Tegernsee - Rottach-Egern - Bad Wiessee - Gmund - Tegernsee,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12359___H_s25_1.pdf,MVV_ticketing
+mvv-12-361-1,1,361,Holzkirchen - Darching - Weyarn - Miesbach - Schliersee,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12361___H_s25_1.pdf,MVV_ticketing
+mvv-12-363-1,1,363,Kleinhöhenkirchen - Weyarn - Miesbach,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12363___H_s25_1.pdf,MVV_ticketing
+mvv-12-364-1,1,364,Bad Tölz - Wackersberg - Arzbach - Lenggries (- Brauneckbahn - Hohenburg),3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12364___H_s25_1.pdf,MVV_ticketing
+mvv-12-388-1,1,388,Waldkopfbahn-Talstation - Brannenburg / Waldkopfbahn-Talstation - Oberaudorf,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12388___H_s25_1.pdf,MVV_ticketing
+mvv-12-391-1,1,391,Bad Tölz - Blombergbahn - Bad Heilbrunn - Penzberg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12391___H_s25_1.pdf,MVV_ticketing
+mvv-12-392-1,1,392,Bad Tölz - Bad Heilbrunn - Benediktbeuern - Kochel,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12392___H_s25_1.pdf,MVV_ticketing
+mvv-12-393-1,1,393,Kochel - Schlehdorf - Großweil - Achrain - Murnau,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12393___H_s25_1.pdf,MVV_ticketing
+mvv-12-393V-1,1,393V,Schlehdorf - Großweil - Ohlstadt - Murnau,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12393V___H_s25_1.pdf,MVV_ticketing
+mvv-12-393V-2,1,393V,Schlehdorf - Großweil - Ohlstadt - Hechendorf - Murnau,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12393V___H_s25_1.pdf,MVV_ticketing
+mvv-12-394-1,1,394,Penzberg - Benediktbeuern - Kochel - Schlehdorf,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12394___H_s25_1.pdf,MVV_ticketing
+mvv-12-395-1,1,395,Lenggries - Wegscheid - Jachenau,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12395___H_s25_1.pdf,MVV_ticketing
+mvv-12-397-1,1,397,Murnau - Riegsee - Obersöchering - Hofheim - Murnau,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12397___H_s25_1.pdf,MVV_ticketing
+mvv-12-397-2,1,397,Murnau - Riegsee - Obersöchering - Hofheim - Murnau,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12397___H_s25_1.pdf,MVV_ticketing
+mvv-12-398-1,1,398,Linie Alpin: Geitau - Bayrischzell - Sudelfeld - Bayrischzell - Geitau,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12398___H_s25_1.pdf,MVV_ticketing
+mvv-12-399-1,1,399,SkiBus Lenggries (vormittags) Lenggries - Brauneckbahn - Draxl-/Jaudenlifte - Lenggries,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12399___H_s25_1.pdf,MVV_ticketing
+mvv-12-401-1,1,401,Stadtmitte - Berufsschule - Hochschule/FOS - Lessingstr. - Stadtmitte,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12401___H_s25_1.pdf,MVV_ticketing
+mvv-12-402-1,1,402,Stadtmitte - Bahnhof - Endorfer Au - Am Gries - Bahnhof - Stadtmitte,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12402___H_s25_1.pdf,MVV_ticketing
+mvv-12-403-1,1,403,Stadtmitte - Bahnhof - Traberhof - Happing - Kastenau - ROFA-Stadion - Bahnhof - Stadtmitte,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12403___H_s25_1.pdf,MVV_ticketing
+mvv-12-404-1,1,404,Stadtmitte - Unterfürstätt - Küpferling - Stadtmitte,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12404___H_s25_1.pdf,MVV_ticketing
+mvv-12-405-1,1,405,Stadtmitte - Mitterfeld - Langenpfunzen - (Pfaffenhofen -) Westerndorf St.Peter - Egarten,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12405___H_s25_1.pdf,MVV_ticketing
+mvv-12-405V-1,1,405V,"Schülerverkehr: Westerndorf St. Peter, Schule - Pürstlingstraße",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12405V___H_s25_1.pdf,MVV_ticketing
+mvv-12-406-1,1,406,Stadtmitte - Klinikum - Erlenau - Stadtmitte,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12406___H_s25_1.pdf,MVV_ticketing
+mvv-12-407-1,1,407,Stadtmitte - Bahnhof - Heilig Blut - Oberwöhr - Schwaig,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12407___H_s25_1.pdf,MVV_ticketing
+mvv-12-407V-1,1,407V,"Schülerverkehr: Aising, Schule - Pang, Schule - Westerndorf am Wasen - Schwaig - Oberwöhr - Aising",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12407V___H_s25_1.pdf,MVV_ticketing
+mvv-12-408-1,1,408,"Rosenheim, Stadtmitte - Rosenheim - Kolbermoor - Kolbermoor, Siedlerpl. Kolbermoor, Siedlerpl. - Kolbermoor - Rosenheim - Rosenheim, Stadtmitte",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12408___H_s25_1.pdf,MVV_ticketing
+mvv-12-409-1,1,409,"Rosenheim, Stadtmitte - Rosenheim - Aicherpark - Kolbermoor - Kolbermoor, Königssee-/Albert-Schalper-Str.",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12409___H_s25_1.pdf,MVV_ticketing
+mvv-12-410-1,1,410,Kastenau - Stadtmitte,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12410___H_s25_1.pdf,MVV_ticketing
+mvv-12-411-1,1,411,Stadtmitte - Bahnhof - Aisingerwies - Aising - Pang - Schwaig - Am Gries - Bahnhof - Stadtmitte,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12411___H_s25_1.pdf,MVV_ticketing
+mvv-12-412-1,1,412,Stadtmitte - Rosenheim - Schwaig - Pang - Aising - Aisingerwies - Rosenheim - Stadtmitte,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12412___H_s25_1.pdf,MVV_ticketing
+mvv-12-413-1,1,413,Stadtmitte - Bahnhof - ROFA-Stadion - Happinger Ausee - Am Oberfeld - Happing - Traberhof - Bahnhof - Stadtmitte,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12413___H_s25_1.pdf,MVV_ticketing
+mvv-12-419-1,1,419,Adventsbus: Stadtmitte - Loreto - Aicherpark - Pang - Aising - WEKO - Bahnhof - Stadtmitte,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12419___H_s25_1.pdf,MVV_ticketing
+mvv-12-420-1,1,420,Stadtmitte - Bahnhof - Happing - Kastenau - Stadtmitte,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12420___H_s25_1.pdf,MVV_ticketing
+mvv-12-421-1,1,421,Stadtmitte - Rosenheim - Aisingerwies - Pang - Schwaig - Rosenheim - Stadtmitte,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12421___H_s25_1.pdf,MVV_ticketing
+mvv-12-422-1,1,422,Stadtmitte - Rosenheim - Schwaig - Pang - Aisingerwies - Rosenheim - Stadtmitte,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12422___H_s25_1.pdf,MVV_ticketing
+mvv-12-423-1,1,423,Stadtmitte - Rosenheim - Traberhof - Happing - Weko - Am Oberfeld,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12423___H_s25_1.pdf,MVV_ticketing
+mvv-12-424-1,1,424,Bahnhof - Stadtmitte - Unterfürstätt - Küpferling - Stadtmitte - Bahnhof,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12424___H_s25_1.pdf,MVV_ticketing
+mvv-12-426-1,1,426,Bahnhof - Stadtmitte - Erlenau - Langenpfunzen - Westerndorf - Kaserne - Stadtmitte - Bahnhof,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12426___H_s25_1.pdf,MVV_ticketing
+mvv-12-427-1,1,427,Stadtmitte - Endorfer Au - Oberwöhr - Heilig Blut - Stadtmitte,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12427___H_s25_1.pdf,MVV_ticketing
+mvv-12-429-1,1,429,"Rosenheim, Stadtmitte - Rosenheim - Kolbermoor - Kolbermoor, Königsseestr.",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12429___H_s25_1.pdf,MVV_ticketing
+mvv-12-431-1,1,431,Stadtbus Wasserburg Badria - Stadt Busbahnhof - Wasserburg Bf (Reitmehring),3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12431___H_s25_1.pdf,MVV_ticketing
+mvv-12-432-1,1,432,Rettenbach - Pfaffing - Edling - Wasserburg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12432___H_s25_1.pdf,MVV_ticketing
+mvv-12-433-1,1,433,Wasserburg - Soyen - Haag - Maitenbeth/Oberornau,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12433___H_s25_1.pdf,MVV_ticketing
+mvv-12-434-1,1,434,Wasserburg Stadt - Halfing - Bad Endorf - Prien,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12434___H_s25_1.pdf,MVV_ticketing
+mvv-12-435-1,1,435,Rosenheim - Vogtareuth - Griesstätt - Wasserburg Stadt,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12435___H_s25_1.pdf,MVV_ticketing
+mvv-12-436-1,1,436,Rosenheim - Pfaffenhofen - Rott a. Inn - Attel - Wasserburg Bf (Reitmehring) - Wasserburg Stadt,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12436___H_s25_1.pdf,MVV_ticketing
+mvv-12-437-1,1,437,Wasserburg Stadt - Wasserburg Bf (Reitmehring) - Ebersberg - Grafing Bahnhof,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12437___H_s25_1.pdf,MVV_ticketing
+mvv-12-438-1,1,438,Wasserburg Stadt - Wasserburg Bf - Albaching - Haag - Dorfen,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12438___H_s25_1.pdf,MVV_ticketing
+mvv-12-439-1,1,439,Wasserburg Stadt - Eiselfing - Evenhausen - Amerang,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12439___H_s25_1.pdf,MVV_ticketing
+mvv-12-470-1,1,470,Gars - Haag - Hohenlinden - Forstinning - Max-Weber-Platz,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12470___H_s25_1.pdf,MVV_ticketing
+mvv-12-474-1,1,474,Ampfing - Heldenstein - Biburg - Gars am Inn,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12474___H_s25_1.pdf,MVV_ticketing
+mvv-12-475-1,1,475,Steinhöring - Tulling - Albaching - Haag - Gars,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12475___H_s25_1.pdf,MVV_ticketing
+mvv-12-476-1,1,476,Taufkirchen - / Waldkraiburg - Kraiburg - Gars Bf - Gars,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12476___H_s25_1.pdf,MVV_ticketing
+mvv-12-477-1,1,477,Kreuz - Eßbaum - Maitenbeth - Rechtmehring,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12477___H_s25_1.pdf,MVV_ticketing
+mvv-12-478-1,1,478,Oberornau - Schwindegg - Thambach - Gars,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12478___H_s25_1.pdf,MVV_ticketing
+mvv-12-479-1,1,479,Freimehring - Gars - Waldkraiburg - Ampfing - Mühldorf (- Altötting),3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12479___H_s25_1.pdf,MVV_ticketing
+mvv-12-481-1,1,481,Ortsverkehr Prien Bahnhof - (Osternach) - Hafen - Harras - Hafen - Bahnhof,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12481___H_s25_1.pdf,MVV_ticketing
+mvv-12-482-1,1,482,"(Wildbichl -) Sachrang - Aschau - Bernau - Bernau-Felden, Schiff",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12482___H_s25_1.pdf,MVV_ticketing
+mvv-12-483-1,1,9480,Bürgerbus Amerang - Obing - Pittenhart - Eggstätt / Seebruck - Bad Endorf / Prien,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12483___H_s25_1.pdf,MVV_ticketing
+mvv-12-484-1,1,9520,Traunstein - Chieming - Seebruck - Rimsting - Prien,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12484___H_s25_1.pdf,MVV_ticketing
+mvv-12-485-1,1,9505,Reit im Winkl - Marquartstein - Bernau - Prien,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12485___H_s25_1.pdf,MVV_ticketing
+mvv-12-488-1,1,488,Bad Endorf - Hemhof - Eggstätt - Rimsting - Prien,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12488___H_s25_1.pdf,MVV_ticketing
+mvv-12-489-1,1,489,Riedering - Söllhuben - Prien,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12489___H_s25_1.pdf,MVV_ticketing
+mvv-12-490-1,1,490,Rosenheim - Raubling - Neubeuern - Nußdorf (Inn) (- Windshausen),3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12490___H_s25_1.pdf,MVV_ticketing
+mvv-12-491-1,1,491,Rosenheim - Prutting - Krottenmühl - Bad Endorf - Prien,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12491___H_s25_1.pdf,MVV_ticketing
+mvv-12-492-1,1,492,Rosenheim - Prutting - Halfing - Höslwang - Amerang,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12492___H_s25_1.pdf,MVV_ticketing
+mvv-12-493-1,1,493,Rosenheim - Lauterbach - Achenmühle - Grainbach - Roßholzen,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12493___H_s25_1.pdf,MVV_ticketing
+mvv-12-494-1,1,494,Rosenheim - Rohrdorf - Frasdorf - Prien,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12494___H_s25_1.pdf,MVV_ticketing
+mvv-12-495-1,1,495,Rosenheim - Großkarolinenfeld - Tattenhausen,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12495___H_s25_1.pdf,MVV_ticketing
+mvv-12-496-1,1,496,Rosenheim - Riedering - Söllhuben - Frasdorf - Aschau,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12496___H_s25_1.pdf,MVV_ticketing
+mvv-12-497-1,1,497,Rosenheim - Stephanskirchen - Riedering - Moosen - Mauerkirchen - Prien,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12497___H_s25_1.pdf,MVV_ticketing
+mvv-12-498-1,1,498,Rosenheim - Schloßberg - Stephanskirchen - Baierbach,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12498___H_s25_1.pdf,MVV_ticketing
+mvv-12-531-1,1,531,Landshut Hbf - Adlkofen - Engkofen b.Aham (- Marklkofen),3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12531___H_s25_1.pdf,MVV_ticketing
+mvv-12-532-1,1,532,Loizenkirchen - Aham - Gerzen - Günzkofen - Landshut Hbf,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12532___H_s25_1.pdf,MVV_ticketing
+mvv-12-533-1,1,533,Landshut Hbf - Altdorf - Furth - Weihmichl - Pfeffenhausen - Rottenburg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12533___H_s25_1.pdf,MVV_ticketing
+mvv-12-534-1,1,534,Landshut Hbf - Ergolding - Hohenthann - Schmatzhausen - Rottenburg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12534___H_s25_1.pdf,MVV_ticketing
+mvv-12-534-2,1,534,Landshut Hbf - Ergolding - Hohenthann - Schmatzhausen - Rottenburg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12534___H_s25_1.pdf,MVV_ticketing
+mvv-12-535-1,1,535,Ergoldsbach - Mirskofen - Essenbach - Ergolding - Landshut Hbf,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12535___H_s25_1.pdf,MVV_ticketing
+mvv-12-536-1,1,536,Landshut - Ergolding - Essenbach - Bayerbach - Paindlkofen - Martinshaun,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12536___H_s25_1.pdf,MVV_ticketing
+mvv-12-536-2,1,536,Landshut - Ergolding - Essenbach - Bayerbach - Paindlkofen - Unterunsbach,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12536___H_s25_1.pdf,MVV_ticketing
+mvv-12-537-1,1,537,Landshut - Ergolding - Altheim - Ohu - Essenbach - Postau - Weng - Unterköllnbach,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12537___H_s25_1.pdf,MVV_ticketing
+mvv-12-537-2,1,537,Landshut - Ergolding - Altheim - Ohu - Essenbach - Postau - Weng - Oberköllnbach,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12537___H_s25_1.pdf,MVV_ticketing
+mvv-12-538-1,1,538,Landshut Hbf - Ahrain - Wörth (- Dingolfing),3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12538___H_s25_1.pdf,MVV_ticketing
+mvv-12-539-1,1,539,(Mengkofen -) Weng - Niederviehbach - Niederaichbach - Wolfsbach - Landshut,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12539___H_s25_1.pdf,MVV_ticketing
+mvv-12-539V-1,1,539V,Niederaichbach - Oberaichbach - Wörth - Niederviehbach,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12539V___H_s25_1.pdf,MVV_ticketing
+mvv-12-541F-1,1,541F,Stadtverkehr Vilsbiburg: Linie 3 Hörasdorf - Frauensattling - Vilsbiburg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12541F___H_s25_1.pdf,MVV_ticketing
+mvv-12-541H-1,1,541H,Stadtverkehr Vilsbiburg: Linie 1 Tannet - Haarbach - Gaindorf - Vilsbiburg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12541H___H_s25_1.pdf,MVV_ticketing
+mvv-12-541S-1,1,541S,Stadtverkehr Vilsbiburg: Linie 2 Vilsbiburg - Geiselsdorf - Seyboldsdorf,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12541S___H_s25_1.pdf,MVV_ticketing
+mvv-12-542-1,1,542,Hub - Oberaichbach - Kirchberg - Dietelskirchen - Vilsbiburg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12542___H_s25_1.pdf,MVV_ticketing
+mvv-12-543-1,1,543,Niederviehbach - Kirchberg - Aham - Gerzen - Stürming,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12543___H_s25_1.pdf,MVV_ticketing
+mvv-12-545-1,1,545,Velden - Wurmsham - Bodenkirchen - Aich - Vilsbiburg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12545___H_s25_1.pdf,MVV_ticketing
+mvv-12-546-1,1,546,Vilsbiburg - Obervilslern - Holzhausen - Gaindorf - Vilsbiburg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12546___H_s25_1.pdf,MVV_ticketing
+mvv-12-547-1,1,547,Landshut Hbf - Geisenhausen - Vilsbiburg - Neumarkt-St. Veit,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12547___H_s25_1.pdf,MVV_ticketing
+mvv-12-548-1,1,548,Vilsbiburg - Diemannskirchen - Geisenhausen - Adlkofen - Jesendorf,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12548___H_s25_1.pdf,MVV_ticketing
+mvv-12-549-1,1,549,Kapfing - Vilsheim - Altfraunhofen - Geisenhausen - Vilsbiburg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12549___H_s25_1.pdf,MVV_ticketing
+mvv-12-553-1,1,553,Mühldorf - Waldkraiburg - Aschau am Inn,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12553___H_s25_1.pdf,MVV_ticketing
+mvv-12-555-1,1,555,Egglkofen - Neumarkt-St. Veit - Oberbergkirchen - Ampfing - Mühldorf,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12555___H_s25_1.pdf,MVV_ticketing
+mvv-12-557-1,1,557,Neumarkt-St. Veit - Niederbergkirchen - Mühldorf,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12557___H_s25_1.pdf,MVV_ticketing
+mvv-12-557-2,1,557,Neumarkt-St. Veit - Niederbergkirchen - Mühldorf,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12557___H_s25_1.pdf,MVV_ticketing
+mvv-12-558-1,1,558,Haag - Reichertsheim - Ampfing - Waldkraiburg / Mühldorf,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12558___H_s25_1.pdf,MVV_ticketing
+mvv-12-559-1,1,559,Ranoldsberg - Buchbach - Schwindegg - Ampfing - Mühldorf,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12559___H_s25_1.pdf,MVV_ticketing
+mvv-12-559-2,1,559,Ranoldsberg - Buchbach - Schwindegg - Ampfing - Mühldorf,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12559___H_s25_1.pdf,MVV_ticketing
+mvv-12-559-3,1,559,Ranoldsberg - Buchbach - Schwindegg - Ampfing - Mühldorf,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12559___H_s25_1.pdf,MVV_ticketing
+mvv-12-570-1,1,570,StadtBus Waldkraiburg: Rathaus - Friedhof - Rathaus - Bf - F.-Liszt-Str. - Föhrenwinkel - Rathaus - Bf - F.-Liszt-Str. - Bahnhof - Rathaus,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12570___H_s25_1.pdf,MVV_ticketing
+mvv-12-571-1,1,571,StadtBus Waldkraiburg: Dieselschule - Bahnhof - F-Liszt-Str. - Lindach - Hausing - Niederndorf - Pürten - Ebing - F.-Liszt-Str. - Bahnhof - Dieselschule,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12571___H_s25_1.pdf,MVV_ticketing
+mvv-12-573-1,1,573,Aschau am Inn - Au am Inn - Gars - Haag,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12573___H_s25_1.pdf,MVV_ticketing
+mvv-12-574-1,1,574,Kraiburg - Pürten - Waldkraiburg - Ampfing,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12574___H_s25_1.pdf,MVV_ticketing
+mvv-12-575-1,1,575,Kraiburg - Oberflossing - Mühldorf,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12575___H_s25_1.pdf,MVV_ticketing
+mvv-12-576-1,1,576,Wasserburg Stadt - Penzing - Unterreit - Kraiburg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12576___H_s25_1.pdf,MVV_ticketing
+mvv-12-579-1,1,579,Peterskirchen / Waldkraiburg - Taufkirchen - Polling - Mühldorf,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12579___H_s25_1.pdf,MVV_ticketing
+mvv-12-580-1,1,580,"Velden - Jettenstetten - Moosen - Taufkirchen (Vils) - Dorfen, Bahnhof",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12580___H_s25_1.pdf,MVV_ticketing
+mvv-12-580V-1,1,580V,Velden - Moosen - Taufkirchen (Vils) - Dorfen Schulzentrum,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12580V___H_s25_1.pdf,MVV_ticketing
+mvv-12-581-1,1,581,Loiperstätt - Obertaufkirchen - Schwindegg - Dorfen - Taufkirchen (Vils),3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12581___H_s25_1.pdf,MVV_ticketing
+mvv-12-582-1,1,582,Gars - Ramsau - Kirchdorf (b Haag) - Moosham - Dorfen,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12582___H_s25_1.pdf,MVV_ticketing
+mvv-12-584-1,1,584,Dorfen - Isen - Winden - Ramsau - Gars,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12584___H_s25_1.pdf,MVV_ticketing
+mvv-12-586-1,1,586,Velden - Buchbach - Dorfen - Taufkirchen (Vils),3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12586___H_s25_1.pdf,MVV_ticketing
+mvv-12-587-1,1,587,Haag - Kirchdorf - Obertaufkirchen - Schwindegg - Schwindach,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12587___H_s25_1.pdf,MVV_ticketing
+mvv-12-590-1,1,590,Oberroning - Rottenburg - Hohenthann - Neufahrn (- Mallersdorf-Pfaffenberg),3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12590___H_s25_1.pdf,MVV_ticketing
+mvv-12-592-1,1,592,(Rottenburg - Herrngiersdorf) - Gebersdorf - Oberroning - Inkofen - Rottenburg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12592___H_s25_1.pdf,MVV_ticketing
+mvv-12-593-1,1,593,(Ebenhausen -) Walkertshofen - Rainertshausen - Pfeffenhausen - Rottenburg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12593___H_s25_1.pdf,MVV_ticketing
+mvv-12-594-1,1,594,Neufahrn - Rottenburg Realschule,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12594___H_s25_1.pdf,MVV_ticketing
+mvv-12-595-1,1,595,Rottenburg - Schmatzhausen - Hohenthann - Pfarrkofen - Oberergoldsbach - Hohenthann - Schmatzhausen - Rottenburg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12595___H_s25_1.pdf,MVV_ticketing
+mvv-12-595-2,1,595,Pfarrkofen - Hohenthann - Schmatzhausen - Rottenburg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12595___H_s25_1.pdf,MVV_ticketing
+mvv-12-596-1,1,596,Traich - Obersüßbach - Pfeffenhausen - Rottenburg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12596___H_s25_1.pdf,MVV_ticketing
+mvv-12-597-1,1,597,(Wildenberg) - Oberlauterbach - Pattendorf - Rottenburg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12597___H_s25_1.pdf,MVV_ticketing
+mvv-12-598-1,1,598,Niedersüßbach - Holzhausen - Rottenburg - Oberroning,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12598___H_s25_1.pdf,MVV_ticketing
+mvv-12-599-1,1,599,Rottenburg - Schmatzhausen - Hohenthann - Grafenhaun - Furth,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12599___H_s25_1.pdf,MVV_ticketing
+mvv-12-671-1,1,671,Landshut Hbf - Altdorf - Furth - Obersüßbach (- Volkenschwand - Mainburg),3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12671___H_s25_1.pdf,MVV_ticketing
+mvv-12-672-1,1,672,Landshut Hbf - Altfraunhofen - Velden - Vilsbiburg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12672___H_s25_1.pdf,MVV_ticketing
+mvv-12-674-1,1,674,Vilsheim - Münchsdorf - Landshut,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12674___H_s25_1.pdf,MVV_ticketing
+mvv-12-675-1,1,675,Vilsheim - Ast - Tiefenbach - Landshut,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12675___H_s25_1.pdf,MVV_ticketing
+mvv-12-676-1,1,676,Großaibach - Buch a.Erlbach - Niedererlbach - Weixerau - Viecht - Landshut,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12676___H_s25_1.pdf,MVV_ticketing
+mvv-12-678-1,1,678,Bruckberg Rathaus - Edlkofen - Bruckberg - Bruckbergerau - Landshut,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12678___H_s25_1.pdf,MVV_ticketing
+mvv-12-679-1,1,679,Altdorf - Bruckberg - Bruckbergerau - Gündlkofen - Furth,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12679___H_s25_1.pdf,MVV_ticketing
+mvv-12-685-1,1,685,Edlkofen - Moosburg - Mauern - Gammelsdorf - Furth b. Landshut,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12685___H_s25_1.pdf,MVV_ticketing
+mvv-12-686-1,1,686,Großaibach - Buch a.Erlbach - Aich - Moosburg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12686___H_s25_1.pdf,MVV_ticketing
+mvv-12-686-2,1,686,Großaibach - Buch a.Erlbach - Aich - Moosburg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12686___H_s25_1.pdf,MVV_ticketing
+mvv-12-757-1,1,6264,(Langquaid - Schierling - Eggmühl - / Mallersdorf-Pfaffenberg -) Moosmühle - Neufahrn (NB) - Ergoldsbach - Hölskofen,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12757___H_s25_1.pdf,MVV_ticketing
+mvv-12-758-1,1,2025,(Frontenhausen -) Aham - Gerzen - Johannesbrunn - Vilsbiburg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12758___H_s25_1.pdf,MVV_ticketing
+mvv-12-759-1,1,2026,(Gangkofen - / Frontenhausen - Radlkofen -) Geratsfurt - Binabiburg - Vilsbiburg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12759___H_s25_1.pdf,MVV_ticketing
+mvv-12-796-1,1,9441,Trostberg - Altenmarkt - Obing - Kirchensur - Wasserburg Stadt,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12796___H_s25_1.pdf,MVV_ticketing
+mvv-12-798-1,1,DGF33,(Kirchlehen -) Hösacker / Essenbach - Postau - Hörmannsdorf (- Niederviehbach),3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12798___H_s25_1.pdf,MVV_ticketing
+mvv-12-799-1,1,DGF34,(Oberhütt - Ottering - Moostheninng -) Weng - Abzw. Moosberg (- Niederviehbach),3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12799___H_s25_1.pdf,MVV_ticketing
+mvv-12-809-1,1,809,(Hofstetten -) Finning - Windach - Schöffelding - Eresing - Geltendorf,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12809___H_s25_1.pdf,MVV_ticketing
+mvv-12-809V-1,1,809V,Pestenacker - Prittriching - Scheuring - Weil - / Schöffelding - Windach - / (Eching -) Schondorf - Utting - Dießen,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12809V___H_s25_1.pdf,MVV_ticketing
+mvv-12-811-1,1,811,Landsberg am Lech - Erpfting - Ellighofen,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12811___H_s25_1.pdf,MVV_ticketing
+mvv-12-812-1,1,812,Landsberg am Lech - Denklingen - Schongau,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12812___H_s25_1.pdf,MVV_ticketing
+mvv-12-813-1,1,813,Landsberg - Hofstetten - Dettenschwang - Dießen (- Riederau),3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12813___H_s25_1.pdf,MVV_ticketing
+mvv-12-813V-1,1,813V,St. Alban - Dießen - Penzing / Landsberg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12813V___H_s25_1.pdf,MVV_ticketing
+mvv-12-814-1,1,814,Landsberg - Schwifting - Finning - Utting - Holzhausen,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12814___H_s25_1.pdf,MVV_ticketing
+mvv-12-814V-1,1,814V,Frauenwies - Thaining - Hofstetten - Finning - Schondorf,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12814V___H_s25_1.pdf,MVV_ticketing
+mvv-12-815-1,1,815,Landsberg - Ummendorf - Stoffen - Mundraching,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12815___H_s25_1.pdf,MVV_ticketing
+mvv-12-816-1,1,816,Landsberg - Weil - Egling a.d.Paar - Geltendorf,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12816___H_s25_1.pdf,MVV_ticketing
+mvv-12-817-1,1,817,Landsberg - Penzing - Geltendorf,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12817___H_s25_1.pdf,MVV_ticketing
+mvv-12-818-1,1,818,Landsberg am Lech - Holzhausen (b. Buchloe) - Buchloe Bahnhof,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12818___H_s25_1.pdf,MVV_ticketing
+mvv-12-881-1,1,881,StadtBus Landsberg: Landsberg - Bayervorstadt - Am Kornfeld - Landsberg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12881___H_s25_1.pdf,MVV_ticketing
+mvv-12-881V-1,1,881V,"Landsberg, Schulzentrum - Feneberg - Am Kornfeld West",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12881V___H_s25_1.pdf,MVV_ticketing
+mvv-12-882-1,1,882,StadtBus Landsberg: Landsberg - Klinikum - St.-Ulrich-Platz - Klinikum - Landsberg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12882___H_s25_1.pdf,MVV_ticketing
+mvv-12-883-1,1,883,StadtBus Landsberg: Landsberg - Alter Friedhof - St.-Ulrich-Platz - Alter Friedhof - Landsberg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12883___H_s25_1.pdf,MVV_ticketing
+mvv-12-885-1,1,885,StadtBus Landsberg: Landsberg - Wiesenring - Landsberg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12885___H_s25_1.pdf,MVV_ticketing
+mvv-12-886-1,1,886,Adlerstraße - Landsberg - St.-Ulrich-Platz - Kaufering Bf Süd,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12886___H_s25_1.pdf,MVV_ticketing
+mvv-12-886V-1,1,886V,Kaufering-Dorf - Kaufering - Landsberg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12886V___H_s25_1.pdf,MVV_ticketing
+mvv-12-887-1,1,887,"(Landsberg -) Landsberg, Adlerstraße - Penzing - Kaufering Bf Nord",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12887___H_s25_1.pdf,MVV_ticketing
+mvv-12-887-2,1,887,"(Landsberg -) Landsberg, Adlerstraße - Penzing - Kaufering Bf Nord",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12887___H_s25_1.pdf,MVV_ticketing
+mvv-12-887-3,1,887,"(Landsberg -) Landsberg, Adlerstraße - Penzing - Kaufering Bf Nord",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12887___H_s25_1.pdf,MVV_ticketing
+mvv-12-887-4,1,887,"(Landsberg -) Landsberg, Adlerstraße - Penzing - Kaufering Bf Süd",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12887___H_s25_1.pdf,MVV_ticketing
+mvv-12-887-5,1,887,"(Landsberg -) Landsberg, Adlerstraße - Penzing - Kaufering Bf Nord",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12887___H_s25_1.pdf,MVV_ticketing
+mvv-12-891-1,1,891,Weilheim - Dießen - Utting - Eching am Ammersee,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12891___H_s25_1.pdf,MVV_ticketing
+mvv-12-892-1,1,892,Ortsverkehr Kaufering: Bahnhof Nord - Kaufering-Dorf - Berliner Ring - Ahornring - Bahnhof Nord,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12892___H_s25_1.pdf,MVV_ticketing
+mvv-12-893-1,1,893,OrtsBus Dießen: Dießen - Wengen (- Dettenhofen - Obermühlhausen),3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12893___H_s25_1.pdf,MVV_ticketing
+mvv-12-894-1,1,894,Inning - Schondorf - Greifenberg - Schöffelding - Landsberg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12894___H_s25_1.pdf,MVV_ticketing
+mvv-12-894V-1,1,894V,"Inning - Greifenberg - Windach - Geltendorf - St. Ottilien, Schule",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12894V___H_s25_1.pdf,MVV_ticketing
+mvv-12-895-1,1,895,Landsberg - Penzing - Oberbergen - Ramsach Abzw.,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12895___H_s25_1.pdf,MVV_ticketing
+mvv-12-896-1,1,896,Landsberg - Kaufering - Igling - Hurlach - Obermeitingen,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12896___H_s25_1.pdf,MVV_ticketing
+mvv-12-897-1,1,897,(Kaufering -) Landsberg - Scheuring - Prittriching - Mering,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12897___H_s25_1.pdf,MVV_ticketing
+mvv-12-899-1,1,899,(Kinsau - Apfeldorf -) Rott - Issing - Thaining - Dießen,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12899___H_s25_1.pdf,MVV_ticketing
+mvv-12-911-1,1,911,StadtBus Weilheim West: Bahnhof - Hallenbad - Ammerschule - Frühlingstr. - Bahnhof,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12911___H_s25_1.pdf,MVV_ticketing
+mvv-12-912-1,1,912,StadtBus Weilheim Ost: Bahnhof - Krankenhaus - Hardtschule - Friedhof - Bahnhof,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12912___H_s25_1.pdf,MVV_ticketing
+mvv-12-913-1,1,913,StadtBus Weilheim Süd: Bahnhof - Hallenbad - Prälatenweg - Weinhartstr. - Bahnhof,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12913___H_s25_1.pdf,MVV_ticketing
+mvv-12-914-1,1,914,StadtBus Weilheim Nord: Bahnhof - Einkaufspark - Unterhausen - Einkaufspark - Bahnhof,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12914___H_s25_1.pdf,MVV_ticketing
+mvv-12-931-1,1,931,Weilheim - Peißenberg - Echelsbacher Brücke - Steingaden - Schlauch (- Füssen),3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12931___H_s25_1.pdf,MVV_ticketing
+mvv-12-932-1,1,932,Weilheim - Marnbach - Eberfing - Marnbach - Weilheim,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12932___H_s25_1.pdf,MVV_ticketing
+mvv-12-934-1,1,934,Weilheim - Obersöchering - Habach - Penzberg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12934___H_s25_1.pdf,MVV_ticketing
+mvv-12-935-1,1,935,Weilheim - Seeshaupt - Penzberg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12935___H_s25_1.pdf,MVV_ticketing
+mvv-12-936-1,1,936,Weilheim - Peißenberg - Schongau,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12936___H_s25_1.pdf,MVV_ticketing
+mvv-12-937-1,1,937,Weilheim - Wielenbach - Wilzhofen - Tutzing,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12937___H_s25_1.pdf,MVV_ticketing
+mvv-12-938-1,1,938,Weilheim - Polling - Oberhausen - Huglfing - Unter-/Obereglfing - Obersöchering - Uffing - Murnau,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12938___H_s25_1.pdf,MVV_ticketing
+mvv-12-939-1,1,939,Kirnberg - Uffing - Seehausen - Murnau / Unter-/Obereglfing - Obersöchering - Hofheim - Murnau,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12939___H_s25_1.pdf,MVV_ticketing
+mvv-12-940-1,1,940,StadtBus Penzberg Ringlinie A Bahnhof - Steigenberg - Roche - Neue Heimat - Bahnhof,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12940___H_s25_1.pdf,MVV_ticketing
+mvv-12-941-1,1,941,StadtBus Penzberg Ringlinie B Bahnhof - Neue Heimat - Roche - Steigenberg - Bahnhof,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12941___H_s25_1.pdf,MVV_ticketing
+mvv-12-942-1,1,942,Im Dittenried - Bahnhof - Freiheit - Maxkron - Kurfürst-Max-Siedlung,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12942___H_s25_1.pdf,MVV_ticketing
+mvv-12-944-1,1,944,StadtBus Penzberg: Direktverbindungen Firma Roche Im Dittenried - Bahnübergang - Zentrum - Roche,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12944___H_s25_1.pdf,MVV_ticketing
+mvv-12-947-1,1,947,Penzberg - Iffeldorf - Habach - Sindelsdorf - Penzberg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12947___H_s25_1.pdf,MVV_ticketing
+mvv-12-947V-1,1,947V,Schlehdorf (- Sindelsdorf - Antdorf - Habach - Untersöchering - Murnau) / Sindelsdorf (- Penzberg - Iffeldorf ),3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12947V___H_s25_1.pdf,MVV_ticketing
+mvv-12-948-1,1,948,Penzberg - Seeshaupt - Tutzing,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12948___H_s25_1.pdf,MVV_ticketing
+mvv-12-952-1,1,952,Weilheim - Wessobrunn - Rott - Pürgen - Landsberg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12952___H_s25_1.pdf,MVV_ticketing
+mvv-12-953-1,1,953,Weilheim - Wielenbach - Wilzhofen - Pähl - Herrsching,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12953___H_s25_1.pdf,MVV_ticketing
+mvv-12-980-1,1,980,StadtBus Schongau: Bahnhof - Rathaus - Beethovenstraße - Marktoberdorfer Straße - Bahnhof,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12980___H_s25_1.pdf,MVV_ticketing
+mvv-12-982-1,1,982,Schongau - Peiting - Rottenbuch - Echelsbacher Brücke - Steingaden,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12982___H_s25_1.pdf,MVV_ticketing
+mvv-12-984-1,1,984,Tauting - Huglfing - Oberhausen - Peißenberg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12984___H_s25_1.pdf,MVV_ticketing
+mvv-12-985-1,1,985,Herzogsägmühle - Peiting - Herzogsägmühle,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12985___H_s25_1.pdf,MVV_ticketing
+mvv-12-986-1,1,986,Schongau - Herzogsägmühle (- Birkland - Apfeldorf),3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12986___H_s25_1.pdf,MVV_ticketing
+mvv-12-987-1,1,987,Schongau - Altenstadt - Schwabsoien - Sachsenried - Ingenried,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12987___H_s25_1.pdf,MVV_ticketing
+mvv-12-989-1,1,989,Schongau - Altenstadt - Hohenfurch - Schongau,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12989___H_s25_1.pdf,MVV_ticketing
+mvv-12-998-1,1,998,SkiBus Talstation Hausbergbahn - Garmisch-Partenkirchen Bf West,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12998___H_s25_1.pdf,MVV_ticketing
+mvv-12-999-1,1,999,SkiBus Untergrainau - Obergrainau - Schmölz - Talstation Hausbergbahn,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_12999___H_s25_1.pdf,MVV_ticketing
+mvv-16-2100-1,1,2100,Deisenhofen - Großdingharting - Straßlach - Oberbiberg,3,005262,FFFFFF,https://www.mvv-muenchen.de/mobilitaetsangebote/bedarfsverkehr/index.html,MVV_ticketing
+mvv-16-4000-1,1,4000,Aying - Egmating - Glonn - Baiern,3,005262,FFFFFF,https://www.mvv-muenchen.de/mobilitaetsangebote/bedarfsverkehr/index.html,MVV_ticketing
+mvv-16-4800-1,1,4800,Grafing Bahnhof - Bruck - Moosach - Glonn - Baiern,3,005262,FFFFFF,https://www.mvv-muenchen.de/mobilitaetsangebote/bedarfsverkehr/index.html,MVV_ticketing
+mvv-16-4900-1,1,4900,Neuperlach Süd / Zorneding - Oberpframmern - Egmating - Glonn - Baiern,3,005262,FFFFFF,https://www.mvv-muenchen.de/mobilitaetsangebote/bedarfsverkehr/index.html,MVV_ticketing
+mvv-16-5010-1,1,5010,Erding - Wartenberg - Langenpreising - Moosburg,3,005262,FFFFFF,https://www.mvv-muenchen.de/mobilitaetsangebote/bedarfsverkehr/index.html,MVV_ticketing
+mvv-16-5020-1,1,5020,Wartenberg - Langenpreising - Eitting - Erding,3,005262,FFFFFF,https://www.mvv-muenchen.de/mobilitaetsangebote/bedarfsverkehr/index.html,MVV_ticketing
+mvv-16-5050-1,1,5050,Mittbach - Isen - Markt Schwaben,3,005262,FFFFFF,https://www.mvv-muenchen.de/mobilitaetsangebote/bedarfsverkehr/index.html,MVV_ticketing
+mvv-16-5403-1,1,5403,"Dorfen, Bahnhof - Taufkirchen (Vils), Busbahnhof",3,005262,FFFFFF,https://www.mvv-muenchen.de/mobilitaetsangebote/bedarfsverkehr/index.html,MVV_ticketing
+mvv-16-5621-1,1,5621,Taufkirchen (Vils) - Hohenpolding - Schröding - Sulding - Taufkirchen (Vils),3,005262,FFFFFF,https://www.mvv-muenchen.de/mobilitaetsangebote/bedarfsverkehr/index.html,MVV_ticketing
+mvv-16-5670-1,1,5670,Erding - Pretzen - Wörth - Walpertskirchen,3,005262,FFFFFF,https://www.mvv-muenchen.de/mobilitaetsangebote/bedarfsverkehr/index.html,MVV_ticketing
+mvv-16-5680-1,1,5680,Markt Schwaben - Finsing - Moosinning - Klinikum - Erding,3,005262,FFFFFF,https://www.mvv-muenchen.de/mobilitaetsangebote/bedarfsverkehr/index.html,MVV_ticketing
+mvv-16-6301-1,1,6301,Freising - Pettenbrunn - Itzling - Haindlfing - Garten,3,005262,FFFFFF,https://www.mvv-muenchen.de/mobilitaetsangebote/bedarfsverkehr/index.html,MVV_ticketing
+mvv-16-6302-1,1,6302,Freising - Sünzhausen - Pallhausen,3,005262,FFFFFF,https://www.mvv-muenchen.de/mobilitaetsangebote/bedarfsverkehr/index.html,MVV_ticketing
+mvv-16-6303-1,1,6303,Freising - Dürneck - Achering - Pulling,3,005262,FFFFFF,https://www.mvv-muenchen.de/mobilitaetsangebote/bedarfsverkehr/index.html,MVV_ticketing
+mvv-16-6304-1,1,6304,Freising - Altenhausen - Edenhofen - Zellhausen,3,005262,FFFFFF,https://www.mvv-muenchen.de/mobilitaetsangebote/bedarfsverkehr/index.html,MVV_ticketing
+mvv-16-8000-1,1,8000,MVV-RufTaxi Fürstenfeldbruck / Emmering,3,005262,FFFFFF,https://www.mvv-muenchen.de/mobilitaetsangebote/bedarfsverkehr/index.html,MVV_ticketing
+mvv-16-8200-1,1,8200,MVV-RufTaxi Landsberied / Jesenwang / Adelshofen / Moorenweis,3,005262,FFFFFF,https://www.mvv-muenchen.de/mobilitaetsangebote/bedarfsverkehr/index.html,MVV_ticketing
+mvv-16-8300-1,1,8300,MVV-RufTaxi Gernlinden / Olching / Puchheim / Gröbenzell,3,005262,FFFFFF,https://www.mvv-muenchen.de/mobilitaetsangebote/bedarfsverkehr/index.html,MVV_ticketing
+mvv-16-8400-1,1,8400,MVV-RufTaxi Alling / Schöngeising Grafrath / Türkenfeld,3,005262,FFFFFF,https://www.mvv-muenchen.de/mobilitaetsangebote/bedarfsverkehr/index.html,MVV_ticketing
+mvv-16-8500-1,1,8500,MVV-RufTaxi Fürstenfeldbruck / Alling / Eichenau / Germering-Unterpfaffenhofen,3,005262,FFFFFF,https://www.mvv-muenchen.de/mobilitaetsangebote/bedarfsverkehr/index.html,MVV_ticketing
+mvv-16-8700-1,1,8700,MVV-RufTaxi Maisach / Unterschweinbach / Egenhofen / Pfaffenhofen a.d. Glonn,3,005262,FFFFFF,https://www.mvv-muenchen.de/mobilitaetsangebote/bedarfsverkehr/index.html,MVV_ticketing
+mvv-16-8800-1,1,8800,MVV-RufTaxi Mammendorf / Oberschweinbach / Hattenhofen / Althegnenberg / Mittelstetten,3,005262,FFFFFF,https://www.mvv-muenchen.de/mobilitaetsangebote/bedarfsverkehr/index.html,MVV_ticketing
+mvv-19-210-1,1,210,"Neuperlach Süd - Ottobrunn - Brunnthal, Zusestraße",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19210___H_s25_1.pdf,MVV_ticketing
+mvv-19-211-1,1,211,Putzbrunn - Isarweg - Neubiberg - Neuperlach Süd,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19211___H_s25_1.pdf,MVV_ticketing
+mvv-19-211V-1,1,211V,"Neubiberg, Realschule - Neubiberg - Unterbiberg",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19211V___H_s25_1.pdf,MVV_ticketing
+mvv-19-211W-1,1,211W,"Putzbrunn - Solalinden - Riemerling, Th.-Heuss-Str. Ottobrunn, Karl-Stieler-Str. - Solalinden",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19211W___H_s25_1.pdf,MVV_ticketing
+mvv-19-212-1,1,212,Grasbrunn - Putzbrunn - Ottobrunn - Neubiberg - Neuperlach Süd,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19212___H_s25_1.pdf,MVV_ticketing
+mvv-19-214-1,1,214,"Riemerling, Altenheim - Ottobrunn - Hohenbrunn",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19214___H_s25_1.pdf,MVV_ticketing
+mvv-19-214V-1,1,214V,"Ottobrunn, Einsteinstraße - Ottobrunn - Neubiberg, Realschule",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19214V___H_s25_1.pdf,MVV_ticketing
+mvv-19-215-1,1,215,Lohhof Süd - Sportpark - Unterschleißheim Ost,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19215___H_s25_1.pdf,MVV_ticketing
+mvv-19-216-1,1,216,"Taufkirchen, Hugo-Junkers-Str. - Höhenkirchen-Sieg. - Brunnthal - Hofolding - Faistenhaar",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19216___H_s25_1.pdf,MVV_ticketing
+mvv-19-216V-1,1,216V,"Neubiberg, Realschule - Höhenkirchen-Sieg. - Brunnthal - Faistenhaar, Waldsiedlung / Hofolding",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19216V___H_s25_1.pdf,MVV_ticketing
+mvv-19-217-1,1,217,Neuperlach Süd - Unterbiberg - Unterhaching,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19217___H_s25_1.pdf,MVV_ticketing
+mvv-19-218-1,1,218,Unterschleißheim West - Gewerbegebiet - Lohhof Süd,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19218___H_s25_1.pdf,MVV_ticketing
+mvv-19-219-1,1,219,"Unterschleißheim, Business Campus Süd - Unterschleißheim Ost - Garching-Hochbrück",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19219___H_s25_1.pdf,MVV_ticketing
+mvv-19-219V-1,1,219V,"Hochbrück, Jahnstr. - Lohhof, Sportpark",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19219V___H_s25_1.pdf,MVV_ticketing
+mvv-19-220-1,1,220,"Brunnthal, Zusestraße - Winning - Unterhaching - Sankt-Quirin-Platz - Giesing",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19220___H_s25_1.pdf,MVV_ticketing
+mvv-19-220V-1,1,220V,Fasanenpark - Unterhaching,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19220V___H_s25_1.pdf,MVV_ticketing
+mvv-19-221-1,1,221,"München, Waldheimplatz - Ottobrunn - Unterhaching",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19221___H_s25_1.pdf,MVV_ticketing
+mvv-19-222-1,1,222,Neuperlach Süd - Brunnthal Nord - Deisenhofen - Höllriegelskreuth,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19222___H_s25_1.pdf,MVV_ticketing
+mvv-19-222V-1,1,222V,Pullach/Straßlach - Grünwald - Oberhaching - Taufkirchen,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19222V___H_s25_1.pdf,MVV_ticketing
+mvv-19-223-1,1,223,"Sauerlach, Mühlweg - Sauerlach - Arget",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19223___H_s25_1.pdf,MVV_ticketing
+mvv-19-224-1,1,224,"Oberhaching, Kugler Alm - Deisenhofen - Taufkirchen - Unterhaching - Unterhaching, Schule am Sportpark",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19224___H_s25_1.pdf,MVV_ticketing
+mvv-19-225-1,1,225,Taufkirchen - Gewerbegebiet Potzham,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19225___H_s25_1.pdf,MVV_ticketing
+mvv-19-226-1,1,226,Sauerlach - Altkirchen - Deisenhofen Ost,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19226___H_s25_1.pdf,MVV_ticketing
+mvv-19-227-1,1,227,Ortsbus Oberhaching,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19227___H_s25_1.pdf,MVV_ticketing
+mvv-19-229-1,1,229,"Ottobrunn, Phönix-Bad - Karl-Stieler-Str. - Neubiberg - Neuperlach Süd",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19229___H_s25_1.pdf,MVV_ticketing
+mvv-19-230-1,1,230,Haar - Feldkirchen - Ismaning - Garching - Forschungszentrum,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19230___H_s25_1.pdf,MVV_ticketing
+mvv-19-230V-1,1,230V,"Haar - Ismaning - Garching, Untere Straßäcker",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19230V___H_s25_1.pdf,MVV_ticketing
+mvv-19-231-1,1,231,Ismaning - Unterföhring - Studentenstadt,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19231___H_s25_1.pdf,MVV_ticketing
+mvv-19-231V-1,1,231V,"Unterföhring, Siedlerstraße - Ismaning",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19231V___H_s25_1.pdf,MVV_ticketing
+mvv-19-232-1,1,232,Ortsbus Unterföhring,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19232___H_s25_1.pdf,MVV_ticketing
+mvv-19-233-1,1,233,"Studentenstadt - Unterföhring, Gewerbegebiet - Unterföhring",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19233___H_s25_1.pdf,MVV_ticketing
+mvv-19-234-1,1,234,Unterföhring - Aschheim - Feldkirchen - Messestadt West,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19234___H_s25_1.pdf,MVV_ticketing
+mvv-19-234V-1,1,234V,"Messestadt Ost - Feldkirchen - Aschheim, Realschule",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19234V___H_s25_1.pdf,MVV_ticketing
+mvv-19-236-1,1,236,Fischerhäuser - Ismaning - Waldorfschule,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19236___H_s25_1.pdf,MVV_ticketing
+mvv-19-240-1,1,240,"Neukeferloh, Bahnhofstr. - Grasbrunn - Harthausen - Höhenkirchen-Sieg.",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19240___H_s25_1.pdf,MVV_ticketing
+mvv-19-240V-1,1,240V,Harthausen - Grasbrunn - Neukeferloh - Vaterstetten / Haar,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19240V___H_s25_1.pdf,MVV_ticketing
+mvv-19-240W-1,1,240W,Harthausen - Grasbrunn - Neukeferloh - Vaterstetten,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19240W___H_s25_1.pdf,MVV_ticketing
+mvv-19-241-1,1,241,"Haar - Ottobrunn - Taufkirchen - Taufkirchen, Friedhof",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19241___H_s25_1.pdf,MVV_ticketing
+mvv-19-242-1,1,242,Gronsdorf - Ottendichl - Haar,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19242___H_s25_1.pdf,MVV_ticketing
+mvv-19-242V-1,1,242V,Gronsdorf - Ottendichl - Haar,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19242V___H_s25_1.pdf,MVV_ticketing
+mvv-19-243-1,1,243,"Haar, Lise-Meitner-Weg - Haar - Neukeferloh, Ostring - Baldham, Realschule",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19243___H_s25_1.pdf,MVV_ticketing
+mvv-19-244-1,1,244,"Taufkirchen, Hugo-Junkers-Straße - Höhenkirchen-Sieg. - Brunnthal - Sauerlach",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19244___H_s25_1.pdf,MVV_ticketing
+mvv-19-258-1,1,258,"Lochham, Starnberger Str. - Lochham - Gräfelfing, Rathaus - Planegg - Gräfelfing",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19258___H_s25_1.pdf,MVV_ticketing
+mvv-19-259-1,1,259,"Pasing Bf - Gräfelfing, Am Haag - Martinsried",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19259___H_s25_1.pdf,MVV_ticketing
+mvv-19-260-1,1,260,Germering-Unterpfaffenhofen - Planegg - Fürstenried West,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19260___H_s25_1.pdf,MVV_ticketing
+mvv-19-260V-1,1,260V,"Neuried, Hainbuchenring - Planegg Gymnasium",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19260V___H_s25_1.pdf,MVV_ticketing
+mvv-19-261-1,1,261,"Neuried, Hainbuchenring - Fürstenried West",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19261___H_s25_1.pdf,MVV_ticketing
+mvv-19-262-1,1,262,Messestadt Ost - Feldkirchen - Kirchheim - Pliening - Neufinsing,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19262___H_s25_1.pdf,MVV_ticketing
+mvv-19-262V-1,1,262V,Gelting - Pliening - Landsham - Kirchheim Gymnasium,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19262V___H_s25_1.pdf,MVV_ticketing
+mvv-19-263-1,1,263,Messestadt West - Riem Dornach - Aschheim - Kirchheim - Heimstetten Nord - Feldkirchen,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19263___H_s25_1.pdf,MVV_ticketing
+mvv-19-263V-1,1,263V,"Messestadt West - Riem Dornach - Aschheim, Realschule - Kirchheim - Feldkirchen - Messestadt Ost",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19263V___H_s25_1.pdf,MVV_ticketing
+mvv-19-264-1,1,264,Messestadt West - Dornach Gewerbegebiet - Riem Dornach,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19264___H_s25_1.pdf,MVV_ticketing
+mvv-19-265-1,1,265,Pasing Bf - Gräfelfing - Steinkirchen - Planegg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19265___H_s25_1.pdf,MVV_ticketing
+mvv-19-266-1,1,266,Planegg - Martinsried - Klinikum Großhadern,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19266___H_s25_1.pdf,MVV_ticketing
+mvv-19-267-1,1,267,Altenburgstr. - Lochham - Martinsried - Fürstenried West,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19267___H_s25_1.pdf,MVV_ticketing
+mvv-19-267V-1,1,267V,"Pasing, Gymnasium - Martinsried - Neuried",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19267V___H_s25_1.pdf,MVV_ticketing
+mvv-19-268-1,1,268,Gräfelfing - Großhadern - Waldfriedhof,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19268___H_s25_1.pdf,MVV_ticketing
+mvv-19-269-1,1,269,"Neuried, Maxhofweg - Klinikum Großhadern",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19269___H_s25_1.pdf,MVV_ticketing
+mvv-19-270-1,1,270,Höllriegelskreuth - Wolfratshauser Straße Pullach - Georgenstraße - Solln,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19270___H_s25_1.pdf,MVV_ticketing
+mvv-19-270V-1,1,270V,"Pullach, Gartenstr. / Rathaus - München, Siemensallee",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19270V___H_s25_1.pdf,MVV_ticketing
+mvv-19-271-1,1,271,Dietramszell - Egling - Straßlach - Höllriegelskreuth,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19271___H_s25_1.pdf,MVV_ticketing
+mvv-19-271V-1,1,271V,"Grünwald, Gymnasium - Straßlach - Egling",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19271V___H_s25_1.pdf,MVV_ticketing
+mvv-19-272N-1,1,N272,Nachtbuslinie Grünwald,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19272N___H_s25_1.pdf,MVV_ticketing
+mvv-19-275-1,1,275,Holzkirchen - Föching - Holzkirchen,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19275___H_s25_1.pdf,MVV_ticketing
+mvv-19-290-1,1,290,Untere Straßäcker - Garching-Hochbrück - Hochbrück,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19290___H_s25_1.pdf,MVV_ticketing
+mvv-19-290V-1,1,290V,"Prof.-Angermair-Ring - Hochbrück, Jahnstr.",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19290V___H_s25_1.pdf,MVV_ticketing
+mvv-19-291-1,1,291,Dachau - Oberschleißheim - Unterschleißheim West,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19291___H_s25_1.pdf,MVV_ticketing
+mvv-19-292-1,1,292,Sonnenstraße - Oberschleißheim - Garching-Hochbrück - Garching - Garching-Forschungszentrum,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19292___H_s25_1.pdf,MVV_ticketing
+mvv-19-293-1,1,293,Dirnismaning - Garching,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19293___H_s25_1.pdf,MVV_ticketing
+mvv-19-294-1,1,294,Garching-Hochbrück - Helmholtz-Zentrum - Am Hart,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19294___H_s25_1.pdf,MVV_ticketing
+mvv-19-295-1,1,295,Am Hart - Helmholtz-Zentrum - Oberschleißheim,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19295___H_s25_1.pdf,MVV_ticketing
+mvv-19-299-1,1,299,"Riedmoos - Unterschleißheim West - (Lohhof, Schulzentrum)",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19299___H_s25_1.pdf,MVV_ticketing
+mvv-19-301-1,1,301,Wolfratshausen - Farchet B11 - Waldram - Stobäusstraße - Wolfratshausen,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19301___H_s25_1.pdf,MVV_ticketing
+mvv-19-302-1,1,302,Wolfratshausen - Stobäusstraße - Waldram - Farchet B11 - Wolfratshausen,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19302___H_s25_1.pdf,MVV_ticketing
+mvv-19-310-1,1,310,Stadtbus Geretsried Steiner Ring Süd - Schulzentrum - Fasanenweg - Lilienstraße,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19310___H_s25_1.pdf,MVV_ticketing
+mvv-19-311-1,1,311,Bad Tölz - ZOB Isarkai - Max-Höfler-Platz - Kurhaus - ZOB Isarkai - Stadtwerke - Bad Tölz,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19311___H_s25_1.pdf,MVV_ticketing
+mvv-19-312-1,1,312,Bad Tölz - Behördenzentrum - Karwendelsiedlung - ZOB Isarkai - Karwendelsiedlung - Behördenzentrum - Bad Tölz,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19312___H_s25_1.pdf,MVV_ticketing
+mvv-19-353-1,1,353,Holzkirchen - Sachsenkam - Bad Tölz - Lenggries (- Hohenburg),3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19353___H_s25_1.pdf,MVV_ticketing
+mvv-19-360-1,1,360,Tegernsee - Rottach-Egern - Enterrottach - Moni-Alm,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19360___H_s25_1.pdf,MVV_ticketing
+mvv-19-362-1,1,362,Schliersee - Neuhaus - Spitzingsee,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19362___H_s25_1.pdf,MVV_ticketing
+mvv-19-366-1,1,366,Tegernsee - Bad Wiessee - Gmund - Warngau - Holzkirchen,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19366___H_s25_1.pdf,MVV_ticketing
+mvv-19-367-1,1,367,Holzkirchen - Warngau - Wall - Miesbach,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19367___H_s25_1.pdf,MVV_ticketing
+mvv-19-368-1,1,368,Holzkirchen - Otterfing - Dietramszell - Bad Tölz,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19368___H_s25_1.pdf,MVV_ticketing
+mvv-19-368V-1,1,368V,Ellbach - Jahnschule,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19368V___H_s25_1.pdf,MVV_ticketing
+mvv-19-370-1,1,370,"Geretsried, Stein - Feuerwehrschule - Fasanenweg - Wolfratshausen",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19370___H_s25_1.pdf,MVV_ticketing
+mvv-19-370V-1,1,370V,"Geretsried, Stein - Schulzentrum - Wolfratshausen",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19370V___H_s25_1.pdf,MVV_ticketing
+mvv-19-371-1,1,371,Deisenhofen Ost - Endlhausen - Dietramszell - Ascholding - Geretsried,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19371___H_s25_1.pdf,MVV_ticketing
+mvv-19-371V-1,1,371V,"Dietramszell - Ascholding, Kirche - Geretsried, Schulzentrum",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19371V___H_s25_1.pdf,MVV_ticketing
+mvv-19-372-1,1,372,Wolfratshausen - Eurasburg - Beuerberg - Königsdorf - Bad Tölz,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19372___H_s25_1.pdf,MVV_ticketing
+mvv-19-373-1,1,373,Seeshaupt - Münsing - Wolfratshausen,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19373___H_s25_1.pdf,MVV_ticketing
+mvv-19-373V-1,1,373V,Ammerland/Ambach - Münsing - Wolfratshausen,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19373V___H_s25_1.pdf,MVV_ticketing
+mvv-19-374-1,1,374,Wolfratshausen - Königsdorf - Beuerberg - Penzberg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19374___H_s25_1.pdf,MVV_ticketing
+mvv-19-375-1,1,375,Wolfratshausen - Egling - Endlhausen,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19375___H_s25_1.pdf,MVV_ticketing
+mvv-19-375V-1,1,375V,"Neufahrn - Deining - Egling - Ascholding - Geretsried, Schulzentrum",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19375V___H_s25_1.pdf,MVV_ticketing
+mvv-19-376-1,1,376,Bad Heilbrunn - Schönrain - Geretsried - Wolfratshausen,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19376___H_s25_1.pdf,MVV_ticketing
+mvv-19-377-1,1,377,Bad Tölz - Ascholding - Egling - Wolfratshausen,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19377___H_s25_1.pdf,MVV_ticketing
+mvv-19-377V-1,1,377V,Egling - Wolfratshausen - Geretsried,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19377V___H_s25_1.pdf,MVV_ticketing
+mvv-19-378-1,1,378,"Geretsried, Stein - Am Stern - Johannisplatz - Lilienstr. - Gelting - Wolfratshausen",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19378___H_s25_1.pdf,MVV_ticketing
+mvv-19-379-1,1,379,Bad Tölz - Geretsried - Wolfratshausen,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19379___H_s25_1.pdf,MVV_ticketing
+mvv-19-379V-1,1,379V,Wolfratshausen - Königsdorf - (Bad Tölz),3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19379V___H_s25_1.pdf,MVV_ticketing
+mvv-19-440-1,1,440,Glonn - Moosach / Bruck - Grafing Bahnhof,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19440___H_s25_1.pdf,MVV_ticketing
+mvv-19-442-1,1,442,"(Buch -) Eglharting, Westring - Kirchseeon - Ebersberg - Grafing Bahnhof",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19442___H_s25_1.pdf,MVV_ticketing
+mvv-19-443-1,1,443,Steinhöring - Frauenneuharting - Tulling - Abersdorf - Steinhöring,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19443___H_s25_1.pdf,MVV_ticketing
+mvv-19-444-1,1,444,Grafing Bahnhof - Frauenneuharting - Aßling - Rott am Inn - Griesstätt,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19444___H_s25_1.pdf,MVV_ticketing
+mvv-19-444V-1,1,444V,Ostermünchen - Emmering - Schalldorf - Moos,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19444V___H_s25_1.pdf,MVV_ticketing
+mvv-19-445-1,1,445,Ebersberg - Hohenlinden - Forstern - Erding,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19445___H_s25_1.pdf,MVV_ticketing
+mvv-19-445V-1,1,445V,Hohenlinden - Forstern - Erding,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19445V___H_s25_1.pdf,MVV_ticketing
+mvv-19-446-1,1,446,Ebersberg - Schwaberwegen Anzing - Markt Schwaben,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19446___H_s25_1.pdf,MVV_ticketing
+mvv-19-446V-1,1,446,Markt Schwaben - Anzing - Purfing,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19446V___H_s25_1.pdf,MVV_ticketing
+mvv-19-447-1,1,447,"Aßling, Rathaus - Aßling - Oberelkofen - Grafing Bahnhof",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19447___H_s25_1.pdf,MVV_ticketing
+mvv-19-448-1,1,448,Grafing Bf - Grafing Öxinger Platz - Oberndorf - Ebersberg Gewerbegebiet Nord - Grafing Bf,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19448___H_s25_1.pdf,MVV_ticketing
+mvv-19-451-1,1,451,Vaterstetten - Sportzentrum - Baldham Nord - Karwendelplatz - Vaterstetten,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19451___H_s25_1.pdf,MVV_ticketing
+mvv-19-452-1,1,452,Grub Süd - Parsdorf - Weißenfeld - Baldham Dorf - Vaterstetten,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19452___H_s25_1.pdf,MVV_ticketing
+mvv-19-453-1,1,453,Glonn - Egmating - Oberpframmern - Putzbrunn - Neuperlach Süd,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19453___H_s25_1.pdf,MVV_ticketing
+mvv-19-454-1,1,454,Kirchseeon - Moosach - Glonn - Egmating - Höhenkirchen-Siegertsbrunn,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19454___H_s25_1.pdf,MVV_ticketing
+mvv-19-455-1,1,455,Neuperlach Süd - Putzbrunn - Oberpframmern - Glonn - Antholing,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19455___H_s25_1.pdf,MVV_ticketing
+mvv-19-456-1,1,456,Höhenkirchen-Siegertsbrunn - Egmating - Oberpframmern - Zorneding,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19456___H_s25_1.pdf,MVV_ticketing
+mvv-19-459-1,1,459,Hohenlinden - Anzing - Poing Süd - Parsdorf - Messestadt Ost,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19459___H_s25_1.pdf,MVV_ticketing
+mvv-19-460-1,1,460,Poing Nord - Grub Nord - Pliening - Gelting - Poing Nord,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19460___H_s25_1.pdf,MVV_ticketing
+mvv-19-461-1,1,461,Poing Nord - Anzing - Obelfing,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19461___H_s25_1.pdf,MVV_ticketing
+mvv-19-462-1,1,462,"Poing Süd - Poing, Rathaus Süd - Angelbrechting - Poing Süd",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19462___H_s25_1.pdf,MVV_ticketing
+mvv-19-463-1,1,463,"Zorneding, St.-Martin-Str. - Anzing - Markt Schwaben - Pliening - Landsham",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19463___H_s25_1.pdf,MVV_ticketing
+mvv-19-464-1,1,464,Poing Nord - Mitterfeldring/Stahlgruber - Bergfeldsee - Poing Nord,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19464___H_s25_1.pdf,MVV_ticketing
+mvv-19-465-1,1,465,Poing Süd - Neufarn - Anzing - Baldham Nord,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19465___H_s25_1.pdf,MVV_ticketing
+mvv-19-465V-1,1,465,"Baldham, Realschule / Nord - Anzing - Neufarn - Poing Blumenstraße",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19465V___H_s25_1.pdf,MVV_ticketing
+mvv-19-466-1,1,466,Parsdorf Posthalterring - Weißenfeld - Hergolding - Baldham Dorf - Baldham Nord,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19466___H_s25_1.pdf,MVV_ticketing
+mvv-19-466V-1,1,466V,"Baldham Nord - Hergolding - Parsdorf, Dorfplatz",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19466V___H_s25_1.pdf,MVV_ticketing
+mvv-19-468-1,1,468,"Poing Süd - Poing, Rathaus - Poing Nord - Poing West - Poing Süd",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19468___H_s25_1.pdf,MVV_ticketing
+mvv-19-469-1,1,469,Hohenlinden - Forstern - Forstinning - Markt Schwaben,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19469___H_s25_1.pdf,MVV_ticketing
+mvv-19-469V-1,1,469,Markt Schwaben - Forstinning - Forstern - Hohenlinden,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19469V___H_s25_1.pdf,MVV_ticketing
+mvv-19-501-1,1,501,Gammelsdorf - Moosburg - Langenpreising - Wartenberg - Erding,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19501___H_s25_1.pdf,MVV_ticketing
+mvv-19-501V-1,1,501V,Erding - Wartenberg / Moosburg - Gammelsdorf,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19501V___H_s25_1.pdf,MVV_ticketing
+mvv-19-502-1,1,502,Erding - Berglern - Langenpreising - Wartenberg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19502___H_s25_1.pdf,MVV_ticketing
+mvv-19-502V-1,1,502V,"Mitterlern - Eichenkofen - Erding, K.-Aigner-Gymnasium",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19502V___H_s25_1.pdf,MVV_ticketing
+mvv-19-505-1,1,505,Hohenlinden - Mittbach - Isen - Markt Schwaben,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19505___H_s25_1.pdf,MVV_ticketing
+mvv-19-505V-1,1,505V,"Pastetten, Rathaus - Markt Schwaben, Schule",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19505V___H_s25_1.pdf,MVV_ticketing
+mvv-19-507-1,1,507,Erding - Notzing - Ottenhofen - Markt Schwaben,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19507___H_s25_1.pdf,MVV_ticketing
+mvv-19-511-1,1,511,"Erding - Notzing/Oberding - Schwaig - Freising, Berufsschule/Obervellacher Str. - Freising",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19511___H_s25_1.pdf,MVV_ticketing
+mvv-19-511V-1,1,511V,"Erding, Klinikum Nord - Berufsschule - Niederding - Schwaig",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19511V___H_s25_1.pdf,MVV_ticketing
+mvv-19-512-1,1,512,"Erding - Niederding/Notzing - Oberding - Schwaig - Flughafen, Terminalstr. Mitte",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19512___H_s25_1.pdf,MVV_ticketing
+mvv-19-512V-1,1,512V,"Schwaig / Oberding, Schule - Erding, Klinikum / Maria Thalheim",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19512V___H_s25_1.pdf,MVV_ticketing
+mvv-19-513-1,1,513,Erding - Klinikum - Neuer Friedhof (Therme) - Moosinning - Ismaning,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19513___H_s25_1.pdf,MVV_ticketing
+mvv-19-513V-1,1,513V,"Oberding, Schule - Moosinning - Eichenried - Zengermoos",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19513V___H_s25_1.pdf,MVV_ticketing
+mvv-19-515-1,1,515,"Hallbergmoos - Notzing - Erding, Gewerbegebiet West - Berufsschule - Erding",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19515___H_s25_1.pdf,MVV_ticketing
+mvv-19-522-1,1,522,Erding - Pretzen - Altenerding - Gewerbegebiet West - Klinikum,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19522___H_s25_1.pdf,MVV_ticketing
+mvv-19-523-1,1,523,Erding - Williamsville - Am Stadion - Brauerei - Erding,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19523___H_s25_1.pdf,MVV_ticketing
+mvv-19-524-1,1,524,Erding - Brauerei - Am Stadion - Williamsville - Erding,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19524___H_s25_1.pdf,MVV_ticketing
+mvv-19-524V-1,1,524V,"Erding, Brauerstr. - Erding - Erding, Berufsschule",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19524V___H_s25_1.pdf,MVV_ticketing
+mvv-19-525-1,1,525,Erding - Altenerding - Therme Erding - Landratsamt - Stadtmitte - Erding,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19525___H_s25_1.pdf,MVV_ticketing
+mvv-19-526-1,1,526,Erding - Stadtmitte - Landratsamt - Altenerding - Erding,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19526___H_s25_1.pdf,MVV_ticketing
+mvv-19-527-1,1,527,Erding - Stadtmitte - Altenerding - Therme Erding - Erding,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19527___H_s25_1.pdf,MVV_ticketing
+mvv-19-528-1,1,528,Therme Erding - Altenerding / Kronthaler Weiher - Erding - Eichenkofen,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19528___H_s25_1.pdf,MVV_ticketing
+mvv-19-561-1,1,561,Erding - Fraunberg - Steinkirchen - Kirchberg - Wartenberg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19561___H_s25_1.pdf,MVV_ticketing
+mvv-19-562-1,1,562,"Taufkirchen (Vils), Gewerbegebiet - Inning am Holz - Erding",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19562___H_s25_1.pdf,MVV_ticketing
+mvv-19-562V-1,1,562V,Erding - Mauggen - Bockhorn - Grünbach,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19562V___H_s25_1.pdf,MVV_ticketing
+mvv-19-564-1,1,564,"Buchbach - Dorfen, Bahnhof - Kirchasch - Ammersdorf - Erding",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19564___H_s25_1.pdf,MVV_ticketing
+mvv-19-564V-1,1,564V,Unterstrogn - Bockhorn - Erding - Klinikum,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19564V___H_s25_1.pdf,MVV_ticketing
+mvv-19-565-1,1,565,"Dorfen, Bahnhof - Landersdorf - Kirchasch - Papferding - Erding",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19565___H_s25_1.pdf,MVV_ticketing
+mvv-19-567-1,1,567,"Dorfen, Marienplatz - St. Wolfgang - Isen - Walpertskirchen - Erding",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19567___H_s25_1.pdf,MVV_ticketing
+mvv-19-567V-1,1,567V,"Erding, Klinikum Süd - Walpertskirchen - Isen, Rathaus",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19567V___H_s25_1.pdf,MVV_ticketing
+mvv-19-568-1,1,568,"Markt Schwaben - Finsing - Moosinning - Erding, Klinikum - Erding",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19568___H_s25_1.pdf,MVV_ticketing
+mvv-19-568V-1,1,568V,"Markt Schwaben, Wittelsb. Weg - Erding, Klinikum Nord",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19568V___H_s25_1.pdf,MVV_ticketing
+mvv-19-569-1,1,569,Erding - Eitting - Eittingermoos - Gaden,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19569___H_s25_1.pdf,MVV_ticketing
+mvv-19-569V-1,1,569V,"Oberding, Schule - Niederding - Berglern - Gaden",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19569V___H_s25_1.pdf,MVV_ticketing
+mvv-19-630-1,1,630,P+R-Platz - Klinikum Ost - Waldfriedhof - P+R-Platz,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19630___H_s25_1.pdf,MVV_ticketing
+mvv-19-631-1,1,631,Freising - Obere Hauptstraße - Freising,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19631___H_s25_1.pdf,MVV_ticketing
+mvv-19-632-1,1,632,Freising - Marienplatz - Freising,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19632___H_s25_1.pdf,MVV_ticketing
+mvv-19-633-1,1,633,"Marzling - Freising - Freising, Gutenbergstraße",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19633___H_s25_1.pdf,MVV_ticketing
+mvv-19-633V-1,1,633V,Goldshausen - Freising RS Gute Änger,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19633V___H_s25_1.pdf,MVV_ticketing
+mvv-19-634-1,1,634,P+R-Platz - Kirche St. Lantpert - Gewerbegebiet - Attaching,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19634___H_s25_1.pdf,MVV_ticketing
+mvv-19-634V-1,1,634V,"Freising, Obervellacherstraße - Attaching, Sportplatz",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19634V___H_s25_1.pdf,MVV_ticketing
+mvv-19-635-1,1,635,"Freising - Flughafen, Terminalstr. Mitte",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19635___H_s25_1.pdf,MVV_ticketing
+mvv-19-636-1,1,636,Freising - Weihenstephan - Fraunhofer-Institut / Hittostraße,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19636___H_s25_1.pdf,MVV_ticketing
+mvv-19-637-1,1,637,Freising - Dürnast - Hohenbachern und zurück,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19637___H_s25_1.pdf,MVV_ticketing
+mvv-19-638-1,1,638,Freising - Weihenstephan - Forstzentrum - Freising,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19638___H_s25_1.pdf,MVV_ticketing
+mvv-19-639-1,1,639,Freising - AOK - Berufsschule - Lange Point - Freising,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19639___H_s25_1.pdf,MVV_ticketing
+mvv-19-640-1,1,640,Freising - Berufsschule - Kleine Wies - Klinikum Ost - Freising,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19640___H_s25_1.pdf,MVV_ticketing
+mvv-19-641-1,1,641,Freising - Prinz-Ludwig-Straße - Waldfriedhof - Klinikum Ost - Freising,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19641___H_s25_1.pdf,MVV_ticketing
+mvv-19-642-1,1,642,Freising - Klinikum Ost - Asamstraße Landratsamt - Freising,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19642___H_s25_1.pdf,MVV_ticketing
+mvv-19-643-1,1,643,P+R-Platz - Schwabenau - Kepserstraße - Kirche St. Lantpert - P+R-Platz,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19643___H_s25_1.pdf,MVV_ticketing
+mvv-19-645-1,1,645,P+R-Platz - Realschule Gute Änger - Schwimmbad - P+R-Platz,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19645___H_s25_1.pdf,MVV_ticketing
+mvv-19-650-1,1,650,Freising - Klinikum Ost - Kleine Wies - Berufsschule - Freising,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19650___H_s25_1.pdf,MVV_ticketing
+mvv-19-651-1,1,651,Freising - Landshuter Straße - Waldfriedhof - Prinz-Ludwig-Straße - Freising,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19651___H_s25_1.pdf,MVV_ticketing
+mvv-19-652-1,1,652,Freising - Landratsamt - Asamstraße - Klinikum Ost - Freising,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19652___H_s25_1.pdf,MVV_ticketing
+mvv-19-653-1,1,653,P+R-Platz - Kirche St. Lantpert - Kepserstraße - Schwabenau - P+R-Platz,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19653___H_s25_1.pdf,MVV_ticketing
+mvv-19-654-1,1,654,P+R-Platz - Schwimmbad - Epiphanias Zentrum - Schwimmbad - P+R-Platz,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19654___H_s25_1.pdf,MVV_ticketing
+mvv-19-655-1,1,655,P+R-Platz - Schwimmbad - Gute Änger - P+R-Platz,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19655___H_s25_1.pdf,MVV_ticketing
+mvv-19-661-1,1,661,Rudelzhausen - Nandlstadt - Zolling - Freising,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19661___H_s25_1.pdf,MVV_ticketing
+mvv-19-662-1,1,662,Freising - Attenkirchen - Au - Rudelzhausen - Mainburg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19662___H_s25_1.pdf,MVV_ticketing
+mvv-19-662V-1,1,662V,Mainburg - Rudelzhausen - Au - Attenkirchen - Freising,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19662V___H_s25_1.pdf,MVV_ticketing
+mvv-19-663-1,1,663,(Rudelzhausen) - Au - Wolfersdorf - Freising,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19663___H_s25_1.pdf,MVV_ticketing
+mvv-19-664-1,1,664,Schweitenkirchen/Paunzhausen - Kirchdorf - Wolfersdorf - Freising,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19664___H_s25_1.pdf,MVV_ticketing
+mvv-19-664V-1,1,664V,Paunzhausen - Freising,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19664V___H_s25_1.pdf,MVV_ticketing
+mvv-19-665-1,1,665,Petershausen Ost - Hohenkammer - Allershausen Schönbichl/Eberspoint - Freising,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19665___H_s25_1.pdf,MVV_ticketing
+mvv-19-666-1,1,666,Freising - Kranzberg - Allershausen - Hohenkammer,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19666___H_s25_1.pdf,MVV_ticketing
+mvv-19-667-1,1,667,Viehbach/Höchenberg - Sickenhausen - Freising,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19667___H_s25_1.pdf,MVV_ticketing
+mvv-19-668-1,1,668,Freising - Massenhausen/Hetzenhausen - Deutenhausen/Haimhausen,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19668___H_s25_1.pdf,MVV_ticketing
+mvv-19-680-1,1,680,Hagsdorf/Sixthaselbach - Thann - Haag (Amper) - Moosburg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19680___H_s25_1.pdf,MVV_ticketing
+mvv-19-681-1,1,681,"Au, Hopfenhalle - Attenkirchen - Moosburg",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19681___H_s25_1.pdf,MVV_ticketing
+mvv-19-682-1,1,682,Leitersdorf - Nandlstadt - Mauern - Moosburg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19682___H_s25_1.pdf,MVV_ticketing
+mvv-19-682V-1,1,682V,Moosburg - Mauern - Pfettrach,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19682V___H_s25_1.pdf,MVV_ticketing
+mvv-19-683-1,1,683,Mainburg - Rudelzhausen - Hörgertshausen - Moosburg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19683___H_s25_1.pdf,MVV_ticketing
+mvv-19-683V-1,1,683V,Moosburg - Hörgertshausen,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19683V___H_s25_1.pdf,MVV_ticketing
+mvv-19-684-1,1,684,Tegernbach (Lkr.FS) - Nandlstadt - Bergen - Moosburg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19684___H_s25_1.pdf,MVV_ticketing
+mvv-19-687-1,1,687,Buch am Erlbach/Wang - Moosburg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19687___H_s25_1.pdf,MVV_ticketing
+mvv-19-688-1,1,688,Zolling - Langenbach - Moosburg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19688___H_s25_1.pdf,MVV_ticketing
+mvv-19-690-1,1,690,"Garching, Forschungszentrum - Neufahrn - Eching Ost/Ort",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19690___H_s25_1.pdf,MVV_ticketing
+mvv-19-691-1,1,691,Neufahrn - Hallbergmoos - Freising,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19691___H_s25_1.pdf,MVV_ticketing
+mvv-19-691V-1,1,691V,"Eching Süd - Freising, Berufsschule",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19691V___H_s25_1.pdf,MVV_ticketing
+mvv-19-692-1,1,692,Hallbergmoos/Ort - Mintraching - Neufahrn,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19692___H_s25_1.pdf,MVV_ticketing
+mvv-19-693-1,1,693,Schulzentrum/Lohhof Süd - Kammerberg - Hohenkammer,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19693___H_s25_1.pdf,MVV_ticketing
+mvv-19-694-1,1,694,Giggenhausen - Neufahrn,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19694___H_s25_1.pdf,MVV_ticketing
+mvv-19-695-1,1,695,Kirchdorf a. d. Amper - Allershausen - Eching Nord/Süd - Garching-Hochbrück,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19695___H_s25_1.pdf,MVV_ticketing
+mvv-19-696-1,1,696,Deutenhausen - Eching Nord/Süd - Deutenhausen,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19696___H_s25_1.pdf,MVV_ticketing
+mvv-19-698-1,1,698,Ortsverkehr Hallbergmoos Hallbergmoos - Gewerbegebiet/Rathaus - Hallbergmoos,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19698___H_s25_1.pdf,MVV_ticketing
+mvv-19-698V-1,1,698V,"Goldach, Mittermeierweg - Hallbergmoos",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19698V___H_s25_1.pdf,MVV_ticketing
+mvv-19-701-1,1,701,"Karlsfeld, Schwarzhölzlstraße - Karlsfeld",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19701___H_s25_1.pdf,MVV_ticketing
+mvv-19-702-1,1,702,"Dachau, Schulen - Dachau - Karlsfeld",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19702___H_s25_1.pdf,MVV_ticketing
+mvv-19-703-1,1,703,Erdweg - Unterweikertshofen - Höfa - Odelzhausen,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19703___H_s25_1.pdf,MVV_ticketing
+mvv-19-704-1,1,704,Aichach - Altomünster / Dachau,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19704___H_s25_1.pdf,MVV_ticketing
+mvv-19-705-1,1,705,Dachau - Schwabhausen - Unterweikertshofen - Altomünster,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19705___H_s25_1.pdf,MVV_ticketing
+mvv-19-706-1,1,706,(Klenau/Schiltberg-) Hilgertshausen - Markt Indersdorf - Dachau - Karlsfeld - Vogelloh / Allach Ost,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19706___H_s25_1.pdf,MVV_ticketing
+mvv-19-707-1,1,707,Altomünster - Tandern - Hilgertshausen - Jetzendorf - Petershausen West,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19707___H_s25_1.pdf,MVV_ticketing
+mvv-19-708-1,1,708,Neufahrn - Massenhausen - Vierkirchen-Esterhofen - Weichs - Markt Indersdorf,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19708___H_s25_1.pdf,MVV_ticketing
+mvv-19-708V-1,1,708V,Markt Indersdorf - Weichs - Vierkirchen-Esterhofen - Massenhausen,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19708V___H_s25_1.pdf,MVV_ticketing
+mvv-19-710-1,1,710,Moosach - Karlsfeld - Dachau,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19710___H_s25_1.pdf,MVV_ticketing
+mvv-19-711-1,1,711,"Karlsfeld - Karlsfeld, Ludwig-Ganghofer-Straße - Karlsfeld",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19711___H_s25_1.pdf,MVV_ticketing
+mvv-19-715-1,1,715,Kleinberghofen - Altomünster bzw. Kleinberghofen - Stumpfenbach - Altomünster,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19715___H_s25_1.pdf,MVV_ticketing
+mvv-19-721-1,1,721,Stockach/Ebersried - Odelzhausen - Sulzemoos - Bergkirchen - Dachau,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19721___H_s25_1.pdf,MVV_ticketing
+mvv-19-721V-1,1,721V,"Unterumbach/Gaggers - Odelzhausen - Bergkirchen - Dachau, Schulen",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19721V___H_s25_1.pdf,MVV_ticketing
+mvv-19-723-1,1,723,"Haimhausen - Inhausermoos Hebertshausen - DAH, Schulen",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19723___H_s25_1.pdf,MVV_ticketing
+mvv-19-725-1,1,725,Dachau - Hebertshausen - Haimhausen - Fahrenzhausen - Freising,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19725___H_s25_1.pdf,MVV_ticketing
+mvv-19-725V-1,1,725V,"Fahrenzhausen - Haimhausen Hebertshausen - Dachau, Schulen",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19725V___H_s25_1.pdf,MVV_ticketing
+mvv-19-727-1,1,727,"Dachau, Ost - Hebertshausen - Röhrmoos - Niederroth",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19727___H_s25_1.pdf,MVV_ticketing
+mvv-19-727V-1,1,727V,Weichs -Markt Ind. - Röhrmoos- Hebertshausen,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19727V___H_s25_1.pdf,MVV_ticketing
+mvv-19-728-1,1,728,Sigmertshausen - Niederroth - Markt Indersdorf - Petershausen - Obermarbach,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19728___H_s25_1.pdf,MVV_ticketing
+mvv-19-729-1,1,729,Markt Indersdorf - Ainhofen - Weichs - Vierkirchen-Esterh.,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19729___H_s25_1.pdf,MVV_ticketing
+mvv-19-771-1,1,771,Petershausen West - Kammerberg - Haimhausen - Lohhof,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19771___H_s25_1.pdf,MVV_ticketing
+mvv-19-772-1,1,772,Markt Indersdorf - Röhrmoos - Haimhausen - Unterschleißheim,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19772___H_s25_1.pdf,MVV_ticketing
+mvv-19-772V-1,1,772V,Inhausermoos - Haimhausen - Röhrmoos Markt Indersdorf - Weichs,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19772V___H_s25_1.pdf,MVV_ticketing
+mvv-19-782-1,1,782,Randelsried - Pipinsried - Arnzell - Markt Indersdorf,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19782___H_s25_1.pdf,MVV_ticketing
+mvv-19-785-1,1,785,Erdweg - Markt Indersdorf - Weichs - Petershausen West,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19785___H_s25_1.pdf,MVV_ticketing
+mvv-19-791-1,1,791,Gröbenried - Eschenried - Dachau - Bergkirchen,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19791___H_s25_1.pdf,MVV_ticketing
+mvv-19-791V-1,1,791V,Weichs - Markt Indersdorf - Stetten - Arnbach - Schwabhausen,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19791V___H_s25_1.pdf,MVV_ticketing
+mvv-19-803-1,1,803,"Inning, Marktplatz - Grafrath - Schöngeising",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19803___H_s25_1.pdf,MVV_ticketing
+mvv-19-804-1,1,804,Grafrath - Unteralting - Mauern - Jexhof,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19804___H_s25_1.pdf,MVV_ticketing
+mvv-19-805-1,1,805,Grafrath - Kottgeisering - Pleitmannswang - Zankenhausen - Türkenfeld,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19805___H_s25_1.pdf,MVV_ticketing
+mvv-19-807-1,1,807,Türkenfeld - Beuern - Neugreifenberg - Greifenberg - Eching - Türkenfeld,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19807___H_s25_1.pdf,MVV_ticketing
+mvv-19-810-1,1,810,Geltendorf - Moorenweis - Jesenwang Landsberied - Mammendorf,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19810___H_s25_1.pdf,MVV_ticketing
+mvv-19-820-1,1,820,"Fürstenfeldbruck, Schöngeisinger Str. - Buchenau - Schöngeising - Grafrath - Inning - Seefeld-Hechendorf",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19820___H_s25_1.pdf,MVV_ticketing
+mvv-19-822-1,1,822,Mammendorf - Adelshofen - Jesenwang - Schöngeising - Fürstenfeldbruck,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19822___H_s25_1.pdf,MVV_ticketing
+mvv-19-823-1,1,823,Fürstenfeldbruck - Jesenwang Adelshofen - Dünzelbach,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19823___H_s25_1.pdf,MVV_ticketing
+mvv-19-825-1,1,825,Dünzelbach - Moorenweis - Jesenwang - Landsberied - Fürstenfeldbruck,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19825___H_s25_1.pdf,MVV_ticketing
+mvv-19-826-1,1,826,Grafrath - Jesenwang - Grunertshofen - Dünzelbach - Zell - Moorenweis - Grafrath,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19826___H_s25_1.pdf,MVV_ticketing
+mvv-19-829-1,1,829,"Mammendorf - Jesenwang, Schule - Mammendorf, Schule - Moorenweis",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19829___H_s25_1.pdf,MVV_ticketing
+mvv-19-830-1,1,830,Lochhausen - Gröbenzell - Puchheim Nord,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19830___H_s25_1.pdf,MVV_ticketing
+mvv-19-832-1,1,832,"Olching, Kulturwerkstatt - Olching - Gröbenzell - Puchheim Nord",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19832___H_s25_1.pdf,MVV_ticketing
+mvv-19-833-1,1,833,"Eichenau Nord - Olching, Grundschule - Olching - Olching, Cronenbergstraße",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19833___H_s25_1.pdf,MVV_ticketing
+mvv-19-835-1,1,835,Olching - Graßlfing - Geiselbullach - Esting - Kriegerdenkmal,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19835___H_s25_1.pdf,MVV_ticketing
+mvv-19-837-1,1,837,Althegnenberg - Tegernbach - Oberschweinbach - Mammendorf - Fürstenfeldbruck,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19837___H_s25_1.pdf,MVV_ticketing
+mvv-19-838-1,1,838,Tegernbach - Mittelstetten - Oberschweinbach - Mammendorf - Buchenau,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19838___H_s25_1.pdf,MVV_ticketing
+mvv-19-839-1,1,839,Tegernbach - Mittelstetten - Althegnenberg - Mammendorf - Fürstenfeldbruck,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19839___H_s25_1.pdf,MVV_ticketing
+mvv-19-840-1,1,840,Buchenau - Fürstenfeldbruck,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19840___H_s25_1.pdf,MVV_ticketing
+mvv-19-843-1,1,843,"Olching - Emmering - FFB, Adolf-Kolping-Straße / Fürstenfeldbruck",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19843___H_s25_1.pdf,MVV_ticketing
+mvv-19-845-1,1,845,"Fürstenfeldbruck, Fliegerhorst - Fürstenfeldbruck",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19845___H_s25_1.pdf,MVV_ticketing
+mvv-19-851-1,1,851,"Germering, Salzstraße - Germering, Kleiner Stachus - Harthaus Nord",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19851___H_s25_1.pdf,MVV_ticketing
+mvv-19-852-1,1,852,"Fürstenfeldbruck - Alling - Germering-Unterpfaffenhofen - Germering, Kerschensteiner Schule",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19852___H_s25_1.pdf,MVV_ticketing
+mvv-19-853-1,1,853,"Puchheim Bf, Bgm.-Ertl-Straße - Puchheim Süd - Germering-Unterpf.",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19853___H_s25_1.pdf,MVV_ticketing
+mvv-19-854-1,1,854,"Puchheim Ort, Vogelsangstraße - Puchheim Süd",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19854___H_s25_1.pdf,MVV_ticketing
+mvv-19-855-1,1,855,Puchheim Nord - Gewerbegebiet Nord - Lußstraße - Puchheim Nord,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19855___H_s25_1.pdf,MVV_ticketing
+mvv-19-856-1,1,856,"Germering-Unterpfaffenhofen - Germering, Neue Gautinger Straße - Planegg West",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19856___H_s25_1.pdf,MVV_ticketing
+mvv-19-857-1,1,857,"Germering, GEP - Germering, Rathaus - Germering-Unterpfaffenhofen",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19857___H_s25_1.pdf,MVV_ticketing
+mvv-19-858-1,1,858,"Germering, Freibad/Polariom - Germering-Unterpfaffenhofen - Germering, Kriemhildenstraße",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19858___H_s25_1.pdf,MVV_ticketing
+mvv-19-859-1,1,859,"Harthaus Süd - Germering, Kleiner Stachus - Germering, Freibad/Polariom",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19859___H_s25_1.pdf,MVV_ticketing
+mvv-19-860-1,1,860,"Freiham - Puchheim Ort - Eichenau Nord - Olching - Graßlfing, Georgenstraße",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19860___H_s25_1.pdf,MVV_ticketing
+mvv-19-861-1,1,861,"Eichenau, Spechtstraße - Eichenau Süd",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19861___H_s25_1.pdf,MVV_ticketing
+mvv-19-862-1,1,862,Fürstenfeldbruck - Eichenau Nord - Puchheim Süd,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19862___H_s25_1.pdf,MVV_ticketing
+mvv-19-863-1,1,863,"Buchenau - Fürstenfeldbruck, Fliegerhorst - Eichenau Nord",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19863___H_s25_1.pdf,MVV_ticketing
+mvv-19-871-1,1,871,Maisach - Aufkirchen - Egenhofen - Ebersried,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19871___H_s25_1.pdf,MVV_ticketing
+mvv-19-872-1,1,872,Maisach - Realschule - Am Strasserwinkel - Gernlinden,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19872___H_s25_1.pdf,MVV_ticketing
+mvv-19-873-1,1,873,Fürstenfeldbruck - Maisach,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19873___H_s25_1.pdf,MVV_ticketing
+mvv-19-874-1,1,874,"Maisach, Schulen - Malching - Egenhofen, Dirlesried",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19874___H_s25_1.pdf,MVV_ticketing
+mvv-19-875-1,1,875,Waltenhofen - Rottbach - Überacker - Maisach,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19875___H_s25_1.pdf,MVV_ticketing
+mvv-19-901-1,1,901,Starnberg - Blumensiedlung - Hanfeld - Starnberg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19901___H_s25_1.pdf,MVV_ticketing
+mvv-19-902-1,1,902,Starnberg Nord - Starnberg - Klinikum-MediCenter - Cappius - Söcking,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19902___H_s25_1.pdf,MVV_ticketing
+mvv-19-903-1,1,903,Starnberg - Auersberg - Ludwigshöhe - Starnberg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19903___H_s25_1.pdf,MVV_ticketing
+mvv-19-905-1,1,905,Leutstetten - Starnberg - Waldspielplatz,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19905___H_s25_1.pdf,MVV_ticketing
+mvv-19-906-1,1,906,Planegg West - KIM (- Gauting - KIM) - Planegg West,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19906___H_s25_1.pdf,MVV_ticketing
+mvv-19-909-1,1,909,Maising - Starnberg - Starnberg Nord,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19909___H_s25_1.pdf,MVV_ticketing
+mvv-19-921-1,1,921,Inning am Ammersee - Herrsching,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19921___H_s25_1.pdf,MVV_ticketing
+mvv-19-921V-1,1,921V,"Herrsching, Gymnasium - Inning - Etterschlag - Gilching, Gymnasium",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19921V___H_s25_1.pdf,MVV_ticketing
+mvv-19-923-1,1,923,GP Inning/Wörthsee - Steinebach - Weßling - ESPE/3M - Steinebach,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19923___H_s25_1.pdf,MVV_ticketing
+mvv-19-924-1,1,924,Seefeld-Hechendorf - Oberalting - Seefeld-Hechendorf,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19924___H_s25_1.pdf,MVV_ticketing
+mvv-19-928-1,1,928,Andechs - Seefeld-Hechendorf - Steinebach - Walchstadt,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19928___H_s25_1.pdf,MVV_ticketing
+mvv-19-928V-1,1,928V,"Breitbrunn - Bachern / Walchstadt - Gilching, Gymnasium Herrsching Gymnasium - Breitbrunn - Bachern - Walchstadt",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19928V___H_s25_1.pdf,MVV_ticketing
+mvv-19-949-1,1,949,Gauting - Gilching-Argelsried,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19949___H_s25_1.pdf,MVV_ticketing
+mvv-19-950-1,1,950,Herrsching - Frieding - Oberalting - Starnberg Nord,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19950___H_s25_1.pdf,MVV_ticketing
+mvv-19-950V-1,1,950V,Seefeld-Hechendorf - Herrsching Schulen / Seefeld-Hechendorf - Frieding - Unering,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19950V___H_s25_1.pdf,MVV_ticketing
+mvv-19-951-1,1,951,Starnberg Nord - Andechs - Herrsching,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19951___H_s25_1.pdf,MVV_ticketing
+mvv-19-955-1,1,955,Weßling - Starnberg Nord,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19955___H_s25_1.pdf,MVV_ticketing
+mvv-19-956-1,1,956,Aschering - Wieling - Pöcking - Possenhofen - Starnberg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19956___H_s25_1.pdf,MVV_ticketing
+mvv-19-957-1,1,957,Gilching-Argelsried - Neugilching - DLR - Weßling,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19957___H_s25_1.pdf,MVV_ticketing
+mvv-19-958-1,1,958,Tutzing - Andechs - Herrsching,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19958___H_s25_1.pdf,MVV_ticketing
+mvv-19-962-1,1,962,Gauting - Krailling - Fürstenried West,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19962___H_s25_1.pdf,MVV_ticketing
+mvv-19-963-1,1,963,Gauting - Pentenried - Unterbrunn,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19963___H_s25_1.pdf,MVV_ticketing
+mvv-19-965-1,1,965,Gauting - Buchendorf,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19965___H_s25_1.pdf,MVV_ticketing
+mvv-19-966-1,1,966,Gauting - KIM/Krailling - Gauting,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19966___H_s25_1.pdf,MVV_ticketing
+mvv-19-967-1,1,967,Planegg - Krailling,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19967___H_s25_1.pdf,MVV_ticketing
+mvv-19-968-1,1,968,"Planegg West - Stockdorf, Harmsplatz - Gauting",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19968___H_s25_1.pdf,MVV_ticketing
+mvv-19-969-1,1,969,Unterbrunn - Oberbrunn - Gauting,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19969___H_s25_1.pdf,MVV_ticketing
+mvv-19-971-1,1,971,Ammerland - Münsing - Starnberg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19971___H_s25_1.pdf,MVV_ticketing
+mvv-19-972-1,1,972,"Schäftlarn, Kloster - Hohenschäftlarn - Wangen - Starnberg Nord",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19972___H_s25_1.pdf,MVV_ticketing
+mvv-19-973-1,1,973,Berg - Walchstadt - Icking,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19973___H_s25_1.pdf,MVV_ticketing
+mvv-19-974-1,1,974,Icking - Mörlbach - Berg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19974___H_s25_1.pdf,MVV_ticketing
+mvv-19-975-1,1,975,Wolfratshausen - Höhenrain - Bachhausen - Berg - Starnberg Nord,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19975___H_s25_1.pdf,MVV_ticketing
+mvv-19-976-1,1,976,Traubing - Feldafing - Possenhofen - Maising,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19976___H_s25_1.pdf,MVV_ticketing
+mvv-19-977-1,1,977,"Tutzing, Heimgartenstraße - Tutzing - Unterzeismering",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19977___H_s25_1.pdf,MVV_ticketing
+mvv-19-978-1,1,978,Feldafing - Tutzing,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19978___H_s25_1.pdf,MVV_ticketing
+mvv-19-978V-1,1,978V,Frieding - Aschering - Traubing - Feldafing / Tutzing Gymnasium,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19978V___H_s25_1.pdf,MVV_ticketing
+mvv-19-979-1,1,979,"Diemendorf - Haunshofen - Kampberg - Tutzing, Am Kallerbach - Tutzing",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19979___H_s25_1.pdf,MVV_ticketing
+mvv-19-981-1,1,981,Schongau - Bernbeuren - Lechbruck - Prem - Steingaden,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_19981___H_s25_1.pdf,MVV_ticketing
+mvv-20-200-1,1,X200,"München, Ostbahnhof - Taufkirchen, Lilienthalstraße",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_20200___H_s25_1.pdf,MVV_ticketing
+mvv-20-201-1,1,X201,Dachau - Oberschleißheim - Garching-Hochbrück - Garching-Forschungszentrum,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_20201___H_s25_1.pdf,MVV_ticketing
+mvv-20-202-1,1,X202,Unterschleißheim Ost - Garching-Hochbrück - Ismaning - Aschheim - Haar,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_20202___H_s25_1.pdf,MVV_ticketing
+mvv-20-203-1,1,X203,"Deisenhofen West - Tfk., Hugo-Junkers-Straße - Putzbrunn - Haar - Heimstetten",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_20203___H_s25_1.pdf,MVV_ticketing
+mvv-20-204-1,1,X204,Putzbrunn - Ottobrunn - Unterhaching - Candidplatz - Brudermühlstraße - St. Achaz,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_20204___H_s25_1.pdf,MVV_ticketing
+mvv-20-205-1,1,X205,Arabellapark - Unterföhring - Ismaning - Garching - Garching-Forschungszentrum,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_20205___H_s25_1.pdf,MVV_ticketing
+mvv-20-206-1,1,X206,Feldmoching - Oberschleißheim - Lohhof Nord,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_20206___H_s25_1.pdf,MVV_ticketing
+mvv-20-208-1,1,X208,Klinikum Großhadern - Großhadern - Martinsried - Planegg - Germering-Unterpfaffenhofen,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_20208___H_s25_1.pdf,MVV_ticketing
+mvv-20-320-1,1,X320,Wolfratshausen - Egling - Endlhausen - Deisenhofen West,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_20320___H_s25_1.pdf,MVV_ticketing
+mvv-20-380-1,1,X380,Bad Tölz - Miesbach - Rosenheim,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_20380___H_s25_1.pdf,MVV_ticketing
+mvv-20-381-1,1,X381,Bad Tölz - Waakirchen - Miesbach / Gmund,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_20381___H_s25_1.pdf,MVV_ticketing
+mvv-20-660-1,1,X660,"Garching, Forschungszentrum - Freising - Freising, Weihenstephan",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_20660___H_s25_1.pdf,MVV_ticketing
+mvv-20-730-1,1,X730,Pasing - Geiselbullach - Bergkirchen/GADA - Bachern - Schwabhausen,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_20730___H_s25_1.pdf,MVV_ticketing
+mvv-20-731-1,1,X731,Pasing - Sulzemoos - Odelzhausen - Sittenbach - Erdweg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_20731___H_s25_1.pdf,MVV_ticketing
+mvv-20-732-1,1,X732,Dasing - Adelzhausen - Odelzhausen - Sulzemoos - Pasing,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_20732___H_s25_1.pdf,MVV_ticketing
+mvv-20-733-1,1,X733,Pasing - Sulzemoos - Odelzhausen - Pfaffenhofen a.d. Glonn - Egenhofen,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_20733___H_s25_1.pdf,MVV_ticketing
+mvv-20-800-1,1,X800,Buchenau - Esting - Dachau,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_20800___H_s25_1.pdf,MVV_ticketing
+mvv-20-850-1,1,X850,Germering-Unterpfaffenhofen - Fürstenfeldbruck,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_20850___H_s25_1.pdf,MVV_ticketing
+mvv-20-900-1,1,X900,Starnberg - Gilching-Argelsried - Fürstenfeldbruck - Buchenau,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_20900___H_s25_1.pdf,MVV_ticketing
+mvv-20-910-1,1,X910,Geltendorf /ESPE-Platz - Weßling - DLR - Gauting - Klinikum Großh.,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_20910___H_s25_1.pdf,MVV_ticketing
+mvv-20-970-1,1,X970,Bad Tölz - Wolfratshausen - Starnberg,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_20970___H_s25_1.pdf,MVV_ticketing
+mvv-20-990-1,1,X990,Murnau - Penzberg - Bad Tölz,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_20990___H_s25_1.pdf,MVV_ticketing
+mvv-60-601-1,1,601,Preisenberg - Kumhausen - Ländtorplatz - Hauptbahnhof - Altdorf,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-602-1,1,602,Altstadt - Ländtorplatz - Hauptbahnhof - Ergolding,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-603-1,1,603,Auloh - Altstadt - Hauptbahnhof - Wolfgangsiedlung,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-604-1,1,604,Ländtorplatz - West - Hauptbahnhof,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-605-1,1,605,Altstadt - Moniberg - Alte Kaserne - Schweinbach,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-606-1,1,606,Auwaldsiedlung - Altstadt - Hauptbahnhof - Eugenbach,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-607-1,1,607,Mitterwöhr - Altstadt - Hofberg - Obere Altstadt / Berggrub,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-608-1,1,608,Hauptbahnhof - Nördliche Wolfgangsiedlung - Altdorf - Eugenbach,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-609-1,1,609,LA-Altstadt - LA-Hbf - Münchnerau - Gündlkofen - Tondorf,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-610-1,1,610,Metzental - Ländtorplatz - Sportzentrum West,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-611-1,1,611,Piflaser Weg - Am Alten Viehmarkt/CCL - Hauptbahnhof - Münchnerau,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-612-1,1,612,Altstadt - Piflas - Ergolding,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-614-1,1,614,Wolfsteinerau - Frauenberg - Gretlmühle - Altstadt,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-615-1,1,615,Ergolding - Hauptbahnhof,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-616-1,1,616,Auloh - Auwaldsiedlung - Hauptbahnhof,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-617-1,1,617,Eugenbach - Hauptbahnhof,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-618-1,1,618,Metzental - Hauptbahnhof,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-619-1,1,619,Hauptbahnhof - Hochschule - Am Lurzenhof,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-620-1,1,620,Metzental - Ländtorplatz,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-621-1,1,621,Preisenberg - Kumhausen - Ländtorplatz - Hauptbahnhof,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-622-1,1,622,Altstadt - Hauptbahnhof - Piflas - Ergolding,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-623-1,1,623,Auloh - Altstadt - Hauptbahnhof - Wolfgangsiedlung,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-624-1,1,624,Ländtorplatz - West - Hauptbahnhof,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-625-1,1,625,Hauptbahnhof - Altstadt - Moniberg,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-626-1,1,626,Auwaldsiedlung - Altstadt,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-627-1,1,627,Altstadt - Hofberg - Altstadt,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-628-1,1,628,Altstadt - Hauptbahnhof - Wolfgangsiedlung - Eugenbach,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-629-1,1,629,Am Alten Viehmarkt - Altstadt - Hauptbahnhof - Münchnerau - Gündlkofen,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E01-1,1,E01,Auloh - Bismarckplatz - Hauptbahnhof - HLG - Realschule,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E02-1,1,E02,Löschenbrand - Stadtpark - Hauptbahnhof - Altstadt - Am Lurzenhof,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E03-1,1,E03,Hauptbahnhof - Am Alten Viehmarkt - Am Lurzenhof,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E04-1,1,E04,Hascherkeller - Hauptbahnhof - Altstadt - Am Lurzenhof,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E05-1,1,E05,Eugenbach - Wirtschaftsschule - HLG - Realschule,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E06-1,1,E06,Kumhausen - Finanzamt - Am Lurzenhof,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E07-1,1,E07,Hofberg - HLG - Realschule - Wirtschaftsschule,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E08-1,1,E08,Kumhausen - HLG  - Realschule - Wirtschaftsschule,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E09-1,1,E09,Preisenberg - Kumhausen - Realschule Ergolding,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E10-1,1,E10,Altstadt - Hauptbahnhof - Realschule Ergolding,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E11-1,1,E11,Eugenbach - Hauptbahnhof - Realschule Ergolding,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E12-1,1,E12,Ergolding - HLG - Realschule - Wirtschaftsschule,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E13-1,1,E13,Ergolding - Piflas - Altstadt - Ländtorplatz - HLG - Realschule,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E14-1,1,E14,Wolfgangsiedlung - Hauptbahnhof - Altstadt - Am Lurzenhof,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E15-1,1,E15,Auwaldsiedlung - Altstadt - Hauptbahnhof - Wirtschaftsschule - HLG - Realschule,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E17-1,1,E17,Ländtorplatz - HLG - Realschule - Wolfgangschule,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E18-1,1,E18,Frauenberg - Auloh - Hauptbahnhof - HLG - Wirtschaftsschule,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E19-1,1,E19,Altdorf/Kleinfeld - Hauptbahnhof - Altstadt - Am Lurzenhof,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E20-1,1,E20,Nördl. Wolfgangsiedlung - Hauptbahnhof - HLG - Realschule,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E21-1,1,E21,Ländtorplatz - Landshut/West - Am Alten Viehmarkt - Schulstraße,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E22-1,1,E22,Eugenbach - Nördl. Wolfgangsiedlung - Hauptbahnhof - Postplatz - Schulstraße,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E23-1,1,E23,Hauptbahnhof - Altstadt - Am Lurzenhof,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E25-1,1,E25,Auerweg - Nikolaschule,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E26-1,1,E26,Lainerbuckel - Altstadt - Am Lurzenhof,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E28-1,1,E28,Gündlkofen - Unterlenghart - Wirtschaftsschule - Hauptbahnhof - Altstadt,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E29-1,1,E29,Gündlkoferau - Ländtorplatz - Altstadt,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E30-1,1,E30,Kupfereck - Hofberg - Altstadt - Am Lurzenhof,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E31-1,1,E31,Hauptbahnhof - Realschule Ergolding,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E32-1,1,E32,Moniberg - Altstadt - Bismarckplatz,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E33-1,1,E33,Münchnerau - Realschule - Hauptbahnhof - Altstadt,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E34-1,1,E34,Gündlkoferau - Realschule - Hauptbahnhof - Altstadt,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E37-1,1,E37,Hauptbahnhof - Am Lurzenhof,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E38-1,1,E38,Moniberg - Ländtorplatz - HLG - Realschule,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E39-1,1,E39,Preisenberg - Kumhausen - Hauptbahnhof - Realschule Ergolding,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E40-1,1,E40,Wolfsteinerau - Altstadt - Hauptbahnhof - Gymnasium Ergolding,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E41-1,1,E41,Hauptbahnhof - Hochschule - Am Lurzenhof,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E42-1,1,E42,Hauptbahnhof - Hochschule - Am Lurzenhof,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E43-1,1,E43,Hauptbahnhof - Hochschule - Am Lurzenhof,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E50-1,1,E50,Realschule - Wirtschaftsschule - Hauptbahnhof,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E51-1,1,E51,Realschule Ergolding - Hauptbahnhof - Altstadt,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E52-1,1,E52,Auloh - Altstadt - Hauptbahnhof - Eugenbach,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E53-1,1,E53,HLG - Hauptbahnhof - Altstadt - Auloh - Frauenberg - Wolfsteinerau,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E54-1,1,E54,Schulstraße - Altstadt,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E55-1,1,E55,Realschule Ergolding - Hauptbahnhof - Auloh,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E56-1,1,E56,Ergolding - Hauptbahnhof - Altstadt - Schulstraße,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E57-1,1,E57,HLG - Wirtschaftsschule - Hauptbahnhof - Altstadt,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E58-1,1,E58,Realschule Ergolding - Hauptbahnhof - Altstadt - Moniberg,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E59-1,1,E59,Realschule - Wirtschaftsschule - Hauptbahnhof - Preisenberg,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E60-1,1,E60,HLG - Hauptbahnhof - Altstadt - Auloh - Frauenberg - Wolfsteinerau,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E61-1,1,E61,Altstadt - Hofberg,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E62-1,1,E62,HLG - Kumhausen - Preisenberg,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E63-1,1,E63,HLG - Realschule - Piflas - Ergolding,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E64-1,1,E64,Wirtschaftsschule - Realschule - Ländtorplatz - Auloh,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E65-1,1,E65,HLG - Realschule - Campingplatz - Auwaldsiedlung,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E66-1,1,E66,Altstadt - Hauptbahnhof - Ergolding,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E67-1,1,E67,Realschule - Wirtschaftsschule - Hauptbahnhof - Ländtorplatz,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E68-1,1,E68,Schulstraße - Kumhausen - Preisenberg,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E69-1,1,E69,Am Alten Viehmarkt - Hauptbahnhof - Nördl. Wolfgangsiedlung,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E70-1,1,E70,HLG - Realschule - Wirtschaftsschule - Eugenbach,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E71-1,1,E71,HLG - Realschule - Altstadt - Hofberg,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E72-1,1,E72,Schulstraße - Altstadt - Hauptbahnhof - Eugenbach,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E73-1,1,E73,Altstadt - Birkenberg - Lainerbuckel,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E74-1,1,E74,Altstadt - Hauptbahnhof - Unterlenghart - Gündlkofen,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E75-1,1,E75,Bismarckplatz - Altstadt - Kumhausen,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E76-1,1,E76,Maximilianstraße - Hauptbahnhof - Realschule - Gündlkoferau,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E77-1,1,E77,Altstadt - Hauptbahnhof - Münchnerau,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E78-1,1,E78,Am Lurzenhof - Altstadt - Hauptbahnhof,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E79-1,1,E79,HLG - Altstadt - Hauptbahnhof,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E80-1,1,E80,Realschule - HLG - Ländtorplatz - Auloh (Frauenberg),3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E81-1,1,E81,HLG - Hauptbahnhof - Ergolding,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E82-1,1,E82,Ergolding - Hauptbahnhof,3,005262,FFFFFF,,MVV_ticketing
+mvv-60-E83-1,1,E83,Ergolding - Hauptbahnhof - Ländtorplatz,3,005262,FFFFFF,,MVV_ticketing
+mvv-65-719-1,1,719,Dachau - Festwiese - Rathaus - Frühlingstraße - Dachau,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_65719___H_s25_1.pdf,MVV_ticketing
+mvv-65-720-1,1,720,Dachau - Landratsamt - Klinikum - Rathaus - Dachau,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_65720___H_s25_1.pdf,MVV_ticketing
+mvv-65-722-1,1,722,Dachau - Rathaus - Klinikum - Landratsamt - Dachau,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_65722___H_s25_1.pdf,MVV_ticketing
+mvv-65-724-1,1,724,Dachau - Moosstraße - Stadtweiher - - Eschenrieder Straße - Dachau,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_65724___H_s25_1.pdf,MVV_ticketing
+mvv-65-726-1,1,726,Dachau - KZ-Gedenkstätte - Saubachsiedlung,3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_65726___H_s25_1.pdf,MVV_ticketing
+mvv-65-744-1,1,744,"Dachau - Dachau, Kräutergarten",3,005262,FFFFFF,https://efa.mvv-muenchen.de/ttb2/mvv_65744___H_s25_1.pdf,MVV_ticketing

@@ -1,0 +1,5 @@
+route_id,agency_id,route_short_name,route_long_name,route_desc,route_type,route_url,route_color,route_text_color
+TAD-1,TAD,TAD 1,TAD 1 ST-JULIEN-VOCANCE <> ANNONAY GARE ROUTIERE,,3,,9f00ab,ffffff
+TAD-2,TAD,TAD 2,TAD 2 LE MONESTIER <> ANNONAY GARE ROUTIERE,,3,,8eeddd,ffffff
+TAD-3,TAD,TAD 3,TAD 3 SAVAS <> ANNONAY GARE ROUTIERE,,3,,aba565,ffffff
+TAD-4,TAD,TAD 4,TAD 4 TALENCIEUX CENTRE <> ANNONAY GARE ROUTIERE,,3,,43e84b,ffffff
