@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:data.sncf.com)",
+      "WebFetch(domain:www.data.gouv.fr)",
+      "WebFetch(domain:www.insee.fr)",
+      "WebFetch(domain:ec.europa.eu)",
+      "WebFetch(domain:data.deutschebahn.com)",
+      "WebFetch(domain:developers.deutschebahn.com)",
+      "WebFetch(domain:www.era.europa.eu)",
+      "WebFetch(domain:api.deutschebahn.com)",
+      "WebFetch(domain:opendata.deutschebahn.com)",
+      "WebSearch",
+      "WebFetch(domain:www.govdata.de)"
+    ]
+  }
+}
