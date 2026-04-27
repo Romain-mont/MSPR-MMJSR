@@ -19,8 +19,8 @@ services:
       - INCREMENTAL_LOAD=${INCREMENTAL_LOAD}
       - TARGET_COUNTRIES=${TARGET_COUNTRIES}
     volumes:
-      - /Volumes/Optima/MSPR_DATA/raw:/app/data/raw
-      - /Volumes/Optima/MSPR_DATA/staging:/app/data/staging
+      - ${RAW_DATA_DIR:-/Volumes/Optima/MSPR_DATA/raw}:/app/data/raw
+      - ${STAGING_DATA_DIR:-/Volumes/Optima/MSPR_DATA/staging}:/app/data/staging
       - ./extraction:/app/extraction
       - ./transformation:/app/transformation
       - ./load:/app/load

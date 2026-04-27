@@ -74,3 +74,6 @@ logs/
 htmlcov/
 
 postgres_data/
+
+# === DONNÉES LOCALES (perso, non partagées) ===
+data_MM/

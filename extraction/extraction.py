@@ -336,28 +336,252 @@ def extract_airports(overwrite=False):
     return True
 
 
+# PARTIE 4 : SNCF FRÉQUENTATION DES GARES
+
+SNCF_FREQUENTATION_URL = (
+    "https://data.sncf.com/api/explore/v2.1/catalog/datasets/"
+    "frequentation-gares/exports/csv"
+    "?lang=fr&timezone=Europe%2FParis&use_labels=true&delimiter=%3B"
+)
+SNCF_FREQ_DIR = os.environ.get("RAW_SNCF_FREQ_DIR", "./data/raw/sncf_frequentation")
+
+
+def extract_sncf_frequentation():
+    """
+    Extrait la fréquentation annuelle des gares SNCF (2015-2024)
+    Source : data.sncf.com - dataset frequentation-gares
+    ~3000 gares, voyageurs annuels, séparateur point-virgule
+    """
+    print("EXTRACTION SNCF FRÉQUENTATION DES GARES")
+    os.makedirs(SNCF_FREQ_DIR, exist_ok=True)
+
+    today = dt.date.today().strftime("%Y-%m-%d")
+    output_file = f"{SNCF_FREQ_DIR}/sncf_frequentation_{today}.csv"
+
+    if os.path.exists(output_file):
+        print(f"Fichier du jour déjà présent : {output_file}")
+        return True
+
+    try:
+        print("Téléchargement fréquentation SNCF...", end=" ", flush=True)
+        r = requests.get(SNCF_FREQUENTATION_URL, timeout=120)
+        r.raise_for_status()
+
+        content = r.content.decode("utf-8", errors="replace")
+        with open(output_file, "w", encoding="utf-8") as f:
+            f.write(content)
+
+        n_lines = max(0, content.count("\n") - 1)
+        print(f"({n_lines} gares)")
+        return True
+
+    except Exception as e:
+        print(f"Erreur : {e}")
+        if os.path.exists(output_file):
+            os.remove(output_file)
+        return False
+
+
+# PARTIE 5 : POPULATION DES VILLES EUROPÉENNES - EUROSTAT
+
+# Codes Urban Audit Eurostat pour les principales villes couvertes par le projet
+EUROSTAT_CITY_CODES = [
+    # France
+    "FR001C", "FR002C", "FR003C", "FR004C", "FR005C",
+    "FR006C", "FR007C", "FR008C", "FR009C", "FR010C",
+    # Allemagne
+    "DE001C", "DE002C", "DE003C", "DE004C", "DE005C", "DE006C",
+    # Espagne
+    "ES001C", "ES002C", "ES003C",
+    # Italie
+    "IT001C", "IT002C", "IT003C",
+    # Belgique
+    "BE001C",
+    # Pays-Bas
+    "NL001C", "NL002C",
+    # Suisse
+    "CH001C", "CH002C",
+    # Autriche
+    "AT001C",
+    # Royaume-Uni
+    "UK001C",
+]
+
+EUROSTAT_URB_URL = (
+    "https://ec.europa.eu/eurostat/api/dissemination/"
+    "statistics/1.0/data/urb_cpop1"
+)
+EUROSTAT_POP_DIR = os.environ.get("RAW_EUROSTAT_POP_DIR", "./data/raw/population")
+
+
+def _parse_eurostat_sdmx(data):
+    """
+    Parse une réponse SDMX-JSON Eurostat en liste de dicts.
+    Le format flat-index de l'API Eurostat est calculé à partir
+    de l'ordre des dimensions (data["id"]) et de leurs tailles (data["size"]).
+    """
+    id_order = data["id"]
+    sizes    = data["size"]
+    values   = data["value"]
+
+    cats = {}
+    for dim in id_order:
+        cat = data["dimension"][dim]["category"]
+        cats[dim] = {int(pos): code for code, pos in cat["index"].items()}
+
+    rows = []
+    total = 1
+    for s in sizes:
+        total *= s
+
+    for flat in range(total):
+        val = values.get(str(flat))
+        if val is None:
+            continue
+        row = {"value": val}
+        remaining = flat
+        for dim, size in zip(reversed(id_order), reversed(sizes)):
+            pos = remaining % size
+            remaining //= size
+            row[dim] = cats[dim].get(pos, str(pos))
+        rows.append(row)
+
+    return rows
+
+
+def extract_population_eurostat():
+    """
+    Extrait la population totale des grandes villes européennes.
+    Source : Eurostat urb_cpop1 (Urban Audit) - sans authentification.
+    Dimensions filtrées : sexe=Total, âge=Total, villes sélectionnées, 2018+.
+    """
+    print("EXTRACTION EUROSTAT - POPULATION VILLES EUROPÉENNES")
+    os.makedirs(EUROSTAT_POP_DIR, exist_ok=True)
+
+    today = dt.date.today().strftime("%Y-%m-%d")
+    output_file = f"{EUROSTAT_POP_DIR}/eurostat_city_population_{today}.csv"
+
+    if os.path.exists(output_file):
+        print(f"Fichier du jour déjà présent : {output_file}")
+        return True
+
+    try:
+        print("Requête Eurostat urb_cpop1...", end=" ", flush=True)
+
+        # Répétition du paramètre "geo" : syntaxe acceptée par l'API Eurostat
+        params = [
+            ("format", "JSON"),
+            ("lang",   "EN"),
+            ("sex",    "T"),
+            ("age",    "TOTAL"),
+            ("sinceTimePeriod", "2018"),
+        ] + [("geo", code) for code in EUROSTAT_CITY_CODES]
+
+        r = requests.get(EUROSTAT_URB_URL, params=params, timeout=90)
+        r.raise_for_status()
+        data = r.json()
+
+        rows = _parse_eurostat_sdmx(data)
+        if not rows:
+            print("Aucune donnée retournée par Eurostat")
+            return False
+
+        import csv
+        fieldnames = list(rows[0].keys())
+        with open(output_file, "w", newline="", encoding="utf-8") as f:
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(rows)
+
+        n_cities = len({row.get("geo") for row in rows})
+        print(f"({len(rows)} entrées - {n_cities} villes)")
+        return True
+
+    except Exception as e:
+        print(f"Erreur : {e}")
+        if os.path.exists(output_file):
+            os.remove(output_file)
+        return False
+
+
+# PARTIE 6 : POPULATION DES COMMUNES FRANÇAISES - API GEO (INSEE)
+
+# API Geo (api.gouv.fr) - données INSEE, sans authentification requise
+GEO_API_COMMUNES_URL = (
+    "https://geo.api.gouv.fr/communes"
+    "?fields=nom,code,codeDepartement,codeRegion,codesPostaux,population"
+    "&format=csv"
+)
+INSEE_POP_DIR = os.environ.get("RAW_INSEE_POP_DIR", "./data/raw/population")
+
+
+def extract_population_communes_france():
+    """
+    Extrait la population de toutes les communes françaises.
+    Source : API Geo (api.gouv.fr) - données INSEE, sans clé API.
+    ~34 000 communes avec population légale (dernier recensement).
+    """
+    print("EXTRACTION POPULATION COMMUNES FRANCE - API GEO/INSEE")
+    os.makedirs(INSEE_POP_DIR, exist_ok=True)
+
+    today = dt.date.today().strftime("%Y-%m-%d")
+    output_file = f"{INSEE_POP_DIR}/communes_population_france_{today}.csv"
+
+    if os.path.exists(output_file):
+        print(f"Fichier du jour déjà présent : {output_file}")
+        return True
+
+    try:
+        print("Téléchargement communes françaises...", end=" ", flush=True)
+        r = requests.get(GEO_API_COMMUNES_URL, timeout=120)
+        r.raise_for_status()
+
+        content = r.content.decode("utf-8", errors="replace")
+        with open(output_file, "w", encoding="utf-8") as f:
+            f.write(content)
+
+        n_lines = max(0, content.count("\n") - 1)
+        print(f"({n_lines} communes)")
+        return True
+
+    except Exception as e:
+        print(f"Erreur : {e}")
+        if os.path.exists(output_file):
+            os.remove(output_file)
+        return False
+
+
 # ORCHESTRATION
 
 def run_extraction():
     """
-    Lance l'extraction complète des 3 sources
+    Lance l'extraction complète des 6 sources.
     """
     print("EXTRACTION COMBINÉE - Début du processus (PySpark)")
-    
-    
-    success_mobility = extract_mobility_database()
+
+    success_mobility    = extract_mobility_database()
     success_backontrack = extract_backontrack()
-    success_airports = extract_airports()
-    
-    if success_mobility and success_backontrack and success_airports:
-        print("EXTRACTION TERMINÉE AVEC SUCCÈS")
-        print(f"Mobility Database : {MOBILITY_RAW_DIR}")
-        print(f"Back on Track     : {BACKONTRACK_RAW_DIR}")
-        print(f"OurAirports       : {AIRPORTS_RAW_DIR}")
-    else:
-        print("EXTRACTION PARTIELLE (vérifier les erreurs ci-dessus)")
-    
-    # Arrêter la session Spark
+    success_airports    = extract_airports()
+    success_sncf_freq   = extract_sncf_frequentation()
+    success_eurostat    = extract_population_eurostat()
+    success_communes    = extract_population_communes_france()
+
+    results = [
+        ("Mobility Database",        success_mobility,    MOBILITY_RAW_DIR),
+        ("Back on Track",            success_backontrack, BACKONTRACK_RAW_DIR),
+        ("OurAirports",              success_airports,    AIRPORTS_RAW_DIR),
+        ("SNCF Fréquentation gares", success_sncf_freq,   SNCF_FREQ_DIR),
+        ("Eurostat Population",      success_eurostat,    EUROSTAT_POP_DIR),
+        ("Communes France (INSEE)",  success_communes,    INSEE_POP_DIR),
+    ]
+
+    all_ok = all(ok for _, ok, _ in results)
+    status = "TERMINÉE AVEC SUCCÈS" if all_ok else "PARTIELLE (vérifier les erreurs ci-dessus)"
+    print(f"\nEXTRACTION {status}")
+    for name, ok, path in results:
+        mark = "OK" if ok else "ECHEC"
+        print(f"  [{mark}] {name:<30} -> {path}")
+
     spark.stop()
 
 
