@@ -58,6 +58,7 @@ data/spark_temp/
 data/temp_mobility/
 data/temp_mobility_parquet/
 data/temp_mobility_csv/
+data/tmp_staging/
 spark_tmp/
 
 # === LOGS ===
