@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS dim_station_frequentation (
     UNIQUE(station_name)
 );
 
--- 4. FACT_ROUTE_ANALYSIS
+-- 4. FACT_ROUTE_ANALYSI
 CREATE TABLE IF NOT EXISTS fact_route_analysis (
     fact_id              SERIAL PRIMARY KEY,
 
