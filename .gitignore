@@ -78,3 +78,4 @@ postgres_data/
 
 # === DONNÉES LOCALES (perso, non partagées) ===
 data_MM/
+donnee/autre_data/
