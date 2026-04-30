@@ -7,9 +7,9 @@
 ## 0. ETL — Finitions (pipeline déjà fonctionnel)
 
 - [ ] Filtrer les 135 NULL `co2_train_kg` dans `transform.py` (InterCity/Nightjet sans coords GPS)
-- [ ] Dédupliquer les corridors bidirectionnels A→B + B→A (garder dep_name < arr_name)
-- [ ] Vérifier `requirements.txt` à jour (pyspark, pandas, sqlalchemy, scikit-learn, xgboost, fastapi...)
-- [ ] Relancer `python3 main.py --transform && python3 main.py --load` une dernière fois
+- [x] Dédupliquer les corridors bidirectionnels A→B + B→A (garder dep_name < arr_name)
+- [x] Vérifier `requirements.txt` à jour (pyspark, pandas, sqlalchemy, scikit-learn, xgboost, fastapi...)
+
 
 ---
 
