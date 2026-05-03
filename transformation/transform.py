@@ -1181,13 +1181,9 @@ def run_transform():
             if df_intermodal is not None:
                 intermodal_tmp_dir = os.path.join(LOCAL_TMP_DIR, "tmp_staging_intermodal_links")
                 df_intermodal.write.mode("overwrite").option("header", "true").csv(intermodal_tmp_dir)
-                out_inter = os.path.join(FINAL_OUTPUT_DIR, OUTPUT_INTERMODAL_FILE)
-                _merge_part_csvs(intermodal_tmp_dir, out_inter)
-                safe_rmtree(intermodal_tmp_dir)
                 del df_intermodal
                 spark.catalog.clearCache(); gc.collect()
-                df_intermodal = spark.read.option("header", "true").csv(out_inter)
-                print(f"Intermodal exporté : {out_inter}")
+                df_intermodal = spark.read.option("header", "true").csv(intermodal_tmp_dir)
             else:
                 print("Intermodal : aucun lien généré")
         else:
@@ -1228,22 +1224,6 @@ def run_transform():
             "source", "provider"
         ]
         df = df.select(*[c for c in final_cols if c in df.columns])
-
-        # Export final en CSV unique, fusion des parts pour le load
-        out_routes = os.path.join(FINAL_OUTPUT_DIR, OUTPUT_FINAL_FILE)
-        tmp_routes_dir = os.path.join(LOCAL_TMP_DIR, "tmp_final_routes")
-        df.write.mode("overwrite").option("header", "true").csv(tmp_routes_dir)
-        _merge_part_csvs(tmp_routes_dir, out_routes)
-        safe_rmtree(tmp_routes_dir)
-        print(f"Routes exportées : {out_routes}")
-
-        if df_air is not None:
-            out_air = os.path.join(FINAL_OUTPUT_DIR, OUTPUT_AIRPORTS_FILE)
-            tmp_airports_dir = os.path.join(LOCAL_TMP_DIR, "tmp_final_airports")
-            df_air.write.mode("overwrite").option("header", "true").csv(tmp_airports_dir)
-            _merge_part_csvs(tmp_airports_dir, out_air)
-            safe_rmtree(tmp_airports_dir)
-            print(f"Aéroports exportés : {out_air}")
 
         # --- Schéma dimensionnel : pivot train/avion par corridor ---
         print("Construction du schéma dimensionnel...")
@@ -1335,7 +1315,6 @@ def run_transform():
             df_exp.write.mode("overwrite").option("header", "true").csv(tmp)
             _merge_part_csvs(tmp, out_path)
             safe_rmtree(tmp)
-            print(f"Exporté : {out_path}")
 
         _export(dim_route_stg, "tmp_dim_route", os.path.join(FINAL_OUTPUT_DIR, OUTPUT_DIM_ROUTE_FILE))
         _export(dim_vt_stg,    "tmp_dim_vt",   os.path.join(FINAL_OUTPUT_DIR, OUTPUT_DIM_VEHICLE_FILE))
@@ -1344,16 +1323,42 @@ def run_transform():
         dim_station_pd.to_csv(out_station, index=False)
         print(f"Exporté : {out_station}")
 
-        fact_cols = ["origin", "destination", "vehicule_type",
-                     "co2_train_kg", "co2_avion_kg", "co2_saved_kg",
-                     "is_substitutable", "traffic_share_pct",
-                     "distance_km", "station_lat", "station_long",
-                     "station_lat_dest", "station_long_dest"]
-        _export(
-            fact_stg.select(*[c for c in fact_cols if c in fact_stg.columns]),
-            "tmp_fact",
-            os.path.join(FINAL_OUTPUT_DIR, OUTPUT_FACT_FILE)
+        # Jointure pandas : enrichir la fact avec annual_station_traffic + city_population
+        import pandas as _pd
+        fact_pd = fact_stg.select(
+            "origin", "destination", "vehicule_type",
+            "co2_train_kg", "co2_avion_kg", "co2_saved_kg",
+            "is_substitutable", "distance_km",
+            "station_lat", "station_long", "station_lat_dest", "station_long_dest",
+            "origin_city", "destination_city"
+        ).toPandas()
+
+        # Jointure origin → station
+        station_lookup = dim_station_pd[["station_name", "annual_station_traffic", "city_population"]].copy()
+        fact_pd = fact_pd.merge(
+            station_lookup.rename(columns={
+                "station_name": "origin",
+                "annual_station_traffic": "origin_station_traffic",
+                "city_population": "origin_city_population",
+            }),
+            on="origin", how="left"
         )
+
+        # Jointure destination → station
+        fact_pd = fact_pd.merge(
+            station_lookup.rename(columns={
+                "station_name": "destination",
+                "annual_station_traffic": "dest_station_traffic",
+                "city_population": "dest_city_population",
+            }),
+            on="destination", how="left"
+        )
+
+        out_fact = os.path.join(FINAL_OUTPUT_DIR, OUTPUT_FACT_FILE)
+        fact_pd.to_csv(out_fact, index=False)
+        print(f"\n✅ Fichier final : {out_fact}")
+        print(f"   {len(fact_pd)} corridors | {len(fact_pd.columns)} colonnes")
+        print(f"   Colonnes : {list(fact_pd.columns)}")
 
         # Nettoyage des checkpoints finaux provider
         for entry in os.listdir(LOCAL_TMP_DIR):
