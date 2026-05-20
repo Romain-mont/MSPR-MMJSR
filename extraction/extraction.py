@@ -29,8 +29,8 @@ def get_spark():
     builder = SparkSession.builder.appName("DataExtraction")
     builder = builder.config("spark.driver.memory", "2g")
     builder = builder.master("local[*]")
-    if running_in_docker():
-        builder = builder.config("spark.hadoop.fs.defaultFS", "hdfs://namenode:9000")
+    builder = builder.config("spark.hadoop.fs.file.impl", "org.apache.hadoop.fs.RawLocalFileSystem")
+    builder = builder.config("spark.hadoop.fs.file.impl.disable.cache", "true")
     return builder.getOrCreate()
 
 spark = get_spark()
@@ -471,12 +471,11 @@ def extract_population_eurostat():
 
         for code in EUROSTAT_CITY_CODES:
             try:
+                # urb_cpop1 n'accepte pas sex/age comme filtres séparés.
+                # On récupère toutes les dimensions disponibles pour ce code ville.
                 params = [
                     ("format", "JSON"),
                     ("lang",   "EN"),
-                    ("sex",    "T"),
-                    ("age",    "TOTAL"),
-                    ("time",   "2021"),
                     ("geo",    code),
                 ]
                 r = requests.get(EUROSTAT_URB_URL, params=params, timeout=30)

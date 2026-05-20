@@ -255,8 +255,6 @@ def get_spark_session():
     spark_local_dir = os.environ.get("SPARK_LOCAL_DIR", LOCAL_TMP_DIR)
     builder = builder.config("spark.local.dir", spark_local_dir)
     
-    if running_in_docker():
-        builder = builder.config("spark.hadoop.fs.defaultFS", "hdfs://namenode:9000")
     spark = builder.getOrCreate()
     return spark
 

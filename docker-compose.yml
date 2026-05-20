@@ -50,7 +50,7 @@ services:
   api:
     build:
       context: .
-      dockerfile: etl-docker-project/Dockerfile
+      dockerfile: Dockerfile
     container_name: euro-rail-api
     env_file:
       - ./.env
@@ -79,7 +79,7 @@ services:
   dashboard-web:
     build:
       context: .
-      dockerfile: etl-docker-project/Dockerfile
+      dockerfile: Dockerfile
     container_name: dashboard-web
     env_file:
       - ./.env
