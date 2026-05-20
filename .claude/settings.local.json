@@ -13,7 +13,8 @@
       "WebSearch",
       "WebFetch(domain:www.govdata.de)",
       "Bash(docker exec etl-postgres psql -U mspr_user -d mspr_db -c ' *)",
-      "Bash(curl -s \"https://data.sncf.com/api/explore/v2.1/catalog/datasets/gares-de-voyageurs/exports/csv?lang=fr&delimiter=%3B\")"
+      "Bash(curl -s \"https://data.sncf.com/api/explore/v2.1/catalog/datasets/gares-de-voyageurs/exports/csv?lang=fr&delimiter=%3B\")",
+      "Bash(python3 scripts/train_model1_classification.py)"
     ]
   }
 }
