@@ -12,6 +12,7 @@ services:
       - RAW_MOBILITY_DIR=./data/raw/mobility_gtfs
       - RAW_BACKONTRACK_DIR=./data/raw/backontrack_csv
       - RAW_AIRPORTS_DIR=./data/raw/airports
+      - RAW_SNCF_GARES_DIR=./data/raw/sncf_gares_reference
       - OUTPUT_DIR=./data/staging
       - OUTPUT_AIRPORTS_FILE=staging_airports.csv
       - OUTPUT_INTERMODAL_FILE=staging_intermodal.csv

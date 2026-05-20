@@ -152,6 +152,21 @@ def run_extraction_sncf_frequentation():
         return False, duration
 
 
+def run_extraction_sncf_gares_reference():
+    log("SNCF RÉFÉRENTIEL GARES - Démarrage...", "EXTRACT")
+    start = time.time()
+    try:
+        from extraction.extraction import extract_sncf_gares_reference
+        success = extract_sncf_gares_reference()
+        duration = time.time() - start
+        log(f"SNCF RÉFÉRENTIEL GARES - {'Terminé' if success else 'Échec'} ({duration:.1f}s)", "SUCCESS" if success else "ERROR")
+        return success, duration
+    except Exception as e:
+        duration = time.time() - start
+        log(f"SNCF RÉFÉRENTIEL GARES - Erreur: {e}", "ERROR")
+        return False, duration
+
+
 def run_extraction_eurostat_population():
     log("EUROSTAT POPULATION - Démarrage...", "EXTRACT")
     start = time.time()
@@ -203,10 +218,11 @@ def run_extraction_all_parallel(stats: PipelineStats):
     start = time.time()
     results = {}
 
-    with ThreadPoolExecutor(max_workers=6) as executor:
+    with ThreadPoolExecutor(max_workers=7) as executor:
         futures = {
-            executor.submit(run_extraction_backontrack):         "backontrack",
-            executor.submit(run_extraction_airports):            "airports",
+            executor.submit(run_extraction_backontrack):            "backontrack",
+            executor.submit(run_extraction_airports):               "airports",
+            executor.submit(run_extraction_sncf_gares_reference):   "sncf_gares_reference",
             executor.submit(run_extraction_mobility):            "mobility",
             executor.submit(run_extraction_sncf_frequentation): "sncf_frequentation",
             executor.submit(run_extraction_eurostat_population): "eurostat_population",

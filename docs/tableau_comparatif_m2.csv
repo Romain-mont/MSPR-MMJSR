@@ -1,0 +1,6 @@
+Modèle,MAE,RMSE,R²
+Baseline (Dummy),16.836,24.423,-0.001
+Ridge,9.753,13.088,0.713
+Random Forest,5.743,9.836,0.838
+XGBoost,5.763,9.697,0.842
+MLP,8.027,12.156,0.752

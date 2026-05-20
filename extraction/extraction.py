@@ -564,7 +564,54 @@ def extract_population_communes_france():
         return False
 
 
-# PARTIE 7 : POPULATION VILLES EUROPÉENNES - GEONAMES
+# PARTIE 7 : RÉFÉRENTIEL GARES SNCF (coordonnées GPS + code UIC)
+
+SNCF_GARES_URL = (
+    "https://data.sncf.com/api/explore/v2.1/catalog/datasets/"
+    "gares-de-voyageurs/exports/csv"
+    "?lang=fr&delimiter=%3B"
+)
+SNCF_GARES_DIR = os.environ.get("RAW_SNCF_GARES_DIR", "./data/raw/sncf_gares_reference")
+
+
+def extract_sncf_gares_reference():
+    """
+    Extrait le référentiel des gares voyageurs SNCF.
+    Source : data.sncf.com - dataset referentiel-gares-voyageurs
+    Colonnes utiles : code UIC, nom, latitude, longitude de chaque gare française.
+    Permet le matching GPS entre nos stations GTFS et les données SNCF.
+    """
+    print("EXTRACTION SNCF RÉFÉRENTIEL GARES VOYAGEURS")
+    os.makedirs(SNCF_GARES_DIR, exist_ok=True)
+
+    today = dt.date.today().strftime("%Y-%m-%d")
+    output_file = f"{SNCF_GARES_DIR}/sncf_gares_reference_{today}.csv"
+
+    if os.path.exists(output_file):
+        print(f"Fichier du jour déjà présent : {output_file}")
+        return True
+
+    try:
+        print("Téléchargement référentiel gares SNCF...", end=" ", flush=True)
+        r = requests.get(SNCF_GARES_URL, timeout=120)
+        r.raise_for_status()
+
+        content = r.content.decode("utf-8", errors="replace")
+        with open(output_file, "w", encoding="utf-8") as f:
+            f.write(content)
+
+        n_lines = max(0, content.count("\n") - 1)
+        print(f"({n_lines} gares)")
+        return True
+
+    except Exception as e:
+        print(f"Erreur : {e}")
+        if os.path.exists(output_file):
+            os.remove(output_file)
+        return False
+
+
+# PARTIE 8 : POPULATION VILLES EUROPÉENNES - GEONAMES
 
 GEONAMES_URL = "https://download.geonames.org/export/dump/cities15000.zip"
 GEONAMES_DIR = os.environ.get("RAW_GEONAMES_DIR", "./data/raw/population")
@@ -653,15 +700,17 @@ def run_extraction():
     success_backontrack = extract_backontrack()
     success_airports    = extract_airports()
     success_sncf_freq   = extract_sncf_frequentation()
+    success_sncf_gares  = extract_sncf_gares_reference()
     success_eurostat    = extract_population_eurostat()
     success_communes    = extract_population_communes_france()
     success_geonames    = extract_population_geonames()
 
     results = [
-        ("Mobility Database",        success_mobility,    MOBILITY_RAW_DIR),
-        ("Back on Track",            success_backontrack, BACKONTRACK_RAW_DIR),
-        ("OurAirports",              success_airports,    AIRPORTS_RAW_DIR),
-        ("SNCF Fréquentation gares", success_sncf_freq,   SNCF_FREQ_DIR),
+        ("Mobility Database",          success_mobility,   MOBILITY_RAW_DIR),
+        ("Back on Track",              success_backontrack, BACKONTRACK_RAW_DIR),
+        ("OurAirports",                success_airports,    AIRPORTS_RAW_DIR),
+        ("SNCF Fréquentation gares",   success_sncf_freq,  SNCF_FREQ_DIR),
+        ("SNCF Référentiel gares GPS", success_sncf_gares, SNCF_GARES_DIR),
         ("Eurostat Population",      success_eurostat,    EUROSTAT_POP_DIR),
         ("Communes France (INSEE)",  success_communes,    INSEE_POP_DIR),
         ("GeoNames Villes EU",       success_geonames,    GEONAMES_DIR),
