@@ -11,7 +11,6 @@ import requests
 import os
 import re
 import zipfile
-import shutil
 import datetime as dt
 from pathlib import Path
 from urllib.request import urlopen, Request
@@ -25,12 +24,28 @@ def running_in_docker():
     return os.path.exists(path) or os.environ.get('RUNNING_IN_DOCKER') == '1'
 
 # INITIALISATION SPARK compatible Docker
+def _namenode_reachable(host="namenode", port=9000, timeout=2):
+    import socket
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.settimeout(timeout)
+    try:
+        s.connect((host, port))
+        return True
+    except (socket.error, OSError):
+        return False
+    finally:
+        s.close()
+
 def get_spark():
     builder = SparkSession.builder.appName("DataExtraction")
     builder = builder.config("spark.driver.memory", "2g")
     builder = builder.master("local[*]")
-    if running_in_docker():
+    builder = builder.config("spark.hadoop.fs.file.impl", "org.apache.hadoop.fs.RawLocalFileSystem")
+    builder = builder.config("spark.hadoop.fs.file.impl.disable.cache", "true")
+    if running_in_docker() and _namenode_reachable():
         builder = builder.config("spark.hadoop.fs.defaultFS", "hdfs://namenode:9000")
+    else:
+        builder = builder.config("spark.hadoop.fs.defaultFS", "file:///")
     return builder.getOrCreate()
 
 spark = get_spark()
@@ -474,12 +489,9 @@ def extract_population_eurostat():
                 params = [
                     ("format", "JSON"),
                     ("lang",   "EN"),
-                    ("sex",    "T"),
-                    ("age",    "TOTAL"),
-                    ("time",   "2021"),
                     ("geo",    code),
                 ]
-                r = requests.get(EUROSTAT_URB_URL, params=params, timeout=30)
+                r = requests.get(EUROSTAT_URB_URL, params=params, timeout=5)
                 r.raise_for_status()
                 rows = _parse_eurostat_sdmx(r.json())
                 all_rows.extend(rows)
