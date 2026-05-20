@@ -36,17 +36,18 @@
 
 **Livrable : `scripts/train_model1_classification.py`**
 
-- [ ] DummyClassifier (baseline référence)
-- [ ] Logistic Regression
-- [ ] RandomForest Classifier
-- [ ] XGBoost Classifier
-- [ ] MLP Classifier
-- [ ] GridSearchCV / RandomizedSearchCV
-- [ ] Cross-validation 5 folds stratifiée
-- [ ] Tableau comparatif : Precision / Recall / F1 / AUC-ROC
-- [ ] Courbes ROC + matrice de confusion
-- [ ] Feature importance (SHAP ou `feature_importances_`)
-- [ ] Sauvegarder : `models/model1_classification.joblib`
+- [x] DummyClassifier (baseline référence)
+- [x] Logistic Regression
+- [x] RandomForest Classifier
+- [x] XGBoost Classifier
+- [x] MLP Classifier
+- [x] GridSearchCV / RandomizedSearchCV
+- [x] Cross-validation 5 folds stratifiée
+- [x] Tableau comparatif : Precision / Recall / F1 / AUC-ROC
+- [x] Courbes ROC + matrice de confusion
+- [x] Feature importance (`feature_importances_`)
+- [x] Sauvegarder : `models/model1_classification.joblib`
+- [x] Analyse documentée : `docs/analyse_model1.md`
 
 ---
 
@@ -54,15 +55,17 @@
 
 **Livrable : `scripts/train_model2_regression.py`**
 
-- [ ] Ridge (baseline interprétable)
-- [ ] RandomForest Regressor
-- [ ] XGBoost / LightGBM Regressor
-- [ ] MLP Regressor
-- [ ] GridSearchCV / RandomizedSearchCV
-- [ ] Cross-validation 5 folds
-- [ ] Tableau comparatif : MAE / RMSE / R²
-- [ ] Visualisation résidus
-- [ ] Sauvegarder : `models/model2_regression.joblib`
+- [x] Ridge (baseline interprétable)
+- [x] RandomForest Regressor
+- [x] XGBoost Regressor
+- [x] MLP Regressor
+- [x] GridSearchCV / RandomizedSearchCV
+- [x] Cross-validation 5 folds
+- [x] Tableau comparatif : MAE / RMSE / R²
+- [x] Visualisation résidus + feature importance
+- [x] Garde-fou EcoPassenger (vérification cohérence)
+- [x] Sauvegarder : `models/model2_regression.joblib`
+- [x] Analyse documentée : `docs/analyse_model2.md`
 
 ---
 
@@ -71,10 +74,10 @@
 **Livrable : `scripts/predict.py`**
 
 - [x] `models/scaler.joblib` + `models/label_encoder_vehicule.joblib`
-- [ ] `models/model1_classification.joblib`
-- [ ] `models/model2_regression.joblib`
+- [x] `models/model1_classification.joblib`
+- [x] `models/model2_regression.joblib`
 - [ ] `scripts/predict.py` standalone
-- [ ] `random_state=42` partout
+- [x] `random_state=42` partout
 
 ---
 

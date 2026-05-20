@@ -28,6 +28,7 @@ RAW_MOBILITY_DIR    = os.environ.get("RAW_MOBILITY_DIR", "./data/raw/mobility_gt
 RAW_BACKONTRACK_DIR = os.environ.get("RAW_BACKONTRACK_DIR", "./data/raw/backontrack_csv")
 RAW_AIRPORTS_DIR    = os.environ.get("RAW_AIRPORTS_DIR", "./data/raw/airports")
 RAW_SNCF_FREQ_DIR   = os.environ.get("RAW_SNCF_FREQ_DIR",   "./data/raw/sncf_frequentation")
+RAW_SNCF_GARES_DIR  = os.environ.get("RAW_SNCF_GARES_DIR",  "./data/raw/sncf_gares_reference")
 RAW_INSEE_POP_DIR   = os.environ.get("RAW_INSEE_POP_DIR",   "./data/raw/population")
 RAW_GEONAMES_DIR    = os.environ.get("RAW_GEONAMES_DIR",    "./data/raw/population")
 OUTPUT_DIR          = os.environ.get("OUTPUT_DIR", "./data/staging")
