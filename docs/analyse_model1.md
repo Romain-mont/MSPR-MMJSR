@@ -6,9 +6,29 @@
 ## Contexte
 
 **Label :** `is_substitutable = 1` si `distance_km ≤ 600` ET un vol existe sur le corridor  
-**Données :** 2351 corridors France (après filtre NULL co2_train)  
-**Split :** 70% train (1740) / 15% validation (373) / 15% test (373) — stratifié  
-**Déséquilibre :** 80.5% substituables / 19.5% non-substituables → `class_weight='balanced'`
+**Données :** 2547 corridors (après filtre NULL co2_train)  
+**Split :** 70% train (1782) / 15% validation (382) / 15% test (383) — stratifié  
+**Déséquilibre :** 85.1% substituables / 14.9% non-substituables → `class_weight='balanced'`
+
+---
+
+## Features utilisées (13 features)
+
+| Feature | Description |
+|---|---|
+| `distance_km` | Distance du corridor en km |
+| `co2_train_kg` | CO2 émis par le train (EcoPassenger) |
+| `co2_avion_kg` | CO2 émis par l'avion (EcoPassenger) |
+| `vehicule_type` | Type de train (TGV, Train Nuit…) — encodé |
+| `origin_station_traffic` | Fréquentation annuelle gare départ |
+| `origin_city_population` | Population ville départ |
+| `dest_station_traffic` | Fréquentation annuelle gare arrivée |
+| `dest_city_population` | Population ville arrivée |
+| `ratio_origin` | trafic / population — intensité usage ferroviaire départ |
+| `ratio_dest` | trafic / population — intensité usage ferroviaire arrivée |
+| `trip_count_corridor` | Nombre de trajets hebdomadaires sur ce corridor |
+| `trip_count_origin` | Nombre total de trajets hebdomadaires depuis la gare départ |
+| `service_share` | `trip_count_corridor / trip_count_origin` — part du service dédiée au corridor |
 
 ---
 
@@ -30,11 +50,11 @@
 
 | Modèle | F1 weighted (CV) | AUC (CV) |
 |---|---|---|
-| Baseline (Dummy) | 0.718 ± 0.002 | 0.500 |
-| Logistic Regression | 0.961 ± 0.006 | 0.984 |
-| Random Forest | **1.000 ± 0.000** | **1.000** |
-| XGBoost | 0.998 ± 0.005 | 0.999 |
-| MLP | 0.773 ± 0.020 | 0.643 |
+| Baseline (Dummy) | 0.784 ± 0.001 | 0.500 |
+| Logistic Regression | 0.954 ± 0.013 | 0.983 |
+| **Random Forest** | **1.000 ± 0.000** | **1.000** |
+| XGBoost | 0.996 ± 0.003 | 1.000 |
+| MLP | 0.990 ± 0.001 | 1.000 |
 
 ---
 
@@ -47,10 +67,10 @@
 - F1 CV optimal : **1.000**
 
 **XGBoost — meilleurs paramètres :**
-- `n_estimators = 100`
+- `n_estimators = 200`
 - `max_depth = 3`
 - `learning_rate = 0.05`
-- F1 CV optimal : **0.998**
+- F1 CV optimal : **0.996**
 
 ---
 
@@ -60,11 +80,11 @@ Le focus est sur la **classe 0 (non-substituable)** — c'est le cas critique à
 
 | Modèle | Precision (0) | Recall (0) | F1 (0) | F1 weighted | AUC-ROC | Accuracy |
 |---|---|---|---|---|---|---|
-| Baseline (Dummy) | 0.000 | 0.000 | 0.000 | 0.717 | 0.500 | 0.804 |
-| Logistic Regression | 0.800 | 0.986 | 0.883 | 0.951 | 0.965 | 0.949 |
+| Baseline (Dummy) | 0.000 | 0.000 | 0.000 | 0.783 | 0.500 | 0.851 |
+| Logistic Regression | 0.740 | 1.000 | 0.851 | 0.951 | 0.978 | 0.948 |
 | **Random Forest** | **1.000** | **1.000** | **1.000** | **1.000** | **1.000** | **1.000** |
-| XGBoost | 0.973 | 1.000 | 0.986 | 0.995 | 0.997 | 0.995 |
-| MLP | 0.373 | 0.781 | 0.504 | 0.730 | 0.679 | 0.700 |
+| XGBoost | 0.983 | 1.000 | 0.991 | 0.997 | 1.000 | 0.997 |
+| MLP | 0.964 | 0.947 | 0.956 | 0.987 | 0.971 | 0.987 |
 
 **✅ Modèle sélectionné : Random Forest**  
 Sauvegardé dans `models/model1_classification.joblib`
@@ -75,14 +95,19 @@ Sauvegardé dans `models/model1_classification.joblib`
 
 | Feature | Importance | Interprétation |
 |---|---|---|
-| `co2_avion_kg` | **50.9%** | Le CO2 de l'avion encode la distance et la présence d'un vol |
-| `distance_km` | **24.8%** | Critère direct du seuil 600km |
-| `co2_train_kg` | **10.0%** | Varie selon le type de train et le pays |
-| `vehicule_type` | **6.2%** | TGV vs Train Nuit = profils différents |
-| `dest_station_traffic` | 2.7% | Influence faible |
-| `origin_station_traffic` | 2.1% | Influence faible |
-| `origin_city_population` | 2.0% | Influence faible |
-| `dest_city_population` | 1.2% | Influence faible |
+| `co2_avion_kg` | **52.5%** | Le CO2 de l'avion encode la distance et la présence d'un vol |
+| `distance_km` | **24.2%** | Critère direct du seuil 600km |
+| `co2_train_kg` | **8.0%** | Varie selon le type de train et le pays |
+| `trip_count_origin` | 2.2% | Fréquence totale de service depuis la gare départ |
+| `vehicule_type` | 2.1% | TGV vs Train Nuit = profils différents |
+| `service_share` | 2.0% | Part du service hebdomadaire dédiée au corridor |
+| `trip_count_corridor` | 1.8% | Fréquence hebdomadaire du corridor spécifique |
+| `dest_station_traffic` | 1.7% | Fréquentation annuelle gare arrivée |
+| `ratio_origin` | 1.4% | Intensité usage ferroviaire départ |
+| `ratio_dest` | 1.3% | Intensité usage ferroviaire arrivée |
+| `dest_city_population` | 1.1% | Population ville arrivée |
+| `origin_city_population` | 1.1% | Population ville départ |
+| `origin_station_traffic` | 0.7% | Fréquentation annuelle gare départ |
 
 ---
 
@@ -102,11 +127,15 @@ Les features `distance_km` et `co2_avion_kg` contiennent **directement** l'infor
 
 Ce n'est pas un problème — c'est un **résultat cohérent** qu'on peut défendre ainsi :
 
-> "Le score parfait confirme la cohérence de notre label avec nos features. L'intérêt du modèle n'est pas de prédire sur les données françaises où la règle est explicite. C'est de **généraliser à l'Europe** : quand on applique le modèle à Berlin→Munich (600km), il combine distance, CO2 et fréquentation des gares pour prédire, sans avoir besoin que la loi française s'y applique."
+> "Le score parfait confirme la cohérence de notre label avec nos features. L'intérêt du modèle n'est pas de prédire sur les données françaises où la règle est explicite. C'est de **généraliser à l'Europe** : quand on applique le modèle à Berlin→Munich (600km), il combine distance, CO2, fréquentation des gares et intensité de service pour prédire, sans avoir besoin que la loi française s'y applique."
+
+### Apport des nouvelles features de fréquence (service_share, trip_count)
+
+Les features `service_share` (2.0%), `trip_count_corridor` (1.8%) et `trip_count_origin` (2.2%) représentent ensemble **6%** de l'importance. Elles enrichissent le modèle d'une dimension opérationnelle : un corridor avec une forte part de service est plus structurant et donc plus pertinent à substituer.
 
 ### Pourquoi conserver Logistic Regression comme référence ?
 
-La Régression Logistique (94.9%) est plus honnête car elle est **linéaire** — elle ne peut pas parfaitement apprendre une règle non-linéaire. Son score reflète mieux la vraie capacité de généralisation.
+La Régression Logistique (94.8%) est plus honnête car elle est **linéaire** — elle ne peut pas parfaitement apprendre une règle non-linéaire. Son score reflète mieux la vraie capacité de généralisation.
 
 ---
 
@@ -123,8 +152,11 @@ La Régression Logistique (94.9%) est plus honnête car elle est **linéaire** �
 
 | Fichier | Contenu |
 |---|---|
-| `models/model1_classification.joblib` | Random Forest entraîné |
-| `models/scaler.joblib` | StandardScaler (features normalisées) |
+| `models/model1_classification.joblib` | Random Forest entraîné (13 features) |
+| `models/scaler.joblib` | StandardScaler (13 features normalisées) |
 | `models/label_encoder_vehicule.joblib` | LabelEncoder vehicule_type |
+| `data/train_m1.csv` | Split train (1782 lignes) |
+| `data/val_m1.csv` | Split validation (382 lignes) |
+| `data/test_m1.csv` | Split test (383 lignes) |
 | `docs/tableau_comparatif_m1.csv` | Tableau comparatif des 5 modèles |
 | `docs/fig_model1_roc_confusion.png` | Courbes ROC + matrice de confusion |
