@@ -231,6 +231,18 @@ def validate_routes(df):
     )
 
 
+def _namenode_reachable(host="namenode", port=9000, timeout=2):
+    import socket
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.settimeout(timeout)
+    try:
+        s.connect((host, port))
+        return True
+    except (socket.error, OSError):
+        return False
+    finally:
+        s.close()
+
 # 1) SPARK SESSION (Windows + Hadoop)
 def get_spark_session():
     py = sys.executable
@@ -256,8 +268,10 @@ def get_spark_session():
     spark_local_dir = os.environ.get("SPARK_LOCAL_DIR", LOCAL_TMP_DIR)
     builder = builder.config("spark.local.dir", spark_local_dir)
     
-    if running_in_docker():
+    if running_in_docker() and _namenode_reachable():
         builder = builder.config("spark.hadoop.fs.defaultFS", "hdfs://namenode:9000")
+    else:
+        builder = builder.config("spark.hadoop.fs.defaultFS", "file:///")
     spark = builder.getOrCreate()
     return spark
 
@@ -1119,7 +1133,8 @@ def run_transform():
         base_cols = [
             "origin","destination","vehicule_type",
             "station_lat","station_long","station_lat_dest","station_long_dest",
-            "departure_time","arrival_time","shape_distance_km","source","provider"
+            "departure_time","arrival_time","shape_distance_km","source","provider",
+            "trip_count_corridor","trip_count_origin","service_share"
         ]
         df = df.select(*[c for c in base_cols if c in df.columns])
 
@@ -1257,7 +1272,8 @@ def run_transform():
             "origin_city", "destination_city",
             "station_lat", "station_long", "station_lat_dest", "station_long_dest",
             "distance_km", "co2_kg", "departure_time", "arrival_time",
-            "source", "provider"
+            "source", "provider",
+            "trip_count_corridor", "trip_count_origin", "service_share"
         ]
         df = df.select(*[c for c in final_cols if c in df.columns])
 
