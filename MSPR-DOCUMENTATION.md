@@ -13,6 +13,7 @@
 | EDA + Préparation ML | ✅ | `notebooks/01_EDA.ipynb` |
 | Modèle 1 — Classification | ✅ | `scripts/train_model1_classification.py` |
 | Modèle 2 — Régression | ✅ | `scripts/train_model2_regression.py` |
+| Clustering corridors | ✅ | `scripts/clustering_corridors.py` |
 | predict.py standalone | 🔲 | `scripts/predict.py` |
 | API FastAPI /predict | 🔲 | `api/main.py` |
 | Benchmark cloud IA | 🔲 | `docs/benchmark_ia_cloud.md` |
@@ -146,4 +147,6 @@ Le modèle ne voit pas les valeurs CO2 calculées. Après prédiction, comparais
 | `docs/tableau_comparatif_m2.csv` | Tableau comparatif M2 |
 | `docs/fig_model1_roc_confusion.png` | Courbes ROC + confusion M1 |
 | `docs/fig_model2_results.png` | Prédictions + résidus + features M2 |
+| `docs/fig_clustering_corridors.png` | Elbow, Silhouette, PCA, clusters |
+| `docs/analyse_clustering.md` | Analyse complète clustering |
 | `docs/carte_corridors.html` | Carte interactive Folium |

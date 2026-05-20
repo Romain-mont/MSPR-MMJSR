@@ -69,6 +69,20 @@
 
 ---
 
+## 3b. Clustering de corridors (bonus)
+
+**Livrable : `scripts/clustering_corridors.py`**
+
+- [x] K-means k=2 à 6 avec Elbow + Silhouette
+- [x] DBSCAN (détection outliers)
+- [x] Profil des 3 clusters
+- [x] Validation vs label is_substitutable
+- [x] Graphiques + CSV résultats
+- [x] Analyse documentée : `docs/analyse_clustering.md`
+- [x] Sauvegarder : `models/kmeans_corridors.joblib`
+
+---
+
 ## 4. Sauvegarde + Reproductibilité
 
 **Livrable : `scripts/predict.py`**

@@ -469,7 +469,9 @@ def read_mobility_provider(spark, provider_dir: str):
 
     st_a = st_all.alias("a")
     st_b = st_all.alias("b")
-    df = (
+
+    # Self-join avec trip_id pour calculer les fréquences de service
+    all_pairs_full = (
         st_a.join(
             st_b,
             (F.col("a.trip_id") == F.col("b.trip_id")) &
@@ -477,6 +479,7 @@ def read_mobility_provider(spark, provider_dir: str):
             "inner"
         )
         .select(
+            F.col("a.trip_id").alias("_trip_id"),
             F.col("a.sname").alias("origin"),
             F.col("b.sname").alias("destination"),
             F.col("a.lat").cast(DoubleType()).alias("station_lat"),
@@ -490,8 +493,39 @@ def read_mobility_provider(spark, provider_dir: str):
             F.col("a.route_long_name"),
         )
         .filter(F.col("origin") != F.col("destination"))
+    )
+
+    # Fréquence de service par corridor : nb trajets distincts (origine → destination)
+    corridor_counts = (
+        all_pairs_full
+        .groupBy("origin", "destination")
+        .agg(F.countDistinct("_trip_id").alias("trip_count_corridor"))
+    )
+
+    # Nb total de trajets distincts par gare d'origine
+    origin_counts = (
+        st_all.groupBy("sname")
+        .agg(F.countDistinct("trip_id").alias("trip_count_origin"))
+        .withColumnRenamed("sname", "origin")
+    )
+
+    # Paires dédoublonnées
+    df = (
+        all_pairs_full
+        .drop("_trip_id")
         .dropDuplicates(["origin", "destination"])
         .withColumn("shape_distance_km", F.lit(None).cast(DoubleType()))
+    )
+
+    # Joindre les comptages et calculer la part de service
+    df = df.join(corridor_counts, ["origin", "destination"], "left")
+    df = df.join(origin_counts, "origin", "left")
+    df = df.withColumn(
+        "service_share",
+        F.when(
+            F.col("trip_count_origin").cast(DoubleType()) > 0,
+            F.col("trip_count_corridor").cast(DoubleType()) / F.col("trip_count_origin").cast(DoubleType())
+        ).otherwise(F.lit(None).cast(DoubleType()))
     )
     pairs_path = os.path.join(LOCAL_TMP_DIR, f"staging_{os.path.basename(provider_dir)}_pairs.csv")
     df.write.mode("overwrite").option("header", "true").csv(pairs_path)
@@ -543,7 +577,8 @@ def read_mobility_provider(spark, provider_dir: str):
         df.select(
             "origin", "destination", "vehicule_type",
             "station_lat", "station_long", "station_lat_dest", "station_long_dest",
-            "departure_time", "arrival_time", "shape_distance_km"
+            "departure_time", "arrival_time", "shape_distance_km",
+            "trip_count_corridor", "trip_count_origin", "service_share"
         )
         .withColumn("source", F.lit("mobility_db"))
         .withColumn("provider", F.lit(provider_name))
@@ -1260,6 +1295,9 @@ def run_transform():
             F.first("station_long_dest",ignorenulls=True).alias("station_long_dest"),
             F.first("origin_city",      ignorenulls=True).alias("origin_city"),
             F.first("destination_city", ignorenulls=True).alias("destination_city"),
+            F.avg(F.col("trip_count_corridor").cast(DoubleType())).alias("trip_count_corridor"),
+            F.avg(F.col("trip_count_origin").cast(DoubleType())).alias("trip_count_origin"),
+            F.avg(F.col("service_share").cast(DoubleType())).alias("service_share"),
         )
 
         # Min CO2 avion par corridor
@@ -1331,7 +1369,8 @@ def run_transform():
             "co2_train_kg", "co2_avion_kg", "co2_saved_kg",
             "is_substitutable", "distance_km",
             "station_lat", "station_long", "station_lat_dest", "station_long_dest",
-            "origin_city", "destination_city"
+            "origin_city", "destination_city",
+            "trip_count_corridor", "trip_count_origin", "service_share"
         ).toPandas()
 
         # Jointure origin → station
