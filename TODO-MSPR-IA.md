@@ -90,7 +90,7 @@
 - [x] `models/scaler.joblib` + `models/label_encoder_vehicule.joblib`
 - [x] `models/model1_classification.joblib`
 - [x] `models/model2_regression.joblib`
-- [ ] `scripts/predict.py` standalone
+- [x] `scripts/predict.py` standalone
 - [x] `random_state=42` partout
 
 ---
@@ -99,10 +99,10 @@
 
 **Technologie : FastAPI (déjà en place)**
 
-- [ ] `POST /predict/substitution`
-- [ ] `POST /predict/co2_saved`
-- [ ] Métriques monitoring (latence, drift)
-- [ ] Swagger `/docs`
+- [x] `POST /predict/substitution`
+- [x] `POST /predict/co2_saved`
+- [x] Latence mesurée (latency_ms dans la réponse)
+- [x] Swagger `/docs`
 
 ---
 
@@ -110,9 +110,9 @@
 
 **Livrable : `docs/benchmark_ia_cloud.md`**
 
-- [ ] AWS SageMaker / Azure ML / Google Vertex AI / HuggingFace
-- [ ] Tableau comparatif : prix, perfs, RGPD, explicabilité
-- [ ] Justifier choix modèle custom
+- [x] AWS SageMaker / Azure ML / Google Vertex AI / HuggingFace
+- [x] Tableau comparatif : prix, perfs, RGPD, explicabilité
+- [x] Justifier choix modèle custom
 
 ---
 

@@ -1,17 +1,43 @@
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from sqlalchemy import create_engine, text
 from dotenv import load_dotenv
+from typing import Optional
 import os
+import sys
+import time
+
+# Ajout du dossier parent pour importer scripts/predict.py
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
+from scripts.predict import predict_corridor, VEHICULE_TYPES
 
 # 1. Chargement de la config
 load_dotenv()
 
 app = FastAPI(
-    title="Euro Rail CO2 API",
-    description="API pour comparer l'impact carbone des trains en Europe",
-    version="1.0.0"
+    title="ObRail Europe — ML API",
+    description=(
+        "API de prédiction IA pour la substitution avion → train.\n\n"
+        "**Modèle 1** `/predict/substitution` — Classification : ce corridor est-il substituable ?\n\n"
+        "**Modèle 2** `/predict/co2_saved` — Régression : combien de CO2 économisé ?\n\n"
+        f"Types de train acceptés : `{', '.join(VEHICULE_TYPES)}`"
+    ),
+    version="2.0.0",
+    docs_url="/docs",
+    redoc_url="/redoc",
 )
+
+# Préchargement des modèles au démarrage pour éviter la latence au 1er appel
+@app.on_event("startup")
+def preload_models():
+    try:
+        predict_corridor({
+            "distance_km": 1, "vehicule_type": "InterCity",
+            "co2_avion_kg": 0, "co2_train_kg": 0,
+        })
+        print("✅ Modèles ML chargés en mémoire")
+    except Exception as e:
+        print(f"⚠️  Préchargement modèles : {e}")
 
 # 2. Connexion Base de Données (Mêmes variables que l'ingest)
 DB_USER = os.getenv("DB_USER")
@@ -50,10 +76,61 @@ class CompareResponse(BaseModel):
     gain_ecologique_pct: float
     recommandation: str
 
+# ── Modèles Pydantic ML ───────────────────────────────────────────────────────
+
+def _estimate_co2_avion(distance_km: float) -> float:
+    """Estimation EcoPassenger simplifiée : 40 + distance × 0.123 kg CO2/passager."""
+    return round(40.0 + distance_km * 0.123, 1)
+
+
+class CorridorInput(BaseModel):
+    origin:       str   = Field(..., example="Paris",                description="Nom de la gare de départ")
+    destination:  str   = Field(..., example="Lyon",                 description="Nom de la gare d'arrivée")
+    distance_km:  float = Field(..., example=450.0, gt=0,            description="Distance en km")
+    vehicule_type: str  = Field(..., example="Train Longue Distance", description=f"Type de train : {VEHICULE_TYPES}")
+    flight_exists: bool = Field(True, example=True,                  description="True si un vol direct existe sur ce corridor. Si True et co2_avion_kg absent, la valeur est estimée depuis la distance (EcoPassenger).")
+    co2_train_kg:             Optional[float] = Field(None, example=3.5,      description="CO2 train kg (EcoPassenger). Optionnel.")
+    co2_avion_kg:             Optional[float] = Field(None, example=95.0,     description="CO2 avion kg (EcoPassenger). Si absent et flight_exists=True, estimé automatiquement.")
+    origin_station_traffic:   Optional[float] = Field(None, example=18000000, description="Fréquentation annuelle gare départ")
+    dest_station_traffic:     Optional[float] = Field(None, example=14000000, description="Fréquentation annuelle gare arrivée")
+    origin_city_population:   Optional[float] = Field(None, example=2161000,  description="Population ville départ")
+    dest_city_population:     Optional[float] = Field(None, example=522000,   description="Population ville arrivée")
+    ratio_origin:             Optional[float] = Field(None, example=8.33,     description="trafic/population gare départ")
+    ratio_dest:               Optional[float] = Field(None, example=26.82,    description="trafic/population gare arrivée")
+    trip_count_corridor:      Optional[float] = Field(None, example=14,       description="Trajets hebdomadaires sur ce corridor")
+    trip_count_origin:        Optional[float] = Field(None, example=180,      description="Trajets hebdomadaires total gare départ")
+    service_share:            Optional[float] = Field(None, example=0.078,    description="trip_count_corridor / trip_count_origin")
+
+class SubstitutionResponse(BaseModel):
+    origin:                 str
+    destination:            str
+    distance_km:            float
+    vehicule_type:          str
+    is_substitutable:       int   = Field(..., description="1 = substituable, 0 = non substituable")
+    proba_substitutable:    float = Field(..., description="Probabilité de substitution (0 à 1)")
+    co2_avion_kg_used:      float = Field(..., description="CO2 avion utilisé par le modèle (fourni ou estimé EcoPassenger)")
+    co2_avion_estimated:    bool  = Field(..., description="True si co2_avion_kg a été estimé automatiquement depuis la distance")
+    latency_ms:             float = Field(..., description="Temps de réponse du modèle en ms")
+
+class CO2SavedResponse(BaseModel):
+    origin:                 str
+    destination:            str
+    distance_km:            float
+    vehicule_type:          str
+    is_substitutable:       int
+    proba_substitutable:    float
+    co2_saved_kg:           Optional[float] = Field(None, description="CO2 économisé en kg/passager (None si non substituable)")
+    co2_avion_kg_used:      float = Field(..., description="CO2 avion utilisé par le modèle (fourni ou estimé EcoPassenger)")
+    co2_avion_estimated:    bool  = Field(..., description="True si co2_avion_kg a été estimé automatiquement depuis la distance")
+    latency_ms:             float
+
+
+# ── Health check ─────────────────────────────────────────────────────────────
+
 # 4. Route de Test (Pour vérifier que l'API est en vie)
-@app.get("/")
+@app.get("/", tags=["Health"])
 def read_root():
-    return {"status": "online", "message": "Bienvenue sur l'API Euro Rail !"}
+    return {"status": "online", "message": "ObRail Europe ML API — voir /docs"}
 
 # 5. Endpoint pour récupérer toutes les données (pour dashboards)
 @app.get("/data", response_model=list[DataResponse])
@@ -288,3 +365,113 @@ def compare_day_night_trains(depart: str, arrivee: str):
     except Exception as e:
         print(f"Erreur SQL dans /compare : {e}")
         raise HTTPException(status_code=500, detail="Erreur interne du serveur")
+
+
+# ── Endpoints ML ─────────────────────────────────────────────────────────────
+
+def _resolve_co2_avion(corridor: CorridorInput) -> tuple[float, bool]:
+    """
+    Retourne (co2_avion_kg, was_estimated).
+    - Si flight_exists=False → 0.0 (pas de vol = non substituable)
+    - Si co2_avion_kg fourni   → valeur fournie
+    - Sinon                    → estimation EcoPassenger depuis la distance
+    """
+    if not corridor.flight_exists:
+        return 0.0, False
+    if corridor.co2_avion_kg is not None:
+        return corridor.co2_avion_kg, False
+    return _estimate_co2_avion(corridor.distance_km), True
+
+
+@app.post(
+    "/predict/substitution",
+    response_model=SubstitutionResponse,
+    tags=["ML Prédiction"],
+    summary="Modèle 1 — Ce corridor est-il substituable avion → train ?",
+)
+def predict_substitution(corridor: CorridorInput):
+    """
+    Prédit si un corridor ferroviaire peut remplacer un vol aérien.
+
+    **Règle métier (loi française 2023) :** distance ≤ 600 km ET vol existant.
+    Le modèle Random Forest généralise cette règle à toute l'Europe.
+
+    - `is_substitutable = 1` → le train peut remplacer l'avion
+    - `proba_substitutable` → confiance du modèle (0 à 1)
+    - `co2_avion_kg_used` → valeur CO2 avion utilisée (fournie ou estimée)
+    - `co2_avion_estimated = true` → la valeur a été estimée depuis la distance
+
+    **`flight_exists` :** mettre à `false` si aucun vol direct n'existe sur ce corridor.
+    """
+    co2_avion, estimated = _resolve_co2_avion(corridor)
+    t0 = time.perf_counter()
+    try:
+        payload = corridor.model_dump()
+        payload["co2_avion_kg"] = co2_avion
+        result = predict_corridor(payload)
+    except ValueError as e:
+        raise HTTPException(status_code=422, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Erreur modèle : {e}")
+
+    latency = round((time.perf_counter() - t0) * 1000, 2)
+
+    return SubstitutionResponse(
+        origin=corridor.origin,
+        destination=corridor.destination,
+        distance_km=corridor.distance_km,
+        vehicule_type=corridor.vehicule_type,
+        is_substitutable=result["is_substitutable"],
+        proba_substitutable=result["proba_substitutable"],
+        co2_avion_kg_used=co2_avion,
+        co2_avion_estimated=estimated,
+        latency_ms=latency,
+    )
+
+
+@app.post(
+    "/predict/co2_saved",
+    response_model=CO2SavedResponse,
+    tags=["ML Prédiction"],
+    summary="Modèle 2 — Combien de CO2 économisé si le passager prend le train ?",
+)
+def predict_co2_saved(corridor: CorridorInput):
+    """
+    Prédit le gain CO2 en kg/passager si le passager substitue l'avion par le train.
+
+    Enchaîne les deux modèles :
+    1. **Modèle 1** vérifie la substituabilité (en utilisant `co2_avion_kg`)
+    2. **Modèle 2** (XGBoost, R²=0.907) prédit `co2_saved_kg` — **n'utilise pas** co2_avion_kg
+
+    Si le corridor n'est pas substituable, `co2_saved_kg` est `null`.
+
+    **Interprétation :** un passager Paris→Lyon économise ~106 kg de CO2
+    par rapport à l'avion (équivalent à ~700 km en voiture).
+
+    **Garde-fou :** 90.3% des prédictions sont à ±10 kg des valeurs EcoPassenger calculées.
+    """
+    co2_avion, estimated = _resolve_co2_avion(corridor)
+    t0 = time.perf_counter()
+    try:
+        payload = corridor.model_dump()
+        payload["co2_avion_kg"] = co2_avion
+        result = predict_corridor(payload)
+    except ValueError as e:
+        raise HTTPException(status_code=422, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Erreur modèle : {e}")
+
+    latency = round((time.perf_counter() - t0) * 1000, 2)
+
+    return CO2SavedResponse(
+        origin=corridor.origin,
+        destination=corridor.destination,
+        distance_km=corridor.distance_km,
+        vehicule_type=corridor.vehicule_type,
+        is_substitutable=result["is_substitutable"],
+        proba_substitutable=result["proba_substitutable"],
+        co2_saved_kg=result["co2_saved_kg"],
+        co2_avion_kg_used=co2_avion,
+        co2_avion_estimated=estimated,
+        latency_ms=latency,
+    )
