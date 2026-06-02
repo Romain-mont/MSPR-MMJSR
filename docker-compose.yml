@@ -1,11 +1,117 @@
 services:
+
+  # ── Base de données PostgreSQL ─────────────────────────────────────────────
+  db:
+    image: postgres:16-alpine
+    container_name: obrail-db
+    restart: always
+    environment:
+      POSTGRES_USER:     ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB:       ${DB_NAME}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── API FastAPI + modèles ML ───────────────────────────────────────────────
+  api:
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+    container_name: obrail-api
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c",
+             "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      start_period: 20s
+      retries: 3
+
+  # ── Dashboard Streamlit ────────────────────────────────────────────────────
+  dashboard:
+    build:
+      context: .
+      dockerfile: visualization/Dockerfile
+    container_name: obrail-dashboard
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - API_URL=http://api:8000
+    ports:
+      - "8501:8501"
+    depends_on:
+      - api
+
+  # ── Prometheus — collecte métriques API ───────────────────────────────────
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: obrail-prometheus
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.retention.time=15d'
+
+  # ── Grafana — tableaux de bord monitoring ─────────────────────────────────
+  grafana:
+    image: grafana/grafana:latest
+    container_name: obrail-grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_USER:     admin
+      GF_SECURITY_ADMIN_PASSWORD: obrail2025
+      GF_USERS_ALLOW_SIGN_UP:     "false"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    depends_on:
+      - prometheus
+
+  # ── pgAdmin — administration BDD ──────────────────────────────────────────
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: obrail-pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL:    ${PGADMIN_MAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASS}
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+
+  # ── ETL PySpark — pipeline de chargement (one-shot, profil séparé) ─────────
+  # Usage : docker-compose --profile etl up etl
   etl:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: etl-pipeline
-    env_file:
-      - ./.env
+    container_name: obrail-etl
+    env_file: .env
     environment:
       - DB_HOST=db
       - DB_PORT=5432
@@ -32,88 +138,12 @@ services:
       - ./main.py:/app/main.py
     command: ["python", "main.py"]
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    profiles:
+      - etl
 
-  db:
-    image: postgres:16-alpine
-    container_name: etl-postgres
-    restart: always
-    environment:
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_NAME}
-    ports:
-      - "5432:5432"
-    volumes:
-      - ./postgres_data:/var/lib/postgresql/data
-      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
-
-  api:
-    build:
-      context: .
-      dockerfile: etl-docker-project/Dockerfile
-    container_name: euro-rail-api
-    env_file:
-      - ./.env
-    environment:
-      - DB_HOST=db
-      - DB_PORT=5432
-    ports:
-      - "8000:8000"
-    volumes:
-      - ./api:/app/api
-      - ./requirements.txt:/app/requirements.txt
-    command:
-      [
-        "uvicorn",
-        "api.main:app",
-        "--host",
-        "0.0.0.0",
-        "--port",
-        "8000",
-        "--reload",
-      ]
-    depends_on:
-      - db
-    restart: unless-stopped
-
-  dashboard-web:
-    build:
-      context: .
-      dockerfile: etl-docker-project/Dockerfile
-    container_name: dashboard-web
-    env_file:
-      - ./.env
-    environment:
-      - DB_HOST=db
-      - DB_PORT=5432
-      - API_URL=http://api:8000
-    ports:
-      - "8505:8505"
-    volumes:
-      - ./visualization:/app/visualization
-      - ./requirements.txt:/app/requirements.txt
-    command:
-      [
-        "streamlit",
-        "run",
-        "visualization/dashboard_web.py",
-        "--server.port=8505",
-        "--server.address=0.0.0.0",
-      ]
-    depends_on:
-      - db
-      - api
-    restart: unless-stopped
-
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: mspr_pgadmin
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_MAIL}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASS}
-    ports:
-      - "5050:80"
-    depends_on:
-      - db
+volumes:
+  postgres_data:
+  prometheus_data:
+  grafana_data:

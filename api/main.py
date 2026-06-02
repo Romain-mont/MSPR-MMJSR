@@ -2,10 +2,12 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 from sqlalchemy import create_engine, text
 from dotenv import load_dotenv
-from typing import Optional
+from typing import Optional, List
 import os
 import sys
 import time
+
+from prometheus_fastapi_instrumentator import Instrumentator
 
 # Ajout du dossier parent pour importer scripts/predict.py
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
@@ -15,17 +17,21 @@ from scripts.predict import predict_corridor, VEHICULE_TYPES
 load_dotenv()
 
 app = FastAPI(
-    title="ObRail Europe — ML API",
+    title="ObRail Europe — API",
     description=(
-        "API de prédiction IA pour la substitution avion → train.\n\n"
-        "**Modèle 1** `/predict/substitution` — Classification : ce corridor est-il substituable ?\n\n"
-        "**Modèle 2** `/predict/co2_saved` — Régression : combien de CO2 économisé ?\n\n"
-        f"Types de train acceptés : `{', '.join(VEHICULE_TYPES)}`"
+        "API complète ObRail Europe : données ferroviaires + prédiction IA CO2.\n\n"
+        "**Données** : `/trajets`, `/trajets/{id}`, `/stats/volumes`\n\n"
+        "**ML Modèle 1** `/predict/substitution` — Ce corridor est-il substituable avion→train ?\n\n"
+        "**ML Modèle 2** `/predict/co2_saved` — Combien de CO2 économisé ?\n\n"
+        f"Types de train : `{', '.join(VEHICULE_TYPES)}`"
     ),
     version="2.0.0",
     docs_url="/docs",
     redoc_url="/redoc",
 )
+
+# Exposition des métriques Prometheus sur /metrics
+Instrumentator().instrument(app).expose(app)
 
 # Préchargement des modèles au démarrage pour éviter la latence au 1er appel
 @app.on_event("startup")
@@ -127,10 +133,181 @@ class CO2SavedResponse(BaseModel):
 
 # ── Health check ─────────────────────────────────────────────────────────────
 
-# 4. Route de Test (Pour vérifier que l'API est en vie)
+# ── Health & racine ───────────────────────────────────────────────────────────
+
 @app.get("/", tags=["Health"])
 def read_root():
-    return {"status": "online", "message": "ObRail Europe ML API — voir /docs"}
+    return {"status": "online", "message": "ObRail Europe API — voir /docs"}
+
+
+@app.get("/health", tags=["Health"], summary="État de santé du service")
+def health():
+    """Vérifie que l'API et la base de données sont accessibles."""
+    db_ok = False
+    try:
+        with engine.connect() as conn:
+            conn.execute(text("SELECT 1"))
+        db_ok = True
+    except Exception:
+        pass
+    status = "ok" if db_ok else "degraded"
+    if not db_ok:
+        raise HTTPException(status_code=503, detail={"status": status, "db": db_ok})
+    return {"status": status, "db": db_ok, "version": "2.0.0"}
+
+
+# ── Trajets ferroviaires ──────────────────────────────────────────────────────
+
+class TrajetDetail(BaseModel):
+    id:           int
+    origine:      str
+    destination:  str
+    distance_km:  Optional[float]
+    vehicule_type: str
+    co2_train_kg: Optional[float]
+    co2_avion_kg: Optional[float]
+    co2_saved_kg: Optional[float]
+    is_substitutable: Optional[int]
+
+
+@app.get("/trajets", response_model=List[TrajetDetail], tags=["Trajets"],
+         summary="Liste des trajets ferroviaires")
+def get_trajets(
+    limit: int = 100,
+    offset: int = 0,
+    origine: Optional[str] = None,
+    destination: Optional[str] = None,
+    substituable: Optional[bool] = None,
+):
+    """
+    Retourne les trajets ferroviaires avec filtres optionnels.
+    - `origine` / `destination` : filtre partiel (ILIKE)
+    - `substituable` : `true` = uniquement les corridors substituables avion→train
+    """
+    query = """
+        SELECT
+            f.fact_id,
+            r.dep_name    AS origine,
+            r.arr_name    AS destination,
+            r.distance_km,
+            v.label       AS vehicule_type,
+            f.co2_train_kg,
+            f.co2_avion_kg,
+            f.co2_saved_kg,
+            f.is_substitutable
+        FROM fact_route_analysis f
+        JOIN dim_route r        ON f.route_id        = r.route_id
+        JOIN dim_vehicle_type v ON f.vehicle_type_id = v.vehicle_type_id
+        WHERE 1=1
+    """
+    params: dict = {}
+    if origine:
+        query += " AND r.dep_name ILIKE :origine"
+        params["origine"] = f"%{origine}%"
+    if destination:
+        query += " AND r.arr_name ILIKE :destination"
+        params["destination"] = f"%{destination}%"
+    if substituable is not None:
+        query += " AND f.is_substitutable = :sub"
+        params["sub"] = 1 if substituable else 0
+    query += " ORDER BY f.fact_id LIMIT :limit OFFSET :offset"
+    params["limit"] = limit
+    params["offset"] = offset
+
+    try:
+        with engine.connect() as conn:
+            rows = conn.execute(text(query), params).fetchall()
+        return [TrajetDetail(
+            id=r[0], origine=r[1], destination=r[2], distance_km=r[3],
+            vehicule_type=r[4], co2_train_kg=r[5], co2_avion_kg=r[6],
+            co2_saved_kg=r[7], is_substitutable=r[8]
+        ) for r in rows]
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/trajets/{trajet_id}", response_model=TrajetDetail, tags=["Trajets"],
+         summary="Détail d'un trajet par ID")
+def get_trajet(trajet_id: int):
+    """Retourne les informations complètes d'un trajet ferroviaire."""
+    query = """
+        SELECT f.fact_id, r.dep_name, r.arr_name, r.distance_km,
+               v.label, f.co2_train_kg, f.co2_avion_kg, f.co2_saved_kg, f.is_substitutable
+        FROM fact_route_analysis f
+        JOIN dim_route r        ON f.route_id        = r.route_id
+        JOIN dim_vehicle_type v ON f.vehicle_type_id = v.vehicle_type_id
+        WHERE f.fact_id = :id
+    """
+    try:
+        with engine.connect() as conn:
+            row = conn.execute(text(query), {"id": trajet_id}).fetchone()
+        if not row:
+            raise HTTPException(status_code=404, detail=f"Trajet {trajet_id} introuvable")
+        return TrajetDetail(
+            id=row[0], origine=row[1], destination=row[2], distance_km=row[3],
+            vehicule_type=row[4], co2_train_kg=row[5], co2_avion_kg=row[6],
+            co2_saved_kg=row[7], is_substitutable=row[8]
+        )
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/stats/volumes", tags=["Statistiques"],
+         summary="Volumes et répartition jour/nuit par opérateur")
+def stats_volumes():
+    """
+    Agrégations globales sur les trajets :
+    - Répartition trains de jour vs nuit
+    - Volume par type de véhicule
+    - Statistiques CO2
+    """
+    query_repartition = """
+        SELECT
+            CASE WHEN v.label ILIKE '%nuit%' OR v.label ILIKE '%night%'
+                 THEN 'Nuit' ELSE 'Jour' END AS type_service,
+            COUNT(*)                          AS nb_trajets,
+            ROUND(AVG(r.distance_km)::numeric, 1) AS distance_moy_km,
+            ROUND(AVG(f.co2_saved_kg)::numeric, 1) AS co2_saved_moy_kg
+        FROM fact_route_analysis f
+        JOIN dim_route r        ON f.route_id        = r.route_id
+        JOIN dim_vehicle_type v ON f.vehicle_type_id = v.vehicle_type_id
+        GROUP BY type_service
+        ORDER BY nb_trajets DESC
+    """
+    query_vehicule = """
+        SELECT v.label, COUNT(*) AS nb_trajets,
+               ROUND(AVG(f.co2_saved_kg)::numeric, 1) AS co2_saved_moy_kg,
+               SUM(CASE WHEN f.is_substitutable = 1 THEN 1 ELSE 0 END) AS nb_substituables
+        FROM fact_route_analysis f
+        JOIN dim_vehicle_type v ON f.vehicle_type_id = v.vehicle_type_id
+        GROUP BY v.label
+        ORDER BY nb_trajets DESC
+    """
+    query_global = """
+        SELECT COUNT(*) AS total,
+               SUM(CASE WHEN is_substitutable = 1 THEN 1 ELSE 0 END) AS substituables,
+               ROUND(AVG(co2_saved_kg)::numeric, 1) AS co2_saved_moy_kg
+        FROM fact_route_analysis
+        WHERE co2_saved_kg IS NOT NULL
+    """
+    try:
+        with engine.connect() as conn:
+            repartition = [dict(r._mapping) for r in conn.execute(text(query_repartition)).fetchall()]
+            par_vehicule = [dict(r._mapping) for r in conn.execute(text(query_vehicule)).fetchall()]
+            global_row   = conn.execute(text(query_global)).fetchone()
+        return {
+            "global": {
+                "total_trajets":   global_row[0],
+                "substituables":   global_row[1],
+                "co2_saved_moy_kg": global_row[2],
+            },
+            "repartition_jour_nuit": repartition,
+            "par_vehicule":          par_vehicule,
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 # 5. Endpoint pour récupérer toutes les données (pour dashboards)
 @app.get("/data", response_model=list[DataResponse])
