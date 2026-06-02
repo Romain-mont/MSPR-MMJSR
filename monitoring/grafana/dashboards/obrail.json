@@ -1,0 +1,151 @@
+{
+  "title": "ObRail Europe — API Monitoring",
+  "uid": "obrail-api",
+  "schemaVersion": 38,
+  "version": 1,
+  "refresh": "30s",
+  "time": { "from": "now-1h", "to": "now" },
+  "panels": [
+    {
+      "id": 1,
+      "type": "stat",
+      "title": "Disponibilité API",
+      "gridPos": { "x": 0, "y": 0, "w": 4, "h": 4 },
+      "targets": [{
+        "datasource": "Prometheus",
+        "expr": "up{job=\"obrail-api\"}",
+        "legendFormat": "API"
+      }],
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"] },
+        "colorMode": "background",
+        "thresholds": {
+          "steps": [
+            { "value": 0, "color": "red" },
+            { "value": 1, "color": "green" }
+          ]
+        }
+      }
+    },
+    {
+      "id": 2,
+      "type": "stat",
+      "title": "Requêtes totales",
+      "gridPos": { "x": 4, "y": 0, "w": 4, "h": 4 },
+      "targets": [{
+        "datasource": "Prometheus",
+        "expr": "sum(http_requests_total{job=\"obrail-api\"})",
+        "legendFormat": "Total"
+      }],
+      "options": { "reduceOptions": { "calcs": ["lastNotNull"] } }
+    },
+    {
+      "id": 3,
+      "type": "stat",
+      "title": "Taux d'erreurs (%)",
+      "gridPos": { "x": 8, "y": 0, "w": 4, "h": 4 },
+      "targets": [{
+        "datasource": "Prometheus",
+        "expr": "sum(rate(http_requests_total{job=\"obrail-api\",status=~\"5..\"}[5m])) / sum(rate(http_requests_total{job=\"obrail-api\"}[5m])) * 100",
+        "legendFormat": "Erreurs 5xx"
+      }],
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"] },
+        "unit": "percent",
+        "thresholds": {
+          "steps": [
+            { "value": 0, "color": "green" },
+            { "value": 1, "color": "yellow" },
+            { "value": 5, "color": "red" }
+          ]
+        }
+      }
+    },
+    {
+      "id": 4,
+      "type": "stat",
+      "title": "Latence médiane (ms)",
+      "gridPos": { "x": 12, "y": 0, "w": 4, "h": 4 },
+      "targets": [{
+        "datasource": "Prometheus",
+        "expr": "histogram_quantile(0.5, rate(http_request_duration_seconds_bucket{job=\"obrail-api\"}[5m])) * 1000",
+        "legendFormat": "P50"
+      }],
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"] },
+        "unit": "ms",
+        "thresholds": {
+          "steps": [
+            { "value": 0, "color": "green" },
+            { "value": 200, "color": "yellow" },
+            { "value": 1000, "color": "red" }
+          ]
+        }
+      }
+    },
+    {
+      "id": 5,
+      "type": "timeseries",
+      "title": "Débit — Requêtes/s par endpoint",
+      "gridPos": { "x": 0, "y": 4, "w": 12, "h": 8 },
+      "targets": [{
+        "datasource": "Prometheus",
+        "expr": "sum by (handler) (rate(http_requests_total{job=\"obrail-api\"}[1m]))",
+        "legendFormat": "{{handler}}"
+      }]
+    },
+    {
+      "id": 6,
+      "type": "timeseries",
+      "title": "Latence P50 / P95 / P99 (ms)",
+      "gridPos": { "x": 12, "y": 4, "w": 12, "h": 8 },
+      "targets": [
+        {
+          "datasource": "Prometheus",
+          "expr": "histogram_quantile(0.50, sum by (le) (rate(http_request_duration_seconds_bucket{job=\"obrail-api\"}[5m]))) * 1000",
+          "legendFormat": "P50"
+        },
+        {
+          "datasource": "Prometheus",
+          "expr": "histogram_quantile(0.95, sum by (le) (rate(http_request_duration_seconds_bucket{job=\"obrail-api\"}[5m]))) * 1000",
+          "legendFormat": "P95"
+        },
+        {
+          "datasource": "Prometheus",
+          "expr": "histogram_quantile(0.99, sum by (le) (rate(http_request_duration_seconds_bucket{job=\"obrail-api\"}[5m]))) * 1000",
+          "legendFormat": "P99"
+        }
+      ],
+      "fieldConfig": { "defaults": { "unit": "ms" } }
+    },
+    {
+      "id": 7,
+      "type": "timeseries",
+      "title": "Erreurs HTTP (4xx / 5xx)",
+      "gridPos": { "x": 0, "y": 12, "w": 12, "h": 6 },
+      "targets": [
+        {
+          "datasource": "Prometheus",
+          "expr": "sum(rate(http_requests_total{job=\"obrail-api\",status=~\"4..\"}[1m]))",
+          "legendFormat": "4xx (client)"
+        },
+        {
+          "datasource": "Prometheus",
+          "expr": "sum(rate(http_requests_total{job=\"obrail-api\",status=~\"5..\"}[1m]))",
+          "legendFormat": "5xx (serveur)"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "type": "timeseries",
+      "title": "Prédictions ML — /predict/substitution & /predict/co2_saved",
+      "gridPos": { "x": 12, "y": 12, "w": 12, "h": 6 },
+      "targets": [{
+        "datasource": "Prometheus",
+        "expr": "sum by (handler) (rate(http_requests_total{job=\"obrail-api\", handler=~\"/predict.*\"}[1m]))",
+        "legendFormat": "{{handler}}"
+      }]
+    }
+  ]
+}
