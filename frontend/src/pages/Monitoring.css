@@ -1,0 +1,44 @@
+.monitoring { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
+.monitoring h1 { font-size: 1.8rem; }
+
+.monitoring__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+@media (max-width: 768px) { .monitoring__grid { grid-template-columns: 1fr; } }
+.monitoring__endpoints { grid-column: 1 / -1; }
+
+.monitoring__status-badge {
+  display: flex; align-items: center; gap: .7rem;
+  font-size: 1.1rem; font-weight: 700;
+  padding: .8rem 1.2rem; border-radius: var(--radius);
+  margin-bottom: 1.2rem;
+}
+.status-ok    { background: #d4edda; color: #155724; }
+.status-error { background: #f8d7da; color: #721c24; }
+
+.monitoring__dot {
+  width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0;
+  animation: pulse 2s infinite;
+}
+.status-ok .monitoring__dot    { background: #28a745; }
+.status-error .monitoring__dot { background: var(--danger); animation: none; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+.monitoring__details { display: flex; flex-direction: column; gap: .6rem; margin-bottom: 1.2rem; }
+.monitoring__details > div { display: flex; justify-content: space-between; align-items: center; padding: .4rem 0; border-bottom: 1px solid var(--border); }
+.monitoring__details dt { font-size: .88rem; color: var(--muted); }
+.monitoring__details dd { font-weight: 500; }
+
+.monitoring__error { color: var(--danger); font-size: .88rem; margin-top: .8rem; }
+
+.monitoring__tools { display: flex; flex-direction: column; gap: 1rem; margin-top: .5rem; }
+.monitoring__tool-link {
+  display: flex; align-items: flex-start; gap: 1rem;
+  padding: .8rem; border-radius: var(--radius);
+  border: 1px solid var(--border); transition: border-color .15s, background .15s;
+}
+.monitoring__tool-link:hover { border-color: var(--primary); background: var(--primary-light); }
+.monitoring__tool-icon { font-size: 1.8rem; }
+.monitoring__tool-link strong { display: block; margin-bottom: .2rem; }
+.monitoring__tool-link p { font-size: .85rem; color: var(--muted); margin: 0; }
+.monitoring__tool-url { color: var(--primary); font-family: monospace; font-size: .8rem; }
+
+.monitoring__endpoints code { font-size: .85rem; background: var(--primary-light); padding: .1rem .4rem; border-radius: 4px; }

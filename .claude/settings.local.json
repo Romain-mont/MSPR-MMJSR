@@ -14,7 +14,11 @@
       "WebFetch(domain:www.govdata.de)",
       "Bash(docker exec etl-postgres psql -U mspr_user -d mspr_db -c ' *)",
       "Bash(curl -s \"https://data.sncf.com/api/explore/v2.1/catalog/datasets/gares-de-voyageurs/exports/csv?lang=fr&delimiter=%3B\")",
-      "Bash(python3 scripts/train_model1_classification.py)"
+      "Bash(python3 scripts/train_model1_classification.py)",
+      "Bash(ls /Volumes/Optima/MSPR_DATA/staging/)",
+      "Read(//Volumes/Optima/MSPR_DATA/staging/**)",
+      "Bash(ls /Volumes/Optima/MSPR_DATA/raw/mobility_gtfs/ | grep -i \"FR_.*sncf\\\\|FR_.*tgv\\\\|FR_.*inter\\\\|FR_.*national\\\\|FR_.*longue\" | head -20 *)",
+      "Read(//Volumes/Optima/MSPR_DATA/raw/mobility_gtfs/**)"
     ]
   }
 }

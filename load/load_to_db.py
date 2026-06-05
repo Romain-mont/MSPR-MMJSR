@@ -144,7 +144,8 @@ def run_ingestion(clean_tables=True):
             "route_id", "vehicle_type_id",
             "origin_station_id", "dest_station_id",
             "co2_train_kg", "co2_avion_kg", "co2_saved_kg",
-            "traffic_share_pct", "is_substitutable"
+            "traffic_share_pct", "is_substitutable",
+            "trip_count_corridor", "trip_count_origin", "service_share",
         ]
         df_fact_insert = df_fact[[c for c in fact_cols if c in df_fact.columns]]
         df_fact_insert = df_fact_insert.dropna(subset=["route_id"])

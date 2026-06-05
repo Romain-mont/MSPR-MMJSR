@@ -1,0 +1,29 @@
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 180px;
+}
+
+.stat-card__icon { font-size: 2rem; line-height: 1; }
+
+.stat-card__label {
+  font-size: .82rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  margin-bottom: .2rem;
+}
+
+.stat-card__value {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+}
+
+.stat-card__unit {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--muted);
+}

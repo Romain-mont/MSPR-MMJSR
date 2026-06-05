@@ -265,6 +265,15 @@ def get_spark_session():
     builder = builder.config("spark.hadoop.fs.file.impl", "org.apache.hadoop.fs.RawLocalFileSystem")
     builder = builder.config("spark.hadoop.fs.file.impl.disable.cache", "true")
 
+    # Fix compatibilité Java 17+ / Java 21+ / Java 25+
+    # Subject.getSubject() restreint depuis Java 17, supprimé en Java 21+
+    _jvm_opens = (
+        "--add-opens java.base/javax.security.auth=ALL-UNNAMED "
+        "--add-opens java.base/sun.security.action=ALL-UNNAMED"
+    )
+    builder = builder.config("spark.driver.extraJavaOptions",   _jvm_opens)
+    builder = builder.config("spark.executor.extraJavaOptions", _jvm_opens)
+
     spark_local_dir = os.environ.get("SPARK_LOCAL_DIR", LOCAL_TMP_DIR)
     builder = builder.config("spark.local.dir", spark_local_dir)
     

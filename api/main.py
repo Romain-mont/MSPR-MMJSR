@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from sqlalchemy import create_engine, text
 from dotenv import load_dotenv
@@ -28,6 +29,14 @@ app = FastAPI(
     version="2.0.0",
     docs_url="/docs",
     redoc_url="/redoc",
+)
+
+# CORS — autorise le frontend React (localhost:80 et dev localhost:5173)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost", "http://localhost:80", "http://localhost:5173"],
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Exposition des métriques Prometheus sur /metrics
@@ -167,7 +176,12 @@ class TrajetDetail(BaseModel):
     co2_train_kg: Optional[float]
     co2_avion_kg: Optional[float]
     co2_saved_kg: Optional[float]
-    is_substitutable: Optional[int]
+    is_substitutable:       Optional[int]
+    origin_station_traffic: Optional[float]
+    dest_station_traffic:   Optional[float]
+    trip_count_corridor:    Optional[float]
+    trip_count_origin:      Optional[float]
+    service_share:          Optional[float]
 
 
 @app.get("/trajets", response_model=List[TrajetDetail], tags=["Trajets"],
@@ -194,10 +208,17 @@ def get_trajets(
             f.co2_train_kg,
             f.co2_avion_kg,
             f.co2_saved_kg,
-            f.is_substitutable
+            f.is_substitutable,
+            so.annual_station_traffic AS origin_station_traffic,
+            sd.annual_station_traffic AS dest_station_traffic,
+            f.trip_count_corridor,
+            f.trip_count_origin,
+            f.service_share
         FROM fact_route_analysis f
         JOIN dim_route r        ON f.route_id        = r.route_id
         JOIN dim_vehicle_type v ON f.vehicle_type_id = v.vehicle_type_id
+        LEFT JOIN dim_station_frequentation so ON f.origin_station_id = so.station_id
+        LEFT JOIN dim_station_frequentation sd ON f.dest_station_id   = sd.station_id
         WHERE 1=1
     """
     params: dict = {}
@@ -220,7 +241,9 @@ def get_trajets(
         return [TrajetDetail(
             id=r[0], origine=r[1], destination=r[2], distance_km=r[3],
             vehicule_type=r[4], co2_train_kg=r[5], co2_avion_kg=r[6],
-            co2_saved_kg=r[7], is_substitutable=r[8]
+            co2_saved_kg=r[7], is_substitutable=r[8],
+            origin_station_traffic=r[9], dest_station_traffic=r[10],
+            trip_count_corridor=r[11], trip_count_origin=r[12], service_share=r[13]
         ) for r in rows]
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -246,7 +269,9 @@ def get_trajet(trajet_id: int):
         return TrajetDetail(
             id=row[0], origine=row[1], destination=row[2], distance_km=row[3],
             vehicule_type=row[4], co2_train_kg=row[5], co2_avion_kg=row[6],
-            co2_saved_kg=row[7], is_substitutable=row[8]
+            co2_saved_kg=row[7], is_substitutable=row[8],
+            origin_station_traffic=None, dest_station_traffic=None,
+            trip_count_corridor=None, trip_count_origin=None, service_share=None
         )
     except HTTPException:
         raise
