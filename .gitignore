@@ -76,6 +76,10 @@ htmlcov/
 
 postgres_data/
 
+# === MODÈLES ML (trop lourds pour GitHub, régénérés via scripts) ===
+models/*.joblib
+models/*.pkl
+
 # === DONNÉES LOCALES (perso, non partagées) ===
 data_MM/raw
 donnee/autre_data/
