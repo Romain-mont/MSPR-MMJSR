@@ -6,21 +6,24 @@
 ## Contexte
 
 **Target :** `co2_saved_kg` = co2_avion - co2_train (valeur calculée EcoPassenger)  
-**Données :** 2333 corridors avec un vol existant (co2_avion non NULL)  
-**Split :** 70% train (1633) / 15% validation (350) / 15% test (350) — non stratifié  
-**Target — moy: 91.3 kg | méd: 84.8 kg | std: 24.5 kg**
+**Données :** 43 782 corridors avec vol existant (co2_avion non NULL) — sur 46 106 total  
+**Split :** 70% train (30 647) / 15% validation (6 567) / 15% test (6 568) — non stratifié  
+**Target — moy: 92.8 kg | méd: 86.0 kg | std: 27.2 kg**
 
 **Features utilisées (11 features, sans co2_avion et co2_train) :**
-- `distance_km` — seule feature directement liée au CO2
-- `vehicule_type` — type de train (encodé)
-- `origin/dest_station_traffic` — fréquentation des gares
-- `origin/dest_city_population` — population des villes
-- `ratio_origin/dest` — trafic/population (intensité usage ferroviaire)
-- `trip_count_corridor` — trajets hebdomadaires sur ce corridor
-- `trip_count_origin` — trajets hebdomadaires total depuis la gare départ
-- `service_share` — `trip_count_corridor / trip_count_origin`
 
-> `co2_avion_kg` et `co2_train_kg` sont volontairement **exclus** des features. Le modèle apprend depuis la géographie et la démographie — pas depuis les valeurs CO2 calculées. Cela évite un biais circulaire trivial (co2_saved = co2_avion - co2_train).
+| Feature | Description |
+|---|---|
+| `distance_km` | Distance du corridor (feature dominante) |
+| `vehicule_type` | Type de train (15 types encodés) |
+| `origin/dest_station_traffic` | Fréquentation SNCF |
+| `origin/dest_city_population` | Population des villes (INSEE/GeoNames) |
+| `ratio_origin/dest` | trafic/population — intensité usage ferroviaire |
+| `trip_count_corridor` | Trajets hebdomadaires sur ce corridor (GTFS) |
+| `trip_count_origin` | Trajets hebdomadaires total gare départ (GTFS) |
+| `service_share` | `trip_count_corridor / trip_count_origin` |
+
+> `co2_avion_kg` et `co2_train_kg` sont volontairement exclus pour éviter le biais circulaire trivial.
 
 ---
 
@@ -28,109 +31,77 @@
 
 | Modèle | MAE (CV) | R² (CV) |
 |---|---|---|
-| Baseline (Dummy) | 17.451 | -0.003 |
-| Ridge | 10.301 | 0.659 |
-| Random Forest | 5.445 | 0.864 |
-| **XGBoost** | **5.471** | **0.850** |
-| MLP | 8.641 | 0.720 |
+| Baseline (Dummy) | 19.171 | -0.000 |
+| Ridge | 10.391 | 0.758 |
+| **Random Forest** | **4.328** | **0.944** |
+| XGBoost | 4.709 | 0.941 |
+| MLP | 6.616 | 0.890 |
 
 ---
 
 ## Optimisation des hyperparamètres (GridSearchCV)
 
-**Random Forest :**
-- `n_estimators = 200`, `max_depth = None`, `min_samples_split = 2`
-- MAE CV : **5.440**
-
-**XGBoost :**
-- `n_estimators = 200`, `max_depth = 6`, `learning_rate = 0.1`
-- MAE CV : **5.525**
+**Random Forest :** `n_estimators=200`, `max_depth=None`, `min_samples_split=2` → MAE CV : **4.314**  
+**XGBoost :** `n_estimators=200`, `max_depth=6`, `learning_rate=0.1` → MAE CV : **4.836**
 
 ---
 
-## Résultats finaux sur le TEST set
+## Résultats finaux sur le TEST set (6 568 corridors)
 
 | Modèle | MAE | RMSE | R² |
 |---|---|---|---|
-| Baseline (Dummy) | 18.031 | 25.681 | -0.001 |
-| Ridge | 9.915 | 13.528 | 0.722 |
-| Random Forest | 5.139 | 8.143 | 0.899 |
-| **XGBoost** | **4.918** | **7.823** | **0.907** |
-| MLP | 8.323 | 12.258 | 0.772 |
+| Baseline (Dummy) | 19.317 | 27.546 | -0.000 |
+| Ridge | 10.422 | 13.418 | 0.763 |
+| **Random Forest** | **4.07** | **6.268** | **0.948** |
+| XGBoost | 4.785 | 6.836 | 0.938 |
+| MLP | 6.587 | 9.012 | 0.893 |
 
-**✅ Modèle sélectionné : XGBoost** (MAE=4.918 kg, R²=0.907)  
-Sauvegardé dans `models/model2_regression.joblib`
-
-> XGBoost surpasse Random Forest sur le test set (MAE 4.918 vs 5.139, R² 0.907 vs 0.899). Les hyperparamètres optimaux (max_depth=6, n_estimators=200, learning_rate=0.1) lui permettent de mieux capturer les non-linéarités sans sur-ajustement.
+**✅ Modèle sélectionné : Random Forest** (MAE=4.07 kg, R²=0.948)
 
 ---
 
-## Feature Importance (XGBoost)
+## Feature Importance (Random Forest)
 
 | Feature | Importance | Interprétation |
 |---|---|---|
-| `distance_km` | **65.75%** | La distance détermine l'essentiel du CO2 économisé |
-| `dest_city_population` | 4.90% | Grandes villes → corridors plus fréquentés et plus longs |
-| `origin_city_population` | 4.80% | Idem côté départ |
-| `vehicule_type` | 4.56% | TGV vs Train Nuit = profil CO2 différent |
-| `ratio_dest` | 4.49% | Intensité usage ferroviaire à l'arrivée |
-| `ratio_origin` | 3.09% | Intensité usage ferroviaire au départ |
-| `dest_station_traffic` | 3.05% | Fréquentation gare arrivée |
-| `origin_station_traffic` | 2.71% | Fréquentation gare départ |
-| `trip_count_origin` | 2.50% | Volume total de service depuis la gare départ |
-| `service_share` | 2.11% | Part du service hebdomadaire sur ce corridor |
-| `trip_count_corridor` | 2.04% | Fréquence hebdomadaire du corridor |
-
-**Interprétation physique :** `distance_km` à 65.75% est cohérent avec la physique — le CO2 économisé est quasi-linéaire avec la distance. La part réduite vs le Random Forest précédent (89.8%) montre que les nouvelles features de fréquence de service (trip_count, service_share) captent une information supplémentaire réelle, permettant à XGBoost de mieux distribuer l'importance.
+| `distance_km` | **91.50%** | La distance détermine l'essentiel du CO2 économisé |
+| `trip_count_origin` | 1.22% | Volume de service gare départ (GTFS) |
+| `origin_city_population` | 1.10% | Population ville départ |
+| `ratio_origin` | 0.99% | Intensité usage ferroviaire départ |
+| `service_share` | 0.98% | Part du service hebdomadaire sur ce corridor |
+| `dest_city_population` | 0.92% | Population ville arrivée |
+| `origin_station_traffic` | 0.84% | Fréquentation SNCF gare départ |
+| `trip_count_corridor` | 0.80% | Trajets hebdomadaires sur le corridor |
+| `dest_station_traffic` | 0.69% | Fréquentation SNCF gare arrivée |
+| `ratio_dest` | 0.60% | Intensité usage ferroviaire arrivée |
+| `vehicule_type` | 0.35% | Type de train |
 
 ---
 
 ## Garde-fou — Validation vs valeurs EcoPassenger
 
-Les valeurs `co2_avion_kg` et `co2_train_kg` **n'étaient pas** dans les features. Après prédiction, on compare avec les valeurs calculées par EcoPassenger pour vérifier la cohérence.
-
 | Métrique | Valeur |
 |---|---|
-| CO2 économisé calculé (EcoPassenger) — moyenne | 91.9 kg |
-| CO2 économisé prédit (modèle) — moyenne | 91.9 kg |
-| CO2 économisé calculé (EcoPassenger) — médiane | 84.5 kg |
-| CO2 économisé prédit (modèle) — médiane | 84.3 kg |
-| Écart absolu moyen | **4.9 kg** |
-| Écart absolu médian | **3.1 kg** |
-| Prédictions dans ±10 kg | **90.3%** |
-| Prédictions dans ±20 kg | **96.6%** |
-
-**Conclusion :** Le modèle, sans voir les valeurs CO2 calculées, s'en approche à 3.1 kg près en médiane. 90.3% des prédictions sont dans un écart de ±10 kg. C'est une preuve solide que la distance, la démographie et la fréquence de service suffisent à estimer le gain CO2 de façon réaliste.
+| CO2 calculé (EcoPassenger) — médiane | 85.8 kg |
+| CO2 prédit (modèle) — médiane | 86.3 kg |
+| Écart absolu moyen | **4.1 kg** |
+| Écart absolu médian | **2.6 kg** |
+| Prédictions dans ±10 kg | **91.2%** |
+| Prédictions dans ±20 kg | **98.2%** |
 
 ---
 
-## Analyse critique
+## Comparaison avec l'ancienne version (2 687 corridors)
 
-### Pourquoi distance_km domine à 65.75% ?
+| Métrique | Ancien (2 687) | Nouveau (46 106) | Évolution |
+|---|---|---|---|
+| Meilleur modèle | XGBoost | **Random Forest** | changement |
+| MAE | 4.918 kg | **4.07 kg** | **-17%** |
+| R² | 0.907 | **0.948** | **+4.5 pts** |
+| Garde-fou ±10kg | 90.3% | **91.2%** | **+0.9 pts** |
+| Train split | 1 633 | **30 647** | **×19** |
 
-CO2 économisé ≈ CO2_avion - CO2_train ≈ CO2_avion (car CO2_train << CO2_avion)  
-Et CO2_avion est quasi-proportionnel à la distance (même formule EcoPassenger).  
-Donc le modèle apprend correctement que distance → gain CO2.
-
-### Amélioration par rapport à la version précédente
-
-Avec 11 features (incluant trip_count et service_share) vs 8 features précédemment :
-- MAE : 5.743 → **4.918** (amélioration de 14%)
-- R² : 0.838 → **0.907** (amélioration de 8%)
-- Garde-fou ±10kg : 82% → **90.3%** (amélioration de 8 points)
-
-Les features de fréquence de service apportent une information opérationnelle complémentaire : la réalité du service ferroviaire sur le corridor, pas uniquement la géographie.
-
-### Intérêt du modèle malgré la domination de distance_km
-
-Le modèle reste utile pour des cas où la distance seule ne suffit pas :
-- Corridors avec train de nuit (vehicule_type) → profil CO2 différent
-- Corridors avec forte fréquentation et fort service_share → signal de demande réelle
-- Généralisation à des corridors européens sans calcul EcoPassenger préalable
-
-### Comparaison avec Ridge (R²=0.722)
-
-Ridge est un modèle linéaire — il capture bien la relation distance→CO2 mais pas les non-linéarités (types de trains, seuils, interactions). XGBoost est plus adapté à ces subtilités.
+Le passage à 46k corridors améliore significativement toutes les métriques.
 
 ---
 
@@ -138,9 +109,9 @@ Ridge est un modèle linéaire — il capture bien la relation distance→CO2 ma
 
 | Fichier | Contenu |
 |---|---|
-| `models/model2_regression.joblib` | XGBoost entraîné (11 features) |
-| `data/train_m2.csv` | Split train (1633 lignes) |
-| `data/val_m2.csv` | Split validation (350 lignes) |
-| `data/test_m2.csv` | Split test (350 lignes) |
+| `models/model2_regression.joblib` | Random Forest (11 features, 46k dataset) |
+| `data/train_m2.csv` | Split train (30 647 lignes) |
+| `data/val_m2.csv` | Split validation (6 567 lignes) |
+| `data/test_m2.csv` | Split test (6 568 lignes) |
 | `docs/tableau_comparatif_m2.csv` | Tableau comparatif des 5 modèles |
-| `docs/fig_model2_results.png` | Prédictions vs réelles + résidus + feature importance |
+| `docs/fig_model2_results.png` | Prédictions + résidus + feature importance |

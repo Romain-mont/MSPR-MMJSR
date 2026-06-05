@@ -24,7 +24,7 @@
 ## Données
 
 **Fichier source ML :** `donnee/staging_fact_route_analysis.csv`  
-**2687 corridors, 21 colonnes** — enrichi avec population + fréquentation SNCF + ratios + fréquence de service
+**46 106 corridors français, 21 colonnes** — filtrés par GPS France métropolitaine, noms normalisés, enrichis SNCF + INSEE + GTFS
 
 | Colonne | Rôle |
 |---|---|
@@ -49,13 +49,14 @@
 
 | Observation | Valeur |
 |---|---|
-| Déséquilibre classes | 85.1% substituables / 14.9% non-substituables |
+| Corridors analysés | **46 106** (France métropolitaine, GPS filtré) |
+| Déséquilibre classes | 89.5% substituables / 10.5% non-substituables |
 | Feature la plus corrélée avec is_sub | `co2_avion_kg` (-0.782) |
-| Gain CO2 moyen train vs avion | 91.3 kg/passager |
-| Gain CO2 médian | 84.8 kg/passager |
-| Facteur CO2 avion/train médiane | ×63 |
-| Couverture fréquentation SNCF | 54% (matching GPS 200m) |
-| Couverture population | 71% (INSEE + GeoNames) |
+| Gain CO2 moyen train vs avion | 92.8 kg/passager |
+| Gain CO2 médian | 86.0 kg/passager |
+| Types de trains | **15** (TGV, ICE, AVE, EuroNight, Nightjet…) |
+| Couverture fréquentation SNCF | ~55% (matching GPS 200m) |
+| Couverture population | ~55% (INSEE + GeoNames) |
 | Couverture service_share | 85.9% (GTFS via Spark) |
 | service_share médian | 0.053 (5.3% du service gare départ) |
 
@@ -99,8 +100,8 @@ Le score parfait s'explique par la définition du label : `is_substitutable = 1 
 ## Modèle 2 — Régression `co2_saved_kg`
 
 **Script :** `scripts/train_model2_regression.py`  
-**Modèle sauvegardé :** `models/model2_regression.joblib` (XGBoost)  
-**Split :** 1633 train / 350 val / 350 test — **11 features** (sans co2_avion ni co2_train)
+**Modèle sauvegardé :** `models/model2_regression.joblib` (Random Forest)  
+**Split :** 30 647 train / 6 567 val / 6 568 test — **11 features** (sans co2_avion ni co2_train)
 
 **Features utilisées : sans `co2_avion_kg` ni `co2_train_kg`** (évite le biais circulaire — le modèle apprend depuis la géographie, la démographie et la fréquence de service)
 
@@ -108,23 +109,25 @@ Le score parfait s'explique par la définition du label : `is_substitutable = 1 
 
 | Modèle | MAE | RMSE | R² |
 |---|---|---|---|
-| Baseline (Dummy) | 18.031 | 25.681 | -0.001 |
-| Ridge | 9.915 | 13.528 | 0.722 |
-| Random Forest | 5.139 | 8.143 | 0.899 |
-| **XGBoost** | **4.918** | **7.823** | **0.907** |
-| MLP | 8.323 | 12.258 | 0.772 |
+| Baseline (Dummy) | 19.317 | 27.546 | -0.000 |
+| Ridge | 10.422 | 13.418 | 0.763 |
+| **Random Forest** | **4.07** | **6.268** | **0.948** |
+| XGBoost | 4.785 | 6.836 | 0.938 |
+| MLP | 6.587 | 9.012 | 0.893 |
 
-### Feature importance (XGBoost)
+### Feature importance (Random Forest)
 
 | Feature | Importance |
 |---|---|
-| `distance_km` | **65.75%** |
-| `dest_city_population` | 4.90% |
-| `origin_city_population` | 4.80% |
-| `vehicule_type` | 4.56% |
-| `ratio_dest` | 4.49% |
-| `trip_count_origin` + `service_share` + `trip_count_corridor` | ~6.7% |
-| Trafic + ratios restants | ~8.8% |
+| `distance_km` | **91.50%** |
+| `trip_count_origin` | 1.22% |
+| `origin_city_population` | 1.10% |
+| `ratio_origin` | 0.99% |
+| `service_share` | 0.98% |
+| `dest_city_population` | 0.92% |
+| `origin_station_traffic` | 0.84% |
+| `trip_count_corridor` | 0.80% |
+| `dest_station_traffic` | 0.69% |
 
 ### Garde-fou EcoPassenger
 
@@ -132,11 +135,11 @@ Le modèle ne voit pas les valeurs CO2 calculées. Après prédiction, comparais
 
 | Métrique | Valeur |
 |---|---|
-| Écart médian | **3.1 kg** |
-| Prédictions dans ±10 kg | **90.3%** |
-| Prédictions dans ±20 kg | **96.6%** |
+| Écart médian | **2.6 kg** |
+| Prédictions dans ±10 kg | **91.2%** |
+| Prédictions dans ±20 kg | **98.2%** |
 
-`distance_km` à 65.75% est cohérent avec la physique. L'ajout des features de fréquence de service (trip_count, service_share) a permis de passer de 82% à **90.3%** de prédictions dans ±10 kg.
+`distance_km` à 91.5% est cohérent avec la physique. Le passage à 46k corridors (×19 de données) améliore le R² de 0.907 → **0.948** et le garde-fou de 90.3% → **91.2%** dans ±10 kg.
 
 ---
 
@@ -144,8 +147,8 @@ Le modèle ne voit pas les valeurs CO2 calculées. Après prédiction, comparais
 
 | Fichier | Contenu |
 |---|---|
-| `models/model1_classification.joblib` | Random Forest — is_substitutable (13 features) |
-| `models/model2_regression.joblib` | XGBoost — co2_saved_kg (11 features) |
+| `models/model1_classification.joblib` | Random Forest — is_substitutable (13 features, 46k dataset) |
+| `models/model2_regression.joblib` | Random Forest — co2_saved_kg (11 features, 46k dataset) |
 | `models/kmeans_corridors.joblib` | K-Means k=3 — clustering corridors |
 | `models/scaler.joblib` | StandardScaler (13 features) |
 | `models/label_encoder_vehicule.joblib` | LabelEncoder vehicule_type |
