@@ -21,7 +21,9 @@
       "Read(//Volumes/Optima/MSPR_DATA/raw/mobility_gtfs/**)",
       "Bash(python scripts/train_model1_classification.py)",
       "Bash(python scripts/train_model2_regression.py)",
-      "Bash(python3)"
+      "Bash(python3)",
+      "Bash(ls /Volumes/Optima/ 2>/dev/null || echo \"Optima non monté\")",
+      "Read(//Volumes/Optima/**)"
     ]
   }
 }

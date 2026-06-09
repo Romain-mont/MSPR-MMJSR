@@ -1,129 +1,110 @@
 ================================================================================
 RAPPORT D'ANALYSE AUTOMATIQUE - PIPELINE ETL ObRail Europe
 ================================================================================
-Date de génération: 2026-05-20 13:54:21
-Source: ./data/staging/final_routes.csv
+Date de génération: 2026-06-09 15:36:20
+Source: donnee/staging_fact_route_analysis.csv (46k corridors français)
 ================================================================================
 
 1) VUE D'ENSEMBLE
 --------------------------------------------------------------------------------
-   Total routes extraites        : 5000
-   Routes valides (avec distance): 4857
-   Routes invalides              : 143
+   Total corridors (train)        : 46106
+   Corridors avec vol existant    : 43782
+   Corridors substituables        : 41268 (89.5%)
+   Corridors non substituables    : 4838 (10.5%)
 
-   Sources de données:
-      • mobility_db         : 2307 routes
-      • airports            : 2307 routes
-      • back_on_track       :  386 routes
-
-2) RÉPARTITION PAR TYPE DE VÉHICULE
+2) RÉPARTITION PAR TYPE DE VÉHICULE (train uniquement)
 --------------------------------------------------------------------------------
-   • Avion                              : 2307 trajets ( 46.1%)
-   • Train Longue Distance              : 1193 trajets ( 23.9%)
-   • Train Longue Distance Nuit         :  572 trajets ( 11.4%)
-   • EuroNight                          :  570 trajets ( 11.4%)
-   • InterCity                          :  326 trajets (  6.5%)
-   • Nightjet                           :   32 trajets (  0.6%)
+   • Train Longue Distance              :  26121 corridors ( 56.7%)
+   • Train Longue Distance Nuit         :   6036 corridors ( 13.1%)
+   • InterCity                          :   4797 corridors ( 10.4%)
+   • TGV                                :   2435 corridors (  5.3%)
+   • EuroNight                          :   1390 corridors (  3.0%)
+   • Train Nuit                         :   1386 corridors (  3.0%)
+   • InterCity Nuit                     :   1277 corridors (  2.8%)
+   • ICE                                :    857 corridors (  1.9%)
+   • Nightjet                           :    599 corridors (  1.3%)
+   • ICE Nuit                           :    469 corridors (  1.0%)
+   • TGV Nuit                           :    364 corridors (  0.8%)
+   • EuroCity                           :    250 corridors (  0.5%)
+   • AVE                                :    100 corridors (  0.2%)
+   • AVE Nuit                           :     13 corridors (  0.0%)
+   • EuroCity Nuit                      :     12 corridors (  0.0%)
 
 3) STATISTIQUES PAR TYPE DE VÉHICULE
 --------------------------------------------------------------------------------
-Type                                 Count   Dist.Moy (km)    CO2 Moy (kg)
+Type                                   Count   Dist.Moy (km)    CO2 Moy (kg)
 --------------------------------------------------------------------------------
-Avion                                 2307          218.65           96.83
-EuroNight                              570          248.12            6.66
-InterCity                              184          598.66           28.46
-Nightjet                                31          671.70           23.74
-Train Longue Distance                 1193          155.24            1.98
-Train Longue Distance Nuit             572          129.05            1.26
+AVE                                      100           166.6            1.32
+AVE Nuit                                  13           177.5            1.41
+EuroCity                                 250           174.0            2.64
+EuroCity Nuit                             12           163.8            0.14
+EuroNight                               1390           140.0            1.50
+ICE                                      857           212.6            8.36
+ICE Nuit                                 469           183.3            7.08
+InterCity                               4797           141.0            2.68
+InterCity Nuit                          1277           135.1            2.30
+Nightjet                                 599           179.6            6.30
+TGV                                     2435           462.2            6.91
+TGV Nuit                                 364           522.9            7.75
+Train Longue Distance                  26121           209.7            4.03
+Train Longue Distance Nuit              6036           185.6            3.61
+Train Nuit                              1386           202.4            2.89
 
-4) TOP 10 ROUTES LES PLUS LONGUES
+4) TOP 10 CORRIDORS LES PLUS LONGS
 --------------------------------------------------------------------------------
-    1. Edirne                    → Villach Hbf              
-       InterCity                   1154.3 km   89.59 kg CO2
-    2. Villach Hbf               → Edirne                   
-       InterCity                   1154.3 km   43.78 kg CO2
-    3. Konya                     → İzmir Basmane            
-       InterCity                   1127.1 km   47.72 kg CO2
-    4. İzmir Basmane             → Konya                    
-       InterCity                   1127.1 km   74.56 kg CO2
-    5. Edirne                    → Villach Hbf              
-       Avion                       1123.9 km  188.68 kg CO2
-    6. Villach Hbf               → Edirne                   
-       Avion                       1123.9 km  188.68 kg CO2
-    7. Konya                     → İzmir Basmane            
-       Avion                       1119.0 km  187.85 kg CO2
-    8. İzmir Basmane             → Konya                    
-       Avion                       1119.0 km  187.85 kg CO2
-    9. Milano Centrale           → Siracusa                 
-       Avion                       1072.0 km  179.96 kg CO2
-   10. Siracusa                  → Milano Centrale          
-       Avion                       1072.0 km  179.96 kg CO2
+    1. Modane                    → Brest (F)                
+       TGV                          918.3 km   41.31 kg CO2
+    2. Brest (F)                 → Modane                   
+       TGV Nuit                     918.3 km    7.29 kg CO2
+    3. Modane                    → Brest (F)                
+       Train Longue Distance        918.3 km   41.31 kg CO2
+    4. Brest (F)                 → Modane                   
+       Train Longue Distance Nuit    918.3 km    7.29 kg CO2
+    5. Bruxelles Midi            → Perpignan                
+       Train Longue Distance        911.8 km   17.69 kg CO2
+    6. Perpignan                 → Bruxelles Midi           
+       Train Longue Distance        911.8 km   27.34 kg CO2
+    7. Brest (F)                 → Bourg-Saint-Maurice      
+       TGV Nuit                     906.0 km    7.19 kg CO2
+    8. Bourg-Saint-Maurice       → Brest (F)                
+       TGV                          906.0 km   40.75 kg CO2
+    9. Brest (F)                 → Bourg-Saint-Maurice      
+       Train Longue Distance Nuit    906.0 km    7.19 kg CO2
+   10. Bourg-Saint-Maurice       → Brest (F)                
+       Train Longue Distance        906.0 km   40.75 kg CO2
 
 5) COMPARAISON ENVIRONNEMENTALE TRAIN vs AVION
 --------------------------------------------------------------------------------
-   TRAINS (2693 routes)
-      Distance moyenne    :   208.4 km
-      CO2 moyen           :    5.04 kg
-      CO2 par km          :  0.0242 kg/km
-      Distance min/max    : 100.1 / 1154.3 km
+   TRAINS (corridors avec vol existant : 43782)
+      CO2 train moyen     : 4.08 kg/passager
+      CO2 avion moyen     : 96.85 kg/passager
+      CO2 économisé moyen : 92.77 kg/passager
+      CO2 économisé médian: 85.99 kg/passager
+   CONCLUSION: L'avion émet 23.7x plus de CO2 que le train sur ces corridors
 
-   AVIONS (2307 routes)
-      Distance moyenne    :   218.7 km
-      CO2 moyen           :   96.83 kg
-      CO2 par km          :  0.4428 kg/km
-      Distance min/max    : 100.1 / 1123.9 km
-
-   CONCLUSION: L'avion émet 18.3x plus de CO2 par km que le train
-   Économie moyenne en prenant le train: 91.79 kg CO2
-
-6) CLASSIFICATION DÉTAILLÉE DES TRAINS
+6) COUVERTURE DES DONNÉES ENRICHIES
 --------------------------------------------------------------------------------
-   • Train Longue Distance              : 1193 trajets ( 44.3% des trains)
-   • Train Longue Distance Nuit         :  572 trajets ( 21.2% des trains)
-   • EuroNight                          :  570 trajets ( 21.2% des trains)
-   • InterCity                          :  326 trajets ( 12.1% des trains)
-   • Nightjet                           :   32 trajets (  1.2% des trains)
+   Gares uniques (origine)        : 3242
+   Gares uniques (destination)    : 3299
+   Total gares uniques            : 3537
+   Couverture fréquentation SNCF  : 62.5%
+   Couverture population ville    : 72.7%
+   Couverture service_share GTFS  : 100.0%
 
-7) ANALYSE DES TRAINS DE NUIT
+7) TOP 10 GARES LES PLUS CONNECTÉES
 --------------------------------------------------------------------------------
-   Total trains de nuit détectés : 1174
-   Distance moyenne              : 201.3 km
-   CO2 moyen                     : 4.48 kg
-
-      • Train Longue Distance Nuit    : 572 trajets
-      • EuroNight                     : 570 trajets
-      • Nightjet                      :  32 trajets
-
-8) COUVERTURE GÉOGRAPHIQUE
---------------------------------------------------------------------------------
-   Gares/Aéroports d'origine     : 482
-   Gares/Aéroports de destination: 467
-   Total unique                  : 521
-
-   Top 10 gares/aéroports les plus connectés:
-       1. Friedrichshafen Stadtbahnhof            : 120 connexions
-       2. Gare de Nantes                          : 119 connexions
-       3. Gare de Le Mans                         : 116 connexions
-       4. Ulm Hbf                                 : 108 connexions
-       5. Gare de Rennes                          : 102 connexions
-       6. Gare de Tours                           : 100 connexions
-       7. Lindau-Reutin                           :  94 connexions
-       8. Gare de Savenay                         :  93 connexions
-       9. München Hbf Gleis 14                    :  92 connexions
-      10. Gare de Paris Saint-Lazare              :  90 connexions
-
-9) QUALITÉ DES DONNÉES
---------------------------------------------------------------------------------
-   Total lignes                  : 5000
-   Données complètes (distance)  : 4857 (97.1%)
-   Données complètes (CO2)       : 4857 (97.1%)
-   Horaires de départ renseignés : 2685 (53.7%)
-   Horaires d'arrivée renseignés : 2685 (53.7%)
+    1. Paris Gare de Lyon                           :  672 connexions
+    2. Lyon Part Dieu                               :  649 connexions
+    3. Lyon Perrache                                :  583 connexions
+    4. Köln Hbf                                     :  503 connexions
+    5. Nantes                                       :  448 connexions
+    6. Strasbourg                                   :  394 connexions
+    7. Dijon                                        :  383 connexions
+    8. Basel SBB                                    :  346 connexions
+    9. Rennes                                       :  336 connexions
+   10. Karlsruhe Hbf                                :  329 connexions
 
 ================================================================================
-10) FOOTER
-================================================================================
-
-Fichier de sortie: ./analyse/rapport_analyse.md
+Pipeline ETL: ObRail Europe — 46 106 corridors ferroviaires français
+Données: GTFS SNCF + Back on Track + SNCF Fréquentation + INSEE + GeoNames
 Généré par: analyse/analyse_resultat.py
-Pipeline ETL: ObRail Europe - Comparatif Train vs Avion

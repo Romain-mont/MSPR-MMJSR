@@ -14,10 +14,10 @@
 | Modèle 1 — Classification | ✅ | `scripts/train_model1_classification.py` |
 | Modèle 2 — Régression | ✅ | `scripts/train_model2_regression.py` |
 | Clustering corridors | ✅ | `scripts/clustering_corridors.py` |
-| predict.py standalone | 🔲 | `scripts/predict.py` |
-| API FastAPI /predict | 🔲 | `api/main.py` |
-| Benchmark cloud IA | 🔲 | `docs/benchmark_ia_cloud.md` |
-| Rapport technique | 🔲 | `docs/rapport_technique.md` |
+| predict.py standalone | ✅ | `scripts/predict.py` |
+| API FastAPI /predict | ✅ | `api/main.py` |
+| Benchmark cloud IA | ✅ | `docs/benchmark_ia_cloud.md` |
+| Rapport technique | ✅ | `MSPR-DOCUMENTATION.md` + `analyse/rapport_analyse.md` |
 
 ---
 
@@ -149,7 +149,7 @@ Le modèle ne voit pas les valeurs CO2 calculées. Après prédiction, comparais
 |---|---|
 | `models/model1_classification.joblib` | Random Forest — is_substitutable (13 features, 46k dataset) |
 | `models/model2_regression.joblib` | Random Forest — co2_saved_kg (11 features, 46k dataset) |
-| `models/kmeans_corridors.joblib` | K-Means k=3 — clustering corridors |
+| `models/kmeans_corridors.joblib` | K-Means k=4 — clustering corridors (Silhouette=0.652) |
 | `models/scaler.joblib` | StandardScaler (13 features) |
 | `models/label_encoder_vehicule.joblib` | LabelEncoder vehicule_type |
 
