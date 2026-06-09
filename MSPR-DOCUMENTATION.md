@@ -155,6 +155,76 @@ Le modèle ne voit pas les valeurs CO2 calculées. Après prédiction, comparais
 
 ---
 
+## Méthodologie CRISP-DM
+
+Le projet suit la méthodologie **CRISP-DM** (Cross-Industry Standard Process for Data Mining), standard industriel en 6 phases itératives.
+
+### Phase 1 — Compréhension métier
+
+**Objectif :** Identifier les corridors de transport aérien candidates à une substitution par le train, en accord avec la loi française de 2023 (distance ≤ 600 km, vol existant).
+
+**Questions métier :**
+- Quels corridors sont techniquement substituables ?
+- Quel gain CO2 représente la substitution train vs avion ?
+- Comment segmenter les corridors par profil de substituabilité ?
+
+### Phase 2 — Compréhension des données
+
+**Sources mobilisées :**
+- GTFS SNCF + Back on Track (mobilitydb.com) — 46 106 corridors ferroviaires
+- SNCF Open Data — fréquentation des gares (~62.5% de couverture)
+- INSEE + GeoNames — population des villes (~72.7% de couverture)
+- EcoPassenger (UIC/IFEU 2016) — méthodologie CO2 train et avion
+
+**EDA clés :** 89.5% des corridors sont substituables, CO2 avion = 23.7× CO2 train, 15 types de trains.
+
+### Phase 3 — Préparation des données
+
+- Filtrage GPS : France métropolitaine uniquement
+- Normalisation des noms de gares (matching flou GPS à 200m)
+- Feature engineering : `ratio_origin/dest` (trafic/population), `service_share` (GTFS), `duration_h` (vitesses commerciales)
+- Gestion des valeurs manquantes : fillna(0) sur les features de fréquentation
+- Encodage : LabelEncoder sur `vehicule_type`, StandardScaler sur toutes les features
+
+### Phase 4 — Modélisation
+
+Trois modèles complémentaires ont été entraînés et comparés :
+
+| Modèle | Algorithme retenu | Métrique | Score |
+|---|---|---|---|
+| M1 — Classification `is_substitutable` | Random Forest | F1 weighted | **1.000** |
+| M2 — Régression `co2_saved_kg` | Random Forest | R² | **0.948** |
+| M3 — Clustering corridors | K-Means k=4 | Silhouette | **0.652** |
+
+**Clustering — comparaison de 3 méthodes :**
+
+| Méthode | k | Silhouette | Résultat |
+|---|---|---|---|
+| **K-Means** | **4** | **0.652** | **Retenu** |
+| GMM | 2 | 0.381 | Écarté — clusters mal formés (Silhouette négative dès k=3) |
+| DBSCAN | 13 | 0.366 | Écarté — trop de clusters, 140 points bruit |
+
+GMM est moins adapté car il suppose des distributions gaussiennes équilibrées : nos clusters ont des tailles très inégales (38 775 vs 71 corridors), ce qui viole cette hypothèse. K-Means, en minimisant l'inertie intra-cluster sans hypothèse distributionnelle, est plus robuste sur ce jeu de données.
+
+**Features testées et écartées :**
+- `service_share` + `trip_count_corridor` → Silhouette 0.652 → 0.522 (bruité, compte brut)
+- `duration_h` → Silhouette 0.652 → 0.645 (colinéaire avec `distance_km`)
+
+### Phase 5 — Évaluation
+
+- M1 : score parfait expliqué par la règle déterministe (distance ≤ 600km + CO2 avion ≠ 0). Valeur réelle = généralisation à l'Europe hors droit français.
+- M2 : garde-fou EcoPassenger — 91.2% des prédictions dans ±10 kg des valeurs calculées.
+- M3 : alignement clusters vs label validé — Clusters 1/2/3 = 100% substituables, Cluster 0 = zone grise longue distance (48%).
+
+### Phase 6 — Déploiement
+
+- API REST FastAPI avec endpoints `/predict`, `/cluster`, `/health` + métriques Prometheus
+- Frontend React (Vite) avec carte interactive Folium
+- Stack Docker Compose : api + frontend + PostgreSQL + Prometheus + Grafana
+- Modèles sérialisés : `models/*.joblib`
+
+---
+
 ## Documents d'analyse
 
 | Fichier | Contenu |
