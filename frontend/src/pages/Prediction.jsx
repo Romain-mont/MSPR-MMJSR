@@ -362,7 +362,7 @@ export default function Prediction() {
               <h3>Profil du corridor</h3>
               <p className="pred__cluster-label" style={{ color: cluster.color }}>{cluster.icon} {cluster.label}</p>
               <p className="pred__cluster-desc">{cluster.desc}</p>
-              <p className="pred__cluster-source">K-Means k=3 · Silhouette=0.640 · 46k corridors français</p>
+              <p className="pred__cluster-source">K-Means k=4 · Silhouette=0.652 · 46k corridors français</p>
             </div>
 
             <p className="pred__latency">⚡ {result.latency_ms} ms</p>

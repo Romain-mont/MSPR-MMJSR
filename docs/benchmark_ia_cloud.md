@@ -5,13 +5,13 @@
 
 ## Contexte du projet
 
-ObRail Europe entraîne deux modèles ML sur **2 687 corridors ferroviaires** :
+ObRail Europe entraîne deux modèles ML sur **46 106 corridors ferroviaires français** :
 
 | Modèle | Type | Algorithme retenu | Métriques |
 |---|---|---|---|
 | Modèle 1 — Classification | `is_substitutable` | Random Forest | F1=1.000, AUC=1.000 |
-| Modèle 2 — Régression | `co2_saved_kg` | XGBoost | MAE=4.918 kg, R²=0.907 |
-| Clustering | Segmentation corridors | K-Means k=3 | Silhouette=0.640 |
+| Modèle 2 — Régression | `co2_saved_kg` | Random Forest | MAE=4.07 kg, R²=0.948 |
+| Clustering | Segmentation corridors | K-Means k=4 | Silhouette=0.652 |
 
 **Stack actuelle :** Python + scikit-learn + XGBoost + FastAPI + PostgreSQL  
 **Déploiement actuel :** custom, modèles `.joblib` servis via `uvicorn`
@@ -227,8 +227,8 @@ Plateforme de déploiement open source principalement orientée NLP/LLM, mais qu
 
 Pour le projet ObRail Europe, le déploiement cloud n'est **pas justifié à ce stade** pour les raisons suivantes :
 
-### 1. Taille du dataset trop petite pour l'AutoML cloud
-Avec 2 687 corridors, les services AutoML cloud (conçus pour des millions de lignes) n'apporteraient pas de gain significatif par rapport à nos GridSearchCV locaux. Nos modèles atteignent déjà R²=0.907 et F1=1.000.
+### 1. Taille du dataset adaptée mais pas suffisante pour l'AutoML cloud
+Avec 46 106 corridors, les services AutoML cloud (conçus pour des dizaines de millions de lignes) n'apporteraient pas de gain significatif par rapport à nos GridSearchCV locaux. Nos modèles atteignent déjà R²=0.948 et F1=1.000 — performances proches du maximum théorique.
 
 ### 2. Absence de réentraînement fréquent
 Le dataset GTFS et SNCF est stable. Un réentraînement mensuel sur infrastructure locale suffit largement. Les services cloud deviennent pertinents à partir d'un réentraînement continu (streaming) ou de données > 10 Go.
@@ -246,7 +246,7 @@ SageMaker Clarify et Vertex Explainable AI génèrent des SHAP values — notre 
 
 | Scénario | Plateforme recommandée | Raison |
 |---|---|---|
-| Extension à toute l'Europe (>100k corridors) | **AWS SageMaker** | MLOps mature, monitoring drift |
+| Extension à toute l'Europe (>500k corridors) | **AWS SageMaker** | MLOps mature, monitoring drift |
 | Réentraînement quotidien sur nouvelles données GTFS | **Azure ML** | AutoML FLAML + MLflow natif |
 | API publique à fort volume (>1M req/mois) | **Google Vertex AI** | Serverless 0.0025 $/1000 req |
 | Prototype rapide / démo investisseur | **HuggingFace** | Déploiement en 10 minutes |
