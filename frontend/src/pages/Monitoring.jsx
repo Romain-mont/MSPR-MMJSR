@@ -28,8 +28,10 @@ export default function Monitoring() {
 
   return (
     <main className="monitoring" id="main-content">
-      <BackButton />
-      <h1>Monitoring — ObRail Europe</h1>
+      <div className="monitoring__topbar">
+        <BackButton />
+        <h1>Monitoring — ObRail Europe</h1>
+      </div>
 
       <div className="monitoring__grid">
 

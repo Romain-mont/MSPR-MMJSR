@@ -7,8 +7,16 @@ from typing import Optional, List
 import os
 import sys
 import time
+import logging
 
 from prometheus_fastapi_instrumentator import Instrumentator
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(name)s — %(message)s",
+    datefmt="%Y-%m-%dT%H:%M:%S",
+)
+logger = logging.getLogger("obrail")
 
 # Ajout du dossier parent pour importer scripts/predict.py
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
@@ -50,9 +58,9 @@ def preload_models():
             "distance_km": 1, "vehicule_type": "InterCity",
             "co2_avion_kg": 0, "co2_train_kg": 0,
         })
-        print("✅ Modèles ML chargés en mémoire")
+        logger.info("Modèles ML chargés en mémoire")
     except Exception as e:
-        print(f"⚠️  Préchargement modèles : {e}")
+        logger.warning("Préchargement modèles échoué : %s", e)
 
 # 2. Connexion Base de Données (Mêmes variables que l'ingest)
 DB_USER = os.getenv("DB_USER")
@@ -246,6 +254,7 @@ def get_trajets(
             trip_count_corridor=r[11], trip_count_origin=r[12], service_share=r[13]
         ) for r in rows]
     except Exception as e:
+        logger.error("Erreur GET /trajets : %s", e)
         raise HTTPException(status_code=500, detail=str(e))
 
 
@@ -276,6 +285,7 @@ def get_trajet(trajet_id: int):
     except HTTPException:
         raise
     except Exception as e:
+        logger.error("Erreur GET /trajets/%s : %s", trajet_id, e)
         raise HTTPException(status_code=500, detail=str(e))
 
 
@@ -332,6 +342,7 @@ def stats_volumes():
             "par_vehicule":          par_vehicule,
         }
     except Exception as e:
+        logger.error("Erreur GET /stats/volumes : %s", e)
         raise HTTPException(status_code=500, detail=str(e))
 
 # 5. Endpoint pour récupérer toutes les données (pour dashboards)
@@ -387,10 +398,9 @@ def get_all_data(limit: int = None):
         return response_list
     
     except HTTPException:
-        # Relancer les HTTPException sans les transformer
         raise
     except Exception as e:
-        print(f"Erreur SQL : {e}")
+        logger.error("Erreur GET /data : %s", e)
         raise HTTPException(status_code=500, detail="Erreur interne du serveur")
 
 # 6. La Route Principale : Recherche d'itinéraire
@@ -446,10 +456,9 @@ def search_route(depart: str, arrivee: str, vehicle_type: str = None):
         return response_list
 
     except HTTPException:
-       
         raise
     except Exception as e:
-        print(f"Erreur SQL : {e}")
+        logger.error("Erreur GET /search : %s", e)
         raise HTTPException(status_code=500, detail="Erreur interne du serveur")
 
 # 7. Endpoint de Comparaison Écologique (Train Jour vs Train Nuit)
@@ -565,7 +574,7 @@ def compare_day_night_trains(depart: str, arrivee: str):
     except HTTPException:
         raise
     except Exception as e:
-        print(f"Erreur SQL dans /compare : {e}")
+        logger.error("Erreur GET /compare : %s", e)
         raise HTTPException(status_code=500, detail="Erreur interne du serveur")
 
 

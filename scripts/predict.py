@@ -28,13 +28,20 @@ warnings.filterwarnings("ignore")
 MODELS_DIR = os.path.join(os.path.dirname(__file__), "..", "models")
 
 FEATURES_M1 = [
-    "distance_km", "co2_train_kg", "co2_avion_kg", "vehicule_type",
+    "distance_km", "dist_to_600",
+    "co2_train_kg", "co2_avion_kg", "vehicule_type",
     "origin_station_traffic", "origin_city_population",
     "dest_station_traffic", "dest_city_population",
     "ratio_origin", "ratio_dest",
     "trip_count_corridor", "trip_count_origin", "service_share",
 ]
-FEATURES_M2 = [f for f in FEATURES_M1 if f not in ("co2_avion_kg", "co2_train_kg")]
+FEATURES_M2 = [
+    "distance_km", "vehicule_type",
+    "origin_station_traffic", "origin_city_population",
+    "dest_station_traffic", "dest_city_population",
+    "ratio_origin", "ratio_dest",
+    "trip_count_corridor", "trip_count_origin", "service_share",
+]
 
 VEHICULE_TYPES = ["EuroNight", "InterCity", "Nightjet",
                   "Train Longue Distance", "Train Longue Distance Nuit"]
@@ -83,8 +90,11 @@ def predict_corridor(corridor: dict) -> dict:
         v = corridor.get(key)
         return float(v) if v is not None else 0.0
 
+    distance = float(corridor.get("distance_km", 0))
+
     row = {
-        "distance_km":              float(corridor.get("distance_km", 0)),
+        "distance_km":              distance,
+        "dist_to_600":              distance - 600.0,   # pivot légal français
         "co2_train_kg":             _f("co2_train_kg"),
         "co2_avion_kg":             _f("co2_avion_kg"),
         "vehicule_type":            float(vtype_enc),
@@ -103,7 +113,7 @@ def predict_corridor(corridor: dict) -> dict:
 
     # ── Normalisation (les modèles ont été entraînés sur données scalées) ──────
     X_scaled = scaler.transform(df_input)
-    X_m1 = X_scaled                                          # 13 features
+    X_m1 = X_scaled                                          # 14 features
     X_m2 = X_scaled[:, [FEATURES_M1.index(f) for f in FEATURES_M2]]  # 11 features
 
     # ── Modèle 1 — Classification ─────────────────────────────────────────────

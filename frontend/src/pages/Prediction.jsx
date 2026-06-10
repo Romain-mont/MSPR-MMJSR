@@ -9,9 +9,10 @@ const VEHICULE_TYPES = [
 ]
 
 function getClusterInfo(distance, isSubstitutable) {
-  if (!isSubstitutable) return { label: 'Longue distance (> 600km)', desc: 'Au-delà du seuil légal — pas de substitution viable.', color: '#e74c3c', icon: '🔴' }
-  if (distance < 400)   return { label: 'Cluster 0 — Court trajet évident', desc: '100% des corridors similaires sont substituables. Service ferroviaire dense.', color: '#27ae60', icon: '🟢' }
-  return { label: 'Cluster 1 — Zone grise (400–600km)', desc: 'Corridor autour du seuil légal. Substitution possible selon le service disponible.', color: '#f39c12', icon: '🟡' }
+  if (!isSubstitutable) return { label: 'Non substituable', desc: 'Service ferroviaire insuffisant ou distance trop élevée pour une substitution viable.', color: '#e74c3c', icon: '🔴' }
+  if (distance < 400)   return { label: 'Substitution évidente (< 400km)', desc: '100% des corridors similaires sont substituables. Service ferroviaire dense.', color: '#27ae60', icon: '🟢' }
+  if (distance < 600)   return { label: 'Substitution standard (400–600km)', desc: 'Dans le périmètre légal. Le service ferroviaire confirme la substituabilité.', color: '#27ae60', icon: '🟢' }
+  return { label: 'Substitution par exception (> 600km)', desc: 'Au-delà du périmètre légal standard, mais le service ferroviaire dense le justifie.', color: '#f39c12', icon: '🟡' }
 }
 
 function StationAutocomplete({ id, label, value, onChange, onSelect, placeholder }) {
@@ -90,10 +91,11 @@ export default function Prediction() {
   const [destination,  setDestination]  = useState('')
   const [distance,     setDistance]     = useState('')
   const [vehiculeType, setVehiculeType] = useState('Train Longue Distance')
-  // Vol direct toujours supposé existant — l'enjeu est de remplacer un avion par le train
-  const flightExists = true
   const [co2Avion,     setCo2Avion]     = useState('')
-  const [corridorData, setCorridorData] = useState(null) // données DB du corridor
+  const [corridorData, setCorridorData] = useState(null)
+  // Vol direct : uniquement si l'utilisateur a saisi co2_avion_kg manuellement
+  // (on ne peut pas affirmer qu'un vol existe depuis les données DB — co2_avion_kg y est estimé depuis la distance)
+  const flightKnown = !!co2Avion && parseFloat(co2Avion) > 0
 
   const [result,  setResult]  = useState(null)
   const [loading, setLoading] = useState(false)
@@ -126,7 +128,6 @@ export default function Prediction() {
       const payload = {
         origin: origin || 'Départ', destination: destination || 'Arrivée',
         distance_km: distVal, vehicule_type: vehiculeType,
-        flight_exists: flightExists,
       }
       if (co2Avion) payload.co2_avion_kg = parseFloat(co2Avion)
       // Enrichir avec les données SNCF/GTFS de la DB si disponibles
@@ -146,7 +147,7 @@ export default function Prediction() {
 
   const reset = () => {
     setOrigin(''); setDestination(''); setDistance(''); setCo2Avion('')
-    setVehiculeType('Train Longue Distance'); setFlightExists(true)
+    setVehiculeType('Train Longue Distance')
     setResult(null); setError(null); setCorridorData(null)
   }
 
@@ -165,13 +166,15 @@ export default function Prediction() {
     {
       ok: parseDistance(distance) <= 600,
       label: `Distance : ${parseDistance(distance).toFixed(0)} km`,
-      detail: parseDistance(distance) <= 600 ? `≤ 600km — dans le périmètre légal (loi française 2023)` : `> 600km — hors périmètre de substitution`,
+      detail: parseDistance(distance) <= 600 ? `≤ 600km — dans le périmètre légal (loi française 2023)` : `> 600km — au-delà du périmètre de substitution standard`,
     },
-    {
-      ok: flightExists,
-      label: `Vol direct : ${flightExists ? 'existant' : 'absent'}`,
-      detail: flightExists ? 'Un vol direct existe sur ce corridor — substitution pertinente' : 'Pas de vol direct — substitution non applicable',
-    },
+    // Vol direct : affiché uniquement si l'utilisateur a saisi co2_avion_kg manuellement
+    // Les données DB ne permettent pas de confirmer l'existence d'un aéroport (co2_avion estimé depuis la distance)
+    ...(flightKnown ? [{
+      ok: true,
+      label: `CO₂ avion : ${parseFloat(co2Avion).toFixed(1)} kg — renseigné manuellement`,
+      detail: 'Valeur fournie — vol direct confirmé sur ce corridor',
+    }] : []),
     ...(traffic ? [{
       ok: true,
       label: `Fréquentation gare : ${traffic >= 1e6 ? (traffic/1e6).toFixed(1)+'M' : Math.round(traffic/1000)+'k'} voyageurs/an`,
@@ -189,7 +192,9 @@ export default function Prediction() {
   return (
     <main className="pred" id="main-content">
       <div className="pred__header">
-        <BackButton />
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '.5rem' }}>
+          <BackButton />
+        </div>
         <h1>Analyser un corridor</h1>
         <p>L'IA prédit si un vol peut être remplacé par le train et calcule le CO₂ économisé.</p>
       </div>
@@ -303,7 +308,6 @@ export default function Prediction() {
               <div>
                 <h2>{result.is_substitutable ? 'Substitution possible' : 'Substitution non recommandée'}</h2>
                 <p className="pred__route">{result.origin} → {result.destination} · {parseDistance(distance).toFixed(0)} km</p>
-                <p className="pred__confidence">Confiance du modèle : <strong>{(result.proba_substitutable * 100).toFixed(1)}%</strong></p>
               </div>
             </div>
 
@@ -324,7 +328,7 @@ export default function Prediction() {
                     <div className="pred__co2-bar-wrap">
                       <div className="pred__co2-bar pred__co2-bar--train"
                         style={{ width: `${Math.max(4, ((co2AvionUsed - result.co2_saved_kg) / co2AvionUsed) * 100)}%` }}>
-                        {(co2AvionUsed - result.co2_saved_kg).toFixed(1)} kg
+                        {Math.max(0, co2AvionUsed - result.co2_saved_kg).toFixed(1)} kg
                       </div>
                     </div>
                   </div>
