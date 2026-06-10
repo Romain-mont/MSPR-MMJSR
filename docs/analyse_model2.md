@@ -1,5 +1,6 @@
 # Analyse — Modèle 2 : Régression `co2_saved_kg`
 ## Enjeu : Quantifier le gain CO2 si le passager prend le train au lieu de l'avion
+## Dataset 43 782 corridors | 11 features | Random Forest MAE=4.07 kg R²=0.948
 
 ---
 
@@ -7,8 +8,9 @@
 
 **Target :** `co2_saved_kg` = co2_avion - co2_train (valeur calculée EcoPassenger)  
 **Données :** 43 782 corridors avec vol existant (co2_avion non NULL) — sur 46 106 total  
-**Split :** 70% train (30 647) / 15% validation (6 567) / 15% test (6 568) — non stratifié  
-**Target — moy: 92.8 kg | méd: 86.0 kg | std: 27.2 kg**
+**Split :** 70% train (30 647) / 15% validation (6 567) / 15% test (6 568) — non stratifié (seed=42)  
+**Target — moy: 92.8 kg | méd: 86.0 kg | std: 27.2 kg**  
+**Normalisation :** StandardScaler (fit sur train uniquement)
 
 **Features utilisées (11 features, sans co2_avion et co2_train) :**
 
@@ -102,6 +104,16 @@
 | Train split | 1 633 | **30 647** | **×19** |
 
 Le passage à 46k corridors améliore significativement toutes les métriques.
+
+---
+
+## Lien avec le clustering M3
+
+La domination de `distance_km` à 91.5% est cohérente avec la structure des clusters K-Means :
+- **Cluster 0** (604 km moy) → CO2 économisé ~148 kg — zone de forte valeur de substitution
+- **Clusters 1/2/3** (150-167 km moy) → CO2 économisé ~83-86 kg — majorité du dataset
+
+Le Modèle 2 sert à quantifier précisément le gain dans chaque cluster — complément métier du clustering.
 
 ---
 

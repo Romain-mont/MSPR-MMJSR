@@ -1,5 +1,6 @@
 # Analyse — Modèle 1 : Classification `is_substitutable`
 ## Enjeu : Identifier automatiquement les corridors où le train peut remplacer l'avion
+## Dataset 46 106 corridors | 13 features | Random Forest F1=1.000
 
 ---
 
@@ -7,8 +8,9 @@
 
 **Label :** `is_substitutable = 1` si `distance_km ≤ 600` ET un vol existe sur le corridor  
 **Données :** 46 106 corridors français (après filtre GPS France métropolitaine + normalisation noms)  
-**Split :** 70% train (32 274) / 15% validation (6 916) / 15% test (6 916) — stratifié  
-**Déséquilibre :** 89.5% substituables / 10.5% non-substituables → `class_weight='balanced'`
+**Split :** 70% train (32 274) / 15% validation (6 916) / 15% test (6 916) — **stratifié** (seed=42)  
+**Déséquilibre :** 89.5% substituables / 10.5% non-substituables → `class_weight='balanced'`  
+**Normalisation :** StandardScaler (fit sur train uniquement, transform sur val et test)
 
 ---
 
@@ -108,6 +110,9 @@
 - MLP passe de F1=0.956 → **0.997** (bénéficie de plus de données)
 - XGBoost passe de F1=0.991 → **0.999**
 - 15 types de véhicules vs 5 (couvre plus de trains européens)
+
+### Lien avec le clustering M3
+Le Cluster 0 K-Means (4 852 corridors, 48% substituables) correspond exactement aux cas difficiles pour M1 — c'est autour du seuil 600 km que le modèle de classification apporte le plus de valeur par rapport à une règle déterministe simple.
 
 ---
 
