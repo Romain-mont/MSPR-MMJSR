@@ -236,5 +236,9 @@ GMM est moins adapté car il suppose des distributions gaussiennes équilibrées
 | `docs/fig_model1_roc_confusion.png` | Courbes ROC + confusion M1 |
 | `docs/fig_model2_results.png` | Prédictions + résidus + features M2 |
 | `docs/fig_clustering_corridors.png` | Elbow, Silhouette, PCA, clusters |
-| `docs/analyse_clustering.md` | Analyse complète clustering |
-| `docs/carte_corridors.html` | Carte interactive Folium |
+| `docs/analyse_clustering.md` | Analyse complète clustering (K-Means vs GMM vs DBSCAN) |
+| `docs/carte_corridors.html` | Carte interactive Folium — corridors substituables |
+| `docs/carte_clusters.html` | Carte interactive Folium — corridors colorés par cluster |
+| `docs/fig_dendrogram.png` | Dendrogramme Ward (validation hiérarchique k=4) |
+| `docs/retrain_procedure.md` | Procédure complète de re-entraînement |
+| `docs/benchmark_ia_cloud.md` | Benchmark AWS / Azure / GCP / HuggingFace |
