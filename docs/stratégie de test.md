@@ -88,22 +88,23 @@ NPR 50-100 (MOYENNE)  → Tests standards : unitaires + quelques cas
 ### 4.1 Pyramide de Tests
 
 ```
-         /\
-        /  \         Peu d'E2E (hors périmètre MSPR3)
-       /____\
-      /      \
-     / Intégr.\      79 tests — endpoints API avec mocks DB + ML
-    /  (API)   \
-   /____________\
-  /              \
- / Unitaires (30) \   Base large : fonctions pures, logique ML
-/__________________\
+              /\
+             /  \        E2E Playwright (82 tests)
+            / E2E\       Interface React + routage + résultats ML
+           /______\      API mockée via page.route()
+          /        \
+         / Intégr.  \    79 tests — endpoints API avec mocks DB + ML
+        /  (API)     \
+       /______________\
+      /                \
+     / Unitaires (30)   \  Base large : fonctions pures, logique ML
+    /____________________\
 ```
 
 **Principes :**
 - **Base large (Unitaires)** : investir sur la couverture rapide et fiable des fonctions pures
 - **Milieu (Intégration)** : valider les contrats API et les interactions DB/ML
-- **Sommet (E2E)** : non implémenté dans cette version (nécessiterait Cypress/Playwright + app démarrée)
+- **Sommet (E2E)** : valider les parcours utilisateur complets via l'interface React
 
 ### 4.2 Niveaux Implémentés
 
@@ -146,6 +147,30 @@ NPR 50-100 (MOYENNE)  → Tests standards : unitaires + quelques cas
 - 100% des endpoints principaux testés (cas positif + cas négatif)
 - Gestion d'erreur validée pour chaque endpoint
 - Tests indépendants de toute base de données réelle
+
+#### 4.2.3 Tests End-to-End (E2E)
+
+**Objectifs :**
+- Valider les parcours utilisateur critiques depuis l'interface React
+- Vérifier la navigation, les formulaires et l'affichage des résultats ML
+- Tester les états dégradés (API indisponible) tels que vus par l'utilisateur final
+
+**Scope :**
+- Navigation globale : navbar, routage React Router, lien d'accessibilité
+- Page d'accueil : hero, KPIs, cartes modules, barre santé API
+- Page Trajets : affichage liste, filtres, état vide, messages d'erreur
+- Page Prédiction : formulaire, validation, verdict substituable/non-substituable, CO2
+- Page Monitoring : statut service, bouton refresh, liens outils, tableau endpoints
+
+**Outil :** `@playwright/test` (Playwright, navigateur Chromium headless)
+
+**Stratégie de mock :** L'API backend (port 8000) est entièrement mockée via `page.route()` — le serveur Vite (port 5173) est le seul processus requis. Les patterns de route ciblent explicitement `http://localhost:8000/` pour éviter d'intercepter les assets JS servis par Vite.
+
+**Critères de succès :**
+- 100% des pages principales couvertes
+- Tests du chemin nominal ET des états dégradés (AMDEC R1, R3, R4)
+- Exécution complète < 30 secondes (headless Chromium)
+- Aucune dépendance à l'API réelle ni à PostgreSQL
 
 ---
 
@@ -191,7 +216,7 @@ Toutes les dépendances externes sont mockées pour garantir des tests rapides e
 ### 6.1 Structure des Fichiers
 
 ```
-tests/
+tests/                                # Tests backend (pytest)
 ├── conftest.py                       # Fixtures partagées, données de test, helpers de mock
 ├── unit/
 │   ├── test_co2_estimation.py        # Tests unitaires calculs CO2 (11 tests)
@@ -202,9 +227,17 @@ tests/
     ├── test_stats.py                  # GET /stats/volumes (8 tests)
     ├── test_predict_api.py            # POST /predict/substitution et /predict/co2_saved (25 tests)
     └── test_legacy_endpoints.py       # GET /data, /search, /compare + error handling (20 tests)
+
+frontend/e2e/                         # Tests E2E (Playwright)
+├── helpers.js                        # Mocks API, données fictives partagées
+├── navigation.spec.js                # Navbar + routage React Router (11 tests)
+├── home.spec.js                      # Page d'accueil : hero, stats, modules (17 tests)
+├── trajets.spec.js                   # Page Trajets : liste, filtres, états (17 tests)
+├── prediction.spec.js                # Page Prédiction : formulaire, résultats (21 tests)
+└── monitoring.spec.js                # Page Monitoring : health, outils, endpoints (16 tests)
 ```
 
-**Total : 109 tests**
+**Total backend : 109 tests** | **Total E2E : 82 tests** | **Total global : 191 tests**
 
 ### 6.2 Détail par Fichier
 
@@ -311,15 +344,23 @@ Les scripts d'entraînement et d'enrichissement sont exclus du périmètre car c
 
 ### 7.2 Dépendances de Test
 
-**`requirements-test.txt`** :
+**Backend — `requirements-test.txt`** :
 ```
 pytest>=8.0.0
 pytest-cov>=5.0.0
 httpx>=0.27.0
 ```
 
+**Frontend E2E — `frontend/package.json`** (devDependencies) :
+```
+@playwright/test>=1.60.0
+```
+
+Navigateur requis : Chromium headless (installé via `npx playwright install chromium`).
+
 ### 7.3 Commandes d'Exécution
 
+**Tests backend (pytest) :**
 ```bash
 # Installer les dépendances de test
 pip install -r requirements-test.txt
@@ -332,12 +373,24 @@ pytest tests/unit/
 
 # Lancer uniquement les tests d'intégration
 pytest tests/integration/
+```
 
-# Lancer avec rapport HTML de couverture (dans htmlcov/)
-pytest --cov-report=html
+**Tests E2E (Playwright) :**
+```bash
+cd frontend
 
-# Lancer sans seuil de couverture minimum (pour développement)
-pytest --no-cov-on-fail
+# Installer Playwright et le navigateur Chromium
+npm install
+npx playwright install chromium
+
+# Lancer tous les tests E2E (lance Vite automatiquement)
+npm run test:e2e
+
+# Mode interactif (UI Playwright)
+npm run test:e2e:ui
+
+# Voir le rapport HTML
+npm run test:e2e:report
 ```
 
 ---
@@ -374,15 +427,32 @@ pytest --no-cov-on-fail
 | 51–55 | `_load_models()` corps de fonction | Requiert les fichiers `.joblib` sur disque — non exécutable en CI sans artefacts |
 | 175–214 | `_parse_args()` et `_print_result()` | Fonctions CLI uniquement (non utilisées par l'API) |
 
+### 8.2 Résultats E2E Playwright
+
+| Suite | Tests | Résultat |
+|---|---|---|
+| `navigation.spec.js` | 11 | ✅ 11/11 |
+| `home.spec.js` | 17 | ✅ 17/17 |
+| `trajets.spec.js` | 17 | ✅ 17/17 |
+| `prediction.spec.js` | 21 | ✅ 21/21 |
+| `monitoring.spec.js` | 16 | ✅ 16/16 |
+| **Total E2E** | **82** | **✅ 82/82** |
+
+Durée d'exécution E2E : ~14 secondes (Chromium headless).
+
 ### 8.3 Métriques de Qualité
 
 | Métrique | Cible | Obtenu |
 |---|---|---|
-| Couverture de code (modules critiques) | ≥ 80% | **83.91%** ✅ |
+| Couverture de code backend (modules critiques) | ≥ 80% | **83.91%** ✅ |
 | Taux de réussite tests unitaires | 100% | **100%** ✅ |
 | Taux de réussite tests intégration | ≥ 95% | **100%** ✅ |
-| Temps d'exécution total | < 30s | **~2s** ✅ |
-| Nombre total de tests | — | **109** |
+| Taux de réussite tests E2E | ≥ 95% | **100%** ✅ |
+| Temps d'exécution backend | < 30s | **~2s** ✅ |
+| Temps d'exécution E2E | < 60s | **~14s** ✅ |
+| Nombre total de tests (backend) | — | **109** |
+| Nombre total de tests (E2E) | — | **82** |
+| **Total global** | — | **191** |
 
 ---
 
@@ -421,7 +491,7 @@ Les tests sont intégrés dans le pipeline CI/CD (voir `.github/workflows/ci.yml
 Conformément aux principes d'industrialisation :
 
 **Erreur 1 : Trop de tests end-to-end**  
-Prévention : pyramide de tests respectée — 28% unitaires (base), 72% intégration (milieu), 0% E2E (sommet).
+Prévention : pyramide de tests équilibrée — 16% unitaires (base), 41% intégration (milieu), 43% E2E (sommet). L'E2E est proportionnellement plus important ici car le frontend React est le principal point d'entrée utilisateur.
 
 **Erreur 2 : Tests couplés aux dépendances externes**  
 Prévention : mocks totaux (DB, modèles ML) → les tests s'exécutent en < 2 secondes sans infrastructure.
@@ -441,5 +511,5 @@ Prévention : `--cov-fail-under=80` dans `pytest.ini` fait échouer le pipeline 
 | Équipe projet | ObRail — Équipe MSPR3 | Juin 2026 |
 
 **Version :** 1.0  
-**Prochaine révision :** Avant ajout des tests E2E (Cypress/Playwright)  
+**Prochaine révision :** Avant intégration du CI/CD GitHub Actions  
 **Validité :** À jour jusqu'à la prochaine release
