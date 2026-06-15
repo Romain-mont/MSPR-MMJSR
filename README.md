@@ -2,6 +2,7 @@
 
 <div align="center">
 
+[![CI/CD](https://github.com/Romain-mont/MSPR-MMJSR/actions/workflows/ci.yml/badge.svg)](https://github.com/Romain-mont/MSPR-MMJSR/actions/workflows/ci.yml)
 ![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.128-009688?logo=fastapi&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791?logo=postgresql&logoColor=white)
