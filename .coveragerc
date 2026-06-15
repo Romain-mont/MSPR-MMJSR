@@ -1,0 +1,13 @@
+[run]
+source = api, scripts
+omit =
+    scripts/clustering_corridors.py
+    scripts/enrich_duration.py
+    scripts/enrich_station_traffic_gps.py
+    scripts/train_model1_classification.py
+    scripts/train_model2_regression.py
+
+[report]
+exclude_lines =
+    if __name__ == .__main__.:
+    pragma: no cover
