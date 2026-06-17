@@ -326,10 +326,19 @@ export default function Prediction() {
                   <div className="pred__co2-row">
                     <span className="pred__co2-label">🚄 Train</span>
                     <div className="pred__co2-bar-wrap">
-                      <div className="pred__co2-bar pred__co2-bar--train"
-                        style={{ width: `${Math.max(4, ((co2AvionUsed - result.co2_saved_kg) / co2AvionUsed) * 100)}%` }}>
-                        {Math.max(0, co2AvionUsed - result.co2_saved_kg).toFixed(1)} kg
-                      </div>
+                      {(() => {
+                        const trainCo2 = Math.max(0, co2AvionUsed - result.co2_saved_kg)
+                        const trainPct = Math.max(4, (trainCo2 / co2AvionUsed) * 100)
+                        const small = trainPct < 15
+                        return (
+                          <>
+                            <div className="pred__co2-bar pred__co2-bar--train" style={{ width: `${trainPct}%` }}>
+                              {!small && `${trainCo2.toFixed(1)} kg`}
+                            </div>
+                            {small && <span className="pred__co2-bar-outside">{trainCo2.toFixed(1)} kg</span>}
+                          </>
+                        )
+                      })()}
                     </div>
                   </div>
                 </div>

@@ -10,7 +10,17 @@ cp .env.example .env
 
 Adapter si besoin les variables dans `.env` (les valeurs par défaut fonctionnent en local).
 
-## 2) Démarrage rapide (stack complète)
+## 2) Démarrage rapide
+
+### Frontend + API uniquement (sans monitoring)
+
+```bash
+docker compose up -d db api frontend
+```
+
+> `db` est requis car l'API en dépend.
+
+### Stack complète (+ Grafana + Prometheus + pgAdmin)
 
 ```bash
 docker compose up -d
