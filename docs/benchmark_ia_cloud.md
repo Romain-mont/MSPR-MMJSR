@@ -9,7 +9,7 @@ ObRail Europe entraîne deux modèles ML sur **46 106 corridors ferroviaires fra
 
 | Modèle | Type | Algorithme retenu | Métriques |
 |---|---|---|---|
-| Modèle 1 — Classification | `is_substitutable` | Random Forest | F1=1.000, AUC=1.000 |
+| Modèle 1 — Classification | `is_substitutable` | XGBoost | F1=0.996, AUC=1.000 |
 | Modèle 2 — Régression | `co2_saved_kg` | Random Forest | MAE=4.07 kg, R²=0.948 |
 | Clustering (M3) | Segmentation corridors | K-Means k=4 (vs GMM k=2, DBSCAN k=13) | Silhouette=0.652 |
 

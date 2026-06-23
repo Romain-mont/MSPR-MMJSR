@@ -44,6 +44,9 @@ CREATE TABLE IF NOT EXISTS fact_route_analysis (
     co2_saved_kg         NUMERIC(10,4),
     traffic_share_pct    NUMERIC(5,2),
     is_substitutable     SMALLINT,
+    trip_count_corridor  INTEGER,
+    trip_count_origin    INTEGER,
+    service_share        NUMERIC(8,6),
 
     FOREIGN KEY (route_id)          REFERENCES dim_route(route_id),
     FOREIGN KEY (vehicle_type_id)   REFERENCES dim_vehicle_type(vehicle_type_id),

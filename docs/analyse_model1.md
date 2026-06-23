@@ -50,6 +50,22 @@ is_substitutable = 1  si  service_score ≥ seuil  ET  co2_avion_kg > 0
 
 ---
 
+## Corrélations avec `is_substitutable` (Pearson)
+
+| Feature | Corrélation | Signal |
+|---|---|---|
+| `co2_avion_kg` | **−0.33** | Plus le vol est long (pollue), moins c'est substituable |
+| `distance_km` | **−0.31** | Corrélation négative — pivot à 600km |
+| `service_share` | **+0.28** | Feature positive #1 — part du service corridor |
+| `trip_count_corridor` | **+0.16** | Fréquence hebdomadaire directe |
+| Trafic brut (gare) | ~0.00 | **Non discriminant** — justifie le passage en ratio |
+
+> Les corrélations sont modérées (|r| ≤ 0.33) car le label v2 est non-linéaire (sigmoid). Le classement est cohérent avec les importances XGBoost : `trip_count_corridor` et `service_share` dominent en non-linéaire même si `distance_km` apparaît plus haut en Pearson.
+
+**Couverture des features GTFS :** `service_share`, `trip_count_corridor`, `trip_count_origin` → **100%** (seulement 16 NULL sur 46 106). C'est la source de données la plus complète du dataset.
+
+---
+
 ## Features utilisées (14 features)
 
 | Feature | Description | Rôle |

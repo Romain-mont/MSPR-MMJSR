@@ -327,7 +327,8 @@ export default function Prediction() {
                     <span className="pred__co2-label">🚄 Train</span>
                     <div className="pred__co2-bar-wrap">
                       {(() => {
-                        const trainCo2 = Math.max(0, co2AvionUsed - result.co2_saved_kg)
+                        const trainCo2 = corridorData?.co2_train_kg
+                          ?? Math.max(0, co2AvionUsed - result.co2_saved_kg)
                         const trainPct = Math.max(4, (trainCo2 / co2AvionUsed) * 100)
                         const small = trainPct < 15
                         return (

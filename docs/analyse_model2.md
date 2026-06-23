@@ -109,11 +109,13 @@ Le passage à 46k corridors améliore significativement toutes les métriques.
 
 ## Lien avec le clustering M3
 
-La domination de `distance_km` à 91.5% est cohérente avec la structure des clusters K-Means :
-- **Cluster 0** (604 km moy) → CO2 économisé ~148 kg — zone de forte valeur de substitution
-- **Clusters 1/2/3** (150-167 km moy) → CO2 économisé ~83-86 kg — majorité du dataset
+La domination de `distance_km` à 91.5% est cohérente avec la structure des clusters K-Means log1p (clustering de référence, k=2) :
+- **Cluster 0** (~580 km moy, long-haul) → CO2 économisé ~145 kg — zone de forte valeur de substitution
+- **Cluster 1** (~160 km moy, standard) → CO2 économisé ~85 kg — majorité du dataset
 
 Le Modèle 2 sert à quantifier précisément le gain dans chaque cluster — complément métier du clustering.
+
+> ℹ️ Les anciens clusters C2/C3 (84 et 71 corridors) ont été identifiés comme artefacts outliers et absorbés dans le clustering log1p final (voir `analyse_clustering.md` §3.5–3.7).
 
 ---
 

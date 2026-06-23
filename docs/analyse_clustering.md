@@ -24,7 +24,7 @@
 
 ---
 
-## K-Means — Recherche du k optimal
+## K-Means — Recherche du k optimal (ratios bruts)
 
 | k | Inertie | Silhouette Score |
 |---|---|---|
@@ -35,6 +35,8 @@
 | 6 | 54 015 | 0.354 |
 
 **k=4 sélectionné** par Silhouette Score maximal (0.652). La méthode Elbow confirme un coude à k=4.
+
+> ⚠️ **Note :** Cette version ratios bruts est conservée à titre pédagogique. Voir §3.5–3.7 pour la version log1p recommandée (k=2).
 
 ---
 
@@ -168,6 +170,71 @@ Ces features ont été conservées dans le CSV pour d'autres usages mais écart�
 
 ---
 
+## 3.5–3.7 Validation log1p — Clustering de référence
+
+### Pourquoi tester une transformation log1p
+
+Les features `ratio_origin` et `ratio_dest` présentent une distribution très asymétrique : quelques corridors atteignent des z-scores > +20 (ex: `Tilly → Habay` : z=+27.9). Ces valeurs extrêmes gonflent l'écart-type global et dominent la distance euclidienne utilisée par K-Means et Ward — créant des clusters artificiels (C2, C3).
+
+**Correction appliquée :** `np.log1p()` sur `ratio_origin` et `ratio_dest` avant standardisation.
+
+```python
+# log1p écrase les extremes sans les supprimer
+Valeur normale : 100   → log1p = 4.6
+Outlier        : 10000 → log1p = 9.2  (pas 10 000)
+```
+
+### Résultats K-Means log1p
+
+| k | Silhouette Score |
+|---|---|
+| **2** | **0.499** ← optimal |
+| 3 | 0.412 |
+| 4 | 0.378 |
+
+**k=2 sélectionné.** La méthode Elbow converge vers k=2, Ward confirme k=2 (0 points isolés vs 3 dans la version brute).
+
+### Comparatif des deux versions
+
+| | Ratios bruts | Ratios log1p |
+|---|---|---|
+| k retenu (K-Means = Ward) | 4 | **2** |
+| Silhouette K-Means | 0.652 | 0.499 |
+| Points isolés (dendrogramme) | 3 | **0** |
+| Tailles de clusters | 4 852 / 38 775 / 84 / 71 | **5 320 / 38 462** |
+
+> La baisse de Silhouette (0.652 → 0.499) n'est pas une régression : le score original était **artificiellement gonflé** par la séparation triviale de C2/C3 (clusters minuscules et extrêmement éloignés). 0.499 reflète honnêtement la structure réelle (au-dessus du seuil usuel 0.4 pour des données bruitées).
+
+### Verdict sur C2/C3
+
+Trois preuves convergentes confirment que C2 (84 corridors) et C3 (71 corridors) étaient des **artefacts** :
+1. Disparition des clusters après log1p sans réapparition équivalente
+2. Passage de 3 à 0 points isolés dans le dendrogramme Ward
+3. Convergence K-Means et Ward vers k=2
+
+Ces corridors (0.33% du dataset) correspondaient à des gares à très faible population de ville mais fort trafic — signal réel mais trop rare pour constituer une niche métier exploitable.
+
+### Profil des 2 clusters log1p (référence)
+
+| Cluster | Corridors | Profil | % substituables |
+|---|---|---|---|
+| **0** | 5 320 (12%) | Long-haul, distance moy ~580 km, CO2 éco ~145 kg | **55.6%** |
+| **1** | 38 462 (88%) | Standard, distance moy ~160 km, CO2 éco ~85 kg | **88.2%** |
+
+**Cohérence métier :** k=2 colle naturellement à la variable binaire `is_substitutable` du Modèle 1. Le Cluster 0 (55.6% substituables) est la **zone de décision critique** — exactement les corridors long-haul où la desserte ferroviaire est déterminante. Le Cluster 1 (88.2%) représente le maillage court/moyen évident.
+
+### Alignement clustering log1p vs label `is_substitutable`
+
+Le clustering log1p n'a jamais vu `is_substitutable`, `service_share` ou `trip_count_corridor`. Pourtant :
+- Cluster 0 (long-haul) : 55.6% substituables — nettement sous la moyenne globale (84.25%) ← cohérent avec r=-0.31 entre distance et label
+- Cluster 1 (standard) : 88.2% substituables — au-dessus de la moyenne ← corridors courts, bien desservis en moyenne
+
+> Le mélange 55.6%/44.4% du Cluster 0 confirme la **limite de la géographie seule** : c'est la desserte ferroviaire (`service_share`, `trip_count_corridor`) — volontairement exclue du clustering — qui reste le facteur déterminant (47.9% + 11.6% d'importance dans le Modèle 1).
+
+**Recommandation :** Retenir la version log1p (`cluster_kmeans_log`, k=2) comme **clustering de référence** pour M3/segmentation. La version k=4 est conservée uniquement comme illustration pédagogique de l'effet des outliers.
+
+---
+
 ## Évolution par rapport à l'ancienne version (2 147 corridors)
 
 | Métrique | Ancien (2 147) | Nouveau (43 782) | Évolution |
@@ -183,7 +250,7 @@ La structure en clusters est **stable** malgré ×20 de données — validation 
 
 ## Conclusion pour la soutenance
 
-> "Sans utiliser le label `is_substitutable`, le clustering K-Means retrouve naturellement les mêmes groupes avec une cohérence de 100% sur les clusters extrêmes. Trois algorithmes ont été comparés — K-Means (Silhouette=0.652), GMM (0.381, inadapté aux distributions inégales) et DBSCAN (0.366, trop fragmenté). K-Means est retenu. Le dendrogramme Ward confirme indépendamment k=4. La carte géographique valide la cohérence spatiale des clusters. Le Cluster 0 (zone grise autour de 600 km, 4 852 corridors) représente précisément les cas sur lesquels la politique publique doit se concentrer. Le Cluster 3 révèle les hubs ferroviaires majeurs comme Paris et Lyon — corridors à enjeu symbolique fort pour la transition."
+> "Sans utiliser le label `is_substitutable`, le clustering K-Means retrouve naturellement la même structure que le label. Trois algorithmes ont été comparés — K-Means, GMM (0.381, inadapté) et DBSCAN (0.366, trop fragmenté). K-Means est retenu. Une validation par transformation log1p des ratios a révélé que les clusters C2 et C3 (155 corridors, 0.33%) étaient des artefacts de sensibilité aux outliers, et non des niches métier réelles. Le clustering de référence final est **k=2** (log1p, Silhouette=0.499) : Cluster 0 — long-haul (5 320 corridors, zone de décision critique, 55.6% substituables) et Cluster 1 — standard (38 462 corridors, 88.2% substituables). Le dendrogramme Ward confirme indépendamment k=2 avec 0 points isolés. La géographie seule capte un signal partiel — c'est la desserte ferroviaire qui reste le facteur déterminant."
 
 ---
 
@@ -191,9 +258,12 @@ La structure en clusters est **stable** malgré ×20 de données — validation 
 
 | Fichier | Contenu |
 |---|---|
-| `models/kmeans_corridors.joblib` | Modèle K-Means entraîné (k=4, 43k corridors) |
-| `docs/fig_clustering_corridors.png` | Elbow, Silhouette K-Means vs GMM, BIC GMM, PCA K-Means, PCA GMM, Distance vs CO2 |
-| `docs/fig_dendrogram.png` | Dendrogramme Ward (n=500, k=4 validé) |
+| `models/kmeans_corridors.joblib` | Modèle K-Means brut (k=4, 43k corridors) — version pédagogique |
+| `models/kmeans_corridors_log.joblib` | Modèle K-Means log1p (k=2, 43k corridors) — **version de référence** |
+| `docs/fig_clustering_corridors.png` | Elbow, Silhouette K-Means vs GMM, BIC, PCA, Distance vs CO2 (ratios bruts) |
+| `docs/fig_clustering_corridors_log1p.png` | Même pipeline sur ratios log1p (k=2 de référence) |
+| `docs/fig_dendrogram.png` | Dendrogramme Ward (n=500, k=4, ratios bruts — 3 points isolés) |
+| `docs/fig_dendrogram_log1p.png` | Dendrogramme Ward (n=500, k=2, log1p — 0 points isolés) |
 | `docs/carte_clusters.html` | Carte Folium interactive colorée par cluster K-Means |
 | `docs/corridors_clustered.csv` | Dataset avec labels de clusters (43 782 lignes) |
 | `docs/profil_clusters.csv` | Profil statistique par cluster |

@@ -7,12 +7,12 @@ export default function Trajets() {
   const [trajets, setTrajets]     = useState([])
   const [loading, setLoading]     = useState(false)
   const [error, setError]         = useState(null)
-  const [filters, setFilters]     = useState({ origine: '', destination: '', substituable: '' })
+  const [filters, setFilters]     = useState({ origine: '', destination: '', substituable: '', limit: '100' })
 
   const load = (f = filters) => {
     setLoading(true)
     setError(null)
-    const params = { limit: 100 }
+    const params = { limit: parseInt(f.limit) || 100 }
     if (f.origine)              params.origine      = f.origine
     if (f.destination)          params.destination  = f.destination
     if (f.substituable !== '')  params.substituable = f.substituable === 'true'
@@ -27,7 +27,7 @@ export default function Trajets() {
   const handleChange = e => setFilters(p => ({ ...p, [e.target.name]: e.target.value }))
   const handleSubmit = e => { e.preventDefault(); load() }
   const handleReset  = () => {
-    const f = { origine: '', destination: '', substituable: '' }
+    const f = { origine: '', destination: '', substituable: '', limit: '100' }
     setFilters(f)
     load(f)
   }
@@ -60,6 +60,18 @@ export default function Trajets() {
               <option value="">Tous</option>
               <option value="true">✅ Substituables uniquement</option>
               <option value="false">❌ Non substituables uniquement</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="limit">Nombre de résultats</label>
+            <select id="limit" name="limit" value={filters.limit} onChange={handleChange}>
+              <option value="50">50</option>
+              <option value="100">100</option>
+              <option value="250">250</option>
+              <option value="500">500</option>
+              <option value="1000">1 000</option>
+              <option value="5000">5 000</option>
+              <option value="99999">Tous</option>
             </select>
           </div>
         </div>

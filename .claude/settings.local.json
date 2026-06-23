@@ -25,7 +25,20 @@
       "Bash(ls /Volumes/Optima/ 2>/dev/null || echo \"Optima non monté\")",
       "Read(//Volumes/Optima/**)",
       "Bash(python3 -c ' *)",
-      "Bash(python3 scripts/clustering_corridors.py)"
+      "Bash(python3 scripts/clustering_corridors.py)",
+      "Bash(curl -s \"http://localhost:8000/health\")",
+      "Bash(curl -s \"http://localhost:8000/trajets?origine=Pari&limit=5\")",
+      "Bash(python3 -m json.tool)",
+      "Bash(docker exec -it obrail-db psql -U mspr_user -d mspr_db -c ' *)",
+      "Bash(docker exec *)",
+      "Bash(DB_HOST=localhost DB_PORT=5432 DB_NAME=mspr_db DB_USER=mspr_user DB_PASSWORD=mspr_password STAGING_DATA_DIR=./donnee python3 load/load_to_db.py)",
+      "Bash(DB_HOST=localhost DB_PORT=5432 DB_NAME=mspr_db DB_USER=mspr_user DB_PASSWORD=mspr_password FINAL_OUTPUT_DIR=/Volumes/Optima/MSPR_DATA/staging python3 load/load_to_db.py)",
+      "Bash(DB_HOST=127.0.0.1 DB_PORT=5432 DB_NAME=mspr_db DB_USER=mspr_user DB_PASSWORD=mspr_password FINAL_OUTPUT_DIR=/Volumes/Optima/MSPR_DATA/staging python3 load/load_to_db.py)",
+      "Bash(docker compose *)",
+      "Bash(docker cp *)",
+      "Bash(curl -s \"http://localhost:8000/trajets?origine=Pari&limit=3\")",
+      "Bash(curl -s \"http://localhost:8000/trajets?origine=Paris+Gare+de+Lyon&destination=Marseille+Saint-Charles&limit=3\")",
+      "Bash(pytest --tb=no -q)"
     ]
   }
 }

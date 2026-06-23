@@ -6,6 +6,9 @@ omit =
     scripts/enrich_station_traffic_gps.py
     scripts/train_model1_classification.py
     scripts/train_model2_regression.py
+    scripts/generate_architecture.py
+    scripts/generate_rapport.py
+    scripts/load_from_donnee.py
 
 [report]
 exclude_lines =

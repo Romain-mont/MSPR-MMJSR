@@ -159,7 +159,7 @@ else:
 
 plt.tight_layout()
 plt.savefig(os.path.join(DOCS_DIR, "fig_model2_results.png"), dpi=150, bbox_inches='tight')
-plt.show()
+plt.close()
 
 # ── Sauvegarde ───────────────────────────────────────────────────────────────
 model_path = os.path.join(MODELS_DIR, "model2_regression.joblib")

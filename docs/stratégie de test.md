@@ -50,9 +50,115 @@ La stratégie couvre les composants suivants :
 
 ---
 
-## 3. Identification des Risques par AMDEC
+## 3. Spécifications Fonctionnelles — User Stories
 
-### 3.1 Principes de l'AMDEC
+Les user stories définissent les besoins utilisateurs depuis lesquels sont dérivés les scénarios de test E2E. Chaque user story est tracée vers les critères d'acceptance et les tests Playwright correspondants.
+
+### 3.1 Utilisateurs cibles
+
+| Profil | Description |
+|---|---|
+| **Partenaire institutionnel** | Commission européenne, ONG (Transport & Environnement) — besoin d'analyse et de reporting |
+| **Opérateur ferroviaire** | SNCF, DB, ÖBB — besoin de valoriser leurs corridors substituables |
+| **Équipe interne ObRail** | Administrateurs supervisant la disponibilité du service |
+
+### 3.2 User Stories
+
+---
+
+#### US-01 — Navigation globale
+> **En tant que** partenaire institutionnel,  
+> **Je veux** naviguer librement entre les sections de l'application,  
+> **Afin de** accéder rapidement à l'information qui m'intéresse sans me perdre.
+
+**Critères d'acceptance :**
+- La barre de navigation est visible sur toutes les pages
+- Les 4 liens (Accueil, Trajets, Prédiction, Monitoring) sont accessibles en un clic
+- La page active est visuellement identifiée
+- Un lien d'accès rapide au contenu principal est disponible (accessibilité RGAA)
+
+**Tests associés :** `frontend/e2e/navigation.spec.js` — 11 tests
+
+---
+
+#### US-02 — Consultation et filtrage des trajets ferroviaires
+> **En tant que** opérateur ferroviaire,  
+> **Je veux** consulter et filtrer la liste des corridors ferroviaires européens,  
+> **Afin d'** identifier rapidement les trajets substituables desservis par mon réseau.
+
+**Critères d'acceptance :**
+- La liste des trajets s'affiche avec les informations clés (origine, destination, distance, CO₂)
+- Un filtre par gare d'origine et de destination est disponible
+- Un bouton de réinitialisation restaure la liste complète
+- Un message explicite s'affiche si aucun résultat ne correspond aux filtres
+- En cas d'indisponibilité de l'API, un message d'erreur clair est affiché
+
+**Tests associés :** `frontend/e2e/trajets.spec.js` — 17 tests
+
+---
+
+#### US-03 — Prédiction de substituabilité avion → train
+> **En tant que** partenaire institutionnel,  
+> **Je veux** soumettre un corridor (origine, destination, distance, type de train) pour obtenir une prédiction IA,  
+> **Afin de** savoir si ce vol peut être remplacé par le train et quantifier le gain CO₂ par passager.
+
+**Critères d'acceptance :**
+- Le formulaire valide les champs obligatoires avant soumission (distance > 0, type de train requis)
+- Le résultat affiche clairement le verdict : substituable ou non substituable
+- Si substituable, le gain CO₂ en kg est affiché avec la comparaison visuelle avion vs train
+- Le formulaire peut être réinitialisé pour une nouvelle prédiction
+- Les champs vides bloquent la soumission avec un message d'erreur explicite
+
+**Tests associés :** `frontend/e2e/prediction.spec.js` — 21 tests
+
+---
+
+#### US-04 — Surveillance de l'état du service
+> **En tant que** équipe interne ObRail,  
+> **Je veux** consulter l'état de santé de l'API et accéder aux outils de supervision,  
+> **Afin de** détecter rapidement tout incident et intervenir avant qu'il n'impacte les partenaires.
+
+**Critères d'acceptance :**
+- Le statut de l'API (opérationnel / dégradé) est affiché en temps réel
+- Un bouton "Actualiser" permet de forcer un nouveau contrôle de santé
+- Les liens vers Grafana et Prometheus sont accessibles depuis l'interface
+- Le tableau des endpoints disponibles est affiché avec leur état
+- En cas d'API indisponible, le statut "dégradé" est clairement signalé
+
+**Tests associés :** `frontend/e2e/monitoring.spec.js` — 16 tests
+
+---
+
+#### US-05 — Vue d'ensemble des indicateurs clés
+> **En tant que** partenaire institutionnel,  
+> **Je veux** accéder dès la page d'accueil aux indicateurs clés du projet ObRail,  
+> **Afin de** saisir immédiatement l'impact environnemental des corridors analysés.
+
+**Critères d'acceptance :**
+- Les KPIs principaux sont affichés (nombre de corridors, % substituables, CO₂ moyen économisé)
+- Les modules applicatifs sont présentés avec une description claire
+- La barre de santé API indique l'état du service en temps réel
+- En cas d'API indisponible, les statistiques affichent un état dégradé explicite
+
+**Tests associés :** `frontend/e2e/home.spec.js` — 17 tests
+
+---
+
+### 3.3 Matrice de Traçabilité User Stories → Tests
+
+| User Story | Suite E2E | Tests backend liés | Risque AMDEC |
+|---|---|---|---|
+| US-01 Navigation | `navigation.spec.js` (11) | `test_health.py` | R3 |
+| US-02 Trajets | `trajets.spec.js` (17) | `test_trajets.py` | R2, R4 |
+| US-03 Prédiction | `prediction.spec.js` (21) | `test_predict_api.py` | R1, R4, R5 |
+| US-04 Monitoring | `monitoring.spec.js` (16) | `test_health.py` | R3 |
+| US-05 Accueil | `home.spec.js` (17) | `test_stats.py` | R2, R3 |
+
+---
+
+## 4. Identification des Risques par AMDEC
+
+### 4.1 Principes de l'AMDEC
 
 L'AMDEC (Analyse des Modes de Défaillance, Effets et Criticité) permet de prioriser l'effort de test selon la criticité des risques. Chaque risque est évalué selon :
 
@@ -61,7 +167,7 @@ L'AMDEC (Analyse des Modes de Défaillance, Effets et Criticité) permet de prio
 - **D (Détection)** : difficulté à détecter avant impact client (1–10)
 - **NPR = S × O × D** : plus le NPR est élevé, plus le test est prioritaire
 
-### 3.2 Tableau AMDEC — ObRail Europe
+### 4.2 Tableau AMDEC — ObRail Europe
 
 | # | Mode de Défaillance | Effet pour l'Utilisateur | S | O | D | NPR | Criticité | Stratégie de Test |
 |---|---|---|---|---|---|---|---|---|
@@ -71,7 +177,7 @@ L'AMDEC (Analyse des Modes de Défaillance, Effets et Criticité) permet de prio
 | **R4** | Validation des entrées défaillante | Injection de données invalides, crash | 8 | 2 | 5 | **80** | CRITIQUE | Tests Pydantic 422, distance négative, vehicule_type invalide |
 | **R5** | Calcul CO2 erroné | Données environnementales incorrectes | 8 | 3 | 6 | **144** | CRITIQUE | Tests unitaires `_estimate_co2_avion`, `_resolve_co2_avion` |
 
-### 3.3 Priorisation par NPR
+### 4.3 Priorisation par NPR
 
 ```
 NPR > 200 (CRITIQUE)  → Tests très exhaustifs : unitaires + intégration + cas d'erreur
@@ -83,7 +189,7 @@ NPR 50-100 (MOYENNE)  → Tests standards : unitaires + quelques cas
 
 ---
 
-## 4. Niveaux de Test Définis
+## 5. Niveaux de Test Définis
 
 ### 4.1 Pyramide de Tests
 
@@ -174,7 +280,7 @@ NPR 50-100 (MOYENNE)  → Tests standards : unitaires + quelques cas
 
 ---
 
-## 5. Principes Directeurs
+## 6. Principes Directeurs
 
 ### 5.1 Quality by Design
 
@@ -211,7 +317,7 @@ Toutes les dépendances externes sont mockées pour garantir des tests rapides e
 
 ---
 
-## 6. Organisation des Tests
+## 7. Organisation des Tests
 
 ### 6.1 Structure des Fichiers
 
@@ -312,7 +418,7 @@ Mock particulier : 3 appels `execute()` dans la même connexion gérés par `sid
 
 ---
 
-## 7. Configuration Technique
+## 8. Configuration Technique
 
 ### 7.1 Fichiers de Configuration
 
@@ -395,7 +501,7 @@ npm run test:e2e:report
 
 ---
 
-## 8. Résultats de Couverture
+## 9. Résultats de Couverture
 
 ### 8.1 Couverture Obtenue
 
@@ -456,7 +562,7 @@ Durée d'exécution E2E : ~14 secondes (Chromium headless).
 
 ---
 
-## 9. Processus de Test et CI/CD
+## 10. Processus de Test et CI/CD
 
 ### 9.1 Cycle de Test (Shift-Left)
 
@@ -486,7 +592,7 @@ Les tests sont intégrés dans le pipeline CI/CD (voir `.github/workflows/ci.yml
 
 ---
 
-## 10. Erreurs à Éviter
+## 11. Erreurs à Éviter
 
 Conformément aux principes d'industrialisation :
 
@@ -504,7 +610,7 @@ Prévention : `--cov-fail-under=80` dans `pytest.ini` fait échouer le pipeline 
 
 ---
 
-## 11. Approbations
+## 12. Approbations
 
 | Rôle | Nom | Date |
 |---|---|---|
